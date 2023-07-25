@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar';
 import '../../App.css'
 
-function FindId() {
+function Find_pw() {
   
   const about = "비밀번호를 잃어버리셨나요? \n 뭐든빌리개에 가입한 이메일을 정확히 입력해 주세요. \n 이메일을 통해 비밀번호 변경 링크가 전송됩니다."  
 
@@ -37,13 +37,11 @@ function FindId() {
             <button style={{color:"black", border: "none",
                             borderRadius:'10px', height: "50px", 
                             marginLeft:"8px" , marginTop:"44px" }}
-                    onClick={() => navigate('/changePW')}>인증 메일 전송하기</button>
+                    onClick={() => navigate('/resetPW')}>인증 메일 전송하기</button>
         </div>
       </div>
     );
   };
 
   
-  export default FindId;
-
-  // if문 넣어서 입력한 아이디를 찾을 수 없으면 찾을 수 없다고 팝업 띄우고 회원가입 같이 띄우기
+  export default Find_pw;
