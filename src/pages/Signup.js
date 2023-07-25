@@ -10,7 +10,7 @@ import '../App.css';
 import { registerUser } from '../pages/about_membership/user_action';
 import { useNavigate } from 'react-router-dom';
 import HorizonLine from './HorizonLine';
-import DaumPostcode from 'react-daum-postcode';
+// import DaumPostcode from 'react-daum-postcode';
 
 function Signup (props) {
 

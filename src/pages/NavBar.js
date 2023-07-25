@@ -43,11 +43,11 @@ function NavBar() {
                 <Form className="d-flex">
                   <Form.Control
                     type="search"
-                    placeholder="뭐가 필요하냥"
+                    placeholder="무엇이 필요하세요?"
                     className="search_button"
                     aria-label="Search"
                   />
-                <Button variant="outline-success">검색</Button>
+                <Button variant="outline-success" style={{width: "100px", height: "50px"}}>검색</Button>
                 </Form> 
               </Offcanvas.Body>
             </Navbar.Offcanvas>
