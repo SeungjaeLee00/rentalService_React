@@ -7,6 +7,7 @@ import { applyMiddleware, createStore } from 'redux';
 import Signup from './pages/Signup';
 import ItemMain from './pages/about_Item/ItemMain';
 import FindId from './pages/about_membership/FindId';
+import FoundID from './pages/about_membership/FoundId';
 import FindPw from './pages/about_membership/Find_pw';
 import './index.css';
 import App from './App';
@@ -14,6 +15,7 @@ import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import Reducer from './pages/about_membership/user_reducer';
+import LoginPage from './pages/LoginPage';
 
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
@@ -32,8 +34,11 @@ root.render(
         <Route exact path="/" element={<App />} /> 
         {/* 회원가입 */}
         <Route exact path="/signup" element={<Signup />} />
+        <Route exact path="/loginpage" element={<LoginPage />} />
         
         <Route exact path="/find-id" element={<FindId />} />
+        <Route exact path="/foundID" element={<FoundID />} />
+
         <Route exact path="/find-pw" element={<FindPw />} />
         {/* 로그인하고 보이는 첫 창*/}
         <Route exact path="/itemmain" element={<ItemMain />} />
