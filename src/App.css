@@ -1,5 +1,25 @@
+.main-bg {
+  height: 500px;
+  background-image: url('./img/logo.png');
+  background-size: cover;
+  background-position: center;
+}
+
 .App {
   text-align: center;
+  font-family: 'NanumBarunGothic';
+}
+
+.sub{
+  font-family: 'NanumBarunGothic';
+}
+
+.item_list {
+  font-family: 'NanumBarunGothic';
+}
+
+.d-flex {
+  font-family: 'NanumBarunGothic';
 }
 
 .App-logo {
@@ -7,10 +27,43 @@
   pointer-events: none;
 }
 
+.social_login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* @font-face {
+  font-family: 'KyoboHand';
+  src: url('./fonts/KyoboHandwriting2019.otf') format('woff');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+@font-face {
+  font-family: 'NanumBarunGothic';
+  font-weight: normal;
+  font-style: normal;
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff');
+ }
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.more_info {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.login {
+  padding-bottom: 100px;
+}
+
+.Makers {
+  padding-top: 10px;
 }
 
 .App-header {
@@ -35,4 +88,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.inputField { 
+    background-color: transparent;
+    height: 45px;
+    width: 300px;
+    border: 2px solid rgba(0, 0, 0, 0.23);
+    border-radius: 7px;
+}
+
+.inputField:hover {
+    border: 2px solid black;
+}
+
+.inputField:focus-visible  {
+    outline: none!important;
+    border: 2px solid #1976d2;
+}
+
+.signUp {
+  color: aqua;
 }
