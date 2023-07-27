@@ -72,7 +72,7 @@ function Signup (props) {
   }
 
   return (
-    <div className='App'>
+    <div className='App' style={{borderColor:"red", borderWidth: "1px"}}>
       <NavBar />
       <h2 style={{marginTop:"60px", marginBottom:"10px"
           }}>회원가입</h2>
@@ -80,10 +80,10 @@ function Signup (props) {
 
       <div style={{ 
             display: 'flex', justifyContent: 'center', alignItems: '', 
-            width: '100%', height: '100vh', paddingTop: '10px', 
+            width: '100%', height: '100vh', paddingTop: '10px', borderColor:"red", borderWidth: 1
             }}>
             
-            <form style={{ display: 'flex', flexDirection: 'column'}}
+            <form style={{ display: 'flex', flexDirection: 'column', }}
                 onSubmit={onSubmitHandler}
             >
                 <label style={{ textAlign:"left" }}>이름</label> 

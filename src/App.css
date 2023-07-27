@@ -112,3 +112,13 @@
 .signUp {
   color: aqua;
 }
+
+.buttonstyle{
+  background-color: #4A4F5A;
+  color: white;
+  border-radius: 30px;
+  border: 0;
+  position: fixed;
+  right: 45px;
+  bottom: 30px;  
+}

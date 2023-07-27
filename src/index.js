@@ -17,6 +17,8 @@ import ReduxThunk from 'redux-thunk';
 import Reducer from './pages/about_membership/user_reducer';
 import LoginPage from './pages/LoginPage';
 import ResetPW from './pages/about_membership/ResetPW';
+import Upload_Item from './pages/my_page/Upload_Item';
+// import { Upload } from '@mui/icons-material';
 
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
@@ -33,7 +35,7 @@ root.render(
       <Routes>
         {/* 메인 페이지 */}
         <Route exact path="/" element={<App />} />
-         
+
         {/* 회원가입 */}
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/loginpage" element={<LoginPage />} />
@@ -46,6 +48,8 @@ root.render(
         
         {/* 로그인하고 보이는 첫 창*/}
         <Route exact path="/itemmain" element={<ItemMain />} />
+
+        <Route exact path="/itemmain/uploaditem" element={<Upload_Item />} />
       </Routes>
       </Provider>
     </BrowserRouter>

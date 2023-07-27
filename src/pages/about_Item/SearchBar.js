@@ -32,6 +32,7 @@ function SearchBar(){
             <option value={"household-goods"}>생활용품</option>
             <option value={"musical-instruments"}>악기</option>
             <option value={"toy"}>완구</option>
+            <option value={"cloth"}>의류</option>
             <option value={"etc"}>기타</option>
           </NativeSelect>
         </FormControl>
