@@ -10,6 +10,8 @@ import SearchBar from './SearchBar';
 
 
 function ItemMain() {
+
+    
   
   const [search, setSearch] = useState("");
   const onChange = (e) => {
@@ -26,7 +28,7 @@ function ItemMain() {
 
       <div className="container" style={{marginTop: "40px"}}>
         <div className="row">
-
+          <Card />
         </div>
       </div>
 
@@ -41,15 +43,19 @@ function ItemMain() {
 };
 
 function Card(props){
+  const about = "이승재 \n 조회 수 25회 ⋅ 1년 전"
   return (
-    <div className="col-md-4" style={{ display: 'flex', flexDirection: 'row', padding: '20px'}}>
-      <img src={'https://codingapple1.github.io/shop/shoes' + props.i + '.jpg'} width="50%" />
-      <div className='etc' style={{marginTop: "40px"}}>
-        <h4>3번 신은 신발</h4>
-        <p>신발 빌려드려요</p>
+    <div className="col-md-4">
+      <img src={'https://codingapple1.github.io/shop/shoes1.jpg'} width="60%" />
+      <div className='etc' style={{textAlign: 'left', marginLeft: "60px"}}>
+        <h5> 3번 신은 신발 </h5>
+        <p style={{color: 'gray', fontSize: "15px"}}>{about}</p>
       </div>
+      
     </div>
   )
 }
   
   export default ItemMain;
+
+  // style={{ display: 'flex', flexDirection: 'row', padding: '20px'}}
