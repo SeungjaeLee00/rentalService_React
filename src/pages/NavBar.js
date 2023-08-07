@@ -44,9 +44,9 @@ function NavBar() {
                     title="마이페이지"
                     id={`offcanvasNavbarDropdown-expand-${false}`}
                   >
-                    <NavDropdown.Item>회원정보 수정</NavDropdown.Item>
-                    <NavDropdown.Item>내 게시물 보기</NavDropdown.Item>
-                    <NavDropdown.Item onClick={() => navigate('/itemmain/uploaditem')}>내 물건 올리기</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => navigate('/itemmain/edit-membership')}>회원정보 수정</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => navigate('/itemmain/myitempage')}>내 게시물 보기</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => navigate('/itemmain/upload-item')}>내 물건 올리기</NavDropdown.Item>
                   </NavDropdown>
 
                   <Nav.Link onClick={()=>{ setMakers(!makers) }} >뭐든빌리개를 만드는 사람들</Nav.Link>

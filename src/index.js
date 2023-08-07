@@ -18,6 +18,9 @@ import Reducer from './pages/about_membership/user_reducer';
 import LoginPage from './pages/LoginPage';
 import ResetPW from './pages/about_membership/ResetPW';
 import Upload_Item from './pages/my_page/Upload_Item';
+import MyitemPage from './pages/my_page/MyitemPage';
+import Edit_Item from './pages/my_page/Edit_Item';
+import Edit_membership from './pages/my_page/Edit_membership';
 // import { Upload } from '@mui/icons-material';
 
 
@@ -45,11 +48,15 @@ root.render(
 
         <Route exact path="/find-pw" element={<FindPw />} />
         <Route exact path="/resetPW" element={<ResetPW /> } />
+
+        <Route exact path="/itemmain/edit-membership" element={<Edit_membership />} />
         
         {/* 로그인하고 보이는 첫 창*/}
         <Route exact path="/itemmain" element={<ItemMain />} />
 
-        <Route exact path="/itemmain/uploaditem" element={<Upload_Item />} />
+        <Route exact path="/itemmain/myitempage" element={<MyitemPage />} />
+        <Route exact path="/itemmain/myitempage/edit" element={<Edit_Item />} />
+        <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
       </Routes>
       </Provider>
     </BrowserRouter>

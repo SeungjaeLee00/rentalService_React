@@ -6,15 +6,9 @@ import { useInView } from 'react-intersection-observer';  // 무한 스크롤용
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../NavBar';
-import SearchBar from './SearchBar';
 
 
-function ItemMain() {
-  
-  const [search, setSearch] = useState("");
-  const onChange = (e) => {
-          setSearch(e.target.value)
-      }
+function MyitemPage() {
 
   let [item, setItem] = useState();
   let navigate = useNavigate();  // hook: page 이동을 도와줌
@@ -22,10 +16,10 @@ function ItemMain() {
   return (
     <div className='App'>
       <NavBar />
-      <SearchBar />
 
       <div className="container" style={{marginTop: "40px"}}>
         <div className="row">
+            <button onClick={() => navigate('/itemmain/myitempage/edit')}>수정버튼예시</button>
 
         </div>
       </div>
@@ -52,4 +46,4 @@ function Card(props){
   )
 }
   
-  export default ItemMain;
+  export default MyitemPage;
