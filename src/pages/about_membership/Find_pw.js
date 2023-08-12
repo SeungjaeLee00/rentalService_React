@@ -18,47 +18,46 @@ function Find_pw() {
     setEmail(event.currentTarget.value);
   }
 
-  // return (
-  //     <div className='App'>
-  //       <NavBar />
-  //       <br />
-  //       <h3>비밀번호 찾기</h3>
-  //       <p>{about}</p>
-  //       <div style={{ 
-  //           display: 'flex', justifyContent: 'center', alignItems: '', 
-  //           width: '100%', height: '100vh', paddingTop: '10px'
-  //           }}>
-              
-  //         <form style={{ display: 'flex', flexDirection: 'column'}}>
-
-  //           <br />
-  //           <label style={{ textAlign:"left", fontSize:"15px", color:"#4A4F5A" }}>비밀번호 재설정</label>
-  //           <input type='email' class="inputField" 
-  //                   placeholder="  abcdef@google.com" value={Email} onChange={onEmailHandler}/>
-  //           </form>
-  //           <button style={{color:"black", border: "none",
-  //                           borderRadius:'10px', height: "50px", 
-  //                           marginLeft:"8px" , marginTop:"44px" }}
-  //                   onClick={() => navigate('/resetPW')}>인증 메일 전송하기</button>
-  //       </div>
-  //     </div>
-  //   );
-  // };
-
   return (
-    <div className='page-container'>
-      <div className='PwFind-container'>
-        <h1>비밀번호를 찾고자 하는 아이디를 입력해주세요</h1>
-        <input></input>
-        <button>다음</button>
+      <div className='App'>
+        <br />
+        <h3>비밀번호 찾기</h3>
+        <p>{about}</p>
+        <div style={{ 
+            display: 'flex', justifyContent: 'center', alignItems: '', 
+            width: '100%', height: '100vh', paddingTop: '10px'
+            }}>
+              
+          <form style={{ display: 'flex', flexDirection: 'column'}}>
+
+            <br />
+            <label style={{ textAlign:"left", fontSize:"15px", color:"#4A4F5A" }}>비밀번호 재설정</label>
+            <input type='email' class="inputField" 
+                    placeholder="  abcdef@google.com" value={Email} onChange={onEmailHandler}/>
+            </form>
+            <button style={{color:"black", border: "none",
+                            borderRadius:'10px', height: "50px", 
+                            marginLeft:"8px" , marginTop:"44px" }}
+                    onClick={() => navigate('/resetPW')}>인증 메일 전송하기</button>
+        </div>
       </div>
-      <div>
-        <p>아이디가 기억나지 않는다면?</p>
-        <Link to="/find-id">아이디 찾기</Link>
-      </div>
-    </div>
-  );
-};
+    );
+  };
+
+//   return (
+//     <div className='page-container'>
+//       <div className='PwFind-container'>
+//         <h1>비밀번호를 찾고자 하는 아이디를 입력해주세요</h1>
+//         <input></input>
+//         <button>다음</button>
+//       </div>
+//       <div>
+//         <p>아이디가 기억나지 않는다면?</p>
+//         <Link to="/find-id">아이디 찾기</Link>
+//       </div>
+//     </div>
+//   );
+// };
 
 export default Find_pw;
 

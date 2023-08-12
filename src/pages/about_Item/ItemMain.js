@@ -10,12 +10,6 @@ import SearchBar from './SearchBar';
 
 
 function ItemMain() {
-// <<<<<<< HEAD
-// =======
-//     return (
-//       <div className='App'>
-// >>>>>>> 21d089500f02fec3291b74f310f0c0f9b77a9e96
-
     
   
   const [search, setSearch] = useState("");

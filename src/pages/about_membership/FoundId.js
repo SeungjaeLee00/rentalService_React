@@ -9,7 +9,6 @@ function FoundId() {
 
   return (
       <div className='App'>
-        <NavBar />
         <br />
 
         <h5 style={{ marginTop: "50px", marginBottom: "40px" }}>회원님의 아이디는</h5>
