@@ -1,11 +1,15 @@
+// 웹사이트 맨위 상단바
+
 import '../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function NavBar() {
 
     let [makers, setMakers] = useState(false);
+    let navigate = useNavigate();  // hook: page 이동을 도와줌
 
     return (
         <Navbar bg="light"  variant="light"
@@ -35,7 +39,18 @@ function NavBar() {
                     <NavDropdown.Item href="#3">악기</NavDropdown.Item>
                     <NavDropdown.Item href="#4">완구</NavDropdown.Item>
                     <NavDropdown.Item href="#5">의류</NavDropdown.Item>
+                    <NavDropdown.Item href="#6">기타</NavDropdown.Item>
                   </NavDropdown>
+
+                  <NavDropdown
+                    title="마이페이지"
+                    id={`offcanvasNavbarDropdown-expand-${false}`}
+                  >
+                    <NavDropdown.Item onClick={() => navigate('/itemmain/edit-membership')}>회원정보 수정</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => navigate('/itemmain/myitempage')}>내 게시물 보기</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => navigate('/itemmain/upload-item')}>내 물건 올리기</NavDropdown.Item>
+                  </NavDropdown>
+
                   <Nav.Link onClick={()=>{ setMakers(!makers) }} >뭐든빌리개를 만드는 사람들</Nav.Link>
                   {makers === true? <Makers/>: null }
                 </Nav>
@@ -43,11 +58,11 @@ function NavBar() {
                 <Form className="d-flex">
                   <Form.Control
                     type="search"
-                    placeholder="뭐가 필요하냥"
+                    placeholder="무엇이 필요하세요?"
                     className="search_button"
                     aria-label="Search"
                   />
-                <Button variant="outline-success">검색</Button>
+                <Button variant="outline-success" style={{width: "100px", height: "50px"}}>검색</Button>
                 </Form> 
               </Offcanvas.Body>
             </Navbar.Offcanvas>

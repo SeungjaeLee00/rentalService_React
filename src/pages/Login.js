@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import KaKaoLogin from '../socialLogin/KakaoLogin';
 import NaverLogin from '../socialLogin/NaverLogin';
 import GoogleLogin from '../socialLogin/GoogleLLogIn';
-import { loginUser } from '../pages/about_membership/user_action';
+import { loginUser } from './about_membership/user_action';
 import HorizonLine from './HorizonLine';
 
 

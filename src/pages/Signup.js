@@ -10,7 +10,7 @@ import '../App.css';
 import { registerUser } from '../pages/about_membership/user_action';
 import { useNavigate } from 'react-router-dom';
 import HorizonLine from './HorizonLine';
-import DaumPostcode from 'react-daum-postcode';
+// import DaumPostcode from 'react-daum-postcode';
 
 function Signup (props) {
 
@@ -19,6 +19,7 @@ function Signup (props) {
 
 
   const [Username, setUsername] = useState("");
+  const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
@@ -28,6 +29,9 @@ function Signup (props) {
   const onUsernameHandler = (event) => {
       setUsername(event.currentTarget.value);
   }
+  const onEmailHandler = (event) => {
+    setEmail(event.currentTarget.value);
+}
   const onPasswordHandler = (event) => {
       setPassword(event.currentTarget.value);
   }
@@ -50,6 +54,7 @@ function Signup (props) {
 
       let body = {
           username: Username,
+          email: Email,
           password: Password,
           confirmPassword: ConfirmPassword,
           phonenumber: PhoneNumber,
@@ -67,23 +72,35 @@ function Signup (props) {
   }
 
   return (
+// <<<<<<< HEAD
+//     <div className='App' style={{borderColor:"red", borderWidth: "1px"}}>
+//       <NavBar />
+//       <h2 style={{marginTop:"60px", marginBottom:"10px"
+//           }}>회원가입</h2>
+//           <h5 style={{marginBottom:"30px"}}>뭐든빌리개를 시작해보세요!</h5>
+// =======
     <div className='App'>
       
       <h1 style={{marginTop:"60px", marginBottom:"10px"
           }}>회원가입</h1>
           <h4 style={{marginBottom:"30px"}}>뭐든빌리개를 시작해보세요!</h4>
+{/*  >>>>>>> 21d089500f02fec3291b74f310f0c0f9b77a9e96 */}
 
       <div style={{ 
             display: 'flex', justifyContent: 'center', alignItems: '', 
-            width: '100%', height: '100vh', paddingTop: '10px', 
+            width: '100%', height: '100vh', paddingTop: '10px', borderColor:"red", borderWidth: 1
             }}>
             
-            <form style={{ display: 'flex', flexDirection: 'column'}}
+            <form style={{ display: 'flex', flexDirection: 'column', }}
                 onSubmit={onSubmitHandler}
             >
                 <label style={{ textAlign:"left" }}>이름</label> 
                 <input type='username' class="inputField" 
                         placeholder="  ex) jaejae" value={Username} onChange={onUsernameHandler} />
+                <br />
+                <label style={{ textAlign:"left" }}>이메일</label> 
+                <input type='email' class="inputField" 
+                        placeholder="  abcdef@google.com" value={Email} onChange={onEmailHandler} />
                 <br />
                 <label style={{ textAlign:"left" }}>비밀번호</label>
                 <input type='password' class="inputField" 
@@ -93,7 +110,7 @@ function Signup (props) {
                 <input type='password' class="inputField" 
                         placeholder="" value={ConfirmPassword} onChange={onConfirmPasswordHandler}/>
                 <br />
-                <label style={{ textAlign:"left" }}>핸드폰 번호</label>
+                <label style={{ textAlign:"left" }}>핸드폰 번호(숫자만 입력)</label>
                 <input type='phonenumber' class="inputField" 
                         placeholder="  010-1234-5678" value={PhoneNumber} onChange={onPhoneNumberHandler}/>
                 <br />
@@ -102,7 +119,7 @@ function Signup (props) {
                         placeholder="" value={Address} onChange={onAddressHandler}/>
                 <br />
                 <button formAction='' style={{padding:"10px", marginTop:"8px", 
-                        backgroundColor:"#4A4F5A", color:"white", borderRadius:'10px'}} 
+                        backgroundColor:"#4A4F5A", color:"white", borderRadius:'10px', border:"none"}} 
                         onClick = {() => navigate('/itemmain')} >가입하기</button>
                 <HorizonLine />
                 <NaverLogin/>
