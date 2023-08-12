@@ -13,7 +13,9 @@
   top:0;   
   bottom:0;
   width:100%;   
-  border: 1px solid blue;
+  font-family: 'NanumBarunGothic';
+  line-height: 25px;
+
 }
 
 .page-container{
@@ -21,15 +23,19 @@
   max-width:1400px;
   margin:0 auto;
   padding:32px 0;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* text-align: center; -> 가운데정렬*/ 
 }
 .page-container-main{
   max-width:1400px;
   margin:0 auto;
   padding:32px 0;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   text-align: center;
+}
+
+.Makers{
+  line-height: 25px;
 }
 
 
