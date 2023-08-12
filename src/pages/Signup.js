@@ -68,7 +68,7 @@ function Signup (props) {
 
   return (
     <div className='App'>
-      <NavBar />
+      
       <h1 style={{marginTop:"60px", marginBottom:"10px"
           }}>회원가입</h1>
           <h4 style={{marginBottom:"30px"}}>뭐든빌리개를 시작해보세요!</h4>
