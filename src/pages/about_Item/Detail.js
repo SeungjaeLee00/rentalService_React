@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 // import { useInView } from 'react-intersection-observer';  // 무한 스크롤용 라이브러리
 import '../../App.css';
-import CommentInput from '../about_Item/commentInput';
+import HorizonLine from '../HorizonLine';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../../img/logo.png'
 
@@ -31,7 +31,6 @@ function Detail() {
   );
 
 
-
   return (
     <div className='page-container'>
       <div className='Detail_Item_wrap'>
@@ -55,7 +54,7 @@ function Detail() {
           </div>
         </div>
       </div>
-      <CommentInput onInsert={onInsert} />
+      
 
       <div className='upload_item' style={{ position: "fixed", right: '45px', bottom: '30px' }}>
         <button style={{ borderRadius: "30px", fontSize: '20px', width: "100px", height: "50px", border: "none" }}
