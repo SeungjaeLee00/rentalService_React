@@ -1,51 +1,34 @@
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import './App.css';
-import Login from './pages/Login.js';
 import NavBar from './pages/NavBar';
+import Signup from './pages/Signup';
+import Main from'./pages/Main';
+import ItemMain from './pages/about_Item/ItemMain';
+import FindId from './pages/about_membership/FindId';
+import FindPw from './pages/about_membership/Find_pw';
 
 function App() {
 
-  let navigate = useNavigate();  // hook: page 이동을 도와줌
-  
-    const [showLoginPopup, setshowLoginPopup] = useState(false);
-
-    const openloginModal = () => {
-      setshowLoginPopup(true);
-    };
-    const closeloginModal = () => {
-      setshowLoginPopup(false);
-    };
-
   return (
-    <div className="App">
+    <div className="root-wrap">
       <NavBar />
+      <Routes>
+        {/* 메인 페이지 -> Login.js  */}
+        <Route exact path="/" element={<Main />} />
+        {/* 회원가입 */}
+        <Route exact path="/signup" element={<Signup />} />
 
-      <div className='main-bg'></div>
-
-      <div className='more_info'>
-        <div className='col'>
-          <img src=''/>
-          <h4>무엇이든 빌리세요!</h4>
-          <p>당장 내일 필요한데 또 내일만 쓸 물건을 사긴 그렇잖아요? 해서 준비했습니다!</p>
-        </div>
-      </div>
-
-      <div className='login'>
-        <div className='col'>
-          <Button onClick={openloginModal} variant="secondary" size="lg"> 로 그 인 </Button>{' '}
-          <Button onClick = {() => navigate('/signup')} variant="secondary" size="lg" > 회원가입 </Button>
-
-          <Login open={showLoginPopup} close={closeloginModal} ></Login>
-        </div>
-      </div>
+        <Route exact path="/find-id" element={<FindId />} />
+        <Route exact path="/find-pw" element={<FindPw />} />
+        {/* 로그인하고 보이는 첫 창*/}
+        <Route exact path="/itemmain" element={<ItemMain />} />
+      </Routes>
     </div>
 
-    
-  );}
+
+  );
+}
 
 export default App;

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { applyMiddleware, createStore } from 'redux';
 
@@ -23,7 +22,6 @@ import Edit_Item from './pages/my_page/Edit_Item';
 import Edit_membership from './pages/my_page/Edit_membership';
 // import { Upload } from '@mui/icons-material';
 
-
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -35,6 +33,7 @@ root.render(
           window.__REDUX_DEVTOOLS_EXTENSION__ &&
           window.__REDUX_DEVTOOLS_EXTENSION__()
         )}>
+<<<<<<< HEAD
       <Routes>
         {/* 메인 페이지 */}
         <Route exact path="/" element={<App />} />
@@ -58,9 +57,12 @@ root.render(
         <Route exact path="/itemmain/myitempage/edit" element={<Edit_Item />} />
         <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
       </Routes>
+=======
+          <App/>
+>>>>>>> 21d089500f02fec3291b74f310f0c0f9b77a9e96
       </Provider>
     </BrowserRouter>
    </React.StrictMode>
 );
 
-reportWebVitals();
+
