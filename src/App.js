@@ -12,6 +12,7 @@ import Upload_Item from './pages/my_page/Upload_Item';
 import FoundId from './pages/about_membership/FoundId';
 import LoginPage from './pages/LoginPage';
 import { LoginSharp } from '@mui/icons-material';
+import Detail from './pages/about_Item/Detail';
 
 function App() {
 
@@ -35,6 +36,8 @@ function App() {
         <Route exact path="/itemmain" element={<ItemMain />} />
         
         <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
+        <Route exact path='/itemmain/detail' element={<Detail />} />
+        
       </Routes>
     </div>
 

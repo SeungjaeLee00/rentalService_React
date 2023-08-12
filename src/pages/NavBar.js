@@ -1,5 +1,3 @@
-// 웹사이트 맨위 상단바
-
 import '../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';

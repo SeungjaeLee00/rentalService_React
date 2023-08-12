@@ -36,6 +36,7 @@ export default function Main() {
                     setData(data);
                  });
             }}>서버버튼</button>
+            
             <div className='more_info'>
                 <div className='col'>
                     <img src='' />

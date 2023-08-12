@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../NavBar';
 import SearchBar from './SearchBar';
 
-
 function ItemMain() {
     
   
@@ -17,8 +16,8 @@ function ItemMain() {
           setSearch(e.target.value)
       }
 
-  let [item, setItem] = useState();
-  let navigate = useNavigate();  // hook: page 이동을 도와줌
+  let [item, setItem] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  let navigate = useNavigate();  
 
   return (
     <div className='App'>
@@ -27,7 +26,7 @@ function ItemMain() {
 
       <div className="container" style={{marginTop: "40px"}}>
         <div className="row">
-          <Card />
+          {item.map(function(){return(<Card />)})}
         </div>
       </div>
 
@@ -42,13 +41,25 @@ function ItemMain() {
 };
 
 function Card(props){
-  const about = "이승재 \n 조회 수 25회 ⋅ 1년 전"
+
+  let navigate = useNavigate();
+  
+  const about = "이승재 \n 조회 수 회 ⋅ 1초 전"
+
   return (
-    <div className="col-md-4">
+    <div className="col-md-4" style={{ marginBottom: "30px" }}
+          onClick={() =>  navigate('/itemmain/detail')}>
       <img src={'https://codingapple1.github.io/shop/shoes1.jpg'} width="60%" />
-      <div className='etc' style={{textAlign: 'left', marginLeft: "60px"}}>
-        <h5> 3번 신은 신발 </h5>
-        <p style={{color: 'gray', fontSize: "15px"}}>{about}</p>
+      <div className='etc' style={{ display: 'flex', flexDirection: 'row', padding: '20px' }}>
+        <div  style={{textAlign: 'left', marginLeft: "60px"}}>
+          <h5> 3번 신은 신발 </h5>
+          <p style={{color: 'gray', fontSize: "15px"}}>{about}</p>
+        </div>
+        <div style={{textAlign: 'right'}}>
+          <p style={{color: 'green', fontSize: "12px"}}>대여 가능</p>
+        </div>
+        
+        
       </div>
       
     </div>

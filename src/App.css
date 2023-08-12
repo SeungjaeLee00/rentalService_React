@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'NanumBarunGothic';
+  font-weight: normal;
+  font-style: normal;
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff');
+ }
+
 .main-bg {
   height: 500px;
   background-image: url('./img/logo.png');
@@ -33,21 +40,6 @@
   justify-content: center;
   align-items: center;
 }
-
-
-/* @font-face {
-  font-family: 'KyoboHand';
-  src: url('./fonts/KyoboHandwriting2019.otf') format('woff');
-  font-weight: normal;
-  font-style: normal;
-} */
-
-@font-face {
-  font-family: 'NanumBarunGothic';
-  font-weight: normal;
-  font-style: normal;
-  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff');
- }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

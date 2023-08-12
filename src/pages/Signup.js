@@ -72,19 +72,11 @@ function Signup (props) {
   }
 
   return (
-// <<<<<<< HEAD
-//     <div className='App' style={{borderColor:"red", borderWidth: "1px"}}>
-//       <NavBar />
-//       <h2 style={{marginTop:"60px", marginBottom:"10px"
-//           }}>회원가입</h2>
-//           <h5 style={{marginBottom:"30px"}}>뭐든빌리개를 시작해보세요!</h5>
-// =======
+
     <div className='App'>
-      
-      <h1 style={{marginTop:"60px", marginBottom:"10px"
-          }}>회원가입</h1>
-          <h4 style={{marginBottom:"30px"}}>뭐든빌리개를 시작해보세요!</h4>
-{/*  >>>>>>> 21d089500f02fec3291b74f310f0c0f9b77a9e96 */}
+      <h2 style={{marginTop:"60px", marginBottom:"10px"
+          }}>회원가입</h2>
+          <h5 style={{marginBottom:"30px"}}>뭐든빌리개를 시작해보세요!</h5>
 
       <div style={{ 
             display: 'flex', justifyContent: 'center', alignItems: '', 
