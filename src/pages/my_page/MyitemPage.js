@@ -15,7 +15,7 @@ function MyitemPage() {
 
   return (
     <div className='App'>
-      <NavBar />
+      
 
       <div className="container" style={{marginTop: "40px"}}>
         <div className="row">

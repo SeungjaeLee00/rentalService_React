@@ -28,7 +28,7 @@ function ItemMain() {
 
   return (
     <div className='App'>
-      <NavBar />
+      
       <SearchBar />
 
       <div className="container" style={{marginTop: "40px"}}>
@@ -39,7 +39,7 @@ function ItemMain() {
 
       <div className='upload_item' style={{position:"fixed", right: '45px', bottom: '30px'}}>
         <button style={{ borderRadius:"30px", fontSize:'20px',  width:"100px", height: "50px", border:"none" }}
-                onClick={() => navigate('/itemmain/uploaditem')}> + 글쓰기 </button>
+                onClick={() => navigate('/itemmain/upload-item')}> + 글쓰기 </button>
       </div> 
 
       

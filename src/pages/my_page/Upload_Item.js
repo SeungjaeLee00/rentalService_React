@@ -51,7 +51,7 @@ const Upload_Item = () => {
 
   return(
   <>
-  <NavBar />
+  
   <div style={{ marginTop: "80px", marginLeft: "110px", marginRight: "110px", marginBottom: "80px"}}>
     <div style={{ display: "flex" }}>
       <h3 >기본 정보</h3>

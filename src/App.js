@@ -8,6 +8,7 @@ import Main from'./pages/Main';
 import ItemMain from './pages/about_Item/ItemMain';
 import FindId from './pages/about_membership/FindId';
 import FindPw from './pages/about_membership/Find_pw';
+import Upload_Item from './pages/my_page/Upload_Item';
 
 function App() {
 
@@ -24,11 +25,14 @@ function App() {
         <Route exact path="/find-pw" element={<FindPw />} />
         {/* 로그인하고 보이는 첫 창*/}
         <Route exact path="/itemmain" element={<ItemMain />} />
+        
+        <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
       </Routes>
     </div>
 
 
   );
 }
+
 
 export default App;

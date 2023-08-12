@@ -26,7 +26,7 @@ export default function Main() {
         <div className="page-container-main">
             <div className='main-bg'></div>
             <button onClick={()=>{
-                fetch("http://13.125.98.26:8080/members")
+                fetch("https://jsonplaceholder.typicode.com/users/1")
                  .then((res)=>{
                     console.log(res);
                     return res.json();
