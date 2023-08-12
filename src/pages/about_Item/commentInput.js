@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-// import { MdAdd } from 'react-icons/md';
+import { MdAdd } from 'react-icons/md';
 // import { useInView } from 'react-intersection-observer';  // 무한 스크롤용 라이브러리
 
 import '../../App.css';
