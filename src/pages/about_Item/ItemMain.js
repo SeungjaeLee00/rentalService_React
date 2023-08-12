@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';  // 무한 스크롤용 라이브러리
-
 
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../NavBar';
-import SearchBar from './SearchBar';
+//import SearchBar from './SearchBar';
 
 
 function ItemMain() {
@@ -23,7 +21,7 @@ function ItemMain() {
   return (
     <div className='App'>
       
-      <SearchBar />
+      {/* <SearchBar /> */}
 
       <div className="container" style={{marginTop: "40px"}}>
         <div className="row">
