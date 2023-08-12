@@ -166,7 +166,7 @@ const Upload_Item = () => {
     <HorizonLine />
     <br />
 
-    <div style={{ display: "flex", paddingBottom: "40px"}}>
+    <div style={{ display: "flex" }}>
       <h5>수량</h5>
       <br />
       <input
@@ -179,7 +179,7 @@ const Upload_Item = () => {
                  border: "2px solid rgba(0, 0, 0, 0.23)",
                  borderRadius: "7px", marginLeft: "80px" }}
       />
-      <p style={{ marginLeft: "15px" }}> 개</p>  
+      <p style={{ marginLeft: "15px", }}> 개</p>  
     </div>
     
     <button className='buttonstyle' style={{ fontSize:'20px',  width:"100px", height: "50px" }}
@@ -190,3 +190,4 @@ const Upload_Item = () => {
 };
 
 export default Upload_Item;
+ 
