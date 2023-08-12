@@ -1,3 +1,5 @@
+// 모달창 아닌 로그인 페이지
+
 import React, { useState } from 'react';
 import '../App.css';
 import { Label, Input, Button, Form, FormGroup } from 'reactstrap';
