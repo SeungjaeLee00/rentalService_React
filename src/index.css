@@ -1,6 +1,14 @@
 @import 'reset.css';
 
+@font-face {
+  font-family: 'NanumBarunGothic';
+  font-weight: normal;
+  font-style: normal;
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff');
+ }
+
 .root-wrap{
+  font-family: 'NanumBarunGothic';
   position:absolute;
   top:0;   
   bottom:0;
@@ -9,6 +17,7 @@
 }
 
 .page-container{
+  
   max-width:1400px;
   margin:0 auto;
   padding:32px 0;
@@ -21,20 +30,6 @@
   padding:32px 0;
   border: 1px solid red;
   text-align: center;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 
