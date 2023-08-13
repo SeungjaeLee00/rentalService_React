@@ -25,6 +25,7 @@ export default function Main() {
     return (
         <div className="page-container-main">
             <div className='main-bg'></div>
+
             <button onClick={()=>{
                 fetch("/members")   
                  .then((res)=>{
@@ -35,7 +36,7 @@ export default function Main() {
                     console.log(data.result.data.memberList[0].nickname);
                     setData(data);
                  });
-            }}>서버버튼</button>
+            }}>서버버튼</button> 
             
             <div className='more_info'>
                 <div className='col'>

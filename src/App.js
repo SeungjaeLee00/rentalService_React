@@ -13,7 +13,8 @@ import FoundId from './pages/about_membership/FoundId';
 import LoginPage from './pages/LoginPage';
 
 import Detail from './pages/about_Item/Detail';
-import { LoginSharp } from '@mui/icons-material';
+import { LoginSharp, RoundaboutLeft } from '@mui/icons-material';
+import Edit_membership from './pages/my_page/Edit_membership';
 
 
 function App() {
@@ -39,7 +40,9 @@ function App() {
         
         <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
         <Route exact path='/itemmain/detail' element={<Detail />} />
-        
+
+
+        <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
       </Routes>
     </div>
 

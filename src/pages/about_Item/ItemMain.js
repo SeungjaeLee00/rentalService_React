@@ -30,7 +30,7 @@ function ItemMain() {
     const fetchData = async () => {
       setLoading(true);
       const response = await axios.get(
-        // "http://13.125.98.26:8080/posts"
+        // "http://13.125.98.26:8080/auth/sign-up"
         "https://jsonplaceholder.typicode.com/posts"
       );
       setPosts(response.data);
