@@ -5,122 +5,175 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import KaKaoLogin from '../socialLogin/KakaoLogin';
 import NaverLogin from '../socialLogin/NaverLogin';
 import GoogleLogin from '../socialLogin/GoogleLLogIn';
-import NavBar from './NavBar';
 import '../App.css';
 import { registerUser } from '../pages/about_membership/user_action';
 import { useNavigate } from 'react-router-dom';
 import HorizonLine from './HorizonLine';
-// import DaumPostcode from 'react-daum-postcode';
+import axios from 'axios';
 
-function Signup (props) {
+function Signup () {
+    
+    let navigate = useNavigate();  // hook: page 이동을 도와줌
+    
+    const [username, setUserName] = useState("");
+    const [authKey, setauthKey] = useState("");
+    const [nickname, setNickname] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    
+    const [city, setCity] = useState('');
+    const [district, setDistrict] = useState('');
+    const [street, setStreet] = useState('');
+    const [zipCode, setZipCode] = useState('');
+    
+    const onUserNameHandler = (event) => {
+        setUserName(event.currentTarget.value);
+    }
+    const onKeyHandler = (event) => {
+        setauthKey(event.currentTarget.value);
+    }
+    const onNicknameHandler = (event) => {
+        setNickname(event.currentTarget.value);
+    }
+    const onPasswordHandler = (event) => {
+        setPassword(event.currentTarget.value);
+    }
+    const onConfirmPasswordHandler = (event) => {
+        setConfirmPassword(event.currentTarget.value);
+    }
+    const onPhoneNumberHandler = (event) => {
+        setPhoneNumber(event.currentTarget.value);
+    }
 
-  const dispatch = useDispatch();
-  let navigate = useNavigate();  // hook: page 이동을 도와줌
+    const handleCityChange = (event) => {
+        setCity(event.target.value);
+    };
+    
+    const handleDistrictChange = (event) => {
+        setDistrict(event.target.value);
+    };
+    
+    const handleStreetChange = (event) => {
+        setStreet(event.target.value);
+    };
+    
+    const handleZipCodeChange = (event) => {
+        setZipCode(event.target.value);
+    };
 
+    const handleSendUserName = () => {
+        axios.post('http://13.125.98.26:8080/email/sign-up?email=' + username )
+          .then(response => {
+            console.log('이메일 전송 성공:', response.data);
+          })
+          .catch(error => {
+            console.error('이메일 전송 실패:', error);
+          });
+      };
 
-  const [Username, setUsername] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [ConfirmPassword, setConfirmPassword] = useState("");
-  const [PhoneNumber, setPhoneNumber] = useState("");
-  const [Address, setAddress] = useState("");
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
 
+        const address = {
+            city: city,
+            district: district,
+            street: street,
+            zipCode: zipCode
+          };
 
-  const onUsernameHandler = (event) => {
-      setUsername(event.currentTarget.value);
-  }
-  const onEmailHandler = (event) => {
-    setEmail(event.currentTarget.value);
-}
-  const onPasswordHandler = (event) => {
-      setPassword(event.currentTarget.value);
-  }
-  const onConfirmPasswordHandler = (event) => {
-      setConfirmPassword(event.currentTarget.value);
-  }
-  const onPhoneNumberHandler = (event) => {
-    setPhoneNumber(event.currentTarget.value);
-  }
-  const onAddressHandler = (event) => {
-    setAddress(event.currentTarget.value);
-  }
+        const dataToSend = {
+            username: username,
+            authKey: authKey,
+            nickname: nickname,
+            password: password,
+            phoneNumber: phoneNumber,
+            address: address
+        }
+        if(password !== confirmPassword){
+            return alert('비밀번호와 비밀번호 확인이 같지 않습니다.')
+        }
 
-  const onSubmitHandler = (event) => {
-      event.preventDefault();
+        axios.post('http://13.125.98.26:8080/auth/sign-up', dataToSend)
+        .then(response => {
+          console.log('회원가입 성공:', response.data);
+          if ((response.status = 200)) {
+            return navigate("/itemmain");
+            }
+        })
+        .catch(error => {
+          console.error('회원가입 실패:', error);
+        });
+    };
+    
+    return (
+        <div className='App'>
+        <h2 style={{marginTop:"30px", marginBottom:"10px"
+            }}>회원가입</h2>
+            <h5 style={{marginBottom:"20px"}}>뭐든빌리개를 시작해보세요!</h5>
 
-      if(Password !== ConfirmPassword){
-          return alert('비밀번호와 비밀번호 확인이 같지 않습니다.')
-      }
+        <div style={{ 
+                display: 'flex', justifyContent: 'center', alignItems: '', 
+                width: '100%', height: '100vh', paddingTop: '10px', borderWidth: 1
+                }}>
+                
+                <form style={{ display: 'flex', flexDirection: 'column', }} 
+                        onSubmit={onSubmitHandler} >
+        
+                        <label style={{ textAlign:"left" }}>이메일</label> 
+                        <input type='username' class="inputField" 
+                                placeholder="  abcdef@google.com" value={username} onChange={onUserNameHandler} />
+                        <button  style={{color:"black", border: "none",
+                                            borderRadius:'10px', marginTop:"10px" }}
+                                            onClick={handleSendUserName}> 인증하기 </button>      
+                        <br />
 
-      let body = {
-          username: Username,
-          email: Email,
-          password: Password,
-          confirmPassword: ConfirmPassword,
-          phonenumber: PhoneNumber,
-          addess: Address
-      }
+                        <label style={{ textAlign:"left" }}>이메일 인증키</label>
+                        <input type="authKey" class="inputField"
+                            placeholder="  인증번호를 입력하세요" value={authKey} onChange={onKeyHandler} />
+                        <br />
 
-      dispatch(registerUser(body))
-      .then(response => {
-          if(response.payload.success){
-              props.history.push('/itemmain')
-          } else {
-              alert('Error')
-          }
-      })
-  }
+                        <label style={{ textAlign:"left" }}>이름</label> 
+                        <input type='nickname' class="inputField" 
+                                placeholder="  ex) jaejae" value={nickname} onChange={onNicknameHandler} />
+                        <br />
 
-  return (
+                        <label style={{ textAlign:"left" }}>비밀번호</label>
+                        <input type='password' class="inputField" 
+                                placeholder="  영문, 숫자, 특수문자 포함 8자 이상" value={password} onChange={onPasswordHandler}/>
+                        <br />
 
-    <div className='App'>
-      <h2 style={{marginTop:"60px", marginBottom:"10px"
-          }}>회원가입</h2>
-          <h5 style={{marginBottom:"30px"}}>뭐든빌리개를 시작해보세요!</h5>
+                        <label style={{ textAlign:"left" }}>비밀번호 확인</label>
+                        <input type='password' class="inputField" 
+                                placeholder="" value={confirmPassword} onChange={onConfirmPasswordHandler}/>
+                        <br />
 
-      <div style={{ 
-            display: 'flex', justifyContent: 'center', alignItems: '', 
-            width: '100%', height: '100vh', paddingTop: '10px', borderColor:"red", borderWidth: 1
-            }}>
-            
-            <form style={{ display: 'flex', flexDirection: 'column', }}
-                onSubmit={onSubmitHandler}
-            >
-                <label style={{ textAlign:"left" }}>이름</label> 
-                <input type='username' class="inputField" 
-                        placeholder="  ex) jaejae" value={Username} onChange={onUsernameHandler} />
-                <br />
-                <label style={{ textAlign:"left" }}>이메일</label> 
-                <input type='email' class="inputField" 
-                        placeholder="  abcdef@google.com" value={Email} onChange={onEmailHandler} />
-                <br />
-                <label style={{ textAlign:"left" }}>비밀번호</label>
-                <input type='password' class="inputField" 
-                        placeholder="  영문, 숫자, 특수문자 포함 8자 이상" value={Password} onChange={onPasswordHandler}/>
-                <br />
-                <label style={{ textAlign:"left" }}>비밀번호 확인</label>
-                <input type='password' class="inputField" 
-                        placeholder="" value={ConfirmPassword} onChange={onConfirmPasswordHandler}/>
-                <br />
-                <label style={{ textAlign:"left" }}>핸드폰 번호(숫자만 입력)</label>
-                <input type='phonenumber' class="inputField" 
-                        placeholder="  010-1234-5678" value={PhoneNumber} onChange={onPhoneNumberHandler}/>
-                <br />
-                <label style={{ textAlign:"left" }}>주소</label>
-                <input type='address' class="inputField" 
-                        placeholder="" value={Address} onChange={onAddressHandler}/>
-                <br />
-                <button formAction='' style={{padding:"10px", marginTop:"8px", 
-                        backgroundColor:"#4A4F5A", color:"white", borderRadius:'10px', border:"none"}} 
-                        onClick = {() => navigate('/itemmain')} >가입하기</button>
-                <HorizonLine />
-                <NaverLogin/>
-                <KaKaoLogin/>
-                <GoogleLogin />
-            </form>
-        </div>
-  </div>
-  );
-};
-  
-  export default Signup;
+                        <label style={{ textAlign:"left" }}>핸드폰 번호(숫자만 입력)</label>
+                        <input type='text' class="inputField" 
+                                placeholder="  010-1234-5678" value={phoneNumber} onChange={onPhoneNumberHandler}/>
+                        <br />
+                        
+                        <label style={{ textAlign:"left" }}>주소</label>
+                        <input type='text' class="inputField" 
+                                placeholder=" 도시" value={city} onChange={handleCityChange}/>
+                        <input type='text' class="inputField" 
+                                placeholder="  지역(구)" value={district} onChange={handleDistrictChange}/>
+                        <input type='text' class="inputField" 
+                                placeholder="  번지(동)" value={street} onChange={handleStreetChange}/>
+                        <input type='text' class="inputField" 
+                                placeholder="  우편번호" value={zipCode} onChange={handleZipCodeChange}/>
+                        <br />
+                        
+                        <button type="submit" style={{padding:"10px", marginTop:"8px", 
+                                backgroundColor:"#4A4F5A", color:"white", borderRadius:'10px', border:"none"}} >가입하기</button>
+                        <HorizonLine />
+                        <NaverLogin/>
+                        <KaKaoLogin/>
+                        <GoogleLogin />
+                </form>
+            </div>
+    </div>
+    );
+    };
+    
+    export default Signup;
