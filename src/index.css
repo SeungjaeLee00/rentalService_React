@@ -23,7 +23,7 @@
   max-width:1900px;
   margin:0 auto;
   padding:32px 0;
-  /* border: 1px solid red; */
+  border: 1px solid red;
   /* text-align: center; -> 가운데정렬*/ 
 }
 .page-container-main{
@@ -75,9 +75,7 @@
 
 }
 
-
-
-
+/* 상품상세페이지 이미지 슬라이드 css*/
 .swiper {
   width: 100%;
   height: 100%;
@@ -100,3 +98,47 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* 상품화면 css */ 
+
+.Item-TopSide, .Item-BottomSide {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border:1px solid green;
+}
+
+/* 상품한개부분섹션 */
+.Item{
+  display:flex;
+  flex-direction: column;
+  border:1px blue solid;
+
+}
+
+/* 상품 이름 가격 올린날짜 상품상태 섹션 */
+.Item-Information-Wrap
+{
+  display:flex;
+
+}
+
+.Item-Name-Price-Date-Wrap
+{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Item-State
+{
+  margin-left:20px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
