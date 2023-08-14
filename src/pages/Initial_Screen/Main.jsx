@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import Login from './Login.js';
+import Login from '../Login/Login';
 import { useEffect } from "react";
 import axios from 'axios';
 

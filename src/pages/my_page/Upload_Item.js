@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 
 import '../../App.css';
-import HorizonLine from '../HorizonLine';
+import HorizonLine from '../../components/HorizonLine';
 
 const Upload_Item = () => {
   const navigate = useNavigate();

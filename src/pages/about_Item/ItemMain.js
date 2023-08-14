@@ -6,8 +6,8 @@ import axios from 'axios';
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './SearchBar';
-import Pagination from '../Pagination';
-import Posts from '../Posts';
+import Pagination from './Pagination';
+import Posts from './Posts';
 
 function ItemMain() {
 

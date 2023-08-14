@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 // import { useInView } from 'react-intersection-observer';  // 무한 스크롤용 라이브러리
 import '../../App.css';
-import HorizonLine from '../HorizonLine';
+import HorizonLine from '../../components/HorizonLine';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ExImg1 from '../../assets/img/상품예시.jpg'
 import ExImg2 from '../../assets/img/상품예시2.png'

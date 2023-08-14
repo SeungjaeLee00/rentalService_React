@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { applyMiddleware, createStore } from 'redux';
 
-import Signup from './pages/Signup';
-import ItemMain from './pages/about_Item/ItemMain';
-import FindId from './pages/about_membership/FindId';
-import FindPw from './pages/about_membership/Find_pw';
 import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
