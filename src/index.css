@@ -101,19 +101,23 @@
 
 /* 상품화면 css */ 
 
-.Item-TopSide, .Item-BottomSide {
+.Item-Wrap {
   display:flex;
   flex-direction: row;
+  flex-wrap:wrap;
   justify-content: space-around;
   align-items: center;
-  border:1px solid green;
+ 
 }
 
 /* 상품한개부분섹션 */
 .Item{
   display:flex;
   flex-direction: column;
-  border:1px blue solid;
+  justify-content: center;
+  align-items: center;
+  width:500px;
+ 
 
 }
 
@@ -134,10 +138,17 @@
 
 .Item-State
 {
-  margin-left:20px;
+  margin-left:40px;
   display:flex;
   justify-content: center;
   align-items: center;
+}
+
+.Item-Pagination{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
 }
 
 

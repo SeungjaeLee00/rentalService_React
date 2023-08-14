@@ -10,20 +10,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './SearchBar';
 import Pagination from './Pagination';
 import Posts from './Posts';
+import TempData from "../../TempData.json";
+
+
+
 
 function ItemMain() {
 
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useState(6);
 
   const [search, setSearch] = useState("");
+  const [ItemIndex, setItemIndex] = useState(6);
+
   const onChange = (e) => {
     setSearch(e.target.value)
   }
-
-  // let [item, setItem] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
   let navigate = useNavigate();
 
@@ -40,43 +44,40 @@ function ItemMain() {
     fetchData();
   }, []);
 
-  const indexOfLast = currentPage * postsPerPage;
-  const indexOfFirst = indexOfLast - postsPerPage;
+
+  const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
+  const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
+  //배열분할함수 우리는 TempData에 임시로 데이터 가져옴
   const currentPosts = (posts) => {
     let currentPosts = 0;
-    currentPosts = posts.slice(indexOfFirst, indexOfLast);
+    currentPosts = TempData.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
 
+  const a = [1, 2, 3];
+
   return (
     <div className='page-container'>
-
       {/* 본문상단의검색바 */}
       <SearchBar />
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
-        <div className='Item-TopSide'>
-          <ItemProduce navigate={navigate}/>
-          <ItemProduce navigate={navigate}/>
-          <ItemProduce navigate={navigate}/>
-        </div>
-        <div className='Item-BottomSide'>
-          <ItemProduce navigate={navigate}/>
-          <ItemProduce navigate={navigate}/>
-          <ItemProduce navigate={navigate}/>
-        </div>
+        <Posts TempData={currentPosts(TempData)} loading={loading} ItemIndex={ItemIndex} />
 
       </div>
 
 
-
       {/* 본문하단버튼 */}
-      {/* <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={posts.length}
-        paginate={setCurrentPage}
-      ></Pagination> */}
+      <div className="Item-Pagination">
+        <Pagination
+          // 총데이터를 postsPerPage만큼 등분해서 보여준다. 6개씩보여주자.
+          postsPerPage={postsPerPage} //각각 페이지당 포스트개수(6개)
+          totalPosts={TempData.length} //전체 데이터 개수 (18개)
+          paginate={setCurrentPage} //CurrentPage변경하는함수.(첫번째페이지가정 6)
+        ></Pagination>
+      </div>
+
 
 
       <div className='upload_item' style={{ position: "fixed", right: '45px', bottom: '30px' }}>
@@ -89,28 +90,31 @@ function ItemMain() {
   );
 };
 
-
+// 아이템 생성 함수
 function ItemProduce(props) {
   return (
-    <div className="Item" onClick={()=>{
-      props.navigate('/itemmain/Detail');
-    }}>
-      <div className='Item-Img'>
-        <img src={ExImg} style={{ width: 200, height: 200 }} />
-      </div>
-      <div className='Item-Information-Wrap'>
-        <div className='Item-Name-Price-Date-Wrap'>
-          <div className='Item-Name'>(새상품)꼼데라송 가디건</div>
-          <div className='Item-Price'>가격 : 250,000원</div>
-          <div className='Item-Date'>2023.08.13.16:00</div>
+    props.TempData.slice(0, props.ItemIndex).map((a, i) => {
+      return (
+        <div className="Item" onClick={() => {
+          props.navigate('/itemmain/Detail');
+        }}>
+          <div className='Item-Img'>
+            <img src={ExImg} style={{ width: 200, height: 200 }} />
+          </div>
+          <div className='Item-Information-Wrap'>
+            <div className='Item-Name-Price-Date-Wrap'>
+              <div className='Item-Name'>{props.TempData[i].Id} {props.TempData[i].title}</div>
+              <div className='Item-Price'>가격 : {props.TempData[i].price}</div>
+              <div className='Item-Date'>{props.TempData[i].date}</div>
+            </div>
+            <div className='Item-State'>
+              {props.TempData[i].state}
+            </div>
+          </div>
         </div>
-        <div className='Item-State'>
-          상품상태 : 판매중
-        </div>
-      </div>
-    </div>
+      )
+    })
   )
-
 }
 
 function Card(props) {
@@ -140,5 +144,3 @@ function Card(props) {
 }
 
 export default ItemMain;
-
-  // style={{ display: 'flex', flexDirection: 'row', padding: '20px'}}
