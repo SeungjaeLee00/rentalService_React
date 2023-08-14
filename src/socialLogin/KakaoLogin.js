@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import kakao from "../img/kakao.png";
+import kakao from "../assets/img/kakao.png";
 import '../App.css';
 import '../modal.css';
 

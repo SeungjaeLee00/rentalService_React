@@ -4,10 +4,10 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import '../../App.css';
 import HorizonLine from '../HorizonLine';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ExImg1 from '../../img/상품예시.jpg'
-import ExImg2 from '../../img/상품예시2.png'
-import ExImg3 from '../../img/상품예시3.jpg'
-import ExImg4 from '../../img/상품예시4.jpg'
+import ExImg1 from '../../assets/img/상품예시.jpg'
+import ExImg2 from '../../assets/img/상품예시2.png'
+import ExImg3 from '../../assets/img/상품예시3.jpg'
+import ExImg4 from '../../assets/img/상품예시4.jpg'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
