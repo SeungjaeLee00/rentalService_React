@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../modal.css';
+import '../../style/modal.css';
 import '../../App.css';
 import { Label, Input, Button, Form, FormGroup } from 'reactstrap';
 import { NavLink, useNavigate } from 'react-router-dom';

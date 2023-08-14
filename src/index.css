@@ -1,4 +1,4 @@
-@import 'reset.css';
+@import './style/reset.css';
 
 @font-face {
   font-family: 'NanumBarunGothic';
