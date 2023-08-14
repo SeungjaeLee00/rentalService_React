@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import NavBar from '../NavBar';
 import '../../App.css'
 
 function FoundId() {

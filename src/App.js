@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import './App.css';
-import NavBar from './pages/NavBar';
+import NavBar from './components/NavBar';
 import Signup from './pages/Signup';
 import Main from'./pages/Main';
 import ItemMain from './pages/about_Item/ItemMain';

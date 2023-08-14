@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Link} from 'react-router-dom'
 
-import NavBar from '../NavBar';
 import '../../App.css'
 
 function Find_pw() {
