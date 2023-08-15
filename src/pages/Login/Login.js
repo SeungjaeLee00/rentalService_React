@@ -4,6 +4,7 @@ import '../../App.css';
 import { Label, Input, Button, Form, FormGroup } from 'reactstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import KaKaoLogin from '../../socialLogin/KakaoLogin';
 import NaverLogin from '../../socialLogin/NaverLogin';
@@ -14,35 +15,38 @@ import HorizonLine from '../../components/HorizonLine';
 
 const Login = (props) => {
 
-  let navigate = useNavigate();  // hook: page 이동을 도와줌
+  // let navigate = useNavigate();  // hook: page 이동을 도와줌
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const { open, close, header } = props;
 
-  const dispatch = useDispatch();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState('');
 
-  const [Id, setId] = useState("");
-  const [Password, setPassword] = useState("");
-
-  const onIdHandler = (event) => {
-      setId(event.currentTarget.value);
+  const onUsernameHandler = (event) => {
+    setUsername(event.currentTarget.value);
   }
   const onPasswordHandler = (event) => {
-      setPassword(event.currentTarget.value);
+    setPassword(event.currentTarget.value);
   }
+
   const onSubmitHandler = (event) => {
-      // 버튼만 누르면 리로드 되는것을 막아줌
-      event.preventDefault();
+    event.preventDefault();
 
-      console.log('Id', Id);
-      console.log('Password', Password);
-      
-      let body = {
-          Id: Id,
-          password: Password,
-      }
+    const userData = {
+      username: username,
+      password: password
+    };
 
-      dispatch(loginUser(body));
-  }
+    axios.post('http://13.125.98.26:8080/auth/login', userData)
+      .then(response => {
+        setMessage('로그인 성공');
+      })
+      .catch(error => {
+        console.error('로그인 실패:', error);
+        setMessage('로그인에 실패하였습니다.');
+      });
+  };
 
 
   return (
@@ -55,19 +59,20 @@ const Login = (props) => {
           </header>
 
           <main>
-          <Form onSubmit={''}>
+          <Form onSubmit={onSubmitHandler}>
             <FormGroup>
               <h4>뭐든빌리개</h4>
               <p style={{fontSize:"13px", color:"#4A4F5A"}}>서비스 이용을 위해 로그인 해주세요.</p>
               <br/>
-              <input type='Id' class="inputField" placeholder="  아이디" value={Id} 
-                onChange={onIdHandler} style={{marginBottom:"20px"}}/>
-              <input type='password' class="inputField" placeholder="  비밀번호" value={Password} 
+              <input type='Id' class="inputField" placeholder="  아이디" value={username} 
+                onChange={onUsernameHandler} style={{marginBottom:"20px"}}/>
+              <input type='password' class="inputField" placeholder="  비밀번호" value={password} 
                 onChange={onPasswordHandler}/>
               
               <div className='loginbtn'>
-                <Button color="dark" onClick = {() => navigate('/itemmain')}>Login</Button>
+                <Button color="dark" type="submit">Login</Button>
               </div>
+
               <div className = "small">
                   <NavLink style={({ isActive }) => ({ color: isActive ? 'yellow' : 'gray' })} to="/find-id">아이디 찾기</NavLink>{' | '}
                   <NavLink style={({ isActive }) => ({ color: isActive ? 'yellow' : 'gray' })} to="/find-pw">비밀번호 찾기</NavLink>{' | '}

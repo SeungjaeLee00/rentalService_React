@@ -92,12 +92,13 @@ function ItemMain() {
 
 // 아이템 생성 함수
 function ItemProduce(props) {
+  // let navigate = useNavigate();
   return (
     props.TempData.slice(0, props.ItemIndex).map((a, i) => {
       return (
-        <div className="Item" onClick={() => {
-          props.navigate('/itemmain/Detail');
-        }}>
+        <div className="Item" onClick={() => 
+          {props.navigate('/itemmain/Detail')}
+        }>
           <div className='Item-Img'>
             <img src={ExImg} style={{ width: 200, height: 200 }} />
           </div>

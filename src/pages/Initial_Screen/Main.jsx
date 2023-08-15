@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import Login from './Login.js';
+import Login from '../Login/Login';
 import { useEffect } from "react";
 import axios from 'axios';
 
@@ -25,13 +25,10 @@ export default function Main() {
     return (
         <div className="page-container-main">
             <div className='main-bg'></div>
-<<<<<<<<< Temporary merge branch 1
+
+
             <button onClick={()=>{
                 fetch("/members")   
-=========
-            {/* <button onClick={()=>{
-                fetch("https://jsonplaceholder.typicode.com/users/1")
->>>>>>>>> Temporary merge branch 2
                  .then((res)=>{
                     console.log(res);
                     return res.json();
@@ -40,7 +37,7 @@ export default function Main() {
                     console.log(data.result.data.memberList[0].nickname);
                     setData(data);
                  });
-            }}>서버버튼</button> */}
+            }}>서버버튼</button> 
             
             <div className='more_info'>
                 <div className='col'>
