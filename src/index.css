@@ -56,7 +56,23 @@
   width:400px;
   display:flex;
   flex-direction:column;
+}
+
+.Item_Button {
+  display:flex;
+  flex-direction: row;
   align-items: center;
+  margin-top: 70px;
+}
+
+.Item_Button button{
+  background-color:black;
+  color : white;
+  width:200px;
+  height:50px;
+  border-radius: 10px;
+  font-weight: bold;
+
 }
 
 

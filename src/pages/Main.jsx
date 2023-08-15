@@ -25,17 +25,19 @@ export default function Main() {
     return (
         <div className="page-container-main">
             <div className='main-bg'></div>
-            {/* <button onClick={()=>{
-                fetch("https://jsonplaceholder.typicode.com/users/1")
+
+
+            <button onClick={()=>{
+                fetch("/members")   
                  .then((res)=>{
                     console.log(res);
                     return res.json();
                  })
                  .then((data)=>{
-                    console.log(data);
+                    console.log(data.result.data.memberList[0].nickname);
                     setData(data);
                  });
-            }}>서버버튼</button> */}
+            }}>서버버튼</button>
             
             <div className='more_info'>
                 <div className='col'>

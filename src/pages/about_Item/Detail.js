@@ -4,104 +4,109 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import '../../App.css';
 import HorizonLine from '../HorizonLine';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from '../../img/logo.png'
+import ExImg from '../../img/상품예시.jpg'
 
 function Detail() {
 
-    let navigate = useNavigate();  
-    const [comments, setComments] = useState([
-        { id: 1, content: 'I like it!' }
-      ]);
-    
-    const nextId = useRef(1);
-    
-    const onInsert = useCallback(
-        (content) => {
-          const comment = {
-            id: nextId.current,
-            content
-          };
-          console.log(content);
-          setComments(comments => comments.concat(comment));
-          nextId.current += 1; 
-        },
-        [comments],
-      );
 
-    const [value, setValue] = useState({
-        content: ''
-    });
-
-    const onChangeContent = useCallback(
-        (e) => {
-            setValue({
-                content: e.target.value,
-            });
-        },
-        [value]
+  
+  let navigate = useNavigate();  
+  const [comments, setComments] = useState([
+      { id: 1, content: 'I like it!' }
+    ]);
+  
+  const nextId = useRef(1);
+  
+  const onInsert = useCallback(
+      (content) => {
+        const comment = {
+          id: nextId.current,
+          content
+        };
+        console.log(content);
+        setComments(comments => comments.concat(comment));
+        nextId.current += 1; 
+      },
+      [comments],
     );
 
-    const onSubmit = useCallback(
-        e => {
-            onInsert(value.content);
-            setValue({
-                content: ''
-            });
+  const [value, setValue] = useState({
+      content: ''
+  });
 
-            e.preventDefault();
-        },
-        [onInsert, value],
-    );
+  const onChangeContent = useCallback(
+      (e) => {
+          setValue({
+              content: e.target.value,
+          });
+      },
+      [value]
+  );
 
-    return (
-        <div className='page-container'>
-          <div className='Detail_Item_wrap'>
-            <div className='Detail_Item_Img'>
-              <img style={{width:350, height:300}} src={logo}/>
-            </div>
-            <div className='Item_About'>
-              <div className='Detail_Item_Category'>패션</div>
-              <div className="Detail_Item_Name_Price">
-                <div style={{ marginTop: 20, fontSize: 30 }} className="Detail_Item_Name">상품명</div>
-                <div style={{ marginTop: 20 }} className="Detail_Item_Price">가격</div>
-              </div>
-              <div style={{ marginTop: 20 }}>
-                <span>날짜</span>
-                <span>조회</span>
-                <span>찜</span>
-                <div style={{ marginTop: 20 }}>상품설명</div>
-              </div>
-              <div style={{ marginTop: 20 }}>
-                <button>쪽지보내기</button>
-              </div>
-            </div>
+  const onSubmit = useCallback(
+      e => {
+          onInsert(value.content);
+          setValue({
+              content: ''
+          });
+
+          e.preventDefault();
+      },
+      [onInsert, value],
+  );
+
+
+  return (
+    <div className='page-container'>
+      <div className='Detail_Item_wrap'>
+        <div className='Detail_Item_Img'>
+          <img style={{ width: 350, height: 300 }} src={ExImg} />
+        </div>
+        <div className='Item_About'>
+          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; 패션의류&nbsp; {'>'} &nbsp;여성의류&nbsp; {'>'}&nbsp; (새상품)꼼데라송 가디건</div>
+          <div className="Detail_Item_Name_Price">
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight:"bold" }} className="Detail_Item_Name">(새상품)꼼데라송 가디건</div>
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight:"bold"}} className="Detail_Item_Price">250,000원</div>
           </div>
-        
+          <div style={{ marginTop: 20 }}>
+            <span>2023.08.13.16:00&nbsp;{'·'}&nbsp;</span>
+            <span>조회 4&nbsp;{'·'}&nbsp;&nbsp;</span>
+            <span>찜 0</span>
+            <div style={{ marginTop: 20 }}>꼼데가르송 가디건 블랙색상 
+            XS사이즈 새상품입니다. 저렴한 가격에드려요. 쪽지주세요</div>
+          </div>
+          <div className='Item_Button'>
+            <button style={{backgroundColor:"white", color:"black"}}>찜</button>
+            <button>쪽지보내기</button>
+          </div>
+        </div>
+      </div>
+      <HorizonLine />
 
-        <HorizonLine />
+      <div style={{ padding: "20px" }}>
+        <h3>댓글</h3>
+        <form className="CommentInsert" onSubmit={onSubmit}
+          style={{ display: 'flex' }}>
+          <textarea placeholder="    댓글을 입력하세요."
+            cols="90"
+            rows="2"
+            style={{
+              background_color: "transparent",
+              border: "2px solid rgba(0, 0, 0, 0.23)",
+              borderRadius: "7px", marginLeft: "270px"
+            }}
+            value={value.content}
+            onChange={onChangeContent}
+          />
+          <button type="submit" style={{ border: 'none', marginLeft: "5px" }}>보내기</button>
+        </form>
+      </div>
 
-            <div style={{ padding: "20px" }}>
-                <h3>댓글</h3>
-                <form className="CommentInsert" onSubmit={onSubmit}
-                    style={{ display:'flex' }}>
-                    <textarea placeholder="    댓글을 입력하세요."
-                        cols="90"
-                        rows="2"
-                        style={{ background_color: "transparent", 
-                        border: "2px solid rgba(0, 0, 0, 0.23)",
-                        borderRadius: "7px", marginLeft: "270px" }}
-                        value={value.content}
-                        onChange={onChangeContent}
-                    />
-                    <button type="submit" style={{ border:'none', marginLeft: "5px" }}>보내기</button>
-                </form>
-            </div>
-
-            <div className='upload_item' style={{position:"fixed", right: '45px', bottom: '30px'}}>
-                <button style={{ borderRadius:"30px", fontSize:'20px',  width:"100px", height: "50px", border:"none" }}
-                        onClick={() => navigate('/itemmain/upload-item')}> + 글쓰기 </button>
-            </div>
-            </div>
+      <div className='upload_item' style={{ position: "fixed", right: '45px', bottom: '30px' }}>
+        <button style={{ borderRadius: "30px", fontSize: '20px', width: "100px", height: "50px", border: "none" }}
+          onClick={() => navigate('/itemmain/upload-item')}> + 글쓰기 </button>
+      </div>
+    </div>
   )
 }
 
