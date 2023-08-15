@@ -2,7 +2,7 @@
   "name": "borroweverythings",
   "version": "0.1.0",
   "private": true,
-  "proxy" : "http://13.125.98.26:8080",
+  "proxy": "http://13.125.98.26:8080",
   "dependencies": {
     "@emotion/react": "11.1.5",
     "@emotion/styled": "11.1.5",
@@ -33,7 +33,9 @@
     "redux": "^4.2.1",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.4.2",
+    "sass": "^1.65.1",
     "styled-components": "^6.0.7",
+    "swiper": "^10.1.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

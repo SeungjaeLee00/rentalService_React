@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import '../modal.css';
-import '../App.css';
+import '../../style/modal.css';
+import '../../App.css';
 import { Label, Input, Button, Form, FormGroup } from 'reactstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import KaKaoLogin from '../socialLogin/KakaoLogin';
-import NaverLogin from '../socialLogin/NaverLogin';
-import GoogleLogin from '../socialLogin/GoogleLLogIn';
-import { loginUser } from './about_membership/user_action';
-import HorizonLine from './HorizonLine';
+import KaKaoLogin from '../../socialLogin/KakaoLogin';
+import NaverLogin from '../../socialLogin/NaverLogin';
+import GoogleLogin from '../../socialLogin/GoogleLLogIn';
+import { loginUser } from '../about_membership/user_action';
+import HorizonLine from '../../components/HorizonLine';
 
 
 const Login = (props) => {

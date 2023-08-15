@@ -2,15 +2,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import './App.css';
-import NavBar from './pages/NavBar';
-import Signup from './pages/Signup';
-import Main from'./pages/Main';
+import NavBar from './components/NavBar';
+import Signup from './pages/SignUp/Signup';
+import Main from'./pages/Initial_Screen/Main';
 import ItemMain from './pages/about_Item/ItemMain';
 import FindId from './pages/about_membership/FindId';
 import FindPw from './pages/about_membership/Find_pw';
 import Upload_Item from './pages/my_page/Upload_Item';
 import FoundId from './pages/about_membership/FoundId';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/Login/LoginPage';
 
 import Detail from './pages/about_Item/Detail';
 import { LoginSharp, RoundaboutLeft } from '@mui/icons-material';

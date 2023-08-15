@@ -1,4 +1,4 @@
-@import 'reset.css';
+@import './style/reset.css';
 
 @font-face {
   font-family: 'NanumBarunGothic';
@@ -23,7 +23,7 @@
   max-width:1900px;
   margin:0 auto;
   padding:32px 0;
-  /* border: 1px solid red; */
+  border: 1px solid red;
   /* text-align: center; -> 가운데정렬*/ 
 }
 .page-container-main{
@@ -75,6 +75,81 @@
 
 }
 
+/* 상품상세페이지 이미지 슬라이드 css*/
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 상품화면 css */ 
+
+.Item-Wrap {
+  display:flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content: space-around;
+  align-items: center;
+ 
+}
+
+/* 상품한개부분섹션 */
+.Item{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:500px;
+ 
+
+}
+
+/* 상품 이름 가격 올린날짜 상품상태 섹션 */
+.Item-Information-Wrap
+{
+  display:flex;
+
+}
+
+.Item-Name-Price-Date-Wrap
+{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Item-State
+{
+  margin-left:40px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Item-Pagination{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
 
 
 
