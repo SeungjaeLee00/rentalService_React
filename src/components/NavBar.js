@@ -8,6 +8,7 @@ function NavBar() {
 
     let [makers, setMakers] = useState(false);
     let navigate = useNavigate();  // hook: page 이동을 도와줌
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     return (
         <Navbar bg="light"  variant="light"
@@ -47,6 +48,7 @@ function NavBar() {
                     <NavDropdown.Item onClick={() => navigate('/my-page/edit-membership')}>회원정보 수정</NavDropdown.Item>
                     <NavDropdown.Item onClick={() => navigate('/my-page/myitempage')}>내 게시물 보기</NavDropdown.Item>
                     <NavDropdown.Item onClick={() => navigate('/my-page/upload-item')}>내 물건 올리기</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => navigate('/my-page/chats')}>쪽지함</NavDropdown.Item>
                   </NavDropdown>
 
                   <Nav.Link onClick={()=>{ setMakers(!makers) }} >뭐든빌리개를 만드는 사람들</Nav.Link>
@@ -62,6 +64,10 @@ function NavBar() {
                   />
                 <Button variant="outline-success" style={{width: "100px", height: "50px"}}>검색</Button>
                 </Form> 
+
+                {/* <Button onClick={() => setIsLoggedIn(!isLoggedIn)}>
+                  {isLoggedIn ? 'Log Out' : 'Log In'}
+                </Button> */}
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>

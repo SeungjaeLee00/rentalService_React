@@ -15,7 +15,7 @@ import HorizonLine from '../../components/HorizonLine';
 
 const Login = (props) => {
 
-  // let navigate = useNavigate();  // hook: page 이동을 도와줌
+  let navigate = useNavigate();  // hook: page 이동을 도와줌
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const { open, close, header } = props;
 
@@ -41,6 +41,9 @@ const Login = (props) => {
     axios.post('http://13.125.98.26:8080/auth/login', userData)
       .then(response => {
         setMessage('로그인 성공');
+        if ((response.status = 200)) {
+          return navigate("/itemmain");
+          }
       })
       .catch(error => {
         console.error('로그인 실패:', error);

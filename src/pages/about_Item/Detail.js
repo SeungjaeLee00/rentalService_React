@@ -110,7 +110,7 @@ function Detail() {
           </div>
           <div className='Item_Button'>
             <button style={{ backgroundColor: "white", color: "black" }}>찜</button>
-            <button>쪽지보내기</button>
+            <button onClick={() => navigate('/itemmain/detail/chat')}>쪽지보내기</button>
           </div>
         </div>
       </div>

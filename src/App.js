@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
 import './App.css';
 import NavBar from './components/NavBar';
@@ -12,10 +12,13 @@ import ResetPW from './pages/about_membership/ResetPW';
 import Upload_Item from './pages/my_page/Upload_Item';
 import FoundId from './pages/about_membership/FoundId';
 import LoginPage from './pages/Login/LoginPage';
+import Chat from './pages/Chat/Chat';
+
 
 import Detail from './pages/about_Item/Detail';
 import { LoginSharp, RoundaboutLeft } from '@mui/icons-material';
 import Edit_membership from './pages/my_page/Edit_membership';
+import AllChats from './pages/Chat/AllChats';
 
 
 function App() {
@@ -43,9 +46,12 @@ function App() {
         
         <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
         <Route exact path='/itemmain/detail' element={<Detail />} />
-
+        <Route exact path='/itemmain/detail/chat' element={<Chat/>} />
+        
+        
 
         <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
+        <Route exact path='/my-page/chats' element={<AllChats />} />
       </Routes>
     </div>
 

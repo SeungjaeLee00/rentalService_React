@@ -97,7 +97,7 @@ function ItemProduce(props) {
     props.TempData.slice(0, props.ItemIndex).map((a, i) => {
       return (
         <div className="Item" onClick={() => 
-          {props.navigate('/itemmain/Detail')}
+          {props.navigate('/itemmain/detail')}
         }>
           <div className='Item-Img'>
             <img src={ExImg} style={{ width: 200, height: 200 }} />
@@ -118,30 +118,30 @@ function ItemProduce(props) {
   )
 }
 
-function Card(props) {
+// function Card(props) {
 
-  let navigate = useNavigate();
+//   let navigate = useNavigate();
 
-  const about = "이승재 \n 조회 수 회 ⋅ 1초 전"
+//   const about = "이승재 \n 조회 수 회 ⋅ 1초 전"
 
-  return (
-    <div className="col-md-4" style={{ marginBottom: "30px" }}
-      onClick={() => navigate('/itemmain/detail')}>
-      <img src={'https://codingapple1.github.io/shop/shoes1.jpg'} width="60%" />
-      <div className='etc' style={{ display: 'flex', flexDirection: 'row', padding: '20px' }}>
-        <div style={{ textAlign: 'left', marginLeft: "60px" }}>
-          <h5> 3번 신은 신발 </h5>
-          <p style={{ color: 'gray', fontSize: "15px" }}>{about}</p>
-        </div>
-        <div style={{ textAlign: 'right' }}>
-          <p style={{ color: 'green', fontSize: "12px" }}>대여 가능</p>
-        </div>
+//   return (
+//     <div className="col-md-4" style={{ marginBottom: "30px" }}
+//       onClick={() => navigate('/itemmain/detail')}>
+//       <img src={'https://codingapple1.github.io/shop/shoes1.jpg'} width="60%" />
+//       <div className='etc' style={{ display: 'flex', flexDirection: 'row', padding: '20px' }}>
+//         <div style={{ textAlign: 'left', marginLeft: "60px" }}>
+//           <h5> 3번 신은 신발 </h5>
+//           <p style={{ color: 'gray', fontSize: "15px" }}>{about}</p>
+//         </div>
+//         <div style={{ textAlign: 'right' }}>
+//           <p style={{ color: 'green', fontSize: "12px" }}>대여 가능</p>
+//         </div>
 
 
-      </div>
+//       </div>
 
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
 
 export default ItemMain;

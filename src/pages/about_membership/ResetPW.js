@@ -90,7 +90,7 @@ function Find_pw() {
             <button style={{color:"black", border: "none",
                             borderRadius:'10px', height: "50px", 
                             marginLeft:"8px" , marginTop:"44px" }}
-                  type="submit" >저장하기</button>
+                  type="submit" >변경하기</button>
             </form>
             
 
