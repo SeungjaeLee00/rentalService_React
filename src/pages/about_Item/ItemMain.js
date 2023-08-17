@@ -16,7 +16,7 @@ import TempData from "../../TempData.json";
 
 
 function ItemMain() {
-
+   
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,6 +40,9 @@ function ItemMain() {
       );
       setPosts(response.data);
       setLoading(false);
+
+      //json데이터 Post에 넣음
+      setPosts(TempData);
     };
     fetchData();
   }, []);
@@ -47,15 +50,16 @@ function ItemMain() {
 
   const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
   const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
-  //배열분할함수 우리는 TempData에 임시로 데이터 가져옴
-  const currentPosts = (posts) => {
+
+  //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣음.
+  const currentPosts = () => {
     let currentPosts = 0;
-    currentPosts = TempData.slice(indexOfFirst, indexOfLast);
+    currentPosts = posts.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
 
-  const a = [1, 2, 3];
-
+  console.log(posts);
+  
   return (
     <div className='page-container'>
       {/* 본문상단의검색바 */}
@@ -63,7 +67,7 @@ function ItemMain() {
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
-        <Posts TempData={currentPosts(TempData)} loading={loading} ItemIndex={ItemIndex} />
+        <Posts TempData={currentPosts()} navigate={navigate} loading={loading} ItemIndex={ItemIndex} />
 
       </div>
 
