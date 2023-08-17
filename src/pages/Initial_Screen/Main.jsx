@@ -26,6 +26,7 @@ export default function Main() {
         <div className="page-container-main">
             <div className='main-bg'></div>
 
+
             <button onClick={()=>{
                 fetch("/members")   
                  .then((res)=>{

@@ -1,0 +1,26 @@
+.message-app {
+  padding: 20px;
+}
+
+.button-container {
+  margin-bottom: 20px;
+}
+
+.button-container button {
+  margin-right: 10px;
+}
+
+.message-list {
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-width: 400px;
+}
+
+.message-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.message-list li {
+  margin-bottom: 10px;
+}

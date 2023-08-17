@@ -9,7 +9,16 @@ import '../../App.css';
 import HorizonLine from '../../components/HorizonLine';
 
 const Upload_Item = () => {
+
+  let [itemimg, setItemImg] = useState("");
+
   const navigate = useNavigate();
+
+  // const [title, setTitle] = useState('');
+  // const [content, setContent] = useState('');
+  // const [categoryName, setCategoryName] = useState('');
+  // const [multipartFiles, setMultipaerFiles] = useState('');
+  const [message, setMessage] = useState('');
 
   const [board, setBoard] = useState({
     itemimage: '',
@@ -20,6 +29,7 @@ const Upload_Item = () => {
   });
 
   const { itemimage, title, price, contents, count } = board; //비구조화 할당
+  
 
   const onChange = (event) => {
     const { value, name } = event.target; //event.target에서 name과 value만 가져오기
@@ -29,14 +39,36 @@ const Upload_Item = () => {
     });
   };
 
-  const saveBoard = async () => {
-    await axios.post(`//localhost:3000/board`, board).then((res) => {
-      alert('등록되었습니다.');
-      navigate('/itemmain');
-    });
+  // const saveBoard = async () => {
+  //   await axios.post(`//localhost:3000/board`, board).then((res) => {
+  //     alert('등록되었습니다.');
+  //     navigate('/itemmain');
+  //   });
+  // };
+
+  const saveBoard = (event) => {
+    event.preventDefault();
+
+    const postData = {
+      // title: title,
+      // content: content
+    };
+
+    axios.post('http://13.125.98.26:8080/posts', postData)
+      .then(response => {
+        setMessage('게시물이 성공적으로 생성되었습니다.');
+        if ((response.status = 201)) {
+          return navigate("/itemmain");
+          }
+      })
+      
+      .catch(error => {
+        console.error('게시물 생성 실패:', error);
+        setMessage('게시물 생성에 실패하였습니다.');
+      });
   };
 
-  let [itemimg, setItemImg] = useState("");
+  
 
   const setPreViewImg = (event) => {
     var reader = new FileReader();

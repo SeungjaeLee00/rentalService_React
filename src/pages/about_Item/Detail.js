@@ -1,6 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-// import { useInView } from 'react-intersection-observer';  // 무한 스크롤용 라이브러리
 import '../../App.css';
 import HorizonLine from '../../components/HorizonLine';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,20 +7,25 @@ import ExImg1 from '../../assets/img/상품예시.jpg'
 import ExImg2 from '../../assets/img/상품예시2.png'
 import ExImg3 from '../../assets/img/상품예시3.jpg'
 import ExImg4 from '../../assets/img/상품예시4.jpg'
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import { Navigation, Pagination, Mousewheel, Keyboard} from 'swiper/modules';
+// import 'swiper/css';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/scrollbar';
+// import { Navigation, Pagination, Mousewheel, Keyboard} from 'swiper/modules';
 
+import 'swiper/swiper-bundle.min.css'; 
+import 'swiper/components/navigation/navigation.min.css'; 
+import 'swiper/components/pagination/pagination.min.css'; 
+import 'swiper/components/scrollbar/scrollbar.min.css'; 
+import SwiperCore, { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/core';
+SwiperCore.use([Navigation, Pagination, Mousewheel, Keyboard]);
 
 function Detail() {
-
-
 
   let navigate = useNavigate();
   const [comments, setComments] = useState([
@@ -106,7 +110,7 @@ function Detail() {
           </div>
           <div className='Item_Button'>
             <button style={{ backgroundColor: "white", color: "black" }}>찜</button>
-            <button>쪽지보내기</button>
+            <button onClick={() => navigate('/itemmain/detail/chat')}>쪽지보내기</button>
           </div>
         </div>
       </div>
