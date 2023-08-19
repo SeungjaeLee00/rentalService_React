@@ -38,7 +38,7 @@ function ItemMain() {
         // "http://13.125.98.26:8080/auth/sign-up"
         "https://jsonplaceholder.typicode.com/posts"
       );
-      setPosts(response.data);
+      // setPosts(response.data);
       setLoading(false);
 
       //json데이터 Post에 넣음
@@ -65,12 +65,18 @@ function ItemMain() {
       {/* 본문상단의검색바 */}
       <SearchBar />
 
-      {/* 본문가운데상품진열 */}
+      {/* 본문가운데상품진열
       <div className="Item-Wrap">
         <Posts TempData={currentPosts()} navigate={navigate} loading={loading} ItemIndex={ItemIndex} />
 
-      </div>
+      </div> */}
 
+      {/* 본문가운데상품진열 */}
+      <div className="Item-Wrap">
+        {posts && <Posts TempData={currentPosts()} navigate={navigate} loading={loading} ItemIndex={ItemIndex} />}
+
+      </div>
+      
 
       {/* 본문하단버튼 */}
       <div className="Item-Pagination">

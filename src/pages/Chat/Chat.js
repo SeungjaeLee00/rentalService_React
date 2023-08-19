@@ -14,7 +14,7 @@ function Chat() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (message.trim() !== '') {
-    //   onSendMessage(message);
+      //   onSendMessage(message);
       setMessage('');
     }
   };

@@ -1,14 +1,22 @@
 import React from "react";
 import ExImg from "../../assets/img/상품예시.jpg"
 import { red } from "@mui/material/colors";
+import { useNavigate } from "react-router";
 
 const Posts = (props) => {
+
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate('/itemmain/detail');
+  };
   return (
     props.TempData.slice(0, props.ItemIndex).map((a, i) => {
-      return (
-        <div className="Item" onClick={() => {
-          this.props.navigate('/itemmain/detail');
-        }}>
+        return (
+        // <div className="Item" onClick={() => {
+        //   props.navigate('/itemmain/detail');
+        // }}>
+          <div className="Item" onClick={handleNavigate} >
           <div className='Item-Img'>
             <img src={ExImg} style={{ width: 200, height: 200 }} />
           </div>

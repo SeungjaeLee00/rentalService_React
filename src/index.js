@@ -14,15 +14,15 @@ const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-   <React.StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
-    <Provider 
-      store={createStoreWithMiddleware(Reducer, 
+      <Provider
+        store={createStoreWithMiddleware(Reducer,
           window.__REDUX_DEVTOOLS_EXTENSION__ &&
           window.__REDUX_DEVTOOLS_EXTENSION__()
         )}>
-          <App/>
+        <App />
       </Provider>
     </BrowserRouter>
-   </React.StrictMode>
+  </React.StrictMode>
 );
