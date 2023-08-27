@@ -49,6 +49,8 @@ function App() {
         <Route exact path='/itemmain/detail/chat' element={<Chat/>} />
         
         
+        
+        
 
         <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
         <Route exact path='/my-page/chats' element={<AllChats />} />

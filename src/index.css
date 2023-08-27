@@ -152,4 +152,20 @@
 }
 
 
+/* 상품검색바 css */
+
+.search_input {
+  padding: 2px;
+  margin-right: 5px;
+  margin-left:700px;
+  margin-top: 15px;
+  width: 25%;
+}
+
+.serach_submit {
+  position: absolute;
+  margin-top: 14px;
+  cursor: pointer;
+}
+
 

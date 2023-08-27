@@ -1,16 +1,21 @@
 import React from "react";
-import ExImg from "../../assets/img/상품예시.jpg"
+import Gadigun from "../../assets/img/가디건1.jpg";
+import NikeAir from "../../assets/img/에어포스1.jpg";
+import LeeCap from "../../assets/img/lee볼캡모자1.jpg";
 import { red } from "@mui/material/colors";
+import { useNavigate } from "react-router";
+
 
 const Posts = (props) => {
+  const navigate = useNavigate();
   return (
     props.TempData.slice(0, props.ItemIndex).map((a, i) => {
       return (
         <div className="Item" onClick={() => {
-          props.navigate('/itemmain/detail');
+          navigate('/itemmain/detail');
         }}>
           <div className='Item-Img'>
-            <img src={ExImg} style={{ width: 200, height: 200 }} />
+            <img src={Gadigun} style={{ width: 200, height: 200 }} />
           </div>
           <div className='Item-Information-Wrap'>
             <div className='Item-Name-Price-Date-Wrap'>
