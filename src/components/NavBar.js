@@ -3,18 +3,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../pages/Login/AuthContext';
 
 function NavBar() {
 
   let [makers, setMakers] = useState(false);
   let navigate = useNavigate();  // hook: page 이동을 도와줌
 
-  const handleLogout = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+  const { isAuthenticated, logout } = useAuth();
 
+  const handleLogout = () => {
+    logout()
     window.location = '/';
   };
+
 
   return (
     <Navbar bg="light" variant="light"

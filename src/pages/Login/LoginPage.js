@@ -1,5 +1,4 @@
 // 모달창 아닌 로그인 페이지
-
 import React, { useState } from 'react';
 import '../../App.css';
 import { Label, Input, Button, Form, FormGroup } from 'reactstrap';
@@ -12,19 +11,16 @@ import NaverLogin from '../../socialLogin/NaverLogin';
 import GoogleLogin from '../../socialLogin/GoogleLLogIn';
 import { loginUser } from '../about_membership/user_action';
 import HorizonLine from '../../components/HorizonLine';
+import { useAuth } from '../Login/AuthContext';
 
 
 function LoginPage(props) {
+    let navigate = useNavigate();
+    const { login } = useAuth();
 
-    let navigate = useNavigate();  // hook: page 이동을 도와줌
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState('');
-
-    const [accessToken, setAccessToken] = useState('');
-    const [refreshToken, setRefreshToken] = useState('');
-
-    const [viewMode, setViewMode] = useState('sent'); // 기본 뷰 모드
 
     const onUsernameHandler = (event) => {
         setUsername(event.currentTarget.value);
@@ -45,17 +41,16 @@ function LoginPage(props) {
             .then(response => {
                 setMessage('로그인 성공');
                 console.log('로그인 성공:', response.data);
+
+                const returnData = response.data;
+                const { accessToken, refreshToken } = returnData.result.data;
+                login(accessToken, refreshToken);
+
+                console.log('토큰: ', returnData.result.data);
+
                 if ((response.status = 200)) {
                     return navigate("/itemmain");
                 }
-
-                const { accessToken, refreshToken } = response.data;
-                setAccessToken(accessToken);
-                setRefreshToken(refreshToken);
-
-                // 메세지함으로 이동하며 토큰을 쿼리 문자열로 전달
-                navigate(`http://13.125.98.26:8080/messages/${viewMode}`, { state: { accessToken, refreshToken } });
-
             })
             .catch(error => {
                 console.error('로그인 실패:', error);

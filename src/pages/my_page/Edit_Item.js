@@ -8,9 +8,11 @@ import Box from "@mui/material/Box";
 
 import '../../App.css';
 import HorizonLine from '../HorizonLine';
+import { useAuth } from '../Login/AuthContext';
 
 const Edit_Item = () => {
   const navigate = useNavigate();
+  const { accessToken } = useAuth();
 
   const [board, setBoard] = useState({
     itemimage: '',
@@ -48,6 +50,10 @@ const Edit_Item = () => {
 
     reader.readAsDataURL(event.target.files[0]);
   }
+
+  if (!accessToken) {
+    navigate('/loginpage');
+   }
 
   return(
   <>

@@ -3,7 +3,7 @@ import '../../style/modal.css';
 import '../../App.css';
 import { Label, Input, Button, Form, FormGroup } from 'reactstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import KaKaoLogin from '../../socialLogin/KakaoLogin';
@@ -11,17 +11,17 @@ import NaverLogin from '../../socialLogin/NaverLogin';
 import GoogleLogin from '../../socialLogin/GoogleLLogIn';
 import { loginUser } from '../about_membership/user_action';
 import HorizonLine from '../../components/HorizonLine';
+import { useAuth } from '../Login/AuthContext';
 
 
 const Login = (props) => {
-
-  let navigate = useNavigate();  // hook: page 이동을 도와줌
-  // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
+  let navigate = useNavigate();
+  const { login } = useAuth();
   const { open, close, header } = props;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState(''); 
+  const [message, setMessage] = useState('');
 
   const onUsernameHandler = (event) => {
     setUsername(event.currentTarget.value);
@@ -42,15 +42,15 @@ const Login = (props) => {
       .then(response => {
         setMessage('로그인 성공');
         console.log('로그인 성공:', response.data);
+
+        const returnData = response.data;
+        const { accessToken, refreshToken } = returnData.result.data;
+        login(accessToken, refreshToken);
+        console.log('토큰 저장 성공: ', returnData.result.data);
+
         if ((response.status = 200)) {
           return navigate("/itemmain");
         }
-
-        const { accessToken, refreshToken } = response.data;
-
-        localStorage.getItem('accessToken', accessToken);
-        localStorage.getItem('refreshToken', refreshToken);
-
       })
       .catch(error => {
         console.error('로그인 실패:', error);
