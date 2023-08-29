@@ -18,15 +18,23 @@
   
   .chat-form button {
     padding: 8px 16px;
-    background-color: #007bff;
+    background-color: gray;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
   }
-  
+
   .chat-form button:hover {
-    background-color: #0056b3;
+    background-color: gray;
   }
-  
+
+.to-chats {
+  position : fixed;
+  bottom : 80%;
+  right : 1px;
+  padding: 8px 16px;
+  margin-top: 20px;  
+  color: rgb(80, 80, 80);
+}

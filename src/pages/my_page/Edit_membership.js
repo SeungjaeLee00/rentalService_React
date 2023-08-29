@@ -19,32 +19,42 @@ function Edit_membership() {
       navigate('/loginpage');
       return;
     }
-    
+
     if (accessToken) {
-        axios.get('http://13.125.98.26:8080/members/my-profile', {
+      const apiUrl = 'http://13.125.98.26:8080/members/my-profile';
+      try {
+        axios.get(apiUrl, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         })
         .then(response => {
-          setData(response.data);
           console.log('회원 정보 불러오기 성공:', response.data);
+          setData(response.data);
         })
         .catch(error => {
           console.error('API 요청 오류:', error);
+
+          if (error.response && error.response.status === 401) {
+            console.error('AccessToken이 만료되었습니다. 로그인 페이지로 이동합니다.');
+            navigate('/loginpage');
+          }
         });
+      } catch (error) {
+        console.error('API 요청 오류:', error);
       }
-    }, [accessToken, isAuthenticated, navigate]);
+    }
+  }, [accessToken, navigate]);
 
   return (
     <div>
     <h2>User Profile</h2>
-    {/* {data ? (
+    {data ? (
         <p>서버에서 받은 데이터: {data}</p>
     ) : (
     <p>데이터를 불러올 수 없습니다.</p>
-    )} */}
-    <p>서버에서 받은 데이터: {data}</p>
+    )}
+    {/* <p>서버에서 받은 데이터: {data}</p> */}
     <button onClick={ handleLogout }>로그아웃</button>
   </div>
   );

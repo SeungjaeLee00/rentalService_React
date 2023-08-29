@@ -57,6 +57,7 @@ function NavBar() {
                 <NavDropdown.Item onClick={() => navigate('/my-page/myitempage')}>내 게시물 보기</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => navigate('/my-page/upload-item')}>내 물건 올리기</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => navigate('/my-page/chats')}>쪽지함</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate('/my-page/reports')}>신고함</NavDropdown.Item>
                 <NavDropdown.Item onClick={handleLogout}>로그아웃</NavDropdown.Item>
               </NavDropdown>
 

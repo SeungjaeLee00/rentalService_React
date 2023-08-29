@@ -1,43 +1,76 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import './ChatForm.css';
 import { useAuth } from '../Login/AuthContext';
+import axios from 'axios';
 
 function Chat() {
 
   let navigate = useNavigate();
-  const [message, setMessage] = useState('');
-  const { isAuthenticated } = useAuth();
+  const [content, setContent] = useState('');
+  const [receiveMember, setReceiveMember] = useState('');
+  const { accessToken, isAuthenticated } = useAuth();
 
-  const handleInputChange = (event) => {
-    setMessage(event.target.value);
+  const handleContentChange = (event) => {
+    setContent(event.target.value);
   };
+  const handleReciveMemberChange = (event) => {
+    setReceiveMember(event.target.value);
+  }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (message.trim() !== '') {
-      //   onSendMessage(message);
-      setMessage('');
+    const dataToSend = {
+      content: content,
+      receiveMember: receiveMember
+    }
+  
+    try {
+      if (!isAuthenticated) {
+        navigate('/loginpage');
+        return;
+      }
+  
+      const response = await axios.post('http://13.125.98.26:8080/messages', dataToSend, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+  
+      console.log('메세지 전송 성공: ', response.data);
+  
+      if (response.status === 201) {
+        console.log('메세지: ', response.data);
+      }
+    } catch (error) {
+      console.error('메세지 전송 실패:', error);
+  
+      if (error.response && error.response.status === 401) {
+        console.error('AccessToken이 만료되었습니다. 로그인 페이지로 이동합니다.');
+        navigate('/loginpage');
+      }
     }
   };
-
-  if ( !isAuthenticated ) {
-    navigate('/loginpage');
-  }
 
   return (
     <div className="chat-form-container">
       <form onSubmit={handleSubmit} className="chat-form">
         <input
           type="text"
-          placeholder="메세지를 입력하세요..."
-          value={message}
-          onChange={handleInputChange}
+          placeholder="보낼 사람"
+          value={receiveMember}
+          onChange={handleReciveMemberChange}
         />
-        <button type="submit">Send</button>
+        <input
+          type="text"
+          placeholder="메세지를 입력하세요..."
+          value={content}
+          onChange={handleContentChange}
+        />
+        <button type="submit"> 보내기 </button>
       </form>
 
-      <button onClick={() => navigate('/my-page/chats')}>쪽지함</button>
+      <Link className="to-chats" to="/my-page/chats" > 쪽지함 바로가기 </Link>
     </div>
   );
 }
