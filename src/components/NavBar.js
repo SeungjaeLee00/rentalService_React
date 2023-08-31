@@ -17,7 +17,6 @@ function NavBar() {
     window.location = '/';
   };
 
-
   return (
     <Navbar bg="light" variant="light"
       key={false} expand={false} className="bar">
@@ -42,7 +41,6 @@ function NavBar() {
               >
                 <NavDropdown.Item href="#1">가전제품</NavDropdown.Item>
                 <NavDropdown.Item href="#2">생활용품</NavDropdown.Item>
-                {/* <NavDropdown.Divider /> */}
                 <NavDropdown.Item href="#3">악기</NavDropdown.Item>
                 <NavDropdown.Item href="#4">완구</NavDropdown.Item>
                 <NavDropdown.Item href="#5">의류</NavDropdown.Item>
@@ -50,15 +48,27 @@ function NavBar() {
               </NavDropdown>
 
               <NavDropdown
+                title="리뷰 게시판"
+                id={`offcanvasNavbarDropdown-expand-${false}`}
+              >
+                <NavDropdown.Item href="#2">받은 리뷰보기</NavDropdown.Item>
+                <NavDropdown.Item href="#3">리뷰 작성하기</NavDropdown.Item>
+              </NavDropdown>
+
+              <NavDropdown
                 title="마이페이지"
                 id={`offcanvasNavbarDropdown-expand-${false}`}
               >
-                <NavDropdown.Item onClick={() => navigate('/my-page/edit-membership')}>회원정보 수정</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => navigate('/my-page/myitempage')}>내 게시물 보기</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => navigate('/my-page/upload-item')}>내 물건 올리기</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => navigate('/my-page/chats')}>쪽지함</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => navigate('/my-page/reports')}>신고함</NavDropdown.Item>
-                <NavDropdown.Item onClick={handleLogout}>로그아웃</NavDropdown.Item>
+                <NavDropdown.Item href = '/my-page/myitempage'>내 게시물 보기</NavDropdown.Item>
+                <NavDropdown.Item href = '/my-page/upload-item'>내 물건 올리기</NavDropdown.Item>
+                <NavDropdown.Item href = '/my-page/all-trades'>거래 내역 조회</NavDropdown.Item>
+                <NavDropdown.Item href='/my-page/chats'>쪽지함</NavDropdown.Item>
+                <NavDropdown.Item href='/my-page/reports'>신고함</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown title="설정" style={{ marginLeft: "20px", marginRight:"20px", marginBottom:"5px" }}>
+                  <NavDropdown.Item href='/my-page/edit-membership'>회원정보 수정</NavDropdown.Item>
+                  <NavDropdown.Item onClick={handleLogout}>로그아웃</NavDropdown.Item>
+                </NavDropdown>
               </NavDropdown>
 
               <Nav.Link onClick={() => { setMakers(!makers) }} >뭐든빌리개를 만드는 사람들</Nav.Link>
@@ -74,10 +84,6 @@ function NavBar() {
               />
               <Button variant="outline-success" style={{ width: "100px", height: "50px" }}>검색</Button>
             </Form>
-
-            {/* <Button onClick={() => setIsLoggedIn(!isLoggedIn)}>
-                  {isLoggedIn ? 'Log Out' : 'Log In'}
-                </Button> */}
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>

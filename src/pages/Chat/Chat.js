@@ -24,27 +24,23 @@ function Chat() {
       content: content,
       receiveMember: receiveMember
     }
-  
+
     try {
       if (!isAuthenticated) {
         navigate('/loginpage');
         return;
       }
-  
       const response = await axios.post('http://13.125.98.26:8080/messages', dataToSend, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-  
       console.log('메세지 전송 성공: ', response.data);
-  
       if (response.status === 201) {
         console.log('메세지: ', response.data);
       }
     } catch (error) {
       console.error('메세지 전송 실패:', error);
-  
       if (error.response && error.response.status === 401) {
         console.error('AccessToken이 만료되었습니다. 로그인 페이지로 이동합니다.');
         navigate('/loginpage');

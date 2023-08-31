@@ -1,27 +1,29 @@
 import { useState, useRef, useCallback } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import '../../App.css';
+import Do_Report from '../Report/Do_Report';
+
 import HorizonLine from '../../components/HorizonLine';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ExImg1 from '../../assets/img/상품예시.jpg'
-import ExImg2 from '../../assets/img/상품예시2.png'
-import ExImg3 from '../../assets/img/상품예시3.jpg'
-import ExImg4 from '../../assets/img/상품예시4.jpg'
+import ExImg1 from '../../assets/img/가디건1.jpg'
+import ExImg2 from '../../assets/img/가디건2.png'
+import ExImg3 from '../../assets/img/가디건3.jpg'
+import ExImg4 from '../../assets/img/가디건4.jpg'
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
 // import 'swiper/css';
 // import 'swiper/css/navigation';
 // import 'swiper/css/pagination';
 // import 'swiper/css/scrollbar';
 // import { Navigation, Pagination, Mousewheel, Keyboard} from 'swiper/modules';
 
-import 'swiper/swiper-bundle.min.css'; 
-import 'swiper/components/navigation/navigation.min.css'; 
-import 'swiper/components/pagination/pagination.min.css'; 
-import 'swiper/components/scrollbar/scrollbar.min.css'; 
+// Import Swiper styles
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/components/navigation/navigation.min.css';
+import 'swiper/components/pagination/pagination.min.css';
+import 'swiper/components/scrollbar/scrollbar.min.css';
 import SwiperCore, { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/core';
 SwiperCore.use([Navigation, Pagination, Mousewheel, Keyboard]);
 
@@ -71,15 +73,20 @@ function Detail() {
     },
     [onInsert, value],
   );
+  const [showReportPopup, setshowReportPopup] = useState(false);
 
-
-
+  const openReportModal = () => {
+    setshowReportPopup(true);
+  };
+  const closeReportnModal = () => {
+    setshowReportPopup(false);
+  };
 
   return (
     <div className='page-container'>
       <div className='Detail_Item_wrap'>
         <div className='Detail_Item_Img'>
-          <Swiper
+          {/* <Swiper
             cssMode={true}
             navigation={true}
             pagination={true}
@@ -92,7 +99,7 @@ function Detail() {
             <SwiperSlide><img src={ExImg2} /></SwiperSlide>
             <SwiperSlide><img src={ExImg3} /></SwiperSlide>
             <SwiperSlide><img src={ExImg4} /></SwiperSlide>
-          </Swiper>
+          </Swiper> */}
 
         </div>
         <div className='Item_About'>
@@ -111,6 +118,9 @@ function Detail() {
           <div className='Item_Button'>
             <button style={{ backgroundColor: "white", color: "black" }}>찜</button>
             <button onClick={() => navigate('/itemmain/detail/chat')}>쪽지보내기</button>
+            <button onClick={openReportModal} variant="secondary" size="lg">❗️</button>
+            <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
+
           </div>
         </div>
       </div>

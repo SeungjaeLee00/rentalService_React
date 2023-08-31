@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../../style/modal.css';
 import '../../App.css';
-import { Label, Input, Button, Form, FormGroup } from 'reactstrap';
+import { Button, Form, FormGroup } from 'reactstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import KaKaoLogin from '../../socialLogin/KakaoLogin';
@@ -17,7 +16,7 @@ import { useAuth } from '../Login/AuthContext';
 const Login = (props) => {
   let navigate = useNavigate();
   const { login } = useAuth();
-  const { open, close, header } = props;
+  const { open, close } = props;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

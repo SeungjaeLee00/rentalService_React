@@ -23,6 +23,7 @@ import AllChats from './pages/Chat/AllChats';
 import MyitemPage from './pages/my_page/MyitemPage';
 import My_Reports from './pages/Report/My_Reports';
 import Do_Report from './pages/Report/Do_Report'
+import AllTrade from './pages/Trade/AllTrade';
 
 
 function App() {
@@ -40,16 +41,12 @@ function App() {
           <Route exact path="/find-id" element={<FindId />} />
           <Route exact path="/find-pw" element={<FindPw />} />
           <Route exact path='/reset-pw' element={<ResetPW />} />
-
-
           <Route exact path="/found-id" element={<FoundId />} />
-
           <Route exact path="/loginpage" element={<LoginPage />} />
 
-          {/* 로그인하고 보이는 첫 창*/}
           <Route exact path="/itemmain" element={<ItemMain />} />
 
-          {/* <Route exact path="/itemmain/upload-item" element={<Upload_Item />} /> */}
+          <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
           <Route exact path='/itemmain/detail' element={<Detail />} />
           <Route exact path='/itemmain/detail/chat' element={<Chat />} />
 
@@ -59,6 +56,7 @@ function App() {
           <Route exact path='/my-page/chats' element={<AllChats />} />
           <Route exact path='/my-page/reports' element={<My_Reports />} />
           <Route exact path='/report' element={<Do_Report />} />
+          <Route exact path='/my-page/all-trades' element={<AllTrade />} />
         </Routes>
       </AuthProvider>
       {/* </Router> */}
