@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './MessageApp.css';
-import { useAuth } from '../Login/AuthContext';
+import { useAuth } from '../../components/AuthContext';
 
 
 function AllChats() {

@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../pages/Login/AuthContext';
+import { useAuth } from './AuthContext';
 
 function NavBar() {
 

@@ -1,9 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import { useState } from 'react';
 import { Route, Routes, Router } from 'react-router-dom';
-
 import './App.css';
-import { AuthProvider } from '../src/pages/Login/AuthContext';
+import { AuthProvider } from './components/AuthContext';
 
 import NavBar from './components/NavBar';
 import Signup from './pages/SignUp/Signup';
@@ -16,7 +14,6 @@ import Upload_Item from './pages/my_page/Upload_Item';
 import FoundId from './pages/about_membership/FoundId';
 import LoginPage from './pages/Login/LoginPage';
 import Chat from './pages/Chat/Chat';
-
 import Detail from './pages/about_Item/Detail';
 import Edit_membership from './pages/my_page/Edit_membership';
 import AllChats from './pages/Chat/AllChats';

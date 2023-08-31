@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../../App.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useAuth } from '../Login/AuthContext';
+import { useAuth } from '../../components/AuthContext';
 
 function My_Reports() {
     const navigate = useNavigate();
