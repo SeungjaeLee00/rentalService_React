@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import './MessageApp.css';
 import { useAuth } from '../Login/AuthContext';
 
 
-function AllChats() {
+function AllTrade() {
   const navigate = useNavigate();
 
   const { isAuthenticated, accessToken } = useAuth();
 
   const [messages, setMessages] = useState([]);
-  const [viewMode, setViewMode] = useState('sent'); // 기본 뷰 모드
+  const [viewMode, setViewMode] = useState('rend-item'); // 기본 뷰 모드
+  const [itemviewMode, setItemViewMode] = useState('true'); //기본 complete 모드
 
   const fetchMessages = async () => {
     try {
       if (accessToken) {
-        const response = await axios.get(`http://13.125.98.26:8080/messages/${viewMode}`, {
+        const response = await axios.get(`http://13.125.98.26:8080/trades/${viewMode}?tradeComplete=${itemviewMode}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -49,22 +49,22 @@ function AllChats() {
   return (
     <div className="message-app">
       <div className="button-container">
-        <button onClick={() => setViewMode('sent')}>보낸 쪽지함</button>
-        <button onClick={() => setViewMode('received')}>받은 쪽지함</button>
+        <button onClick={() => setViewMode('rend-item')}>빌려줄게요</button>
+        <button onClick={() => setViewMode('borrow-item')}>빌려주세요</button>
       </div>
       <div>
-        <h2>{viewMode === 'sent' ? '보낸 쪽지함' : '받은 쪽지함'}</h2>
-        <ul>
-          {/* {messages.map(message => (
-            <li key={message.id}>
-              <strong>From:</strong> {message.sent}, <strong>To:</strong> {message.received}, <strong>Message:</strong> {message.text}
-            </li>
-          ))} */}
-        </ul>
+        <h2>{viewMode === 'rend-item' ? '빌려줄게요' : '빌려주세요'}</h2>
+        {messages ? (
+            <ul>
+              <p>{messages}</p>
+            </ul>
+        ) : (
+            <p>데이터를 불러올 수 없습니다.</p>
+        )}
       </div>
 
     </div>
   );
 }
 
-export default AllChats;
+export default AllTrade;

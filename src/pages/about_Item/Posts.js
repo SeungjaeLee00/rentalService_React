@@ -4,7 +4,9 @@ import NikeAir from "../../assets/img/에어포스1.jpg";
 import LeeCap from "../../assets/img/lee볼캡모자1.jpg";
 import { red } from "@mui/material/colors";
 import { useNavigate } from "react-router";
+
 import { useSelector } from 'react-redux';
+
 
 const Posts = (props) => {
 

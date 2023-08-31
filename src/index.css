@@ -23,7 +23,7 @@
   max-width:1900px;
   margin:0 auto;
   padding:32px 0;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* text-align: center; -> 가운데정렬*/ 
 }
 .page-container-main{

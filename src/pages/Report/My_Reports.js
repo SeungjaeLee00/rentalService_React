@@ -15,7 +15,6 @@ function My_Reports() {
             navigate('/loginpage');
             return;
         }
-
         if (accessToken) {
             const apiUrl = 'http://13.125.98.26:8080/reports/myPage';
             try {
@@ -49,7 +48,6 @@ function My_Reports() {
             ) : (
                 <p>데이터를 불러올 수 없습니다.</p>
             )}
-            <button onClick={() => navigate('/report')}> 신고하기 </button>
         </div>
     )
 }
