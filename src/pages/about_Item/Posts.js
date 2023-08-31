@@ -17,7 +17,7 @@ const Posts = (props) => {
   return (a.item.slice(0, props.ItemIndex).map((a, i) => {
       return (
         <div className="Item" onClick={() => {
-          navigate('/itemmain/detail');
+          navigate('/itemmain/detail/'+i);
         }}>
 
           <div className='Item-Img'>

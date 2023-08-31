@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../pages/Login/AuthContext';
+import { useAuth } from './AuthContext';
 
 function NavBar() {
 
@@ -51,8 +51,8 @@ function NavBar() {
                 title="리뷰 게시판"
                 id={`offcanvasNavbarDropdown-expand-${false}`}
               >
-                <NavDropdown.Item href="#2">받은 리뷰보기</NavDropdown.Item>
-                <NavDropdown.Item href="#3">리뷰 작성하기</NavDropdown.Item>
+                <NavDropdown.Item href='/reviews/my-review'>받은 리뷰보기</NavDropdown.Item>
+                <NavDropdown.Item href='/reviews/write-review'>리뷰 작성하기</NavDropdown.Item>
               </NavDropdown>
 
               <NavDropdown
@@ -62,8 +62,8 @@ function NavBar() {
                 <NavDropdown.Item href = '/my-page/myitempage'>내 게시물 보기</NavDropdown.Item>
                 <NavDropdown.Item href = '/my-page/upload-item'>내 물건 올리기</NavDropdown.Item>
                 <NavDropdown.Item href = '/my-page/all-trades'>거래 내역 조회</NavDropdown.Item>
-                <NavDropdown.Item href='/my-page/chats'>쪽지함</NavDropdown.Item>
-                <NavDropdown.Item href='/my-page/reports'>신고함</NavDropdown.Item>
+                <NavDropdown.Item href = '/my-page/chats'>쪽지함</NavDropdown.Item>
+                <NavDropdown.Item href = '/my-page/reports'>신고함</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown title="설정" style={{ marginLeft: "20px", marginRight:"20px", marginBottom:"5px" }}>
                   <NavDropdown.Item href='/my-page/edit-membership'>회원정보 수정</NavDropdown.Item>

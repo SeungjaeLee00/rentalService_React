@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import './ChatForm.css';
-import { useAuth } from '../Login/AuthContext';
+import { useAuth } from '../../components/AuthContext';
 import axios from 'axios';
 
 function Chat() {

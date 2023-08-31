@@ -41,10 +41,15 @@ function ItemMain(props) {
   let navigate = useNavigate();
 
 
-
-
   const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
   const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
+
+
+
+  //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣음.
+  //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣었고,
+  //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts라는 곳에 담아줌.
+
 
 
 
@@ -52,6 +57,7 @@ function ItemMain(props) {
   //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts라는 곳에 담아줌.
 
   //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣음.
+
 
   //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣음.
   //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣었고,
@@ -83,6 +89,7 @@ function ItemMain(props) {
 
   const [searchdata, setSearchData] = useState([]);
   const data = [];
+
 
 
   return (

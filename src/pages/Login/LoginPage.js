@@ -11,7 +11,7 @@ import NaverLogin from '../../socialLogin/NaverLogin';
 import GoogleLogin from '../../socialLogin/GoogleLLogIn';
 import { loginUser } from '../about_membership/user_action';
 import HorizonLine from '../../components/HorizonLine';
-import { useAuth } from '../Login/AuthContext';
+import { useAuth } from '../../components/AuthContext';
 
 
 function LoginPage(props) {

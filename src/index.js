@@ -9,7 +9,8 @@ import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import Reducer from './pages/about_membership/user_reducer';
-import { AuthProvider } from './pages/Login/AuthContext';
+import { AuthProvider } from './components/AuthContext.js'
+
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 

@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 
 import '../../App.css';
 import HorizonLine from '../../components/HorizonLine';
-import { useAuth } from '../Login/AuthContext';
+import { useAuth } from '../../components/AuthContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { additem } from '../../store';
 import { ConnectingAirportsOutlined } from '@mui/icons-material';

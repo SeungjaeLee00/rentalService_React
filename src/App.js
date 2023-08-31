@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes, Router } from 'react-router-dom';
 
 import './App.css';
-import { AuthProvider } from '../src/pages/Login/AuthContext';
+import { AuthProvider } from './components/AuthContext';
 
 import NavBar from './components/NavBar';
 import Signup from './pages/SignUp/Signup';
@@ -24,6 +24,8 @@ import MyitemPage from './pages/my_page/MyitemPage';
 import My_Reports from './pages/Report/My_Reports';
 import Do_Report from './pages/Report/Do_Report'
 import AllTrade from './pages/Trade/AllTrade';
+import My_Review from './pages/Review/My_Review';
+import Write_Review from './pages/Review/Write_Review';
 
 
 function App() {
@@ -33,23 +35,19 @@ function App() {
       {/* <Router> */}
       <AuthProvider>
         <Routes>
-          {/* 메인 페이지 -> Login.js  */}
           <Route exact path="/" element={<Main />} />
-          {/* 회원가입 */}
           <Route exact path="/signup" element={<Signup />} />
+
         <Route exact path="/find-id" element={<FindId />} />
         <Route exact path="/find-pw" element={<FindPw />} />
         <Route exact path='/reset-pw' element={<ResetPW />} />
-    
-      
-        
+
           <Route exact path="/found-id" element={<FoundId />} />
           <Route exact path="/loginpage" element={<LoginPage />} />
 
           <Route exact path="/itemmain" element={<ItemMain />} />
-
           <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
-          <Route exact path='/itemmain/detail' element={<Detail />} />
+          <Route exact path='/itemmain/detail/:id' element={<Detail />} />
           <Route exact path='/itemmain/detail/chat' element={<Chat />} />
 
           <Route exact path="/my-page/upload-item" element={<Upload_Item />} />
@@ -57,8 +55,12 @@ function App() {
           <Route exact path='/my-page/myitempage' element={<MyitemPage />} />
           <Route exact path='/my-page/chats' element={<AllChats />} />
           <Route exact path='/my-page/reports' element={<My_Reports />} />
-          <Route exact path='/report' element={<Do_Report />} />
           <Route exact path='/my-page/all-trades' element={<AllTrade />} />
+
+          <Route exact path='/report' element={<Do_Report />} />
+          
+          <Route exact path='/reviews/my-review' element={<My_Review />} />
+          <Route exact path='/reviews/write-review' element={<Write_Review />} />
         </Routes>
       </AuthProvider>
       {/* </Router> */}
