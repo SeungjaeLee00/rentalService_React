@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { applyMiddleware, createStore } from 'redux';
-
+import store from './store.js';
 import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
@@ -11,13 +11,14 @@ import ReduxThunk from 'redux-thunk';
 import Reducer from './pages/about_membership/user_reducer';
 import { AuthProvider } from './pages/Login/AuthContext';
 
+
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
    <React.StrictMode>
     <BrowserRouter>
-    {/* <Provider  */}
+     <Provider store={store}>
     <AuthProvider
       store={createStoreWithMiddleware(Reducer, 
           window.__REDUX_DEVTOOLS_EXTENSION__ &&
@@ -25,7 +26,7 @@ root.render(
         )}>
           <App/>
           </AuthProvider>
-      {/* </Provider> */}
+      </Provider>
     </BrowserRouter>
    </React.StrictMode>
 );

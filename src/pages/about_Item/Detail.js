@@ -11,7 +11,7 @@ import ExImg3 from '../../assets/img/가디건3.jpg'
 import ExImg4 from '../../assets/img/가디건4.jpg'
 
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+// import { Swiper, SwiperSlide } from 'swiper/react';
 
 // import 'swiper/css';
 // import 'swiper/css/navigation';
@@ -20,10 +20,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // import { Navigation, Pagination, Mousewheel, Keyboard} from 'swiper/modules';
 
 // Import Swiper styles
-import 'swiper/swiper-bundle.min.css';
-import 'swiper/components/navigation/navigation.min.css';
-import 'swiper/components/pagination/pagination.min.css';
-import 'swiper/components/scrollbar/scrollbar.min.css';
+import 'swiper/swiper-bundle.min.css'; 
+import 'swiper/components/navigation/navigation.min.css'; 
+import 'swiper/components/pagination/pagination.min.css'; 
+import 'swiper/components/scrollbar/scrollbar.min.css'; 
 import SwiperCore, { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/core';
 SwiperCore.use([Navigation, Pagination, Mousewheel, Keyboard]);
 
