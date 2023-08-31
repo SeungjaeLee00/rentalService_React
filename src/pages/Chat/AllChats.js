@@ -1,24 +1,50 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './MessageApp.css';
+import { useAuth } from '../Login/AuthContext';
+
 
 function AllChats() {
-  const [messages, setMessages] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [viewMode, setViewMode] = useState('sent'); // 기본 뷰 모드
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchMessages();
-  }, [viewMode]); // 클릭하면 메세지 패치
+  const { isAuthenticated, accessToken } = useAuth();
+
+  const [messages, setMessages] = useState([]);
+  const [viewMode, setViewMode] = useState('sent'); // 기본 뷰 모드
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get(`http://13.125.98.26:8080/messages/${viewMode}`);
-      setMessages(response.data);
+      if (accessToken) {
+        const response = await axios.get(`http://13.125.98.26:8080/messages/${viewMode}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        if (response.data.success) {
+          setMessages(response.data.messages);
+        } else {
+          console.error('서버 응답 오류:', response.data.error);
+        }
+      }
     } catch (error) {
-      console.error('Error fetching messages:', error);
+      console.error('API 요청 오류:', error);
+
+      if (error.response && error.response.status === 401) {
+        console.error('AccessToken이 만료되었습니다. 로그인 페이지로 이동합니다.');
+        navigate('/loginpage');
+      }
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchMessages();
+    } else {
+      navigate('/loginpage');
+    }
+  }, [accessToken, viewMode, isAuthenticated, navigate]);
 
   return (
     <div className="message-app">
@@ -36,6 +62,7 @@ function AllChats() {
           ))} */}
         </ul>
       </div>
+
     </div>
   );
 }

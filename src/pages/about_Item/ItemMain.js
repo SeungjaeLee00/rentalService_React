@@ -11,15 +11,20 @@ import SearchBar from './SearchBar';
 import Pagination from './Pagination';
 import Posts from './Posts';
 import TempData from "../../TempData";
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { additem } from '../../store';
 
 
 function ItemMain(props) {
   
-  const [searchParams,setSearchParams]=useSearchParams();
-  const id= searchParams.get("search");
-  console.log("search id ="+ id);
+  let dispatch=useDispatch();
+  let a = useSelector((state) => { return state });
+  console.log(a);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const id = searchParams.get("search");
+  console.log("search id =" + id);
+
 
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -35,41 +40,31 @@ function ItemMain(props) {
 
   let navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const response = await axios.get(
-        // "http://13.125.98.26:8080/auth/sign-up"
-        "https://jsonplaceholder.typicode.com/posts"
-      );
-      
-      setLoading(false);
 
-      //json데이터 Post에 넣음
-      setPosts(TempData);
-    };
-    fetchData();
-  }, []);
 
 
   const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
   const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
 
+
   //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣었고,
   //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts라는 곳에 담아줌.
+
+  //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣음.
   const currentPosts = () => {
     let currentPosts = 0;
     currentPosts = posts.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
-  
-  
+
+
+
   // let searchdata = queryString.parse(this.props.location.search);
   // console.log(this.props)
   // console.log(searchdata);
-  
-  
-  
+
+
+
   // console.log(posts[1].title.includes('에어포스'));
   // posts.map((item,i)=>{
   //   if(item.title.includes('에어포스'))
@@ -77,33 +72,47 @@ function ItemMain(props) {
   //     console.log(item.title);
   //   }
   // })
-  
+
   const [searchdata, setSearchData] = useState([]);
-  const data =[];
-  console.log(data);
-  console.log(searchdata);
+  const data = [];
+
+
+
   return (
     <div className='page-container'>
       {/* 본문상단의검색바 */}
 
       <div className='Search-Bar'>
-      <form>
-        <input type="text" maxLength='20' className='search_input' name='search' placeholder="검색어를 입력해주세요" onChange={(e)=>{
-          setSearch(e.target.value);
-        }}/>
-        <input type="submit" value="검색" className='search_submit' onClick={()=>{
-          posts.map((item,i)=>{
-            if(item.title.includes(search))
-            {
-              console.log(item);
-              data.concat(item);
-              setSearchData(data);
-            }
-          })
-        }}/>
-      </form>      
-    </div>
+        <form>
+          <input type="text" maxLength='20' className='search_input' name='search' placeholder="검색어를 입력해주세요" onChange={(e) => {
+            setSearch(e.target.value);
+          }} />
+          <input type="submit" value="검색" className='search_submit' onClick={() => {
+            posts.map((item, i) => {
+              if (item.title.includes(search)) {
+                console.log(item);
+                data.concat(item);
+                setSearchData(data);
+              }
+            })
+          }} />
+        </form>
+      </div>
+      
+      <button onClick={()=>{
+        console.log(a);
+      }}>데이터확인버튼</button>
+      <button onClick={()=>{
+        dispatch(additem());
+      }}>데이터추가</button>
 
+
+
+      {/* 본문가운데상품진열
+      <div className="Item-Wrap">
+        <Posts TempData={currentPosts()} navigate={navigate} loading={loading} ItemIndex={ItemIndex} />
+
+      </div> */}
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
@@ -136,13 +145,12 @@ function ItemMain(props) {
 
 // 아이템 생성 함수 지금사용 x , posts.js에서 아이템생성해줌.
 function ItemProduce(props) {
-  // let navigate = useNavigate();
   return (
     props.TempData.slice(0, props.ItemIndex).map((a, i) => {
       return (
-        <div className="Item" onClick={() => 
-          {props.navigate('/itemmain/detail')}
-        }>
+        <div className="Item" onClick={() => {
+          props.navigate('/itemmain/Detail');
+        }}>
           <div className='Item-Img'>
             <img src={ExImg} style={{ width: 200, height: 200 }} />
           </div>

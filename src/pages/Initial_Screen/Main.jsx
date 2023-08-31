@@ -8,26 +8,22 @@ import { useEffect } from "react";
 import axios from 'axios';
 
 export default function Main() {
-    
+
+    let navigate = useNavigate();
+
     const [data, setData] = useState("");
-    
-    
-    let navigate = useNavigate();  // hook: page 이동을 도와줌
-  
     const [showLoginPopup, setshowLoginPopup] = useState(false);
 
     const openloginModal = () => {
-      setshowLoginPopup(true);
+        setshowLoginPopup(true);
     };
     const closeloginModal = () => {
-      setshowLoginPopup(false);
+        setshowLoginPopup(false);
     };
     return (
         <div className="page-container-main">
             <div className='main-bg'></div>
-
-
-            <button onClick={()=>{
+            {/* <button onClick={()=>{
                 fetch("/members")   
                  .then((res)=>{
                     console.log(res);
@@ -37,12 +33,12 @@ export default function Main() {
                     console.log(data.result.data.memberList[0].nickname);
                     setData(data);
                  });
-            }}>서버버튼</button> 
-            
+            }}>서버버튼</button>  */}
+
             <div className='more_info'>
                 <div className='col'>
                     <img src='' />
-                    
+
                     <h4>무엇이든 빌리세요!</h4>
                     <p>당장 내일 필요한데 또 내일만 쓸 물건을 사긴 그렇잖아요? 해서 준비했습니다!</p>
                 </div>
