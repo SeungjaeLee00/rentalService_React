@@ -93,6 +93,7 @@ function Detail() {
     <div className='page-container'>
       <div className='Detail_Item_wrap'>
         <div className='Detail_Item_Img'>
+          
           {/* <Swiper
             cssMode={true}
             navigation={true}

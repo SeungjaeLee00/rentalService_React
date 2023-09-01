@@ -44,26 +44,9 @@ function ItemMain(props) {
   const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
   const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
 
-
-
   //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣음.
   //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣었고,
   //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts라는 곳에 담아줌.
-
-
-
-
-  //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣었고,
-  //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts라는 곳에 담아줌.
-
-  //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣음.
-
-
-  //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣음.
-  //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣었고,
-  //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts라는 곳에 담아줌.
-
-
   const currentPosts = () => {
     let currentPosts = 0;
     currentPosts = posts.slice(indexOfFirst, indexOfLast);
@@ -101,15 +84,7 @@ function ItemMain(props) {
           <input type="text" maxLength='20' className='search_input' name='search' placeholder="검색어를 입력해주세요" onChange={(e) => {
             setSearch(e.target.value);
           }} />
-          <input type="submit" value="검색" className='search_submit' onClick={() => {
-            posts.map((item, i) => {
-              if (item.title.includes(search)) {
-                console.log(item);
-                data.concat(item);
-                setSearchData(data);
-              }
-            })
-          }} />
+          <input type="submit" value="검색" className='search_submit'/>
         </form>
       </div>
       
@@ -130,7 +105,7 @@ function ItemMain(props) {
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
-        {posts && <Posts TempData={currentPosts()} navigate={navigate} loading={loading} ItemIndex={ItemIndex} />}
+        {posts && <Posts TempData={currentPosts()} navigate={navigate} loading={loading} ItemIndex={ItemIndex} search={search} />}
 
       </div>
 

@@ -14,9 +14,16 @@ const Posts = (props) => {
   let a_img = [Gadigun, NikeAir, LeeCap]
 
   const navigate = useNavigate();
-  return (a.item.slice(0, props.ItemIndex).map((a, i) => {
-      return (
-        <div className="Item" onClick={() => {
+  const items = a.item.filter((data)=>{
+    if(props.search==null) return data;
+    else if(data.title.toLowerCase().includes(props.search.toLowerCase()) || data.title.toLowerCase().includes(props.search.toLowerCase())){
+      return data
+  }
+})
+console.log(items);
+  return ( a.item.slice(0, props.ItemIndex).map((a, i) => {
+     
+      return (  <div className="Item" onClick={() => {
           navigate('/itemmain/detail/'+i);
         }}>
 
