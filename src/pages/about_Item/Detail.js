@@ -111,7 +111,7 @@ function Detail() {
 
         </div>
         <div className='Item_About'>
-          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; 패션의류&nbsp; {'>'} &nbsp;여성의류&nbsp; {'>'}&nbsp; (새상품)꼼데라송 가디건</div>
+          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {a.item[id].category}&nbsp; {'>'} &nbsp; {a.item[id].title}</div>
           <div className="Detail_Item_Name_Price">
             <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">{a.item[id].title}</div>
             <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{a.item[id].price}</div>

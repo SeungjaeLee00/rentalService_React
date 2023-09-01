@@ -18,8 +18,9 @@ import { additem } from '../../store';
 function ItemMain(props) {
   
   let dispatch=useDispatch();
-  let a = useSelector((state) => { return state });
-  console.log(a);
+  let store = useSelector((state) => { return state });
+  console.log(store.item);
+  
 
   const [searchParams, setSearchParams] = useSearchParams();
   const id = searchParams.get("search");
@@ -44,36 +45,17 @@ function ItemMain(props) {
   const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
   const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
 
-  //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣음.
-  //배열분할함수, 우리는 TempData에 임시로 데이터 가져와서 post(useState)에 넣었고,
+
   //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts라는 곳에 담아줌.
   const currentPosts = () => {
     let currentPosts = 0;
-    currentPosts = posts.slice(indexOfFirst, indexOfLast);
+    currentPosts = store.item.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
-
-
-
-  // let searchdata = queryString.parse(this.props.location.search);
-  // console.log(this.props)
-  // console.log(searchdata);
-
-
-
-  // console.log(posts[1].title.includes('에어포스'));
-  // posts.map((item,i)=>{
-  //   if(item.title.includes('에어포스'))
-  //   {
-  //     console.log(item.title);
-  //   }
-  // })
-
+  
 
   const [searchdata, setSearchData] = useState([]);
   const data = [];
-
-
 
   return (
     <div className='page-container'>
@@ -88,15 +70,7 @@ function ItemMain(props) {
         </form>
       </div>
       
-      <button onClick={()=>{
-        console.log(a);
-      }}>데이터확인버튼</button>
-      <button onClick={()=>{
-        dispatch(additem());
-      }}>데이터추가</button>
-
-
-
+  
       {/* 본문가운데상품진열
       <div className="Item-Wrap">
         <Posts TempData={currentPosts()} navigate={navigate} loading={loading} ItemIndex={ItemIndex} />
@@ -105,7 +79,7 @@ function ItemMain(props) {
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
-        {posts && <Posts TempData={currentPosts()} navigate={navigate} loading={loading} ItemIndex={ItemIndex} search={search} />}
+        {posts && <Posts currentPosts={currentPosts()} loading={loading} ItemIndex={ItemIndex} search={search} />}
 
       </div>
 
@@ -114,8 +88,8 @@ function ItemMain(props) {
       <div className="Item-Pagination">
         <Pagination
           // 총데이터를 postsPerPage만큼 등분해서 보여준다. 6개씩보여주자.
-          postsPerPage={postsPerPage} //각각 페이지당 포스트개수(6개)
-          totalPosts={TempData.length} //전체 데이터 개수 (18개)
+          postsPerPage={postsPerPage} //각각 페이지당 포스트개수
+          totalPosts={store.item.length} //전체 데이터 개수 
           paginate={setCurrentPage} //CurrentPage변경하는함수.(첫번째페이지가정 6)
         ></Pagination>
       </div>
