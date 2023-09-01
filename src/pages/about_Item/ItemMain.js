@@ -13,6 +13,7 @@ import Posts from './Posts';
 import TempData from "../../TempData";
 import { useDispatch, useSelector } from 'react-redux';
 import { additem } from '../../store';
+import Category from '../../components/Category';
 
 
 function ItemMain(props) {
@@ -56,18 +57,31 @@ function ItemMain(props) {
 
   const [searchdata, setSearchData] = useState([]);
   const data = [];
-
+  
+  const [view, setView] = useState(false);
   return (
     <div className='page-container'>
       {/* 본문상단의검색바 */}
 
       <div className='Search-Bar'>
         <form>
-          <input type="text" maxLength='20' className='search_input' name='search' placeholder="검색어를 입력해주세요" onChange={(e) => {
+          <input type="text" maxLength='20' className='search_input' name='search' placeholder="어떤 상품을 찾으시나요?" onChange={(e) => {
             setSearch(e.target.value);
           }} />
-          <input type="submit" value="검색" className='search_submit'/>
+          {/* <input type="submit" value="검색" className='search_submit'/> */}
         </form>
+      </div>
+
+      <div className='Main-Cateogory'>
+        <ul onClick={()=>{setView(!view)}}>
+          카테고리{" "}
+          {view ? '⌃' : '⌄'}
+          {view && <Category/>}
+        </ul>
+      </div>
+
+      <div className='Main-Content'>
+        방금 등록된 상품
       </div>
       
   
