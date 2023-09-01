@@ -175,8 +175,12 @@
   margin-top:30px;
   margin-bottom:30px;
   margin-left:170px;
-  
+  cursor:pointer;
 }
+.Main-Cateogory ul{
+  width:200px;
+}
+
 
 .Category-li
 {
