@@ -32,7 +32,7 @@ function App() {
       {/* <Router> */}
       <AuthProvider>
         <Routes>
-          <Route exact path="/" element={<Main />} />
+          <Route exact path="/" element={<ItemMain />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/find-id" element={<FindId />} />
           <Route exact path="/find-pw" element={<FindPw />} />

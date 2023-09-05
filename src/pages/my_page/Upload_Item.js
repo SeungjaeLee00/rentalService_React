@@ -73,13 +73,13 @@ const Upload_Item = () => {
 
   return (
     <div>
-      <button onClick={()=>{
+      {/* <button onClick={()=>{
         console.log(itemtitle);
         console.log(itemcategory);
         console.log(itemcontent);
         console.log(itemcount);
         console.log(itemprice);
-      }}>데이터확인</button>
+      }}>데이터확인</button> */}
       {isAuthenticated ? (
 
         <div style={{ marginTop: "80px", marginLeft: "110px", marginRight: "110px", marginBottom: "80px" }}>

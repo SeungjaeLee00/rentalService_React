@@ -1,27 +1,40 @@
 import '../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 function NavBar() {
 
-  let [makers, setMakers] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [makers, setMakers] = useState(false);
   let navigate = useNavigate();  // hook: page 이동을 도와줌
 
-  const { isAuthenticated, logout } = useAuth();
+  const { logout } = useAuth();
 
   const handleLogout = () => {
     logout()
     window.location = '/';
+    setIsLogin(prevState => !prevState)
+  };
+
+  const handleLogin = () => {
+    window.location = '/loginpage';
+    setIsLogin(prevState => !prevState)
   };
 
   return (
     <Navbar bg="light" variant="light"
       key={false} expand={false} className="bar">
       <Container fluid>
-        <Navbar.Brand href="/">뭐든빌리개</Navbar.Brand>
+      <Navbar.Brand href="/">뭐든빌리개</Navbar.Brand>
+        {isLogin ? (
+          <Button onClick={handleLogout}
+            variant="outline-dark" size="sm" style={{ marginLeft: "700px" }}>로그아웃</Button>
+        ) : (
+          <Link onClick={handleLogin}
+            variant="outline-dark" size="sm" style={{ marginLeft: "650px" }}>로그인/회원가입</Link>)}
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${false}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${false}`}
@@ -59,13 +72,13 @@ function NavBar() {
                 title="마이페이지"
                 id={`offcanvasNavbarDropdown-expand-${false}`}
               >
-                <NavDropdown.Item href = '/my-page/myitempage'>내 게시물 보기</NavDropdown.Item>
-                <NavDropdown.Item href = '/my-page/upload-item'>내 물건 올리기</NavDropdown.Item>
-                <NavDropdown.Item href = '/my-page/all-trades'>거래 내역 조회</NavDropdown.Item>
-                <NavDropdown.Item href = '/my-page/chats'>쪽지함</NavDropdown.Item>
-                <NavDropdown.Item href = '/my-page/reports'>신고함</NavDropdown.Item>
+                <NavDropdown.Item href='/my-page/myitempage'>내 게시물 보기</NavDropdown.Item>
+                <NavDropdown.Item href='/my-page/upload-item'>내 물건 올리기</NavDropdown.Item>
+                <NavDropdown.Item href='/my-page/all-trades'>거래 내역 조회</NavDropdown.Item>
+                <NavDropdown.Item href='/my-page/chats'>쪽지함</NavDropdown.Item>
+                <NavDropdown.Item href='/my-page/reports'>신고함</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown title="설정" style={{ marginLeft: "20px", marginRight:"20px", marginBottom:"5px" }}>
+                <NavDropdown title="설정" style={{ marginLeft: "20px", marginRight: "20px", marginBottom: "5px" }}>
                   <NavDropdown.Item href='/my-page/edit-membership'>회원정보 수정</NavDropdown.Item>
                   <NavDropdown.Item onClick={handleLogout}>로그아웃</NavDropdown.Item>
                 </NavDropdown>
