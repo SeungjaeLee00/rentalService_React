@@ -12,6 +12,7 @@ import Reducer from './pages/about_membership/user_reducer';
 import { AuthProvider } from './components/AuthContext.js';
 
 
+
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

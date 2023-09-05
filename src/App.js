@@ -34,15 +34,17 @@ function App() {
         <Routes>
           <Route exact path="/" element={<ItemMain />} />
           <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/find-id" element={<FindId />} />
-          <Route exact path="/find-pw" element={<FindPw />} />
-          <Route exact path='/reset-pw' element={<ResetPW />} />
+
+        <Route exact path="/find-id" element={<FindId />} />
+        <Route exact path="/find-pw" element={<FindPw />} />
+        <Route exact path='/reset-pw' element={<ResetPW />} />
+
           <Route exact path="/found-id" element={<FoundId />} />
           <Route exact path="/loginpage" element={<LoginPage />} />
 
           <Route exact path="/itemmain" element={<ItemMain />} />
           <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
-          <Route exact path='/itemmain/detail' element={<Detail />} />
+          <Route exact path='/itemmain/detail/:id' element={<Detail />} />
           <Route exact path='/itemmain/detail/chat' element={<Chat />} />
 
           <Route exact path="/my-page/upload-item" element={<Upload_Item />} />

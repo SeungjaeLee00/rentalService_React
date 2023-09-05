@@ -17,6 +17,7 @@ const Login = (props) => {
   let navigate = useNavigate();
   const { login } = useAuth();
   const { open, close } = props;
+  
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +31,8 @@ const Login = (props) => {
   }
 
   const onSubmitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //새로고침방지
+    
 
     const userData = {
       username: username,
@@ -40,10 +42,15 @@ const Login = (props) => {
     axios.post('http://13.125.98.26:8080/auth/login', userData)
       .then(response => {
         setMessage('로그인 성공');
+        console.log(response);
         console.log('로그인 성공:', response.data);
 
         const returnData = response.data;
+        console.log(returnData.result);
+
         const { accessToken, refreshToken } = returnData.result.data;
+        console.log(accessToken);
+
         login(accessToken, refreshToken);
         console.log('토큰 저장 성공: ', returnData.result.data);
 

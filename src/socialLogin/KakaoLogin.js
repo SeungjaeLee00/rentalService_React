@@ -12,7 +12,7 @@ function KaKaoLogin() {
     const jsKey = "09a20fe694f36680bc9baefcbc101b4d";
     if (Kakao && !Kakao.isInitialized()) {
       await Kakao.init(jsKey);
-      console.log(`kakao 초기화 ${Kakao.isInitialized()}`);
+      //console.log(`kakao 초기화 ${Kakao.isInitialized()}`);
     }
   };
   const kakaoLogin = async () => {
@@ -63,7 +63,7 @@ function KaKaoLogin() {
   }, []);
 
   useEffect(() => {
-    console.log(isLogin);
+    //console.log(isLogin);
     if (isLogin) {
       setUser({
         email: localStorage.getItem("email"),

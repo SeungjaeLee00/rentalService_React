@@ -1,8 +1,8 @@
 import { useState, useRef, useCallback } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import '../../App.css';
 import Do_Report from '../Report/Do_Report';
-
+import { useSelector } from 'react-redux';
 import HorizonLine from '../../components/HorizonLine';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ExImg1 from '../../assets/img/가디건1.jpg'
@@ -27,8 +27,15 @@ import 'swiper/components/scrollbar/scrollbar.min.css';
 import SwiperCore, { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/core';
 SwiperCore.use([Navigation, Pagination, Mousewheel, Keyboard]);
 
-function Detail() {
 
+function Detail() {
+  
+  let {id} = useParams();
+  console.log(id);
+  let a = useSelector((state)=>{return state});
+  console.log(a.item[id].title);
+
+  
   let navigate = useNavigate();
   const [comments, setComments] = useState([
     { id: 1, content: 'I like it!' }
@@ -86,6 +93,7 @@ function Detail() {
     <div className='page-container'>
       <div className='Detail_Item_wrap'>
         <div className='Detail_Item_Img'>
+          
           {/* <Swiper
             cssMode={true}
             navigation={true}
@@ -103,17 +111,16 @@ function Detail() {
 
         </div>
         <div className='Item_About'>
-          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; 패션의류&nbsp; {'>'} &nbsp;여성의류&nbsp; {'>'}&nbsp; (새상품)꼼데라송 가디건</div>
+          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {a.item[id].category}&nbsp; {'>'} &nbsp; {a.item[id].title}</div>
           <div className="Detail_Item_Name_Price">
-            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">(새상품)꼼데라송 가디건</div>
-            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">250,000원</div>
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">{a.item[id].title}</div>
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{a.item[id].price}</div>
           </div>
           <div style={{ marginTop: 20 }}>
             <span>2023.08.13.16:00&nbsp;{'·'}&nbsp;</span>
             <span>조회 4&nbsp;{'·'}&nbsp;&nbsp;</span>
             <span>찜 0</span>
-            <div style={{ marginTop: 20 }}>꼼데가르송 가디건 블랙색상
-              XS사이즈 새상품입니다. 저렴한 가격에드려요. 쪽지주세요</div>
+            <div style={{ marginTop: 20 }}>{a.item[id].content}</div>
           </div>
           <div className='Item_Button'>
             <button style={{ backgroundColor: "white", color: "black" }}>찜</button>

@@ -10,9 +10,8 @@ function NavBar() {
   const [isLogin, setIsLogin] = useState(false);
   const [makers, setMakers] = useState(false);
   let navigate = useNavigate();  // hook: page 이동을 도와줌
-
-  const { logout } = useAuth();
-
+  
+  const { isAuthenticated, logout } = useAuth();
   const handleLogout = () => {
     logout()
     window.location = '/';
@@ -28,13 +27,18 @@ function NavBar() {
     <Navbar bg="light" variant="light"
       key={false} expand={false} className="bar">
       <Container fluid>
-      <Navbar.Brand href="/">뭐든빌리개</Navbar.Brand>
+
+      <Navbar.Brand href="/itemmain">뭐든빌리개</Navbar.Brand>
         {isLogin ? (
           <Button onClick={handleLogout}
             variant="outline-dark" size="sm" style={{ marginLeft: "700px" }}>로그아웃</Button>
         ) : (
           <Link onClick={handleLogin}
             variant="outline-dark" size="sm" style={{ marginLeft: "650px" }}>로그인/회원가입</Link>)}
+
+
+        
+
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${false}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${false}`}
