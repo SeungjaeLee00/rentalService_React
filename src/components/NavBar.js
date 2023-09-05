@@ -1,6 +1,6 @@
 import '../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
@@ -9,9 +9,9 @@ function NavBar() {
 
   let [makers, setMakers] = useState(false);
   let navigate = useNavigate();  // hook: page 이동을 도와줌
-
+  
   const { isAuthenticated, logout } = useAuth();
-
+ 
   const handleLogout = () => {
     logout()
     window.location = '/';
@@ -21,7 +21,8 @@ function NavBar() {
     <Navbar bg="light" variant="light"
       key={false} expand={false} className="bar">
       <Container fluid>
-        <Navbar.Brand href="/">뭐든빌리개</Navbar.Brand>
+        <Navbar.Brand href="/itemmain">뭐든빌리개</Navbar.Brand>
+        
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${false}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${false}`}

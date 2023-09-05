@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useLayoutEffect } from 'react';
 
 export const AuthContext = createContext();
 
@@ -6,7 +6,7 @@ export function AuthProvider({ children }) {
   const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken') || null);
   const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refreshToken') || null);
   const [isAuthenticated, setIsAuthenticated] = useState(accessToken !== null);
-
+  const count=0;
   useEffect(() => {
     if (accessToken) {
       localStorage.setItem('accessToken', accessToken);
@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
     setAccessToken(null);
     setRefreshToken(null);
   };
-
+  
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}
@@ -43,5 +43,5 @@ export function AuthProvider({ children }) {
 }
 
 export function useAuth() {
-  return useContext(AuthContext);
+  return useContext(AuthContext)
 }
