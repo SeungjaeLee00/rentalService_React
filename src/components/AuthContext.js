@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken') || null);
   const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refreshToken') || null);
+  // accessToken 상태가 변경될 때 isAuthenticated 상태도 변경
   const [isAuthenticated, setIsAuthenticated] = useState(accessToken !== null);
   
   useEffect(() => {

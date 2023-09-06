@@ -8,7 +8,6 @@ import axios from 'axios';
 import KaKaoLogin from '../../socialLogin/KakaoLogin';
 import NaverLogin from '../../socialLogin/NaverLogin';
 import GoogleLogin from '../../socialLogin/GoogleLLogIn';
-// import { loginUser } from '../about_membership/user_action';
 import HorizonLine from '../../components/HorizonLine';
 import { useAuth } from '../../components/AuthContext';
 
@@ -32,7 +31,6 @@ const Login = (props) => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault(); //새로고침방지
-    
 
     const userData = {
       username: username,
@@ -46,16 +44,12 @@ const Login = (props) => {
         console.log('로그인 성공:', response.data);
 
         const returnData = response.data;
-        console.log(returnData.result);
-
         const { accessToken, refreshToken } = returnData.result.data;
-        console.log(accessToken);
-
         login(accessToken, refreshToken);
         console.log('토큰 저장 성공: ', returnData.result.data);
 
         if ((response.status = 200)) {
-          return navigate("/itemmain");
+          window.location.replace("/itemmain");
         }
       })
       .catch(error => {
@@ -65,7 +59,6 @@ const Login = (props) => {
   }
 
   return (
-    // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'Login'}>
       {open ? (
         <section>

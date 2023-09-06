@@ -49,7 +49,7 @@ function LoginPage(props) {
                 console.log('토큰: ', returnData.result.data);
 
                 if ((response.status = 200)) {
-                    return navigate("/itemmain");
+                    window.location.replace("/itemmain");
                 }
             })
             .catch(error => {

@@ -7,18 +7,16 @@ import { useAuth } from './AuthContext';
 
 function NavBar() {
   const [makers, setMakers] = useState(false);
-  let navigate = useNavigate();  // hook: page 이동을 도와줌
-  
   const { isAuthenticated, logout } = useAuth();
 
   const handleLogin = () => {
-    navigate("/loginpage");
+    window.location.replace("/loginpage");
   };
 
   const handleLogout = () => {
     logout();
-    navigate("/");
-    
+    window.location.replace("/");
+
   };
 
   useEffect(() => {
@@ -29,14 +27,14 @@ function NavBar() {
     <Navbar bg="light" variant="light"
       key={false} expand={false} className="bar">
       <Container fluid>
-      <Navbar.Brand href="/itemmain">뭐든빌리개</Navbar.Brand>
-      
-      {isAuthenticated ? (
-        <button onClick={handleLogout} style={{ border: "none", marginLeft: "20px" }}>로그아웃</button>
-      ) : (
-        <button onClick={handleLogin} style={{ border: "none", marginLeft: "20px" }}>로그인/회원가입</button>
-      )}
-
+        <Navbar.Brand href="/itemmain">뭐든빌리개</Navbar.Brand>
+        {isAuthenticated ? (
+          <button onClick={handleLogout}
+            style={{ border: "none", backgroundColor: "transparent" }}>로그아웃</button>
+        ) : (
+          <button onClick={handleLogin}
+            style={{ border: "none", backgroundColor: "transparent" }}>로그인/회원가입</button>
+        )}
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${false}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${false}`}
