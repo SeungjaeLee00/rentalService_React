@@ -6,38 +6,36 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 function NavBar() {
-
-  const [isLogin, setIsLogin] = useState(false);
   const [makers, setMakers] = useState(false);
   let navigate = useNavigate();  // hook: page 이동을 도와줌
   
   const { isAuthenticated, logout } = useAuth();
-  const handleLogout = () => {
-    logout()
-    window.location = '/';
-    setIsLogin(prevState => !prevState)
-  };
 
   const handleLogin = () => {
-    window.location = '/loginpage';
-    setIsLogin(prevState => !prevState)
+    navigate("/loginpage");
   };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+    
+  };
+
+  useEffect(() => {
+    console.log(isAuthenticated)
+  }, [isAuthenticated]);
 
   return (
     <Navbar bg="light" variant="light"
       key={false} expand={false} className="bar">
       <Container fluid>
-
       <Navbar.Brand href="/itemmain">뭐든빌리개</Navbar.Brand>
-        {isLogin ? (
-          <Button onClick={handleLogout}
-            variant="outline-dark" size="sm" style={{ marginLeft: "700px" }}>로그아웃</Button>
-        ) : (
-          <Link onClick={handleLogin}
-            variant="outline-dark" size="sm" style={{ marginLeft: "650px" }}>로그인/회원가입</Link>)}
-
-
-        
+      
+      {isAuthenticated ? (
+        <button onClick={handleLogout} style={{ border: "none", marginLeft: "20px" }}>로그아웃</button>
+      ) : (
+        <button onClick={handleLogin} style={{ border: "none", marginLeft: "20px" }}>로그인/회원가입</button>
+      )}
 
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${false}`} />
         <Navbar.Offcanvas
