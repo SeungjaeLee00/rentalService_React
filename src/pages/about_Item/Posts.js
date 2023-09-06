@@ -14,20 +14,26 @@ const Posts = (props) => {
   
   let a_img = [Gadigun, NikeAir, LeeCap, AirClear, StarBux, Pencil];
   const navigate = useNavigate();
-
+   
+  const items = props.currentPosts;
+  console.log(items);
   //items라는 곳에 store.js에 저장된 데이터 저장
+  /*
   const items = props.currentPosts.filter((data) => {
     if (props.search == null) return data;
     else if (data.title.toLowerCase().includes(props.search.toLowerCase())) {
       return data
     }
-  })
+  })*/
 
   return (
     items.slice(0, props.ItemIndex).map((a, i) => {
+      console.log(a);
+      console.log(i);     
       return (
-        <div className="Item" key={i} onClick={() => {
-          navigate('/itemmain/detail/' + i);
+      
+        <div className="Item" key={a.id} onClick={() => {
+          navigate('/itemmain/detail/' + a.id);
         }}>
 
           <div className='Item-Img'>

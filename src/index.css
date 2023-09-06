@@ -168,28 +168,6 @@
   cursor: pointer;
 }
 
-/* 메인페이지의 카테고리부분 */
-.Main-Cateogory{
-  font-size:30px;
-  font-weight: bold;
-  margin-top:30px;
-  margin-bottom:30px;
-  margin-left:170px;
-  cursor:pointer;
-}
-.Main-Cateogory ul{
-  width:200px;
-}
-
-
-.Main-Cateogory ul li
-{
-  font-size: 20px;
-  margin-top:10px;
-}
-.Category-li li{
-  margin-top:13px;
-}
 
 /* 메인화면의 방금 등록된 상품 문구*/
 .Main-Content{
@@ -199,8 +177,16 @@
   margin-bottom:30px;
   margin-left:200px;
 }
-
-
-.Search-Bar{
+.category_page{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top:20px;
+}
+.category_top{
+  display:flex;
+  justify-content: center;
   
+
 }

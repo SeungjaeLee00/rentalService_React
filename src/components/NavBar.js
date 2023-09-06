@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 function NavBar() {
 
   let store = useSelector((state)=>{return state});
-  console.log(store.category);
+  
 
   const [isLogin, setIsLogin] = useState(false);
   const [makers, setMakers] = useState(false);
