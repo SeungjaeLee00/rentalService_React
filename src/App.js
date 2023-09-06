@@ -23,6 +23,7 @@ import Do_Report from './pages/Report/Do_Report'
 import AllTrade from './pages/Trade/AllTrade';
 import My_Review from './pages/Review/My_Review';
 import Write_Review from './pages/Review/Write_Review';
+import Category from './pages/about_Item/Category';
 
 
 function App() {
@@ -42,10 +43,11 @@ function App() {
           <Route exact path="/found-id" element={<FoundId />} />
           <Route exact path="/loginpage" element={<LoginPage />} />
 
-          <Route exact path="/itemmain" element={<ItemMain />} />
+          
           <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
           <Route exact path='/itemmain/detail/:id' element={<Detail />} />
           <Route exact path='/itemmain/detail/chat' element={<Chat />} />
+          <Route exact path='/category/:category' element={<Category/>}/>
 
           <Route exact path="/my-page/upload-item" element={<Upload_Item />} />
           <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
@@ -58,6 +60,9 @@ function App() {
           
           <Route exact path='/reviews/my-review' element={<My_Review />} />
           <Route exact path='/reviews/write-review' element={<Write_Review />} />
+
+
+         
         </Routes>
       </AuthProvider>
       {/* </Router> */}

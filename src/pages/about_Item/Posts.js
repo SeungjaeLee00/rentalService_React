@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import Gadigun from "../../assets/img/가디건1.jpg";
 import NikeAir from "../../assets/img/에어포스1.jpg";
 import LeeCap from "../../assets/img/lee볼캡모자1.jpg";
+import AirClear from "../../assets/img/공기청정기.jpg";
+import StarBux from "../../assets/img/스타벅스.jpg";
+import Pencil from "../../assets/img/만년필.jpg";
+
 import { useNavigate } from "react-router";
 import { useSelector } from 'react-redux';
 
 
 const Posts = (props) => {
   
-  
-  let a_img = [Gadigun, NikeAir, LeeCap]
+  let a_img = [Gadigun, NikeAir, LeeCap, AirClear, StarBux, Pencil];
   const navigate = useNavigate();
 
   //items라는 곳에 store.js에 저장된 데이터 저장
@@ -23,7 +26,7 @@ const Posts = (props) => {
   return (
     items.slice(0, props.ItemIndex).map((a, i) => {
       return (
-        <div className="Item" onClick={() => {
+        <div className="Item" key={i} onClick={() => {
           navigate('/itemmain/detail/' + i);
         }}>
 

@@ -1,19 +1,17 @@
 import React from "react";
 
 
-export default function Category(){
-    return(
-        <div className="Category-li">
-            <li>가전제품</li>
-            <li>생활용품</li>
-            <li>완구</li>
-            <li>운동기구</li>
-            <li>차량,오토바이</li>
-            <li>악기</li>
-            <li>책</li>
-            <li>공구</li>
-            <li>의류</li>
-
+export default function Category() {
+    return (
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown button
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
         </div>
     )
 }

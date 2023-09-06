@@ -13,19 +13,21 @@ import Posts from './Posts';
 import TempData from "../../TempData";
 import { useDispatch, useSelector } from 'react-redux';
 import { additem } from '../../store';
-import Category from '../../components/Category';
+// import Category from '../../components/Category';
 
 
 function ItemMain(props) {
   
   let dispatch=useDispatch();
+  //store 변수에 Redux데이터를 가져와서 저장
   let store = useSelector((state) => { return state });
-  console.log(store.item);
+  
+  
   
 
   const [searchParams, setSearchParams] = useSearchParams();
   const id = searchParams.get("search");
-  console.log("search id =" + id);
+  
 
 
   const [posts, setPosts] = useState([]);
@@ -35,6 +37,8 @@ function ItemMain(props) {
 
   const [search, setSearch] = useState("");
   const [ItemIndex, setItemIndex] = useState(6);
+
+  const [category, setCategory] = useState("");
 
   const onChange = (e) => {
     setSearch(e.target.value)
@@ -62,23 +66,8 @@ function ItemMain(props) {
   return (
     <div className='page-container'>
       {/* 본문상단의검색바 */}
-
-      <div className='Search-Bar'>
-        <form>
-          <input type="text" maxLength='20' className='search_input' name='search' placeholder="어떤 상품을 찾으시나요?" onChange={(e) => {
-            setSearch(e.target.value);
-          }} />
-          {/* <input type="submit" value="검색" className='search_submit'/> */}
-        </form>
-      </div>
-
-      <div className='Main-Cateogory'>
-        <ul onClick={()=>{setView(!view)}}>
-          카테고리{" "}
-          {view ? '⌃' : '⌄'}
-          {view && <Category/>}
-        </ul>
-      </div>
+      
+      
 
       <div className='Main-Content'>
         방금 등록된 상품
@@ -93,7 +82,7 @@ function ItemMain(props) {
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
-        {posts && <Posts currentPosts={currentPosts()} loading={loading} ItemIndex={ItemIndex} search={search} />}
+        {posts && <Posts currentPosts={currentPosts()} loading={loading} ItemIndex={ItemIndex} search={search} category={category} />}
 
       </div>
 
@@ -119,6 +108,26 @@ function ItemMain(props) {
     </div>
   );
 };
+
+// function Category(){
+//   return(
+
+//     <div className="Category-li">
+//         <li>전체상품</li>
+//         <li>가전제품</li>
+//         <li>생활용품</li>
+//         <li>완구</li>
+//         <li>운동기구</li>
+//         <li>차량,오토바이</li>
+//         <li>악기</li>
+//         <li>책</li>
+//         <li>공구</li>
+//         <li onClick={()=>{
+//         }}>의류</li>
+
+//     </div>
+//   )
+// }
 
 // 아이템 생성 함수 지금사용 x , posts.js에서 아이템생성해줌.
 function ItemProduce(props) {

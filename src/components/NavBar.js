@@ -4,13 +4,19 @@ import { useEffect, useState } from 'react';
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import Category from '../pages/about_Item/Category.js';
+import store from '../store';
+import { useSelector } from 'react-redux';
 
 function NavBar() {
+
+  let store = useSelector((state)=>{return state});
+  console.log(store.category);
 
   const [isLogin, setIsLogin] = useState(false);
   const [makers, setMakers] = useState(false);
   let navigate = useNavigate();  // hook: page 이동을 도와줌
-  
+  const [view, setView] = useState(false);
   const { isAuthenticated, logout } = useAuth();
   const handleLogout = () => {
     logout()
@@ -28,16 +34,42 @@ function NavBar() {
       key={false} expand={false} className="bar">
       <Container fluid>
 
-      <Navbar.Brand href="/itemmain">뭐든빌리개</Navbar.Brand>
-        {isLogin ? (
+        <Navbar.Brand href="/">뭐든빌리개</Navbar.Brand>
+        {/* {isLogin ? (
           <Button onClick={handleLogout}
             variant="outline-dark" size="sm" style={{ marginLeft: "700px" }}>로그아웃</Button>
         ) : (
           <Link onClick={handleLogin}
-            variant="outline-dark" size="sm" style={{ marginLeft: "650px" }}>로그인/회원가입</Link>)}
+            variant="outline-dark" size="sm" style={{ marginLeft: "650px" }}>로그인/회원가입</Link>)} */}
+          
+          
+        <NavDropdown
+          title="카테고리"
+          id={`offcanvasNavbarDropdown-expand-${false}`}
+        >
+          {store.category.map((a,index)=>(
+            
+            <NavDropdown.Item onClick={()=>{
+              navigate("category/"+index);
+            }}>{a}</NavDropdown.Item>
+          ))}
+          
+        </NavDropdown>
+
+        <Form className="d-flex">
+          <Form.Control
+            type="search"
+            placeholder="Search"
+            className="me-2"
+            aria-label="Search"
+          />
+          <Button variant="outline-success">Search</Button>
+        </Form>
 
 
-        
+
+
+
 
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${false}`} />
         <Navbar.Offcanvas
@@ -105,6 +137,8 @@ function NavBar() {
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
+
+
   );
 };
 
