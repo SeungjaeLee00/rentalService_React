@@ -10,8 +10,8 @@ import { useSelector } from 'react-redux';
 
 function NavBar() {
 
-  let store = useSelector((state)=>{return state});
-  
+  let store = useSelector((state) => { return state });
+
 
   const [isLogin, setIsLogin] = useState(false);
   const [makers, setMakers] = useState(false);
@@ -30,33 +30,13 @@ function NavBar() {
   };
 
   return (
-    <Navbar bg="light" variant="light"
+    <Navbar style={{ height: "100px" }} bg="light" variant="light"
       key={false} expand={false} className="bar">
       <Container fluid>
 
-        <Navbar.Brand href="/">뭐든빌리개</Navbar.Brand>
-        {/* {isLogin ? (
-          <Button onClick={handleLogout}
-            variant="outline-dark" size="sm" style={{ marginLeft: "700px" }}>로그아웃</Button>
-        ) : (
-          <Link onClick={handleLogin}
-            variant="outline-dark" size="sm" style={{ marginLeft: "650px" }}>로그인/회원가입</Link>)} */}
-          
-          
-        <NavDropdown
-          title="카테고리"
-          id={`offcanvasNavbarDropdown-expand-${false}`}
-        >
-          {store.category.map((a,index)=>(
-            
-            <NavDropdown.Item onClick={()=>{
-              navigate("category/"+index);
-            }}>{a}</NavDropdown.Item>
-          ))}
-          
-        </NavDropdown>
+        <Navbar.Brand style={{ fontSize: "30px", marginTop:"25px", fontWeight:"bold" }} href="/">뭐든빌리개</Navbar.Brand>
 
-        <Form className="d-flex">
+        <Form className="d-flex" style={{marginLeft:"100px"}}>
           <Form.Control
             type="search"
             placeholder="Search"
@@ -65,13 +45,14 @@ function NavBar() {
           />
           <Button variant="outline-success">Search</Button>
         </Form>
+        {/* {isLogin ? (
+          <Button onClick={handleLogout}
+            variant="outline-dark" size="sm" style={{ marginLeft: "700px" }}>로그아웃</Button>
+        ) : (
+          <Link onClick={handleLogin}
+            variant="outline-dark" size="sm" style={{ marginLeft: "650px" }}>로그인/회원가입</Link>)} */}
 
-
-
-
-
-
-        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${false}`} />
+        <Navbar.Toggle style={{marginTop:"25"}} aria-controls={`offcanvasNavbar-expand-${false}`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${false}`}
           aria-labelledby={`offcanvasNavbarLabel-expand-${false}`}
@@ -136,6 +117,21 @@ function NavBar() {
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>
+      <div className='nav-bottom'>
+        <NavDropdown className='nav-category'
+          title="카테고리"
+          id={`offcanvasNavbarDropdown-expand-${false}`}
+        >
+          {store.category.map((a, index) => (
+
+            <NavDropdown.Item onClick={() => {
+              navigate("category/" + index);
+            }}>{a}</NavDropdown.Item>
+          ))}
+
+        </NavDropdown>
+        
+      </div>
     </Navbar>
 
 

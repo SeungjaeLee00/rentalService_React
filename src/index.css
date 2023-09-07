@@ -118,7 +118,14 @@
   align-items: center;
   width:500px;
   cursor:pointer;
+  transition: 0.2s;
+  margin-top: 30px;
+  font-size: 20px;
 
+}
+.Item:hover{
+  transform:scaleY(1.05);
+  box-shadow: 5px 5px 10px -10px gray;
 }
 
 /* 상품 이름 가격 올린날짜 상품상태 섹션 */
@@ -138,10 +145,17 @@
 
 .Item-State
 {
+  
+  font-weight: bold;
   margin-left:40px;
   display:flex;
   justify-content: center;
   align-items: center;
+}
+
+.Item-Price{
+  font-weight: bold;
+  margin:12px 0px;
 }
 
 .Item-Pagination{
@@ -173,7 +187,6 @@
 .Main-Content{
   font-size:30px;
   font-weight: bold;
-  margin-top:50px;
   margin-bottom:30px;
   margin-left:200px;
 }
@@ -182,11 +195,41 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top:20px;
+  margin-top:80px;
 }
 .category_top{
   display:flex;
   justify-content: center;
-  
+}
 
+.dashboard{
+  font-size:50px;
+  margin-top:100px;
+  height:200px;
+  font-weight: 500;
+  margin-left:200px;
+    
+  
+}
+
+.bar{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-bottom{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  
+}
+
+.nav-category{
+  margin-left: 200px;
+  margin-top:10px;
+  font-size: 20px;
 }

@@ -65,7 +65,10 @@ function ItemMain(props) {
   const [view, setView] = useState(false);
   return (
     <div className='page-container'>
-      {/* 본문상단의검색바 */}
+      <div className='dashboard'>
+      <h1>뭐든빌리개는 <br/>
+      언제어디서든지 상품을 대여해주고 받을 수 있는 서비스입니다. </h1>
+      </div>
       
       
 

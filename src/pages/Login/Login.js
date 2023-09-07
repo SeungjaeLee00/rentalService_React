@@ -55,7 +55,7 @@ const Login = (props) => {
         console.log('토큰 저장 성공: ', returnData.result.data);
 
         if ((response.status = 200)) {
-          return navigate("/itemmain");
+          window.location.replace("/itemmain");
         }
       })
       .catch(error => {

@@ -43,7 +43,7 @@ const Posts = (props) => {
             <div className='Item-Name-Price-Date-Wrap'>
               <div style={{ color: "red" }}>상품번호 : {a.id} </div>
               <div className='Item-Name'>{a.title}</div>
-              <div className='Item-Price'>가격 : {a.price}</div>
+              <div className='Item-Price'>{a.price}</div>
               <div className='Item-Date'>{a.date}</div>
             </div>
             <div className='Item-State'>
