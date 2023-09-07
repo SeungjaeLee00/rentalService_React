@@ -124,7 +124,7 @@
 
 }
 .Item:hover{
-  transform:scaleY(1.05);
+  transform:scaleY(1.02);
   box-shadow: 5px 5px 10px -10px gray;
 }
 
@@ -143,11 +143,13 @@
   align-items: center;
 }
 
+.Item-Name{
+  width:250px;
+  margin-left: 80px;
+}
 .Item-State
 {
-  
   font-weight: bold;
-  margin-left:40px;
   display:flex;
   justify-content: center;
   align-items: center;
