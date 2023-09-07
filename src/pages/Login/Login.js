@@ -39,6 +39,8 @@ const Login = (props) => {
       password: password
     };
 
+    
+
     axios.post('http://13.125.98.26:8080/auth/login', userData)
       .then(response => {
         setMessage('로그인 성공');
@@ -55,7 +57,7 @@ const Login = (props) => {
         console.log('토큰 저장 성공: ', returnData.result.data);
 
         if ((response.status = 200)) {
-          window.location.replace("/itemmain");
+          window.location.replace("/");
         }
       })
       .catch(error => {

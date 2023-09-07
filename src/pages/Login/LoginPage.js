@@ -40,6 +40,7 @@ function LoginPage(props) {
         axios.post('http://13.125.98.26:8080/auth/login', userData)
             .then(response => {
                 setMessage('로그인 성공');
+                console.log(response);
                 console.log('로그인 성공:', response.data);
 
                 const returnData = response.data;
@@ -49,7 +50,7 @@ function LoginPage(props) {
                 console.log('토큰: ', returnData.result.data);
 
                 if ((response.status = 200)) {
-                    window.location.replace("/itemmain");
+                    window.location.replace("/");
                 }
             })
             .catch(error => {
@@ -70,11 +71,11 @@ function LoginPage(props) {
                     <p style={{ fontSize: "13px", color: "#4A4F5A" }}>서비스 이용을 위해 로그인 해주세요.</p>
 
                     <br />
-                    <input type='Id' class="inputField" placeholder="  아이디" value={username}
+                    <input type='Id' className="inputField" placeholder="  아이디" value={username}
                         onChange={onUsernameHandler} style={{ marginBottom: "20px" }} />
 
                     <br />
-                    <input type='password' class="inputField" placeholder="  비밀번호" value={password}
+                    <input type='password' className="inputField" placeholder="  비밀번호" value={password}
                         onChange={onPasswordHandler} />
 
                     <div className='loginbtn'>

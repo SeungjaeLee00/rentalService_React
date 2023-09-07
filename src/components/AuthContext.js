@@ -1,3 +1,4 @@
+import { ConnectingAirportsOutlined } from '@mui/icons-material';
 import React, { createContext, useContext, useState, useEffect, useLayoutEffect } from 'react';
 
 export const AuthContext = createContext();
@@ -7,6 +8,8 @@ export function AuthProvider({ children }) {
   const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refreshToken') || null);
   const [isAuthenticated, setIsAuthenticated] = useState(accessToken !== null);
   const count=0;
+  console.log(accessToken);
+  console.log(refreshToken);
   useEffect(() => {
     if (accessToken) {
       localStorage.setItem('accessToken', accessToken);
@@ -37,6 +40,7 @@ export function AuthProvider({ children }) {
   
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+      {console.log(isAuthenticated)}
       {children}
     </AuthContext.Provider>
   );

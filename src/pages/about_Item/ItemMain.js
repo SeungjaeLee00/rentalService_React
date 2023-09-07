@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';  // 무한 스크롤용 라이브러리
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import ExImg from '../../assets/img/가디건1.jpg';
 
 import '../../App.css';
@@ -13,21 +13,28 @@ import Posts from './Posts';
 import TempData from "../../TempData";
 import { useDispatch, useSelector } from 'react-redux';
 import { additem } from '../../store';
+import { useAuth } from '../../components/AuthContext';
 // import Category from '../../components/Category';
 
 
 function ItemMain(props) {
   
-  let dispatch=useDispatch();
+  const actoken = localStorage.accessToken;
+  const retoken = localStorage.refreshToken;
+  console.log(actoken);
+  console.log(retoken);
+  
+
+  let dispatch = useDispatch();
   //store 변수에 Redux데이터를 가져와서 저장
   let store = useSelector((state) => { return state });
-  
-  
-  
+
+
+
 
   const [searchParams, setSearchParams] = useSearchParams();
   const id = searchParams.get("search");
-  
+
 
 
   const [posts, setPosts] = useState([]);
@@ -57,26 +64,92 @@ function ItemMain(props) {
     currentPosts = store.item.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
-  
+
 
   const [searchdata, setSearchData] = useState([]);
-  const data = [];
   
+  const item ={
+    name : 123,
+    price: 123,
+    quantity: 1
+  }
+  const data = {
+    title: "제목 1",
+    content: "내용 1",
+    categoryName: "보드게임",
+    multipartFiles: ExImg
+  };
+
+  const formData = new FormData()
+  formData.append('title',"hello");
+  formData.append('content',"file");
+  formData.append('categoryName', "보드게임");
+  formData.append('multipartFiles', ExImg);
+  console.log(formData);
+  
+  // const value=[{
+  //   title:"hello",
+  //   content:"hello",
+  //   categoryName:"hello"
+  // }]
+  // formData.append("data", new Blob([JSON.stringify(value)], {type:"application/json"}));
+  //const blob = new Blob([JSON.stringify(value)], {type:"application/json"})
+
+  
+
+
   const [view, setView] = useState(false);
   return (
     <div className='page-container'>
+
       <div className='dashboard'>
-      <h1>뭐든빌리개는 <br/>
-      언제어디서든지 상품을 대여해주고 받을 수 있는 서비스입니다. </h1>
+        <h1>뭐든빌리개는 <br />
+          언제어디서든지 상품을 대여해주고 받을 수 있는 서비스입니다. </h1>
       </div>
-      
-      
+      <button onClick={() => {
+        axios.get('http://13.125.98.26:8080/posts')
+          .then(response => {
+            console.log(response);
+            console.log(response.data);
+            console.log(response.data.result);
+          })
+      }}>게시물조회</button>
+
+
+      <button onClick={(e) =>{
+        e.preventDefault()
+        axios.post('http://13.125.98.26:8080/posts', formData ,{
+          headers : { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${actoken}`},
+          headers: {Auth: retoken},
+          
+        })
+        .then(response=>{
+          console.log("성공");
+        })
+        .catch(error=>{
+          console.log(error.response.data.result);
+        })
+      }}
+      >게시물생성</button>
+
+      <button onClick={()=>{
+        axios.get('http://13.125.98.26:8080/members/my-profile',{
+          headers : { Authorization: `Bearer ${actoken}`},
+          headers: {Auth: retoken}
+        })
+         .then(response=>{
+          console.log("본인정보조회성공");
+          console.log(response);
+         })
+      }}>본인정보조회</button>
+
+
 
       <div className='Main-Content'>
         방금 등록된 상품
       </div>
-      
-  
+
+
       {/* 본문가운데상품진열
       <div className="Item-Wrap">
         <Posts TempData={currentPosts()} navigate={navigate} loading={loading} ItemIndex={ItemIndex} />

@@ -7,6 +7,7 @@ import { useAuth } from './AuthContext';
 import Category from '../pages/about_Item/Category.js';
 import store from '../store';
 import { useSelector } from 'react-redux';
+import HorizonLine from './HorizonLine';
 
 function NavBar() {
 
@@ -18,14 +19,15 @@ function NavBar() {
   let navigate = useNavigate();  // hook: page 이동을 도와줌
   const [view, setView] = useState(false);
   const { isAuthenticated, logout } = useAuth();
+  console.log(isAuthenticated);
   const handleLogout = () => {
     logout()
-    window.location = '/';
+    window.location.replace("/");
     setIsLogin(prevState => !prevState)
   };
 
   const handleLogin = () => {
-    window.location = '/loginpage';
+    window.location.replace("/loginpage")
     setIsLogin(prevState => !prevState)
   };
 
@@ -35,7 +37,19 @@ function NavBar() {
       <Container fluid>
 
         <Navbar.Brand style={{ fontSize: "30px", marginTop:"25px", fontWeight:"bold" }} href="/">뭐든빌리개</Navbar.Brand>
+        <NavDropdown className='nav-category'
+          title="카테고리"
+          id={`offcanvasNavbarDropdown-expand-${false}`}
+        >
+          {store.category.map((a, index) => (
 
+            <NavDropdown.Item key={index} onClick={() => {
+              navigate("category/" + index);
+            }}>{a}</NavDropdown.Item>
+          ))}
+
+        </NavDropdown>
+        
         <Form className="d-flex" style={{marginLeft:"100px"}}>
           <Form.Control
             type="search"
@@ -45,14 +59,15 @@ function NavBar() {
           />
           <Button variant="outline-success">Search</Button>
         </Form>
-        {/* {isLogin ? (
+         {isAuthenticated ? (
           <Button onClick={handleLogout}
             variant="outline-dark" size="sm" style={{ marginLeft: "700px" }}>로그아웃</Button>
         ) : (
           <Link onClick={handleLogin}
-            variant="outline-dark" size="sm" style={{ marginLeft: "650px" }}>로그인/회원가입</Link>)} */}
+            variant="outline-dark" size="sm" style={{ marginLeft: "650px" }}>로그인/회원가입</Link>)} 
 
         <Navbar.Toggle style={{marginTop:"25"}} aria-controls={`offcanvasNavbar-expand-${false}`} />
+        
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-${false}`}
           aria-labelledby={`offcanvasNavbarLabel-expand-${false}`}
@@ -117,21 +132,7 @@ function NavBar() {
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>
-      <div className='nav-bottom'>
-        <NavDropdown className='nav-category'
-          title="카테고리"
-          id={`offcanvasNavbarDropdown-expand-${false}`}
-        >
-          {store.category.map((a, index) => (
-
-            <NavDropdown.Item onClick={() => {
-              navigate("category/" + index);
-            }}>{a}</NavDropdown.Item>
-          ))}
-
-        </NavDropdown>
-        
-      </div>
+      
     </Navbar>
 
 

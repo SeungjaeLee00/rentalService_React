@@ -16,7 +16,7 @@ const Posts = (props) => {
   const navigate = useNavigate();
    
   const items = props.currentPosts;
-  console.log(items);
+  
   //items라는 곳에 store.js에 저장된 데이터 저장
   /*
   const items = props.currentPosts.filter((data) => {
@@ -28,8 +28,7 @@ const Posts = (props) => {
 
   return (
     items.slice(0, props.ItemIndex).map((a, i) => {
-      console.log(a);
-      console.log(i);     
+          
       return (
       
         <div className="Item" key={a.id} onClick={() => {
