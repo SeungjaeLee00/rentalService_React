@@ -24,7 +24,8 @@ const Posts = (props) => {
   })*/
 
   return (
-    items.slice(0, props.ItemIndex).map(a => (
+    
+    items?  items.slice(0, props.ItemIndex).map(a => (
       <div className="Item" key={a.id} onClick={() => {
         navigate('/itemmain/detail/' + a.id, { state: a });
       }}>
@@ -43,7 +44,7 @@ const Posts = (props) => {
         </div>
       </div>
 
-    ))
+    )) : <div>로딩중</div>
 
 
   );

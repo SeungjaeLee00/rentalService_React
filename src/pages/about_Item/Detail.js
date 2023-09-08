@@ -37,6 +37,7 @@ function Detail() {
   const state = useLocation();
 
   const [item,setItem] = useState();
+  const [itemlike,setItemLike] = useState();
   useEffect(()=>{
     axios.get('http://13.125.98.26:8080/posts/'+id)
     .then(response=>{
@@ -44,7 +45,8 @@ function Detail() {
       console.log(response.data.result.data);
       setItem(response.data.result.data);
     })
-  },[])
+  },[item])
+  
   
   const likeadd = () =>{
     axios.post('http://13.125.98.26:8080/posts/'+id+'/likes')
@@ -128,9 +130,10 @@ function Detail() {
           </Swiper> */}
 
         </div>
+        {item ? <div>
         <div className='Item_About'>
         
-        {item ? <div>
+        
           {/* <div style={{marginTop:"15px"}}>작성자 : {item.writer.nickname}</div> */}
           <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {item.categoryName}&nbsp; {'>'} &nbsp; {item.title}</div>
           <div className="Detail_Item_Name_Price">
@@ -144,7 +147,7 @@ function Detail() {
             <div style={{ marginTop: 20 }}>{item.content}</div>
             
           </div>
-        </div> : <div>로딩중</div>}
+        
           
 
           
@@ -156,17 +159,22 @@ function Detail() {
               })
               .then(response=>{
                 console.log("성공");
+                let copy =item;
+              console.log(copy);
+              copy.likes=1;
+              setItem(copy);
               })
               .catch(error=>{
                 console.log(error.response.data.result);
               })
-            }} style={{ backgroundColor: "white", color: "black" }}>찜</button>
+            }} style={{ backgroundColor: "white", color: "black" }}>{item.likes ? <span>♥</span> :<span>♡</span>}</button>
             <button onClick={() => navigate('/itemmain/detail/chat')}>쪽지보내기</button>
             <button onClick={openReportModal} variant="secondary" size="lg">❗️</button>
             <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
 
           </div>
         </div>
+        </div> : <div>로딩중</div>}
 
 
       </div>

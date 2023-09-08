@@ -28,20 +28,11 @@ function ItemMain(props) {
   //store 변수에 Redux데이터를 가져와서 저장
   let [store,setStore] = useState([]);
 
-  useEffect(()=>{
-    axios.get('http://13.125.98.26:8080/posts')
-     .then(response=>{
-      //console.log(response.data.result.data.postList);
-      setStore(response.data.result.data.postList);
-     })
-  },[])
-  console.log(store);
+  axios.get('http://13.125.98.26:8080/posts')
+   .then(response=>{
+    setStore(response.data.result.data.postList);
+   })
   
- 
-
-
-
-
   const [searchParams, setSearchParams] = useSearchParams();
   const id = searchParams.get("search");
 
@@ -85,8 +76,8 @@ function ItemMain(props) {
     <div className='page-container'>
      
       <div className='dashboard'>
-        <h1>뭐든빌리개는 <br />
-          언제어디서든지 상품을 대여해주고 받을 수 있는 서비스입니다. </h1>
+        <h1>뭐든빌리개는</h1>
+          <h1>언제어디서든지 상품을 대여해주고 받을 수 있는 서비스입니다. </h1>
       </div>
     
       {/* <button onClick={()=>{
