@@ -1,5 +1,5 @@
-import { useState, useRef, useCallback } from 'react';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { useState, useRef, useCallback, useEffect } from 'react';
+import { Await, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import '../../App.css';
 import Do_Report from '../Report/Do_Report';
 import { useSelector } from 'react-redux';
@@ -25,74 +25,112 @@ import 'swiper/components/navigation/navigation.min.css';
 import 'swiper/components/pagination/pagination.min.css'; 
 import 'swiper/components/scrollbar/scrollbar.min.css'; 
 import SwiperCore, { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/core';
+import axios from 'axios';
 SwiperCore.use([Navigation, Pagination, Mousewheel, Keyboard]);
+
 
 
 function Detail() {
   
   let {id} = useParams();
   console.log(id);
-  let a = useSelector((state)=>{return state});
-  console.log(a.item[id].title);
+  
+  let [a,setA]= useState([]);
+  
+  // const getData = async()=>{
+  //   await axios.get('http://13.125.98.26:8080/posts')
+  //   .then(response=>{
+  //     console.log(response);
+  //     setA(response.data.result.data.postList);
+      
+  //   })
+  // }
+  // getData();
+
+  useEffect(()=>{
+    axios.get('http://13.125.98.26:8080/posts')
+    .then(response=>{
+      setA(response.data.result.data.postList);
+    })
+  }, [])
+  
+  // await axios.get('http://13.125.98.26:8080/posts')
+  //  .then(response=>{
+  //   setA(response.data.result.postList);
+  //  })
+
+   console.log(a);
+
+   const {state} = useLocation();
+   console.log(state);
 
   
-  let navigate = useNavigate();
-  const [comments, setComments] = useState([
-    { id: 1, content: 'I like it!' }
-  ]);
 
-  const nextId = useRef(1);
+  
+  
 
-  const onInsert = useCallback(
-    (content) => {
-      const comment = {
-        id: nextId.current,
-        content
-      };
-      console.log(content);
-      setComments(comments => comments.concat(comment));
-      nextId.current += 1;
-    },
-    [comments],
-  );
+  
+  // let navigate = useNavigate();
+  // const [comments, setComments] = useState([
+  //   { id: 1, content: 'I like it!' }
+  // ]);
 
-  const [value, setValue] = useState({
-    content: ''
-  });
+  // const nextId = useRef(1);
 
-  const onChangeContent = useCallback(
-    (e) => {
-      setValue({
-        content: e.target.value,
-      });
-    },
-    [value]
-  );
+  // const onInsert = useCallback(
+  //   (content) => {
+  //     const comment = {
+  //       id: nextId.current,
+  //       content
+  //     };
+  //     console.log(content);
+  //     setComments(comments => comments.concat(comment));
+  //     nextId.current += 1;
+  //   },
+  //   [comments],
+  // );
 
-  const onSubmit = useCallback(
-    e => {
-      onInsert(value.content);
-      setValue({
-        content: ''
-      });
+  // const [value, setValue] = useState({
+  //   content: ''
+  // });
 
-      e.preventDefault();
-    },
-    [onInsert, value],
-  );
-  const [showReportPopup, setshowReportPopup] = useState(false);
+  // const onChangeContent = useCallback(
+  //   (e) => {
+  //     setValue({
+  //       content: e.target.value,
+  //     });
+  //   },
+  //   [value]
+  // );
 
-  const openReportModal = () => {
-    setshowReportPopup(true);
-  };
-  const closeReportnModal = () => {
-    setshowReportPopup(false);
-  };
+  // const onSubmit = useCallback(
+  //   e => {
+  //     onInsert(value.content);
+  //     setValue({
+  //       content: ''
+  //     });
+
+  //     e.preventDefault();
+  //   },
+  //   [onInsert, value],
+  // );
+  // const [showReportPopup, setshowReportPopup] = useState(false);
+
+  // const openReportModal = () => {
+  //   setshowReportPopup(true);
+  // };
+  // const closeReportnModal = () => {
+  //   setshowReportPopup(false);
+  // };
 
   return (
+    
     <div className='page-container'>
+      
       <div className='Detail_Item_wrap'>
         <div className='Detail_Item_Img'>
+          {a?  <div>a 댐</div> : <div>a 안댐</div>}
+          { a? console.log(a) : null}
           
           {/* <Swiper
             cssMode={true}
@@ -110,30 +148,32 @@ function Detail() {
           </Swiper> */}
 
         </div>
-        <div className='Item_About'>
-          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {a.item[id].category}&nbsp; {'>'} &nbsp; {a.item[id].title}</div>
+        {a  ? (<div className='Item_About'>
+          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {"카테고리"}&nbsp; {'>'} &nbsp; {state.title}</div>
           <div className="Detail_Item_Name_Price">
-            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">{a.item[id].title}</div>
-            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{a.item[id].price}</div>
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">{state.title}</div>
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{"가격"}</div>
           </div>
           <div style={{ marginTop: 20 }}>
             <span>2023.08.13.16:00&nbsp;{'·'}&nbsp;</span>
             <span>조회 4&nbsp;{'·'}&nbsp;&nbsp;</span>
             <span>찜 0</span>
-            <div style={{ marginTop: 20 }}>{a.item[id].content}</div>
+            <div style={{ marginTop: 20 }}>{"내용"}</div>
           </div>
-          <div className='Item_Button'>
+          {/* <div className='Item_Button'>
             <button style={{ backgroundColor: "white", color: "black" }}>찜</button>
             <button onClick={() => navigate('/itemmain/detail/chat')}>쪽지보내기</button>
             <button onClick={openReportModal} variant="secondary" size="lg">❗️</button>
             <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
 
-          </div>
-        </div>
+          </div> */}
+        </div>) : <p>{"로딩중입니다"}</p>}
+
+
       </div>
       <HorizonLine />
 
-      <div style={{ padding: "20px" }}>
+      {/* <div style={{ padding: "20px" }}>
         <h3>댓글</h3>
         <form className="CommentInsert" onSubmit={onSubmit}
           style={{ display: 'flex' }}>
@@ -155,8 +195,8 @@ function Detail() {
       <div className='upload_item' style={{ position: "fixed", right: '45px', bottom: '30px' }}>
         <button style={{ borderRadius: "30px", fontSize: '20px', width: "100px", height: "50px", border: "none" }}
           onClick={() => navigate('/itemmain/upload-item')}> + 글쓰기 </button>
-      </div>
-
+      </div> */}
+      
     </div>
   )
 }

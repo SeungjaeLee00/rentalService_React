@@ -21,17 +21,23 @@ function ItemMain(props) {
   
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
-  console.log(actoken);
-  console.log(retoken);
-  const [file,setFile] = useState();
-  const saveFile=(e)=>{
-    setFile(e.target.files[0]);
-  }
   
-
-  let dispatch = useDispatch();
+  
+ 
+  
   //store 변수에 Redux데이터를 가져와서 저장
-  let store = useSelector((state) => { return state });
+  let [store,setStore] = useState([]);
+
+  useEffect(()=>{
+    axios.get('http://13.125.98.26:8080/posts')
+     .then(response=>{
+      //console.log(response.data.result.data.postList);
+      setStore(response.data.result.data.postList);
+     })
+  },[])
+  console.log(store);
+  
+ 
 
 
 
@@ -65,44 +71,12 @@ function ItemMain(props) {
   //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts라는 곳에 담아줌.
   const currentPosts = () => {
     let currentPosts = 0;
-    currentPosts = store.item.slice(indexOfFirst, indexOfLast);
+    currentPosts = store.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
 
 
   const [searchdata, setSearchData] = useState([]);
-  
-  const item ={
-    name : 123,
-    price: 123,
-    quantity: 1
-  }
-  const data = {
-    title: "제목 1",
-    content: "내용 1",
-    categoryName: "보드게임",
-    itemCreateRequestDto : item,
-    multipartFiles: ExImg
-  };
-
-  const formData = new FormData()
-  formData.append('title',"hello");
-  formData.append('content',"임시데이터");
-  formData.append('categoryName', "보드게임");
-  formData.append('itemCreateRequestDto.name', item.name);
-  formData.append('itemCreateRequestDto.price', item.price);
-  formData.append('itemCreateRequestDto.quantity', item.quantity);
-  formData.append('multipartFiles', file);
-  console.log(formData);
-  
-  // const value=[{
-  //   title:"hello",
-  //   content:"hello",
-  //   categoryName:"hello"
-  // }]
-  // formData.append("data", new Blob([JSON.stringify(value)], {type:"application/json"}));
-  //const blob = new Blob([JSON.stringify(value)], {type:"application/json"})
-
   
 
 
@@ -123,23 +97,7 @@ function ItemMain(props) {
           })
       }}>게시물조회</button>
 
-
-      <button onClick={(e) =>{
-        e.preventDefault()
-        axios.post('http://13.125.98.26:8080/posts', formData ,{
-          headers : { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${actoken}`},
-          headers: {Auth: retoken},
-        })
-        .then(response=>{
-          console.log("성공");
-        })
-        .catch(error=>{
-          console.log(error.response.data.result);
-        })
-      }}
-      >게시물생성</button>
-
-      <input type='file' onChange={saveFile}></input>
+      
 
       <button onClick={()=>{
         axios.get('http://13.125.98.26:8080/members/my-profile',{
@@ -177,7 +135,7 @@ function ItemMain(props) {
         <Pagination
           // 총데이터를 postsPerPage만큼 등분해서 보여준다. 6개씩보여주자.
           postsPerPage={postsPerPage} //각각 페이지당 포스트개수
-          totalPosts={store.item.length} //전체 데이터 개수 
+          totalPosts={store.length} //전체 데이터 개수 
           paginate={setCurrentPage} //CurrentPage변경하는함수.(첫번째페이지가정 6)
         ></Pagination>
       </div>

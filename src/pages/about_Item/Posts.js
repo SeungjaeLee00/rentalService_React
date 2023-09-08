@@ -32,7 +32,7 @@ const Posts = (props) => {
       return (
       
         <div className="Item" key={a.id} onClick={() => {
-          navigate('/itemmain/detail/' + a.id);
+          navigate('/itemmain/detail/' + a.id, {state:a});
         }}>
 
           <div className='Item-Img'>
