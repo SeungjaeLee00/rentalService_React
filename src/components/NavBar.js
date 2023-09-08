@@ -56,6 +56,7 @@ function NavBar() {
             placeholder="Search"
             className="me-2"
             aria-label="Search"
+            style={{width:"400px"}}
           />
           <Button variant="outline-success">Search</Button>
         </Form>

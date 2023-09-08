@@ -7,17 +7,14 @@ import StarBux from "../../assets/img/스타벅스.jpg";
 import Pencil from "../../assets/img/만년필.jpg";
 
 import { useNavigate } from "react-router";
-import { useSelector } from 'react-redux';
 
 
 const Posts = (props) => {
-  
+
   let a_img = [Gadigun, NikeAir, LeeCap, AirClear, StarBux, Pencil];
   const navigate = useNavigate();
-   
+
   const items = props.currentPosts;
-  
-  //items라는 곳에 store.js에 저장된 데이터 저장
   /*
   const items = props.currentPosts.filter((data) => {
     if (props.search == null) return data;
@@ -27,31 +24,27 @@ const Posts = (props) => {
   })*/
 
   return (
-    items.slice(0, props.ItemIndex).map((a, i) => {
-          
-      return (
-      
-        <div className="Item" key={a.id} onClick={() => {
-          navigate('/itemmain/detail/' + a.id, {state:a});
-        }}>
-
-          <div className='Item-Img'>
-            <img src={a_img[a.id]} style={{ width: 200, height: 200 }} />
+    items.slice(0, props.ItemIndex).map(a => (
+      <div className="Item" key={a.id} onClick={() => {
+        navigate('/itemmain/detail/' + a.id, { state: a });
+      }}>
+        <div className='Item-Img'>
+          <img src={a_img[a.id]} style={{ width: 200, height: 200 }} />
+        </div>
+        <div className='Item-Information-Wrap'>
+          <div className='Item-Name-Price-Date-Wrap'>
+            <div className='Item-Name'>{a.title}</div>
+            <div className='Item-Price'>{a.nickname}</div>
+            <div className='Item-Date'>{a.createdTime}</div>
           </div>
-          <div className='Item-Information-Wrap'>
-            <div className='Item-Name-Price-Date-Wrap'>
-              <div style={{ color: "red" }}>상품번호 : {a.id} </div>
-              <div className='Item-Name'>{a.title}</div>
-              <div className='Item-Price'>{a.price}</div>
-              <div className='Item-Date'>{a.date}</div>
-            </div>
-            <div className='Item-State'>
-              {a.state}
-            </div>
+          <div className='Item-State'>
+            {a.state}
           </div>
         </div>
-      )
-    })
+      </div>
+
+    ))
+
 
   );
 };

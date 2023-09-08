@@ -83,23 +83,13 @@ function ItemMain(props) {
   const [view, setView] = useState(false);
   return (
     <div className='page-container'>
-
+     
       <div className='dashboard'>
         <h1>뭐든빌리개는 <br />
           언제어디서든지 상품을 대여해주고 받을 수 있는 서비스입니다. </h1>
       </div>
-      <button onClick={() => {
-        axios.get('http://13.125.98.26:8080/posts')
-          .then(response => {
-            console.log(response);
-            console.log(response.data);
-            console.log(response.data.result);
-          })
-      }}>게시물조회</button>
-
-      
-
-      <button onClick={()=>{
+    
+      {/* <button onClick={()=>{
         axios.get('http://13.125.98.26:8080/members/my-profile',{
           headers : { Authorization: `Bearer ${actoken}`},
           headers: {Auth: retoken}
@@ -108,24 +98,17 @@ function ItemMain(props) {
           console.log("본인정보조회성공");
           console.log(response);
          })
-      }}>본인정보조회</button>
+      }}>본인정보조회</button> */}
 
 
 
       <div className='Main-Content'>
         방금 등록된 상품
       </div>
-
-
-      {/* 본문가운데상품진열
-      <div className="Item-Wrap">
-        <Posts TempData={currentPosts()} navigate={navigate} loading={loading} ItemIndex={ItemIndex} />
-
-      </div> */}
-
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
-        {posts && <Posts currentPosts={currentPosts()} loading={loading} ItemIndex={ItemIndex} search={search} category={category} />}
+        
+        {currentPosts ?( <Posts currentPosts={currentPosts()} loading={loading} ItemIndex={ItemIndex} search={search} category={category} /> ) : (<div>로딩중입니다</div>)}
 
       </div>
 

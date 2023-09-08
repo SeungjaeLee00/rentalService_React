@@ -141,11 +141,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top:15px;
 }
 
 .Item-Name{
-  width:250px;
+
+  width:300px;
   margin-left: 80px;
+  text-align: left;
 }
 .Item-State
 {

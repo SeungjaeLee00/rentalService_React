@@ -34,94 +34,81 @@ function Detail() {
   
   let {id} = useParams();
   console.log(id);
-  
-  let [a,setA]= useState([]);
-  
-  // const getData = async()=>{
-  //   await axios.get('http://13.125.98.26:8080/posts')
-  //   .then(response=>{
-  //     console.log(response);
-  //     setA(response.data.result.data.postList);
-      
-  //   })
-  // }
-  // getData();
+  const state = useLocation();
+
+  const [temp,setTemp] = useState();
+   
+  // let temp2;
+  // axios.get('http://13.125.98.26:8080/posts/'+id)
+  // .then(response=>{
+  //   console.log(response);
+  //   temp2=response;
+  // })
+  // console.log(item);
 
   useEffect(()=>{
-    axios.get('http://13.125.98.26:8080/posts')
+    axios.get('http://13.125.98.26:8080/posts/'+id)
     .then(response=>{
-      setA(response.data.result.data.postList);
+      console.log("성공");
+      console.log(response.data.result.data);
+      setTemp(response.data.result.data);
     })
-  }, [])
-  
-  // await axios.get('http://13.125.98.26:8080/posts')
-  //  .then(response=>{
-  //   setA(response.data.result.postList);
-  //  })
-
-   console.log(a);
-
-   const {state} = useLocation();
-   console.log(state);
-
-  
-
+  },[])
   
   
-
   
-  // let navigate = useNavigate();
-  // const [comments, setComments] = useState([
-  //   { id: 1, content: 'I like it!' }
-  // ]);
+  let navigate = useNavigate();
+  const [comments, setComments] = useState([
+    { id: 1, content: 'I like it!' }
+  ]);
 
-  // const nextId = useRef(1);
+  const nextId = useRef(1);
 
-  // const onInsert = useCallback(
-  //   (content) => {
-  //     const comment = {
-  //       id: nextId.current,
-  //       content
-  //     };
-  //     console.log(content);
-  //     setComments(comments => comments.concat(comment));
-  //     nextId.current += 1;
-  //   },
-  //   [comments],
-  // );
+  const onInsert = useCallback(
+    (content) => {
+      const comment = {
+        id: nextId.current,
+        content
+      };
+      console.log(content);
+      setComments(comments => comments.concat(comment));
+      nextId.current += 1;
+    },
+    [comments],
+  );
 
-  // const [value, setValue] = useState({
-  //   content: ''
-  // });
+  const [value, setValue] = useState({
+    content: ''
+  });
 
-  // const onChangeContent = useCallback(
-  //   (e) => {
-  //     setValue({
-  //       content: e.target.value,
-  //     });
-  //   },
-  //   [value]
-  // );
+  const onChangeContent = useCallback(
+    (e) => {
+      setValue({
+        content: e.target.value,
+      });
+    },
+    [value]
+  );
 
-  // const onSubmit = useCallback(
-  //   e => {
-  //     onInsert(value.content);
-  //     setValue({
-  //       content: ''
-  //     });
+  const onSubmit = useCallback(
+    e => {
+      onInsert(value.content);
+      setValue({
+        content: ''
+      });
 
-  //     e.preventDefault();
-  //   },
-  //   [onInsert, value],
-  // );
-  // const [showReportPopup, setshowReportPopup] = useState(false);
+      e.preventDefault();
+    },
+    [onInsert, value],
+  );
+  const [showReportPopup, setshowReportPopup] = useState(false);
 
-  // const openReportModal = () => {
-  //   setshowReportPopup(true);
-  // };
-  // const closeReportnModal = () => {
-  //   setshowReportPopup(false);
-  // };
+  const openReportModal = () => {
+    setshowReportPopup(true);
+  };
+  const closeReportnModal = () => {
+    setshowReportPopup(false);
+  };
 
   return (
     
@@ -129,8 +116,7 @@ function Detail() {
       
       <div className='Detail_Item_wrap'>
         <div className='Detail_Item_Img'>
-          {a?  <div>a 댐</div> : <div>a 안댐</div>}
-          { a? console.log(a) : null}
+          
           
           {/* <Swiper
             cssMode={true}
@@ -148,32 +134,40 @@ function Detail() {
           </Swiper> */}
 
         </div>
-        {a  ? (<div className='Item_About'>
-          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {"카테고리"}&nbsp; {'>'} &nbsp; {state.title}</div>
+        <div className='Item_About'>
+        
+        {temp ? <div>
+          {/* <div style={{marginTop:"15px"}}>작성자 : {temp.writer.nickname}</div> */}
+          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {temp.categoryName}&nbsp; {'>'} &nbsp; {temp.title}</div>
           <div className="Detail_Item_Name_Price">
-            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">{state.title}</div>
-            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{"가격"}</div>
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">{temp.item? temp.item.name : "로딩중"}</div>
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{temp.item? temp.item.price: "로딩중"}</div>
           </div>
           <div style={{ marginTop: 20 }}>
             <span>2023.08.13.16:00&nbsp;{'·'}&nbsp;</span>
             <span>조회 4&nbsp;{'·'}&nbsp;&nbsp;</span>
             <span>찜 0</span>
-            <div style={{ marginTop: 20 }}>{"내용"}</div>
+            <div style={{ marginTop: 20 }}>{temp.content}</div>
+            
           </div>
-          {/* <div className='Item_Button'>
+        </div> : <div>로딩중</div>}
+          
+
+          
+          <div className='Item_Button'>
             <button style={{ backgroundColor: "white", color: "black" }}>찜</button>
             <button onClick={() => navigate('/itemmain/detail/chat')}>쪽지보내기</button>
             <button onClick={openReportModal} variant="secondary" size="lg">❗️</button>
             <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
 
-          </div> */}
-        </div>) : <p>{"로딩중입니다"}</p>}
+          </div>
+        </div>
 
 
       </div>
       <HorizonLine />
 
-      {/* <div style={{ padding: "20px" }}>
+      <div style={{ padding: "20px" }}>
         <h3>댓글</h3>
         <form className="CommentInsert" onSubmit={onSubmit}
           style={{ display: 'flex' }}>
@@ -195,7 +189,7 @@ function Detail() {
       <div className='upload_item' style={{ position: "fixed", right: '45px', bottom: '30px' }}>
         <button style={{ borderRadius: "30px", fontSize: '20px', width: "100px", height: "50px", border: "none" }}
           onClick={() => navigate('/itemmain/upload-item')}> + 글쓰기 </button>
-      </div> */}
+      </div>
       
     </div>
   )
