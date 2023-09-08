@@ -5,7 +5,7 @@ import Do_Report from '../Report/Do_Report';
 import { useSelector } from 'react-redux';
 import HorizonLine from '../../components/HorizonLine';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ExImg1 from '../../assets/img/가디건1.jpg'
+import ExImg1 from '../../assets/img/Gadigun1.jpg'
 import ExImg2 from '../../assets/img/가디건2.png'
 import ExImg3 from '../../assets/img/가디건3.jpg'
 import ExImg4 from '../../assets/img/가디건4.jpg'

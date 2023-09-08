@@ -38,21 +38,14 @@ const Login = (props) => {
       username: username,
       password: password
     };
-
-    
-
     axios.post('http://13.125.98.26:8080/auth/login', userData)
       .then(response => {
         setMessage('로그인 성공');
-        console.log(response);
-        console.log('로그인 성공:', response.data);
-
+        console.log('로그인성공');
+       
+        //토큰부분
         const returnData = response.data;
-        console.log(returnData.result);
-
         const { accessToken, refreshToken } = returnData.result.data;
-        console.log(accessToken);
-
         login(accessToken, refreshToken);
         console.log('토큰 저장 성공: ', returnData.result.data);
 

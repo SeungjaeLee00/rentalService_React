@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavLink, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';  // 무한 스크롤용 라이브러리
 import axios, { Axios } from 'axios';
-import ExImg from '../../assets/img/가디건1.jpg';
+import ExImg from '../../assets/img/Gadigun1.jpg';
 
 import '../../App.css';
 import '../../index.css';
@@ -23,6 +23,10 @@ function ItemMain(props) {
   const retoken = localStorage.refreshToken;
   console.log(actoken);
   console.log(retoken);
+  const [file,setFile] = useState();
+  const saveFile=(e)=>{
+    setFile(e.target.files[0]);
+  }
   
 
   let dispatch = useDispatch();
@@ -77,14 +81,18 @@ function ItemMain(props) {
     title: "제목 1",
     content: "내용 1",
     categoryName: "보드게임",
+    itemCreateRequestDto : item,
     multipartFiles: ExImg
   };
 
   const formData = new FormData()
   formData.append('title',"hello");
-  formData.append('content',"file");
+  formData.append('content',"임시데이터");
   formData.append('categoryName', "보드게임");
-  formData.append('multipartFiles', ExImg);
+  formData.append('itemCreateRequestDto.name', item.name);
+  formData.append('itemCreateRequestDto.price', item.price);
+  formData.append('itemCreateRequestDto.quantity', item.quantity);
+  formData.append('multipartFiles', file);
   console.log(formData);
   
   // const value=[{
@@ -121,7 +129,6 @@ function ItemMain(props) {
         axios.post('http://13.125.98.26:8080/posts', formData ,{
           headers : { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${actoken}`},
           headers: {Auth: retoken},
-          
         })
         .then(response=>{
           console.log("성공");
@@ -131,6 +138,8 @@ function ItemMain(props) {
         })
       }}
       >게시물생성</button>
+
+      <input type='file' onChange={saveFile}></input>
 
       <button onClick={()=>{
         axios.get('http://13.125.98.26:8080/members/my-profile',{
