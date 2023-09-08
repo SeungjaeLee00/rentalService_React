@@ -13,73 +13,61 @@ import { additem } from '../../store';
 import { ConnectingAirportsOutlined } from '@mui/icons-material';
 
 const Upload_Item = () => {
-  let dispatch=useDispatch();
-  let itemimage, title, price, contents, count;
+  let dispatch = useDispatch();
+  
+
+  const actoken = localStorage.accessToken;
+  const retoken = localStorage.refreshToken;
 
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  let [itemimg, setItemImg] = useState("");
+  const [file, setFile] = useState();
   const [itemtitle, setItemTitle] = useState('');
-  const [itemcategory, setItemCategory] = useState('');
-  const [itemprice, setItemPrice]= useState('');
   const [itemcontent, setItemContent] = useState('');
-  const [itemcount, setItemCount] = useState('');
+  const [itemcategoryName, setItemCategoryName] = useState('');
+  const [itemname, setItemName] = useState('');
+  const [itemprice, setItemPrice] = useState();
+  const [itemquantity, setItemQuantity] = useState();
 
-
-  // const saveBoard = async () => {
-  //   await axios.post(`//localhost:3000/board`, board).then((res) => {
-  //     alert('등록되었습니다.');
-  //     navigate('/itemmain');
-  //   });
-  // };
-
-  // const saveBoard = (event) => {
-  //   event.preventDefault();
-
-  //   const postData = {
-  //     // title: title,
-  //     // content: content
-  //   };
-
-  //   axios.post('http://13.125.98.26:8080/posts', postData)
-  //     .then(response => {
-  //       setMessage('게시물이 성공적으로 생성되었습니다.');
-  //       if ((response.status = 201)) {
-  //         return navigate("/itemmain");
-  //       }
-  //     })
-
-  //     .catch(error => {
-  //       console.error('게시물 생성 실패:', error);
-  //       setMessage('게시물 생성에 실패하였습니다.');
-  //     });
-  // };
-
-
-
-  const setPreViewImg = (event) => {
-    var reader = new FileReader();
-
-    reader.onload = function (event) {
-      setItemImg(event.target.result);
-    };
-
-    reader.readAsDataURL(event.target.files[0]);
+  const saveFile = (e) => {
+    setFile(e.target.files[0]);
   }
+  const saveTitle = (e) => {
+    setItemTitle(e.target.value);
+  }
+  const saveContent = (e) => {
+    setItemContent(e.target.value);
+  }
+  const saveCategory = (e) => {
+    setItemCategoryName(e.target.value);
+  }
+  const saveName = (e) => {
+    setItemName(e.target.value);
+  }
+  const savePrice = (e) => {
+    setItemPrice(e.target.value);
+  }
+  const saveQuantity = (e) => {
+    setItemQuantity(e.target.value);
+  }
+  //사용자의 데이터를 서버에 전달하기 위해 Form형식으로 데이터를 생성
+  const formData = new FormData();
+  formData.append('title', itemtitle);
+  formData.append('content', itemcontent);
+  formData.append('categoryName', itemcategoryName);
+  formData.append('itemCreateRequestDto.name', itemname);
+  formData.append('itemCreateRequestDto.price', itemprice);
+  formData.append('itemCreateRequestDto.quantity', itemquantity);
+  formData.append('multipartFiles', file);
+  
+
 
   if (!isAuthenticated) {
-    navigate('/loginpage');
+    window.location.replace("/loginpage")
   }
 
   return (
     <div>
-      {/* <button onClick={()=>{
-        console.log(itemtitle);
-        console.log(itemcategory);
-        console.log(itemcontent);
-        console.log(itemcount);
-        console.log(itemprice);
-      }}>데이터확인</button> */}
       {isAuthenticated ? (
 
         <div style={{ marginTop: "80px", marginLeft: "110px", marginRight: "110px", marginBottom: "80px" }}>
@@ -93,13 +81,7 @@ const Upload_Item = () => {
           <div style={{ display: "flex" }}>
             <h5>상품이미지</h5>
             <p style={{ color: 'red' }}>*</p>
-            <img src={itemimg} style={{ maxWidth: "500px", marginLeft: "40px" }}></img>
-            <input
-              type="file"
-              id="image"
-              accept="img/*"
-              value={itemimage}
-               />
+            <input type='file' onChange={saveFile} />
           </div>
 
           <br />
@@ -112,12 +94,8 @@ const Upload_Item = () => {
             <br />
             <input
               type="text"
-              name="title"
-              placeholder="  상품 제목을 입력해주세요."
-              value={title}
-              onChange={(e)=>{
-                setItemTitle(e.target.value);
-              }}
+              placeholder="  게시글의 제목을 입력해주세요."
+              onChange={saveTitle}
               style={{
                 background_color: "transparent",
                 border: "2px solid rgba(0, 0, 0, 0.23)",
@@ -133,21 +111,21 @@ const Upload_Item = () => {
             <h5>카테고리</h5>
             <p style={{ color: 'red' }}>*</p>
             <FormControl sx={{ minWidth: 200, marginLeft: " 55px" }}>
-              <NativeSelect 
-                onChange={(e)=>{setItemCategory(e.target.value)}}
+              <NativeSelect
+                onChange={saveCategory}
                 defaultValue={"none"}
                 inputProps={{
                   name: "category",
                   id: "uncontrolled-native",
                 }}
               >
-                
-                <option onClick={()=>{setItemCategory("가전제품")}} value={"가전제품"}>가전제품</option>
-                <option onClick={()=>{setItemCategory("생활용품")}} value={"생활용품"}>생활용품</option>
-                <option onClick={()=>{setItemCategory("악기")}} value={"악기"}>악기</option>
-                <option onClick={()=>{setItemCategory("완구")}} value={"완구"}>완구</option>
-                <option onClick={()=>{setItemCategory("의류")}} value={"의류"}>의류</option>
-                <option onClick={()=>{setItemCategory("기타")}} value={"기타"}>기타</option>
+
+                <option onClick={() => { saveCategory("가전제품") }} >가전제품</option>
+                <option onClick={() => { saveCategory("생활용품") }} >생활용품</option>
+                <option onClick={() => { saveCategory("악기") }} >악기</option>
+                <option onClick={() => { saveCategory("완구") }} >완구</option>
+                <option onClick={() => { saveCategory("의류") }} >의류</option>
+                <option onClick={() => { saveCategory("기타") }} >기타</option>
               </NativeSelect>
             </FormControl>
           </div>
@@ -157,17 +135,35 @@ const Upload_Item = () => {
           <br />
 
           <div style={{ display: "flex" }}>
+            <h5>상품이름</h5>
+            <p style={{ color: 'red' }}>*</p>
+            <br />
+            <input
+              type="text"
+              placeholder="상품의 이름을 입력해주세요"
+
+              onChange={saveName}
+              style={{
+                background_color: "transparent",
+                border: "2px solid rgba(0, 0, 0, 0.23)",
+                borderRadius: "7px", marginLeft: "80px",
+                width: "650px"
+              }}
+            />
+          </div>
+
+          <HorizonLine />
+          <br />
+
+          <div style={{ display: "flex" }}>
             <h5>가격</h5>
             <p style={{ color: 'red' }}>*</p>
             <br />
             <input
               type="text"
-              name="price"
               placeholder="  ₩ 숫자만 입력해주세요."
-              value={price}
-              onChange={(e)=>{
-                setItemPrice(e.target.value);
-              }}
+
+              onChange={savePrice}
               style={{
                 background_color: "transparent",
                 border: "2px solid rgba(0, 0, 0, 0.23)",
@@ -189,11 +185,9 @@ const Upload_Item = () => {
               name="contents"
               cols="90"
               rows="5"
-              value={contents}
+
               placeholder="  여러 장의 상품 사진과 구입 연도, 브랜드, 사용감, 하자 유무 등 대여자에게 필요한 정보를 꼭 포함해주세요. (10자 이상)&#13;&#10;"
-              onChange={(e)=>{
-                setItemContent(e.target.value);
-              }}
+              onChange={saveContent}
               style={{
                 background_color: "transparent",
                 border: "2px solid rgba(0, 0, 0, 0.23)",
@@ -213,12 +207,9 @@ const Upload_Item = () => {
             <br />
             <input
               type="text"
-              name="count"
-              placeholder="  1"
-              value={count}
-              onChange={(e)=>{
-                setItemCount(e.target.value);
-              }}
+
+              placeholder='  1'
+              onChange={saveQuantity}
               style={{
                 background_color: "transparent",
                 border: "2px solid rgba(0, 0, 0, 0.23)",
@@ -229,10 +220,19 @@ const Upload_Item = () => {
           </div>
 
           <button className='buttonstyle' style={{ fontSize: '20px', width: "100px", height: "50px" }}
-            onClick={()=>{
-              let temp = { id :4, title:itemtitle, category:itemcategory, price:itemprice, content:itemcontent, date:"2023-08-31", state:"판매중"}
-              dispatch(additem(temp));
-              navigate('/itemmain')
+            onClick={() => {
+              axios.post('http://13.125.98.26:8080/posts', formData, {
+                headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${actoken}` },
+                headers: { Auth: retoken },
+              })
+                .then(response => {
+                  console.log("성공");
+                })
+                .catch(error => {
+                  console.log(error.response.data.result);
+                })
+
+              navigate("/");
             }}> 등록하기 </button>
         </div>
       ) : (
