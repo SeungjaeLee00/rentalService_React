@@ -36,27 +36,21 @@ function Detail() {
   console.log(id);
   const state = useLocation();
 
-  const [temp,setTemp] = useState();
-   
-  // let temp2;
-  // axios.get('http://13.125.98.26:8080/posts/'+id)
-  // .then(response=>{
-  //   console.log(response);
-  //   temp2=response;
-  // })
-  // console.log(item);
-
+  const [item,setItem] = useState();
   useEffect(()=>{
     axios.get('http://13.125.98.26:8080/posts/'+id)
     .then(response=>{
       console.log("성공");
       console.log(response.data.result.data);
-      setTemp(response.data.result.data);
+      setItem(response.data.result.data);
     })
   },[])
   
+  const likeadd = () =>{
+    axios.post('http://13.125.98.26:8080/posts/'+id+'/likes')
+  }
   
-  
+
   let navigate = useNavigate();
   const [comments, setComments] = useState([
     { id: 1, content: 'I like it!' }
@@ -136,18 +130,18 @@ function Detail() {
         </div>
         <div className='Item_About'>
         
-        {temp ? <div>
-          {/* <div style={{marginTop:"15px"}}>작성자 : {temp.writer.nickname}</div> */}
-          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {temp.categoryName}&nbsp; {'>'} &nbsp; {temp.title}</div>
+        {item ? <div>
+          {/* <div style={{marginTop:"15px"}}>작성자 : {item.writer.nickname}</div> */}
+          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {item.categoryName}&nbsp; {'>'} &nbsp; {item.title}</div>
           <div className="Detail_Item_Name_Price">
-            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">{temp.item? temp.item.name : "로딩중"}</div>
-            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{temp.item? temp.item.price: "로딩중"}</div>
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">{item.item? item.item.name : "로딩중"}</div>
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{item.item? item.item.price: "로딩중"}</div>
           </div>
           <div style={{ marginTop: 20 }}>
             <span>2023.08.13.16:00&nbsp;{'·'}&nbsp;</span>
             <span>조회 4&nbsp;{'·'}&nbsp;&nbsp;</span>
-            <span>찜 0</span>
-            <div style={{ marginTop: 20 }}>{temp.content}</div>
+            <span>찜 {item.likes}</span>
+            <div style={{ marginTop: 20 }}>{item.content}</div>
             
           </div>
         </div> : <div>로딩중</div>}
@@ -155,7 +149,18 @@ function Detail() {
 
           
           <div className='Item_Button'>
-            <button style={{ backgroundColor: "white", color: "black" }}>찜</button>
+            <button onClick={()=>{
+              axios.post('http://13.125.98.26:8080/posts/'+id+'/likes', null,{
+                headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${localStorage.accessToken}` },
+                headers: { Auth: localStorage.refreshToken},
+              })
+              .then(response=>{
+                console.log("성공");
+              })
+              .catch(error=>{
+                console.log(error.response.data.result);
+              })
+            }} style={{ backgroundColor: "white", color: "black" }}>찜</button>
             <button onClick={() => navigate('/itemmain/detail/chat')}>쪽지보내기</button>
             <button onClick={openReportModal} variant="secondary" size="lg">❗️</button>
             <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
