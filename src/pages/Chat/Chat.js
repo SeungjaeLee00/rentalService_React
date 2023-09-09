@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import './ChatForm.css';
 import { useAuth } from '../../components/AuthContext';
 import axios from 'axios';
 
 function Chat() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const actoken = localStorage.accessToken;
+  const retoken = localStorage.refreshToken;
+  const { isAuthenticated } = useAuth();
 
-  let navigate = useNavigate();
-  const [content, setContent] = useState('');
   const [receiveMember, setReceiveMember] = useState('');
-  const { accessToken, isAuthenticated } = useAuth();
+  const [content, setContent] = useState('');
+
+  const handleReceiveMemberChange = (event) => {
+    setReceiveMember(event.target.value);
+  };
 
   const handleContentChange = (event) => {
     setContent(event.target.value);
   };
-  const handleReciveMemberChange = (event) => {
-    setReceiveMember(event.target.value);
-  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,14 +34,17 @@ function Chat() {
         navigate('/loginpage');
         return;
       }
-      const response = await axios.post('http://13.125.98.26:8080/messages', dataToSend, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      console.log('메세지 전송 성공: ', response.data);
-      if (response.status === 201) {
-        console.log('메세지: ', response.data);
+      if (isAuthenticated) {
+        const response = await axios.post('http://13.125.98.26:8080/messages', dataToSend, {
+          headers: {
+            Authorization: `Bearer ${actoken}`,
+            Auth: retoken
+          },
+        });
+        console.log('메세지 전송 성공: ', response.data);
+        if (response.status === 201) {
+          console.log('메세지: ', response.data);
+        }
       }
     } catch (error) {
       console.error('메세지 전송 실패:', error);
@@ -53,9 +60,9 @@ function Chat() {
       <form onSubmit={handleSubmit} className="chat-form">
         <input
           type="text"
-          placeholder="보낼 사람"
+          placeholder="받는 사람"
           value={receiveMember}
-          onChange={handleReciveMemberChange}
+          onChange={handleReceiveMemberChange}
         />
         <input
           type="text"
@@ -66,7 +73,7 @@ function Chat() {
         <button type="submit"> 보내기 </button>
       </form>
 
-      <Link className="to-chats" to="/my-page/chats" > 쪽지함 바로가기 </Link>
+      <Link className="to-chats" to="/my-page/chats">쪽지함 바로가기</Link>
     </div>
   );
 }

@@ -24,3 +24,12 @@
 .message-list li {
   margin-bottom: 10px;
 }
+
+.message-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.message-info-item {
+  margin-right: 20px; 
+}
