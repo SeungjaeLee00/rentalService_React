@@ -18,6 +18,11 @@
 
 }
 
+.body{
+  padding-top: 75px;
+}
+
+
 .page-container{
   
   max-width:1900px;

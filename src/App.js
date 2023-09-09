@@ -33,6 +33,7 @@ function App() {
       <ReNavBar/>
       {/* <NavBar /> */}
       {/* <Router> */}
+      <div className='body'>
       <AuthProvider>
         <Routes>
           <Route exact path="/" element={<ItemMain />} />
@@ -67,6 +68,7 @@ function App() {
          
         </Routes>
       </AuthProvider>
+      </div>
       {/* </Router> */}
     </div>
   );

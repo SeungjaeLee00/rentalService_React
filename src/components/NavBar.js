@@ -35,7 +35,7 @@ function NavBar() {
       key={false} expand={false} className="bar">
       <Container fluid>
 
-        <Navbar.Brand style={{ fontSize: "30px", marginTop:"25px", fontWeight:"bold" }} href="/">뭐든빌리개</Navbar.Brand>
+        <Navbar.Brand style={{ fontSize: "30px", marginTop:"25px",  fontWeight:"bold" }} href="/">뭐든빌리개</Navbar.Brand>
         <NavDropdown className='nav-category'
           title="카테고리"
           id={`offcanvasNavbarDropdown-expand-${false}`}
