@@ -31,6 +31,7 @@ function ItemMain(props) {
   useEffect(()=>{
     axios.get('/posts')
    .then(response=>{
+    console.log(response.data.result.data.postList);
     setStore(response.data.result.data.postList);
    })
   },[])

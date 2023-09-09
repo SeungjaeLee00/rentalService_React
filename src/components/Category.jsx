@@ -4,16 +4,18 @@ import useDetectClose from "../hooks/useDetectClose";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Category() {
     const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
     const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
+    const navigate = useNavigate();
     
     const [category, setCategory] = useState();
     useEffect(()=>{
         axios.get('/category')
          .then(response=>{
-            console.log("카테고리 axios성공");
+            console.log("메인 카테고리 axios성공");
             console.log(response.data.result.data[1].children);
             setCategory(response.data.result.data[1].children);
          })
@@ -36,7 +38,7 @@ export default function Category() {
           <Menu isDropped={myPageIsOpen}>
             <Ul>
             {category ? category.map(data=>(
-                <Li keys={data.id}> <LinkWrapper href="">{data.name}</LinkWrapper></Li>
+                <Li keys={data.id}> <LinkWrapper onClick={()=>{navigate("category/"+data.id, {state:data.name})}}>{data.name}</LinkWrapper></Li>
             )) : null}
             </Ul>
           </Menu>
