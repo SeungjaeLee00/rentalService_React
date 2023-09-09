@@ -3,7 +3,7 @@ import { NavLink, Navigate, useNavigate, useSearchParams } from 'react-router-do
 import { useInView } from 'react-intersection-observer';  // 무한 스크롤용 라이브러리
 import axios, { Axios } from 'axios';
 import ExImg from '../../assets/img/Gadigun1.jpg';
-
+import Logo from '../../assets/img/logo2.PNG';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './SearchBar';
@@ -17,26 +17,26 @@ import { useAuth } from '../../components/AuthContext';
 
 
 function ItemMain(props) {
-  
+
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
-  
-  
- 
-  
+
+
+
+
   //store 변수에 Redux데이터를 가져와서 저장
-  let [store,setStore] = useState([]);
-  
+  let [store, setStore] = useState([]);
+
   //package.json에서 proxy설정했기 때문에 /posts만 사용하여도 댐
-  useEffect(()=>{
+  useEffect(() => {
     axios.get('/posts')
-   .then(response=>{
-    console.log(response.data.result.data.postList);
-    setStore(response.data.result.data.postList);
-   })
-  },[])
-  
-  
+      .then(response => {
+        console.log(response.data.result.data.postList);
+        setStore(response.data.result.data.postList);
+      })
+  }, [])
+
+
   const [searchParams, setSearchParams] = useSearchParams();
   const id = searchParams.get("search");
 
@@ -72,18 +72,27 @@ function ItemMain(props) {
 
 
   const [searchdata, setSearchData] = useState([]);
-  
+
 
 
   const [view, setView] = useState(false);
   return (
     <div className='page-container'>
-     
+
       <div className='dashboard'>
-        <h1>뭐든빌리개는</h1>
-          <h1>언제어디서든지 상품을 대여해주고 받을 수 있는 서비스입니다. </h1>
+        <div className='dashboard-right'>
+          <div className='dashboard-title'>
+            <h1 style={{ fontWeight: "bold", fontSize: "50px" }}>뭐든빌리개는</h1>
+          </div>
+          <div style={{ marginTop: "20px" }} className='dashboard-decoration'>
+            <h1>언제어디서든지 상품을 <br /> 대여해주고 받을 수 있는 서비스입니다. </h1>
+          </div>
+        </div>
+        <div className='dashboard-left'>
+          <img style={{width:"350px", height:"200px", paddingBottom:"30px", paddingLeft:"100px", marginLeft:"100px"}} src={Logo}></img>
+        </div>
       </div>
-    
+
       {/* <button onClick={()=>{
         axios.get('http://13.125.98.26:8080/members/my-profile',{
           headers : { Authorization: `Bearer ${actoken}`},
@@ -102,8 +111,8 @@ function ItemMain(props) {
       </div>
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
-        
-        {currentPosts ?( <Posts currentPosts={currentPosts()} loading={loading} ItemIndex={ItemIndex} search={search} category={category} /> ) : (<div>로딩중입니다</div>)}
+
+        {currentPosts ? (<Posts currentPosts={currentPosts()} loading={loading} ItemIndex={ItemIndex} search={search} category={category} />) : (<div>로딩중입니다</div>)}
 
       </div>
 
