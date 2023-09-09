@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes, Router } from 'react-router-dom';
-import './App.css';
+import './style/App.css';
 import { AuthProvider } from './components/AuthContext';
 
 import NavBar from './components/NavBar';
@@ -24,12 +24,14 @@ import AllTrade from './pages/Trade/AllTrade';
 import My_Review from './pages/Review/My_Review';
 import Write_Review from './pages/Review/Write_Review';
 import Category from './pages/about_Item/Category';
+import ReNavBar from './components/ReNavBar';
 
 
 function App() {
   return (
     <div className="root-wrap">
-      <NavBar />
+      <ReNavBar/>
+      {/* <NavBar /> */}
       {/* <Router> */}
       <AuthProvider>
         <Routes>

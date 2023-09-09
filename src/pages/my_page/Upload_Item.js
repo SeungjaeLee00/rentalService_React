@@ -5,7 +5,7 @@ import NativeSelect from "@mui/material/NativeSelect";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 
-import '../../App.css';
+
 import HorizonLine from '../../components/HorizonLine';
 import { useAuth } from '../../components/AuthContext';
 import { useDispatch, useSelector } from 'react-redux';

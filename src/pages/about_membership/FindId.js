@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import '../../App.css'
+
 
 function FindId() {
   const about = "등록된 휴대폰 번호를 인증하시면 \n 사용중인 계정의 아이디를 알려드립니다."  

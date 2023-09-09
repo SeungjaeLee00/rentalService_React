@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import KaKaoLogin from '../../socialLogin/KakaoLogin';
 import NaverLogin from '../../socialLogin/NaverLogin';
 import GoogleLogin from '../../socialLogin/GoogleLLogIn';
-import '../../App.css';
 import { registerUser } from '../about_membership/user_action';
 import { useNavigate } from 'react-router-dom';
 import HorizonLine from '../../components/HorizonLine';

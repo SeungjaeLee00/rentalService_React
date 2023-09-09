@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 // import {Link} from 'react-router-dom'
 import axios from 'axios';
 
-import '../../App.css'
 
 function Find_pw() {
 

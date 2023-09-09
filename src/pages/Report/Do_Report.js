@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../../style/modal.css';
-import '../../App.css';
 import { Button, Form, FormGroup } from 'reactstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';

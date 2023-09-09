@@ -1,6 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { Await, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
-import '../../App.css';
 import Do_Report from '../Report/Do_Report';
 import { useSelector } from 'react-redux';
 import HorizonLine from '../../components/HorizonLine';
