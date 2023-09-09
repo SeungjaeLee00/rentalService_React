@@ -151,13 +151,17 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   width:200px;
-  
+  margin-top:10px;
 `;
 
 const LinkWrapper = styled.a`
   font-size: 25px;
   text-decoration: none;
   color: gray;
-  
+
+  &:hover{
+    color:blue;
+    cursor:pointer;
+  }
 `;
 
