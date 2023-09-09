@@ -36,16 +36,14 @@ const Do_Report = (props) => {
           Authorization: `Bearer ${actoken}`,
           Auth: retoken
         },
-        // headers: { Auth: retoken },
       });
-      
+      console.log('신고 전송 성공: ', response.data);
       if (response.status === 201) {
-        console.log('신고 성공: ', response.data);
+        console.log('신고: ', response.data);
         
       }
     } catch (error) {
       console.error('신고 실패:', error);
-
       if (error.response && error.response.status === 401) {
         console.error('AccessToken이 만료되었습니다. 로그인 페이지로 이동합니다.');
         navigate('/loginpage');
