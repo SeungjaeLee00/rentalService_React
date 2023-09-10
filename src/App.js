@@ -23,8 +23,12 @@ import Do_Report from './pages/Report/Do_Report'
 import AllTrade from './pages/Trade/AllTrade';
 import My_Review from './pages/Review/My_Review';
 import Write_Review from './pages/Review/Write_Review';
+
 import Category from './pages/about_Item/Category';
 import ReNavBar from './components/ReNavBar';
+
+import All_Review from './pages/Review/All_Review';
+
 
 
 function App() {
@@ -61,6 +65,7 @@ function App() {
 
           <Route exact path='/report' element={<Do_Report />} />
           
+          <Route exact path='/reviews' element={<All_Review />} />
           <Route exact path='/reviews/my-review' element={<My_Review />} />
           <Route exact path='/reviews/write-review' element={<Write_Review />} />
 

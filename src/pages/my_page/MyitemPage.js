@@ -40,16 +40,4 @@ function MyitemPage() {
   );
 };
 
-// function Card(props){
-//   return (
-//     <div className="col-md-4" style={{ display: 'flex', flexDirection: 'row', padding: '20px'}}>
-//       <img src={'https://codingapple1.github.io/shop/shoes' + props.i + '.jpg'} width="50%" />
-//       <div className='etc' style={{marginTop: "40px"}}>
-//         <h4>3번 신은 신발</h4>
-//         <p>신발 빌려드려요</p>
-//       </div>
-//     </div>
-//   )
-// }
-
 export default MyitemPage;

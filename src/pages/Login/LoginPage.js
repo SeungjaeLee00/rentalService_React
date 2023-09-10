@@ -50,6 +50,7 @@ function LoginPage(props) {
 
                 if ((response.status = 200)) {
                     window.location.replace("/");
+
                 }
             })
             .catch(error => {
