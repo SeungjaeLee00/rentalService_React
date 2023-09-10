@@ -73,11 +73,9 @@ const Do_Report = (props) => {
                     id: 'reportType',
                   }}
                 >
-                  <option value="">선택</option>
-                  <option value="무엇을">무엇을</option>
-                  <option value="신고하지">신고하지</option>
-                  <option value="아이디어 좀;">아이디어 좀;</option>
-                  <option value="기타">기타</option>
+                  <option value="POST_REPORT">게시물 신고</option>
+                  {/* 게시물 ID */}
+                  <option value="BUG">버그</option>
                 </NativeSelect>
                 <textarea type='input' class="inputField" style={{ marginTop: "20px", height: "100px" }}
                   placeholder="  내용을 입력 해주세요." value={content} onChange={onContentHandler} />
