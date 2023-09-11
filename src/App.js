@@ -29,6 +29,10 @@ import ReNavBar from './components/ReNavBar';
 
 import All_Review from './pages/Review/All_Review';
 import MyPage from './pages/my_page/MyPage';
+import MyChange from './pages/my_page/MyChange'
+import MyPost from './pages/my_page/MyPost'
+import MyLike from './pages/my_page/MyLike'
+import MyPageTop from './components/MyPageTop';
 
 
 
@@ -70,7 +74,12 @@ function App() {
           <Route exact path='/reviews/my-review' element={<My_Review />} />
           <Route exact path='/reviews/write-review' element={<Write_Review />} />
 
-          <Route exact path="/my-page" element={<MyPage/>}/>
+          <Route exact path="/my-page" element={<MyPage/>}>
+            <Route exact path="post" element={<MyPost/>}></Route>
+            <Route exact path="like" element={<MyLike/>}></Route>
+          </Route>
+
+          <Route exact path='/my-change' element={<MyChange/>}/>
 
 
          

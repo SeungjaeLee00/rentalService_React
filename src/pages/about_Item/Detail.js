@@ -78,7 +78,7 @@ function Detail() {
   }
 
   let { id } = useParams();
-  console.log(id);
+  //console.log(id);
 
   const state = useLocation();
 
@@ -172,7 +172,7 @@ function Detail() {
           <Login open={showLoginPopup} close={closeloginModal} ></Login>
           <div className='Detail_Item_wrap'>
             <div className='Detail_Item_Img'>
-            
+             {item ? <img style={{width:"300px", height:"300px"}} src={item.links[0]}/> : null}
             </div>
             {item ? <div>
               <div className='Item_About'>
@@ -190,7 +190,7 @@ function Detail() {
 
                   <span>찜 {item.likes}</span>
                   <div style={{ marginTop: "20px" }}>{item.content}</div>
-                  <div onClick={navigate()} style={{marginTop:"20px"}} >👤{item.writer.nickname}</div>
+                  <div  style={{marginTop:"20px"}} >👤{item.writer.nickname}</div>
                   
 
                 </div>

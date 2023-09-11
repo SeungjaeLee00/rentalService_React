@@ -1,34 +1,61 @@
 import '../../style/MyPage.css'
 import HorizonLine from '../../components/HorizonLine'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { useState } from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import Nav from "../SideNav/Index";
+import MyPageTop from '../../components/MyPageTop';
 
-export default function MyPage()
+function isActive(path) {
+  return window.location.pathname.startsWith(path);
+}
+function Sidebar()
 {
-    return(
-        <div className="content">
-            <div className="mypagetop">
-                <div className="toptitle">
-                    <h1>My Page</h1>
-                </div>
-                <div className="topinfo">
-                    <div className="infoleft">
-                        <div className="name">유저닉네임</div>
-                        <p style={{marginTop:"10px"}}>회원정보수정</p>
-                    </div>
-                    <div className="inforight">
-                        <div className="userpost">
-                            <div style={{fontSize:"30px"}} className="posttitle">게시물</div>
-                            <div className="postquantity">5개</div>
-                        </div>
-                        <div className="usertrade">
-                            <div style={{fontSize:"30px"}} className="tradetitle">내거래</div>
-                            <div className="tradequantity">5개</div>
-                        </div>
-                        
-                    </div>
-                </div>
+    return (
+        <Nav>
+          <Nav.List>
+            <Nav.Item>
+              <Nav.Link to="post" active={isActive("post")}>
+                 내 게시물 조회 
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link to="like" active={isActive("like")}>
+                좋아요
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Separator />
+    
+            <Nav.Item>
+              <Nav.Link to="/back/python" active={isActive("/back")}>
+                대여해주는 상품 
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Separator />
+    
+            <Nav.Item>
+              <Nav.Link to="/help" active={isActive("/help")}>
+                대여받는 상품
+              </Nav.Link>
+            </Nav.Item>
+          </Nav.List>
+        </Nav>
+      );
+    }
+
+export default function MyPage() {
+    return (
+        <div>
+            <MyPageTop/>
+            <div className="mypagebottom">
+                <div className="bottom-leftnav"><Sidebar/></div>
+                <div className='bottom-right'><Outlet/></div>
             </div>
-            <hr/>
-            <div className="mypagebottom"></div>
+            
         </div>
     )
 }
+
+
+

@@ -31,7 +31,7 @@ function ItemMain(props) {
   useEffect(() => {
     axios.get('/posts')
       .then(response => {
-        console.log(response.data.result.data.postList);
+        //console.log(response.data.result.data.postList);
         setStore(response.data.result.data.postList);
       })
   }, [])
@@ -92,17 +92,9 @@ function ItemMain(props) {
           <img style={{width:"350px", height:"200px", paddingBottom:"30px", paddingLeft:"100px", marginLeft:"100px"}} src={Logo}></img>
         </div>
       </div>
+      <hr/>
 
-      {/* <button onClick={()=>{
-        axios.get('http://13.125.98.26:8080/members/my-profile',{
-          headers : { Authorization: `Bearer ${actoken}`},
-          headers: {Auth: retoken}
-        })
-         .then(response=>{
-          console.log("본인정보조회성공");
-          console.log(response);
-         })
-      }}>본인정보조회</button> */}
+      
 
 
 

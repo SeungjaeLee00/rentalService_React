@@ -25,7 +25,7 @@
 }
 
 .name{
-    font-size:30px;
+    font-size:50px;
 }
 
 .inforight{
@@ -40,8 +40,19 @@
     flex-direction: column;
 }
 
-.usertrade{
+.userrent{
     display:flex;
     flex-direction: column;
     margin-left:200px;
+}
+
+.userborrow{
+    display:flex;
+    flex-direction: column;
+    margin-left:200px;
+}
+
+.mypagebottom{
+    display:flex;
+    flex-direction:row;
 }
