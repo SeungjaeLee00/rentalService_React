@@ -37,7 +37,10 @@ export default function ReNavBar() {
                     {isAuthenticated ? <Link style={{ textDecoration: "none" }} onClick={handleLogout}>로그아웃</Link> :
                         <Link style={{ textDecoration: "none" }} onClick={handleLogin}>로그인/회원가입</Link>}
 
-                    <div className="mypage">마이페이지</div>
+                    {/* <div className="mypage" >마이페이지</div> */}
+                    {isAuthenticated? <Link style={{textDecoration:"none"}} to={"my-page"}>마이페이지</Link> : 
+                        <Link style={{textDecoration:"none"}} to={"/loginpage"}>마이페이지</Link>}
+                    
                 </div>
             </div>
             <div className="header-bottom">

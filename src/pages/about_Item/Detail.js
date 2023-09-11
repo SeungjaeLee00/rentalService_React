@@ -84,6 +84,8 @@ function Detail() {
 
   const [item, setItem] = useState();
   const [itemlike, setItemLike] = useState();
+
+
   useEffect(() => {
     axios.get('http://13.125.98.26:8080/posts/' + id)
       .then(response => {
@@ -91,7 +93,7 @@ function Detail() {
         console.log(response.data.result.data);
         setItem(response.data.result.data);
       })
-  }, [item])
+  }, [])
 
 
   const likeadd = () => {
@@ -170,7 +172,7 @@ function Detail() {
           <Login open={showLoginPopup} close={closeloginModal} ></Login>
           <div className='Detail_Item_wrap'>
             <div className='Detail_Item_Img'>
-
+            
             </div>
             {item ? <div>
               <div className='Item_About'>
@@ -187,7 +189,9 @@ function Detail() {
                   <span>조회 4&nbsp;{'·'}&nbsp;&nbsp;</span>
 
                   <span>찜 {item.likes}</span>
-                  <div style={{ marginTop: 20 }}>{item.content}</div>
+                  <div style={{ marginTop: "20px" }}>{item.content}</div>
+                  <div onClick={navigate()} style={{marginTop:"20px"}} >👤{item.writer.nickname}</div>
+                  
 
                 </div>
 

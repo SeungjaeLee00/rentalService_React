@@ -28,6 +28,7 @@ import Category from './pages/about_Item/Category';
 import ReNavBar from './components/ReNavBar';
 
 import All_Review from './pages/Review/All_Review';
+import MyPage from './pages/my_page/MyPage';
 
 
 
@@ -68,6 +69,8 @@ function App() {
           <Route exact path='/reviews' element={<All_Review />} />
           <Route exact path='/reviews/my-review' element={<My_Review />} />
           <Route exact path='/reviews/write-review' element={<Write_Review />} />
+
+          <Route exact path="/my-page" element={<MyPage/>}/>
 
 
          
