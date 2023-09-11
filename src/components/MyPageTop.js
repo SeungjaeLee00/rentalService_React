@@ -4,13 +4,13 @@ import axios from 'axios'
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
-export default function MyPageTop()
+export default function MyPageTop(props)
 {
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
 
     const [myinfo, setMyInfo] = useState();
-    const [mypost, setMyPost] = useState();
+    
 
     useEffect(() => {
         //본인정보 조회 api
@@ -26,19 +26,7 @@ export default function MyPageTop()
             .catch(error => {
                 console.log(error.response.data.result);
             })
-            //본인작성게시글 api
-            axios.get('/posts/my', {
-                headers: { Authorization: `Bearer ${actoken}` },
-                headers: { Auth: retoken }
-            })
-                .then(response => {
-                    console.log("본인작성게시글조회성공");
-                    console.log(response.data.result.data);
-                    setMyPost(response.data.result.data);
-                })
-                .catch(error => {
-                    console.log(error.response.data.result);
-                })
+            
 
             // //내가 대여해주는(빌려주는) 거래 내역 조회 
             // axios.get('/trades/rend-item', {
@@ -72,7 +60,7 @@ export default function MyPageTop()
     }, [])
     return (
         <div className="content">
-            {myinfo && mypost ? <div className="mypagetop">
+            {myinfo && props.mypost ? <div className="mypagetop">
 
                 <div className="toptitle">
                     <h1>My Page</h1>
@@ -85,7 +73,7 @@ export default function MyPageTop()
                     <div className="inforight">
                         <div className="userpost">
                             <div style={{ fontSize: "30px" }} className="title">게시물</div>
-                            <div style={{marginTop:"15px"}} className="quantity">{mypost.totalElements}개</div>
+                            <div style={{marginTop:"15px"}} className="quantity">{props.mypost.totalElements}개</div>
                         </div>
                         <div className="userrent">
                             <div style={{ fontSize: "30px" }} className="title">대여해주는 상품</div>

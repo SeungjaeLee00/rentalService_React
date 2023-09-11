@@ -7,6 +7,7 @@ const List = styled.ul`
   padding: 0;
   padding-left: 20px;
   list-style: none;
+  font-size:20px;
 `;
 
 function NavList({ children, expanded = true }) {

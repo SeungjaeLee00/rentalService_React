@@ -32,8 +32,8 @@ import MyPage from './pages/my_page/MyPage';
 import MyChange from './pages/my_page/MyChange'
 import MyPost from './pages/my_page/MyPost'
 import MyLike from './pages/my_page/MyLike'
-import MyPageTop from './components/MyPageTop';
-
+import MyRent from './pages/my_page/MyRent';
+import MyBorrow from './pages/my_page/MyBorrow';
 
 
 function App() {
@@ -77,6 +77,8 @@ function App() {
           <Route exact path="/my-page" element={<MyPage/>}>
             <Route exact path="post" element={<MyPost/>}></Route>
             <Route exact path="like" element={<MyLike/>}></Route>
+            <Route exact path='rent' element={<MyRent/>}></Route>
+            <Route exact path='borrow' element={<MyBorrow/>}></Route>
           </Route>
 
           <Route exact path='/my-change' element={<MyChange/>}/>

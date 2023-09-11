@@ -21,7 +21,7 @@ const Link = styled.a`
     `}
 
   &:hover {
-    background: #ff8906;
+    background: white;
     color: blue;
     transform: translateY(-2px);
     transition: 1s;
