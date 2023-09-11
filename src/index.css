@@ -22,7 +22,6 @@
   padding-top: 75px;
 }
 
-
 .page-container{
   
   max-width:1900px;
@@ -31,6 +30,7 @@
   /* border: 1px solid red; */
   /* text-align: center; -> 가운데정렬*/ 
 }
+
 .page-container-main{
   max-width:1400px;
   margin:0 auto;
@@ -45,12 +45,12 @@
 
 .Detail_Item_wrap{
   display:flex;
-  justify-content: center;
+  justify-content: right;
   /* border: 1px solid green; */
 }
 
 .Detail_Item_Img{
-  width:400px;
+  /* width:400px; */
   height:400px;
   margin-right:100px;
   /* border: 1px solid blue; */
@@ -58,7 +58,9 @@
 
 .Item_About{
   /* border:1px solid rebeccapurple; */
-  width:400px;
+  width:530px;
+  margin-right: 50px;
+  /* margin-left: 50px; */
   display:flex;
   flex-direction:column;
 }

@@ -117,7 +117,6 @@ function Edit_membership() {
 
       {isEditing ? (
         <div>
-          {/* <p>ID: {editedData.id}</p> */}
           <label htmlFor="username">이메일:</label>
           <input
             type="text"

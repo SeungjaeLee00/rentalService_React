@@ -28,6 +28,7 @@ import Category from './pages/about_Item/Category';
 import ReNavBar from './components/ReNavBar';
 
 import All_Review from './pages/Review/All_Review';
+import Profile from './pages/my_page/Profile';
 
 
 
@@ -49,6 +50,8 @@ function App() {
 
           <Route exact path="/found-id" element={<FoundId />} />
           <Route exact path="/loginpage" element={<LoginPage />} />
+
+          <Route exact path='/itemmain/detail/profile' element={<Profile />} />
 
           
           <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
