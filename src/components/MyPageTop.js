@@ -19,8 +19,8 @@ export default function MyPageTop(props)
             headers: { Auth: retoken }
         })
             .then(response => {
-                console.log("본인정보조회성공");
-                console.log(response.data.result.data);
+                // console.log("본인정보조회성공");
+                // console.log(response.data.result.data);
                 setMyInfo(response.data.result.data);
             })
             .catch(error => {

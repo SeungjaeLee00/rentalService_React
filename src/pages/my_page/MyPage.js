@@ -58,7 +58,7 @@ export default function MyPage() {
             headers: { Auth: retoken }
         })
             .then(response => {
-                console.log("본인작성게시글조회성공");
+                // console.log("본인작성게시글조회성공");
                 setMyPost(response.data.result.data);
             })
             .catch(error => {

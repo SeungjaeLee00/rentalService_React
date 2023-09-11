@@ -22,7 +22,7 @@ const Posts = (props) => {
       return data
     }
   })*/
-
+  const imgheadurl="https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post";
   return (
     
     items?  items.slice(0, props.ItemIndex).map(a => (
@@ -30,7 +30,7 @@ const Posts = (props) => {
         navigate('/itemmain/detail/' + a.id, { state: a });
       }}>
         <div className='Item-Img'>
-          <img src={a_img[a.id]} style={{ width: 200, height: 200 }} />
+          <img src={"https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/0070d800-28f2-4268-8394-e115e0bcec85.jpg"} style={{ width: 200, height: 200 }} />
         </div>
         <div className='Item-Information-Wrap'>
           <div className='Item-Name-Price-Date-Wrap'>

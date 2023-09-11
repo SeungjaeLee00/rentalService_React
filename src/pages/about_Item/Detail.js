@@ -89,9 +89,10 @@ function Detail() {
   useEffect(() => {
     axios.get('http://13.125.98.26:8080/posts/' + id)
       .then(response => {
-        console.log("성공");
+        console.log("useEffect성공");
         console.log(response.data.result.data);
         setItem(response.data.result.data);
+        setItemLike(response.data.result.data.likes);
       })
   }, [])
 
@@ -172,7 +173,7 @@ function Detail() {
           <Login open={showLoginPopup} close={closeloginModal} ></Login>
           <div className='Detail_Item_wrap'>
             <div className='Detail_Item_Img'>
-             {item ? <img style={{width:"300px", height:"300px"}} src={item.links[0]}/> : null}
+             {item ? <img style={{width:"300px", height:"300px"}} /> : null}
             </div>
             {item ? <div>
               <div className='Item_About'>
@@ -185,19 +186,15 @@ function Detail() {
                   <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{item.item ? item.item.price : "로딩중"}</div>
                 </div>
                 <div style={{ marginTop: 20 }}>
-                  <span>2023.08.13.16:00&nbsp;{'·'}&nbsp;</span>
-                  <span>조회 4&nbsp;{'·'}&nbsp;&nbsp;</span>
+                  <span>2023.08.13.16:00&nbsp;</span>
+                  
 
-                  <span>찜 {item.likes}</span>
+            
                   <div style={{ marginTop: "20px" }}>{item.content}</div>
                   <div  style={{marginTop:"20px"}} >👤{item.writer.nickname}</div>
                   
 
                 </div>
-
-
-
-
                 <div className='Item_Button'>
                   <button onClick={() => {
                     axios.post('http://13.125.98.26:8080/posts/' + id + '/likes', null, {
@@ -206,15 +203,17 @@ function Detail() {
                     })
                       .then(response => {
                         console.log("성공");
+                        
                         let copy = item;
-                        console.log(copy);
                         copy.likes = 1;
                         setItem(copy);
+                        {itemlike ? setItemLike(false) : setItemLike(true)}
+                        
                       })
                       .catch(error => {
                         console.log(error.response.data.result);
                       })
-                  }} style={{ backgroundColor: "white", color: "black" }}>{item.likes ? <span>♥</span> : <span>♡</span>}</button>
+                  }}   style={{ backgroundColor: "white", color: "black" }}>{itemlike ? <span>♥</span> : <span>♡</span>}</button>
                   <button onClick={() => navigate('/itemmain/detail/chat')}>쪽지보내기</button>
                   <button onClick={openReportModal} variant="secondary" size="lg">❗️</button>
                   <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
