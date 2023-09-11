@@ -65,10 +65,29 @@
     justify-content: center;
     align-items:center;
 }
+.post-bottom thead{
+    border-top: 1px solid black;
+    font-size: 18px;
+}
+.post-bottom th,td{
+    border-bottom: 1px solid black;
+    padding:20px;
+    padding-left:30px;
+}
+.post-bottom th{
+    padding-left:55px;
+}
+.post-bottom td{
+    height:100px;
+    padding-top: 30px;
+    padding-left: 55px;
+}
+
+.post-bottom tbody tr:hover{
+    background-color: rgb(250, 250, 250);
+}
 
 .bottom-right{
     display:flex;
     flex-direction:column;
-    
-    
 }
