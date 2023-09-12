@@ -8,6 +8,7 @@ export default function MyChat() {
     const retoken = localStorage.refreshToken;
 
     const [message, setMessage] = useState();
+    const [msgid, setMsgId] = useState();
 
     useEffect(() => {
         axios.get("/messages/received", {
@@ -25,6 +26,8 @@ export default function MyChat() {
             })
     }, [])
 
+
+    //받은쪽지 클릭 실행되는 함수 
     function receiveHandle() {
         axios.get("/messages/received", {
 
@@ -40,7 +43,7 @@ export default function MyChat() {
                 console.log(error.response.data.result);
             })
     }
-
+    //보낸쪽지 클릭 실행되는 함수 
     function sendHandle(){
         axios.get("/messages/sent", {
 
@@ -57,11 +60,27 @@ export default function MyChat() {
             })
 
     }
-
-    // function deletesend()
-    // {
-    //     axios.delete("/messages/6/")
-    // }
+    
+    //보낸메시지 삭제
+    function deletesend()
+    {
+        setMsgId('');
+        axios.delete(`/messages/${msgid}/received`,{
+            headers: { Authorization: `Bearer ${actoken}` },
+            headers: { Auth: retoken }
+        })
+        .then(response=>{
+            console.log("메시지삭제성공")
+            //삭제성공하면 다시 메시지 api불러옴
+            receiveHandle();
+            
+            
+            
+        })
+        .catch(error=>{
+            console.log(error.response.data.result);
+        })
+    }
 
     return (
         <div className="message-wrap">
@@ -78,7 +97,7 @@ export default function MyChat() {
                 <table>
                     <thead>
                         <tr key={1}>
-                            <th key={1}><input type="checkbox" ></input></th>
+                            <th key={1}><input type="checkbox"></input></th>
                             <th key={2}>보낸사람</th>
                             <th key={3} className="th3">제목</th>
                             <th key={4}>날짜</th>
@@ -88,7 +107,9 @@ export default function MyChat() {
                     <tbody>
                         {message ? message.messageList.map(a=> (
                             <tr >
-                                <td ><input type="checkbox"></input></td>
+                                <td ><input  type="checkbox" value={msgid} onClick={()=>
+                                    setMsgId(a.idz)
+                                }></input></td>
                                 <td >{a.senderNickname}</td>
                                 <td >{a.content}</td>
                                 <td >2023-09-12 20:56</td>
@@ -98,7 +119,7 @@ export default function MyChat() {
                     </tbody>
                 </table>
                 <div className="message-button">
-                    <button style={{width:"80px", height:"50px"}}>삭제</button>
+                    <button onClick={deletesend} style={{width:"80px", height:"50px"}}>삭제</button>
                 </div>
                 <div className="message-pagination">
 
