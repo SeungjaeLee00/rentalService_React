@@ -173,7 +173,7 @@ function Detail() {
           <Login open={showLoginPopup} close={closeloginModal} ></Login>
           <div className='Detail_Item_wrap'>
             <div className='Detail_Item_Img'>
-             {item ? <img style={{width:"300px", height:"300px"}} /> : null}
+             {item ? <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + item.imageName} style={{width:"300px", height:"300px"}} /> : null}
             </div>
             {item ? <div>
               <div className='Item_About'>

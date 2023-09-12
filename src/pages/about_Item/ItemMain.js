@@ -31,7 +31,7 @@ function ItemMain(props) {
   useEffect(() => {
     axios.get('/posts')
       .then(response => {
-        // console.log(response.data.result.data.postList);
+        console.log(response.data.result.data.postList);
         setStore(response.data.result.data.postList);
       })
   }, [])
@@ -78,7 +78,6 @@ function ItemMain(props) {
   const [view, setView] = useState(false);
   return (
     <div className='page-container'>
-
       <div className='dashboard'>
         <div className='dashboard-right'>
           <div className='dashboard-title'>

@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 export default function ReNavBar() {
     const { isAuthenticated, logout } = useAuth();
     const [isLogin, setIsLogin] = useState(false);
-    console.log(isAuthenticated);
+    // console.log(isAuthenticated);
     const handleLogout = () => {
         logout()
         window.location.replace("/");
@@ -38,7 +38,7 @@ export default function ReNavBar() {
                         <Link style={{ textDecoration: "none" }} onClick={handleLogin}>로그인/회원가입</Link>}
 
                     {/* <div className="mypage" >마이페이지</div> */}
-                    {isAuthenticated? <Link style={{textDecoration:"none"}} to={"my-page"}>마이페이지</Link> : 
+                    {isAuthenticated? <Link style={{textDecoration:"none", marginRight:"40px"}} to={"my-page"}>마이페이지</Link> : 
                         <Link style={{textDecoration:"none"}} to={"/loginpage"}>마이페이지</Link>}
                     
                 </div>
