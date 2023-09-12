@@ -78,9 +78,12 @@
     padding-left:55px;
 }
 .post-bottom td{
-    height:100px;
+    height:150px;
     padding-top: 30px;
     padding-left: 55px;
+}
+.post-bottom tr:hover{
+    cursor: pointer;
 }
 
 .post-bottom tbody tr:hover{
@@ -90,6 +93,16 @@
 .bottom-right{
     display:flex;
     flex-direction:column;
+}
+.first-td
+{
+    display:flex;
+    flex-direction:row;
+}
+.first-td-info{
+    display:flex;
+    flex-direction: column;
+    margin-left: 20px;
 }
 
 /* 찜페이지 css */
