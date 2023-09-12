@@ -6,6 +6,7 @@ import { useAuth } from '../../components/AuthContext'
 import HorizonLine from '../../components/HorizonLine';
 import Login from '../Login/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Chat from '../../pages/Chat/Chat';
 
 // Import Swiper React components
 // import { Swiper, SwiperSlide } from 'swiper/react';
@@ -214,7 +215,7 @@ function Detail() {
                         console.log(error.response.data.result);
                       })
                   }}   style={{ backgroundColor: "white", color: "black" }}>{itemlike ? <span>♥</span> : <span>♡</span>}</button>
-                  <button onClick={() => navigate('/itemmain/detail/chat')}>쪽지보내기</button>
+                  <button onClick={() => navigate('/itemmain/detail/chat', {state : item})}>쪽지보내기</button>
                   <button onClick={openReportModal} variant="secondary" size="lg">❗️</button>
                   <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
 

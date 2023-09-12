@@ -59,7 +59,7 @@ export default function MyPageTop(props)
         
     }, [])
     return (
-        <div className="content">
+        <div style={{borderBottom:"1px solid black", paddingBottom:"20px"}} className="content">
             {myinfo && props.mypost ? <div className="mypagetop">
 
                 <div className="toptitle">
@@ -88,7 +88,7 @@ export default function MyPageTop(props)
                 </div>
             </div> : null}
 
-            <hr />
+            
             
         </div>
     )

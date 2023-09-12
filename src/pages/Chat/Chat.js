@@ -7,23 +7,24 @@ import axios from 'axios';
 function Chat() {
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(location);
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
   const { isAuthenticated } = useAuth();
 
-  const [receiveMember, setReceiveMember] = useState('');
-  const [content, setContent] = useState('');
+  const [receiveMember, setReceiveMember] = useState(location.state.writer.nickname);
+  const [content, setContent] = useState("");
 
-  const handleReceiveMemberChange = (event) => {
-    setReceiveMember(event.target.value);
-  };
-
+  
+  
   const handleContentChange = (event) => {
     setContent(event.target.value);
   };
-
-  const handleSubmit = async (event) => {
+  
+  //보내기 버튼 클릭하면 실행 
+  const handleSubmit =  (event) => {
     event.preventDefault();
+    //dataToSend에 보낼양식담고.
     const dataToSend = {
       content: content,
       receiveMember: receiveMember
@@ -35,35 +36,30 @@ function Chat() {
         return;
       }
       if (isAuthenticated) {
-        const response = await axios.post('http://13.125.98.26:8080/messages', dataToSend, {
+        axios.post('http://13.125.98.26:8080/messages', dataToSend, {
           headers: {
             Authorization: `Bearer ${actoken}`,
             Auth: retoken
           },
-        });
-        console.log('메세지 전송 성공: ', response.data);
-        if (response.status === 201) {
-          console.log('메세지: ', response.data);
-        }
+        })
+        .then(response=>{
+          console.log('메세지 전송 성공: ', response.data);
+          alert('메시지가 전송되었습니다');
+        })
+        .catch(error=>{
+          console.error('메세지 전송 실패:', error.response.data.result);
+        })
       }
     } catch (error) {
-      console.error('메세지 전송 실패:', error);
-      if (error.response && error.response.status === 401) {
-        console.error('AccessToken이 만료되었습니다. 로그인 페이지로 이동합니다.');
-        navigate('/loginpage');
+      console.error('메세지 전송 실패:', error.response.data.result);
       }
-    }
   };
 
   return (
     <div className="chat-form-container">
-      <form onSubmit={handleSubmit} className="chat-form">
-        <input
-          type="text"
-          placeholder="받는 사람"
-          value={receiveMember}
-          onChange={handleReceiveMemberChange}
-        />
+      <div style={{fontSize:"20px",marginTop:"20px", fontWeight:"bold"}}>게시글제목 : {location.state.title}</div>
+      <div style={{fontSize:"15px", marginTop:"15px"}}>{location.state.writer.nickname}님에게 쪽지</div>
+      <form onSubmit={handleSubmit} className="chat-form" style={{marginTop:"50px"}}>
         <input
           type="text"
           placeholder="메세지를 입력하세요..."

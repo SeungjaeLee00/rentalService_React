@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './MessageApp.css';
+import '../../style/MessageApp.css';
 import { useAuth } from '../../components/AuthContext';
 
 function AllChats() {
@@ -42,7 +42,7 @@ function AllChats() {
           console.error('서버 응답 오류:', response.data.error);
         }
       } catch (error) {
-        console.error('API 요청 오류:', error);
+        console.error('API 요청 오류:', error.response.data.result);
 
         if (error.response && error.response.status === 401) {
           console.error('AccessToken이 만료되었습니다. 로그인 페이지로 이동합니다.');
@@ -72,7 +72,7 @@ function AllChats() {
         }
       })
       .catch(error => {
-        console.error('API 요청 오류:', error);
+        console.error('API 요청 오류:', error.response.data.result);
       });
   }
 
