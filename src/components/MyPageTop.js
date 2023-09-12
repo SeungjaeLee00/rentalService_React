@@ -64,11 +64,12 @@ export default function MyPageTop(props)
 
                 <div className="toptitle">
                     <h1>My Page</h1>
+                    <Link to='/my-page/chats' style={{textDecoration:"none", fontSize:"30px"}}>✉</Link>
                 </div>
                 <div className="topinfo">
                     <div className="infoleft">
                         <div className="name">{myinfo.nickname}</div>
-                        <Link to="my-change" style={{ textDecoration:"none", marginTop: "15px" }}>회원정보수정</Link>
+                        <Link to="my-change" style={{ textDecoration:"none", color:"gray", marginTop: "15px" }}>회원정보수정</Link>
                     </div>
                     <div className="inforight">
                         <div className="userpost">

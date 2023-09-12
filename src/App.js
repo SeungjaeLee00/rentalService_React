@@ -34,6 +34,7 @@ import MyPost from './pages/my_page/MyPost'
 import MyLike from './pages/my_page/MyLike'
 import MyRent from './pages/my_page/MyRent';
 import MyBorrow from './pages/my_page/MyBorrow';
+import MyChat from './pages/Chat/MyChat'
 
 
 function App() {
@@ -64,7 +65,7 @@ function App() {
           <Route exact path="/my-page/upload-item" element={<Upload_Item />} />
           <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
           <Route exact path='/my-page/myitempage' element={<MyitemPage />} />
-          <Route exact path='/my-page/chats' element={<AllChats />} />
+          <Route exact path='/my-page/chats' element={<MyChat />} />
           <Route exact path='/my-page/reports' element={<My_Reports />} />
           <Route exact path='/my-page/all-trades' element={<AllTrade />} />
 
