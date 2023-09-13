@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HorizonLine from '../../components/HorizonLine';
 import '../../style/Profile.css'
+import { useAuth } from '../../components/AuthContext';
 
 function Profile() {
     const { state } = useLocation();
+    const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
     const [userReview, setUserReview] = useState(null);
     const [showPosts, setShowPosts] = useState(true);
     const [showReviews, setShowReviews] = useState(false);
     const [isActive1, setIsActive1] = useState(false);
     const [isActive2, setIsActive2] = useState(false);
+
+    // const { isAuthenticated } = useAuth();
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
 
@@ -31,6 +35,11 @@ function Profile() {
     };
 
     useEffect(() => {
+        // if (!isAuthenticated) {
+        //     navigate('/loginpage');
+        //     return;
+        // }
+        // if (isAuthenticated) {
         const apiUrl = "http://13.125.98.26:8080/members/" + state;
         axios.get(apiUrl, {
             headers: {
@@ -46,6 +55,7 @@ function Profile() {
                 console.error('API 요청 오류:', error);
             });
         viewReview(state);
+        // }
     }, [state]);
 
     const viewReview = async (state) => {
