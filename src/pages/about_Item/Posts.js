@@ -30,7 +30,7 @@ const Posts = (props) => {
         navigate('/itemmain/detail/' + a.id, { state: a });
       }}>
         <div className='Item-Img'>
-          <img src={"https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/logo.png"} style={{ width: 200, height: 200 }} />
+          <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/'+a.link} style={{ width: 200, height: 200 }} />
         </div>
         <div className='Item-Information-Wrap'>
           <div className='Item-Name-Price-Date-Wrap'>
