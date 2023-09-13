@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HorizonLine from '../../components/HorizonLine';
-// import '../../style/'
+import '../../style/Profile.css'
 
 function Profile() {
     const { state } = useLocation();
@@ -11,8 +11,24 @@ function Profile() {
     const [userReview, setUserReview] = useState(null);
     const [showPosts, setShowPosts] = useState(true);
     const [showReviews, setShowReviews] = useState(false);
+    const [isActive1, setIsActive1] = useState(false);
+    const [isActive2, setIsActive2] = useState(false);
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
+
+    const handleShowPosts = () => {
+        setShowPosts(true);
+        setShowReviews(false);
+        setIsActive1(!isActive1);
+        setIsActive2(false);
+    };
+
+    const handleShowReviews = () => {
+        setShowPosts(false);
+        setShowReviews(true);
+        setIsActive2(!isActive2);
+        setIsActive1(false);
+    };
 
     useEffect(() => {
         const apiUrl = "http://13.125.98.26:8080/members/" + state;
@@ -51,69 +67,67 @@ function Profile() {
         }
     };
 
-    const handleShowPosts = () => {
-        setShowPosts(true);
-        setShowReviews(false);
-    };
-
-    const handleShowReviews = () => {
-        setShowPosts(false);
-        setShowReviews(true);
-    };
-
     return (
-        <>
+        <div className='AboutProfile'>
             {userData ? (
-                <div className='AboutProfile'>
-                    <h1>프로필 페이지</h1>
+                <div>
                     <div className='Profile-detail'>
                         <div className='Name-intro'>
-                            <p>닉네임: {userData.nickname}</p>
-                            <p>소개: {userData.introduce}</p>
+                            {/* 사진 넣을 거면 여기에 넣으면 됨. */}
+                            <p className="nickname" >{userData.nickname}</p>
+                            <p className="intro">{userData.introduce}</p>
                         </div>
                         <div className='Post-Review'>
-                            <button className="" onClick={handleShowPosts}>게시물 보기</button>
-                            <button onClick={handleShowReviews}>거래 후기 보기</button>
-                            <div className='LookPosts'>
-
-                                {showPosts ? (
-                                    userData.posts.length > 0 ? (
-                                        <div>
-                                            {/* <h2>게시물</h2> */}
-                                            <ul>
-                                                {userData.posts.map((post, index) => (
-                                                    <li key={index} >
-                                                        {post.title}
-                                                        {post.createdTime}
-                                                        <HorizonLine />
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    ) : (
-                                        <p>게시물이 없습니다.</p>
-                                    )
-                                ) : null}
+                            <div className='Category'>
+                                <div className='Category-detail'>
+                                    <a className={isActive1 ? 'LookPost' : 'default1'}
+                                        onClick={handleShowPosts}>게시물 보기</a>
+                                    <a className={isActive2 ? 'LookReview' : 'default2'}
+                                        onClick={handleShowReviews}>거래 후기 보기</a>
+                                </div>
                             </div>
-                            <div className='LookReviews'>
-                                {showReviews ? (
-                                    userReview && userReview.reviewList && userReview.reviewList.length > 0 ? (
-                                        <div>
+                            <div className='Looks'>          
+                                <div className={isActive1 ? 'LookPosts' : 'nodisplay'}>
+                                    <div className='Post'>게시물</div>
+                                    {showPosts ? (
+                                        userData.posts.length > 0 ? (
+                                            <div className = "PostDetail">
+                                                <ul>
+                                                    {userData.posts.map((post, index) => (
+                                                        <li key={index} >
+                                                            {post.title}
+                                                            {post.createdTime}
+                                                            <HorizonLine />
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        ) : (
+                                            <p className='noPost'>등록된 상품이 없습니다.</p>
+                                        )
+                                    ) : null}
+                                </div>
 
-                                            <ul>
-                                                {userReview.reviewList.map((review, index) => (
-                                                    <li key={index}>
-                                                        <p>작성자: {review.writer}</p>
-                                                        <p>내용: {review.content}</p>
-                                                        <HorizonLine />
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    ) : (
-                                        <p>리뷰가 없습니다.</p>
-                                    )
-                                ) : null}
+                                <div className={isActive2 ? 'LookReviews' : 'nodisplay'}>
+                                    <div className="Review">상품 후기</div>
+                                    {showReviews ? (
+                                        userReview && userReview.reviewList && userReview.reviewList.length > 0 ? (
+                                            <div className = "ReivewDetail">
+                                                <ul>
+                                                    {userReview.reviewList.map((review, index) => (
+                                                        <li key={index}>
+                                                            <p>작성자: {review.writer}</p>
+                                                            <p>내용: {review.content}</p>
+                                                            <HorizonLine />
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        ) : (
+                                            <p className='noReview'>후기가 없습니다.</p>
+                                        )
+                                    ) : null}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,7 +137,7 @@ function Profile() {
                 <p>로딩 중...</p>
             )}
 
-        </>
+        </div>
     );
 }
 

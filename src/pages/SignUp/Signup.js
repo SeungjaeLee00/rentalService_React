@@ -97,7 +97,7 @@ function Signup () {
         .then(response => {
           console.log('회원가입 성공:', response.data);
           if ((response.status = 200)) {
-            return navigate("/itemmain");
+            return navigate("/");
             }
         })
         .catch(error => {
