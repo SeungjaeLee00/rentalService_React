@@ -36,9 +36,9 @@ export default function Category() {
           
           
           <Menu isDropped={myPageIsOpen}>
-            <Ul>
+            <Ul >
             {category ? category.map(data=>(
-                <Li keys={data.id}> <LinkWrapper key={data.id} onClick={()=>{navigate("category/"+data.id, {state:data.name})}}>{data.name}</LinkWrapper></Li>
+                <Li key={"li"+data.id}> <LinkWrapper key={"w"+data.id} onClick={()=>{navigate("category/"+data.id, {state:data.name})}}>{data.name}</LinkWrapper></Li>
             )) : null}
             </Ul>
           </Menu>

@@ -231,8 +231,8 @@ const Upload_Item = () => {
                 .catch(error => {
                   console.log(error.response.data.result);
                 })
-
-              navigate("/");
+              window.location.replace("/");
+              
             }}> 등록하기 </button>
         </div>
       ) : (

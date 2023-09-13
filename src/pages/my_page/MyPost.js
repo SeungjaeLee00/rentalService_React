@@ -11,7 +11,7 @@ export default function MyPost(props) {
 
     return (
         <div className="MyPost-wrap">
-            {mypost ? <div> <div className="post-top">
+            {mypost ? <> <div className="post-top">
                 <p style={{ padding: "10px", fontSize: "25px" }}>게시물내역 조회</p>
             </div>
 
@@ -44,7 +44,7 @@ export default function MyPost(props) {
                         </tbody>
                     </table>
 
-                </div> </div> : null}
+                </div> </> : null}
 
 
         </div>

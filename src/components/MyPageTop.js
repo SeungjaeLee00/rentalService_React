@@ -10,7 +10,7 @@ export default function MyPageTop(props)
     const retoken = localStorage.refreshToken;
 
     const [myinfo, setMyInfo] = useState();
-    
+
 
     useEffect(() => {
         //본인정보 조회 api
@@ -64,7 +64,8 @@ export default function MyPageTop(props)
 
                 <div className="toptitle">
                     <h1>My Page</h1>
-                    <Link to='/my-page/chats' style={{textDecoration:"none", fontSize:"30px"}}>✉</Link>
+                    {/* Link태그에 props로 내가작성한 게시물 전송 */}
+                    <Link to="/my-page/chats" state={{post:props.mypost}} style={{textDecoration:"none", fontSize:"30px"}}>✉</Link>
                 </div>
                 <div className="topinfo">
                     <div className="infoleft">

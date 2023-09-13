@@ -27,7 +27,8 @@ function Chat() {
     //dataToSend에 보낼양식담고.
     const dataToSend = {
       content: content,
-      receiveMember: receiveMember
+      receiveMember: receiveMember,
+      postId :location.state.id
     }
 
     try {

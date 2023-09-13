@@ -11,7 +11,7 @@ const List = styled.ul`
 `;
 
 function NavList({ children, expanded = true }) {
-  return <List expanded={expanded}>{children}</List>;
+  return <List expanded="true">{children}</List>;
 }
 
 export default NavList;

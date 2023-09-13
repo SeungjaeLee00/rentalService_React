@@ -21,10 +21,6 @@ function ItemMain(props) {
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
 
-
-
-
-  //store 변수에 Redux데이터를 가져와서 저장
   let [store, setStore] = useState([]);
 
   //package.json에서 proxy설정했기 때문에 /posts만 사용하여도 댐
