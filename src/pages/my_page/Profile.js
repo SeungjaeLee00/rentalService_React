@@ -131,7 +131,6 @@ function Profile() {
                             </div>
                         </div>
                     </div>
-
                 </div>
             ) : (
                 <p>로딩 중...</p>
