@@ -10,7 +10,10 @@
     flex-direction:row;
     width:1000px;
 }
-
+.message-mid{
+    display:flex;
+    flex-direction: row;
+}
 .message-nav button{
     background-color: white;
     border:0px;
@@ -28,7 +31,7 @@
 
 .message-content table{
     border-top: 1px solid black;
-    margin-top:30px;
+    margin-top:20px;
     width:1000px;
 }
 
@@ -40,7 +43,6 @@
 .message-content tbody tr{
     cursor:pointer;
     &:hover{
-        
         box-shadow: 10px 10px 20px -15px gray;
     }
 }
@@ -65,3 +67,4 @@
     border-radius: 10px;
     color:white;
 }
+

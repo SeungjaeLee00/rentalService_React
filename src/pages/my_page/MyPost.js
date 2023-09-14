@@ -12,11 +12,11 @@ export default function MyPost(props) {
     return (
         <div className="MyPost-wrap">
             {mypost ? <> <div className="post-top">
-                <p style={{ padding: "10px", fontSize: "25px" }}>게시물내역 조회</p>
+                <p style={{ padding:"30px", fontSize: "25px", fontWeight:"bold" }}>게시물내역 조회</p>
             </div>
 
                 <div className="post-bottom">
-                    <table style={{ width: "1500px", marginTop: "20px" }}>
+                    <table style={{ width: "1200px", marginTop: "16px" }}>
                         <thead>
                             <tr>
                                 <th >게시물 정보</th>
