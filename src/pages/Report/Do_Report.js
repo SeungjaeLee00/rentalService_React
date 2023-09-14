@@ -13,6 +13,7 @@ const Do_Report = (props) => {
 
   const [reportType, setReportType] = useState("");
   const [content, setContent] = useState("");
+  const [reportSuccess, setReportSuccess] = useState(false); // 신고 성공 여부를 추적하는 상태 변수
 
   const onReportTypeHandler = (event) => {
     setReportType(event.target.value);
@@ -28,7 +29,7 @@ const Do_Report = (props) => {
       reportType: reportType,
       content: content,
     };
-    
+
     try {
       const response = await axios.post('http://13.125.98.26:8080/reports', dataToSend, {
         headers: {
@@ -39,7 +40,7 @@ const Do_Report = (props) => {
       console.log('신고 전송 성공: ', response.data);
       if (response.status === 201) {
         console.log('신고: ', response.data);
-        
+        setReportSuccess(true); 
       }
     } catch (error) {
       console.error('신고 실패:', error);
@@ -59,29 +60,36 @@ const Do_Report = (props) => {
           </header>
 
           <main>
-            <Form onSubmit={onSubmitHandler}>
-              <FormGroup>
-                <h4>뭐든빌리개</h4>
-                <p style={{ fontSize: "13px", color: "#4A4F5A" }}>신고 내용을 입력 해주세요.</p>
-                <InputLabel htmlFor="reportType">신고 종류</InputLabel>
-                <NativeSelect
-                  value={reportType}
-                  onChange={onReportTypeHandler}
-                  inputProps={{
-                    name: 'reportType',
-                    id: 'reportType',
-                  }}
-                >
-                  <option value="POST_REPORT">게시물 신고</option>
-                  {/* 게시물 ID */}
-                  <option value="BUG">버그</option>
-                </NativeSelect>
-                <textarea type='input' class="inputField" style={{ marginTop: "20px", height: "100px" }}
-                  placeholder="  내용을 입력 해주세요." value={content} onChange={onContentHandler} />
-                <Button color="dark" type="submit" style={{ marginRight: "20px" }}>신고하기</Button>
-                <NavLink style={({ isActive }) => ({ color: isActive ? 'yellow' : 'gray' })} to="/my-page/reports">신고함 바로가기</NavLink>
-              </FormGroup>
-            </Form>
+            {reportSuccess ? ( // 신고 성공 시 메시지 표시
+              <div>
+                <p>신고가 성공적으로 제출되었습니다.</p>
+                <button onClick={close}>닫기</button>
+              </div>
+            ) : (
+              <Form onSubmit={onSubmitHandler}>
+                <FormGroup>
+                  <h4>뭐든빌리개</h4>
+                  <p style={{ fontSize: "13px", color: "#4A4F5A" }}>신고 내용을 입력 해주세요.</p>
+                  <InputLabel htmlFor="reportType">신고 종류</InputLabel>
+                  <NativeSelect
+                    value={reportType}
+                    onChange={onReportTypeHandler}
+                    inputProps={{
+                      name: 'reportType',
+                      id: 'reportType',
+                    }}
+                  >
+                    <option value="POST_REPORT">게시물 신고</option>
+                    {/* 게시물 ID */}
+                    <option value="BUG">버그</option>
+                  </NativeSelect>
+                  <textarea type='input' class="inputField" style={{ marginTop: "20px", height: "100px" }}
+                    placeholder="  내용을 입력 해주세요." value={content} onChange={onContentHandler} />
+                  <Button color="dark" type="submit" style={{ marginRight: "20px" }}>신고하기</Button>
+                  <NavLink style={({ isActive }) => ({ color: isActive ? 'yellow' : 'gray' })} to="/my-page/reports">신고함 바로가기</NavLink>
+                </FormGroup>
+              </Form>
+            )}
           </main>
 
           <footer>

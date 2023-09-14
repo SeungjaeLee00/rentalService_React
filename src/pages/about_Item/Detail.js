@@ -214,7 +214,7 @@ function Detail() {
                         })
                     }} style={{ backgroundColor: "white", color: "black" }}>{item.likes ? <span>♥</span> : <span>♡</span>}</button>
                     <button onClick={() => navigate('/itemmain/detail/chat')}>쪽지보내기</button>
-                    <button onClick={openReportModal} variant="secondary" size="lg">❗️</button>
+                    <button onClick={openReportModal} variant="secondary" size="lg">⚠️신고하기</button>
                     <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
 
                   </div>

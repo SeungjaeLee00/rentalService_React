@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HorizonLine from '../../components/HorizonLine';
 import '../../style/Profile.css'
 import { useAuth } from '../../components/AuthContext';
+import Do_Report from '../Report/Do_Report';
+import Posts from '../about_Item/Posts';
 
 function Profile() {
     const { state } = useLocation();
@@ -13,12 +15,21 @@ function Profile() {
     const [userReview, setUserReview] = useState(null);
     const [showPosts, setShowPosts] = useState(true);
     const [showReviews, setShowReviews] = useState(false);
-    const [isActive1, setIsActive1] = useState(false);
+    const [isActive1, setIsActive1] = useState(true);
     const [isActive2, setIsActive2] = useState(false);
+    const [showReportPopup, setshowReportPopup] = useState(false);
 
-    // const { isAuthenticated } = useAuth();
+
+    const { isAuthenticated } = useAuth();
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
+
+    const openReportModal = () => {
+        setshowReportPopup(true);
+    };
+    const closeReportnModal = () => {
+        setshowReportPopup(false);
+    };
 
     const handleShowPosts = () => {
         setShowPosts(true);
@@ -34,12 +45,17 @@ function Profile() {
         setIsActive1(false);
     };
 
+
+    const handlePostClick = (selectedPost) => {
+        <Posts selectedPost={selectedPost} />
+    };
+
     useEffect(() => {
-        // if (!isAuthenticated) {
-        //     navigate('/loginpage');
-        //     return;
-        // }
-        // if (isAuthenticated) {
+        if (!isAuthenticated) {
+            navigate('/loginpage');
+            return;
+        }
+        if (isAuthenticated) {
         const apiUrl = "http://13.125.98.26:8080/members/" + state;
         axios.get(apiUrl, {
             headers: {
@@ -55,7 +71,7 @@ function Profile() {
                 console.error('API 요청 오류:', error);
             });
         viewReview(state);
-        // }
+        }
     }, [state]);
 
     const viewReview = async (state) => {
@@ -86,6 +102,13 @@ function Profile() {
                             {/* 사진 넣을 거면 여기에 넣으면 됨. */}
                             <p className="nickname" >{userData.nickname}</p>
                             <p className="intro">{userData.introduce}</p>
+                            <div className='report'>
+                                <a className="report-detail" onClick={openReportModal}> ⚠️신고하기 </a>
+                            </div>
+                            <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
+
+
+
                         </div>
                         <div className='Post-Review'>
                             <div className='Category'>
@@ -96,18 +119,26 @@ function Profile() {
                                         onClick={handleShowReviews}>거래 후기 보기</a>
                                 </div>
                             </div>
-                            <div className='Looks'>          
+                            <div className='Looks'>
                                 <div className={isActive1 ? 'LookPosts' : 'nodisplay'}>
                                     <div className='Post'>게시물</div>
                                     {showPosts ? (
                                         userData.posts.length > 0 ? (
-                                            <div className = "PostDetail">
-                                                <ul>
+                                            <div className="PostDetail">
+                                                <ul className='PostList'>
                                                     {userData.posts.map((post, index) => (
-                                                        <li key={index} >
-                                                            {post.title}
-                                                            {post.createdTime}
-                                                            <HorizonLine />
+                                                        <li key={index} className='single-post'>
+                                                            <a className='product'
+                                                                onClick={() => handlePostClick(post)}>
+                                                                <img className="productImg" width="194" height="194"
+                                                                    src={`https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/${post.link}`} />
+                                                                <div className='productdetail'>
+                                                                    <div className='productName'>{post.title}</div>
+                                                                    <div className="productPrice">
+                                                                        <div className="productPrice-detail">{post.itemPrice}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -122,7 +153,7 @@ function Profile() {
                                     <div className="Review">상품 후기</div>
                                     {showReviews ? (
                                         userReview && userReview.reviewList && userReview.reviewList.length > 0 ? (
-                                            <div className = "ReivewDetail">
+                                            <div className="ReivewDetail">
                                                 <ul>
                                                     {userReview.reviewList.map((review, index) => (
                                                         <li key={index}>
