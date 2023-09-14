@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import "../../style/MyChat.css"
+import "../../style/MessageList.css"
 import axios from "axios"
 import MessageList from "./MessageList";
 import { Link, useLocation } from "react-router-dom";

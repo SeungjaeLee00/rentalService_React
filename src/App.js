@@ -36,7 +36,7 @@ import MyRent from './pages/my_page/MyRent';
 import MyBorrow from './pages/my_page/MyBorrow';
 import MyChat from './pages/Chat/MyChat'
 import OneMessage from './pages/Chat/OneMessage';
-
+import SearchItem from './pages/about_Item/SearchItem';
 
 function App() {
   return (
@@ -48,6 +48,7 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route exact path="/" element={<ItemMain />} />
+          <Route exact path="/search/:contents" element={<SearchItem/>}/>
           <Route exact path="/signup" element={<Signup />} />
 
         <Route exact path="/find-id" element={<FindId />} />

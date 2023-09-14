@@ -1,0 +1,40 @@
+.one-wrap{
+    display:flex;
+    flex-direction: column;
+}
+
+.one-top{
+    display: flex;
+    flex-direction: column;
+}
+
+.top-info{
+    display:flex;
+    flex-direction: row;
+}
+
+.info-left{
+    display:flex;
+    flex-direction: column;
+}
+
+.left-bottom{
+    margin-left: 143px;
+}
+.left-top{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width:700px;
+}
+
+.one-bottom{
+    display: flex;
+    flex-direction: column;
+}
+
+.msg-bottom{
+    display:flex;
+    justify-content: center;
+}
+

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../style/Navbar.css'
 import { useAuth } from './AuthContext';
 import { useState } from 'react';
@@ -12,6 +12,8 @@ import IconButton from "@mui/material/IconButton";
 
 
 export default function ReNavBar() {
+    const navigate = useNavigate();
+    const [content,setContent] = useState();
     const { isAuthenticated, logout } = useAuth();
     const [isLogin, setIsLogin] = useState(false);
     // console.log(isAuthenticated);
@@ -48,7 +50,7 @@ export default function ReNavBar() {
                 <div className="searchbar">
                     {/* https://mui.com/material-ui/react-text-field/#main-content 에서 가져옴*/}
                     {/* https://iagreebut.tistory.com/271 */}
-                    <Box
+                    {/* <Box
                         component="form"
                         sx={{
                             '& .MuiTextField-root': { m: 1, width: '70ch'},
@@ -63,11 +65,13 @@ export default function ReNavBar() {
                                 type="search"
                                 variant="standard"
                                 style={{backgroundColor: "rgb(248, 248, 248)", borderRadius:"5px"}}
+                                value={content}
+                                onChange={(e)=>{setContent(e.target.value)}}
                             />
                         <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
                             <SearchIcon />
                         </IconButton>
-                    </Box>
+                    </Box> */}
 
 
 

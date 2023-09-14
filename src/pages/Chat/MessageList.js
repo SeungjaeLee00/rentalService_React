@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
 export default function MessageList(props) {
@@ -10,7 +10,7 @@ export default function MessageList(props) {
     const [message, setMessage] = useState();
     const [msgid, setMsgId] = useState();
     
-    
+    const navigate = useNavigate();
     const [who,setWho] = useState("received");
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function MessageList(props) {
             headers: { Auth: retoken }
         })
             .then(response => {
-                console.log("메시지조회성공");
+                console.log("received메시지조회성공");
                 setMessage(response.data.result.data);
                 console.log(response.data.result.data);
             })
@@ -99,19 +99,21 @@ export default function MessageList(props) {
                         <tr key={`theadtr${msgid}`}>
                             <th key={1}><input type="checkbox"></input></th>
                             <th key={2}>보낸사람</th>
-                            <th key={3} className="th3">제목</th>
-                            <th key={4}>날짜</th>
-                            <th key={5}>읽음상태</th>
+                            <th key={3}>제목</th>
+                            <th key={4} className="th3">내용</th>
+                            <th key={5}>날짜</th>
+                            <th key={6}>읽음상태</th>
                         </tr>
                     </thead>
                     <tbody>
                         
                         {message ? message.messageList.map(a=> (
-                            <tr key={`tbodytr${a.id}`} >
+                            <tr key={`tbodytr${a.id}`} onClick={()=>{navigate(url+a.id, {state:a.id})}}>
                                 <td ><input  type="checkbox"  value={msgid} onClick={()=>{setMsgId(a.id)}}></input></td>
                                 <td >{a.senderNickname}</td>
-                                <td ><Link to={url+a.id} state={{id:a.id}}>{a.content}</Link></td>
-                                <td >2023-09-12 20:56</td>
+                                <td> {a.postTitle}</td>
+                                <td >{a.content}</td>
+                                <td >{a.createdDate}</td>
                                 <td >읽지않음</td>
                             </tr>
                         )) : null}
