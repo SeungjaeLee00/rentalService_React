@@ -31,22 +31,23 @@ export default function OneMessage() {
             {msg ? <>
                 <div className="one-wrap">
                     <div className="one-top">
-                        <div className="top-title"><h1>쪽지함</h1></div>
+                        <div className="top-title"><h1 style={{marginLeft:"30px"}}>쪽지함</h1></div>
                         <div className="top-info">
                             <div className="info-left">
                                 <div className="left-top">
-                                    <div>게시글제목</div>
-                                    <div>보낸날짜</div>
+                                    <div style={{fontSize:"25px", marginLeft:"30px"}}>게시글제목:{msg.postTitle}</div>
+                                    <div style={{marginLeft:"300px", marginLeft:"200px"}}>보낸날짜: {msg.createdDate}</div>
                                 </div>
-                                <div className="left-bottom">발신자</div>
+                                <div style={{marginTop:"30px", marginLeft:"30px"}} className="left-bottom">발신자 : {msg.senderNickname}</div>
                             </div>
                             <div className="info-right">
-                                <button style={{marginLeft:"7+850px"}}>답장</button>
+                                <button>답장</button>
+                                <button style={{marginLeft:"20px"}}>삭제</button>
                             </div>
                         </div>
                     </div>
                     <div className="one-bottom">
-                        <div className="msg-content">쪽지내용</div>
+                        <div className="msg-content">{msg.content}</div>
                         <div className="msg-bottom">
                             <button>목록으로</button>
                         </div>

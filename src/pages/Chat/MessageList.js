@@ -112,7 +112,7 @@ export default function MessageList(props) {
                                 <td ><input  type="checkbox"  value={msgid} onClick={()=>{setMsgId(a.id)}}></input></td>
                                 <td >{a.senderNickname}</td>
                                 <td> {a.postTitle}</td>
-                                <td >{a.content}</td>
+                                <td >{a.content.length>20? a.content.substr(0,19)+"..." : a.content}</td>
                                 <td >{a.createdDate}</td>
                                 <td >읽지않음</td>
                             </tr>
