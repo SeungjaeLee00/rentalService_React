@@ -9,6 +9,7 @@ export default function MessageList(props) {
     
     const [message, setMessage] = useState();
     const [msgid, setMsgId] = useState();
+    const [send,setSend] = useState();
     
     const navigate = useNavigate();
     const [who,setWho] = useState("received");
@@ -24,6 +25,7 @@ export default function MessageList(props) {
                 console.log("received메시지조회성공");
                 setMessage(response.data.result.data);
                 console.log(response.data.result.data);
+                
             })
             .catch(error => {
                 console.log(error.response.data.result);
@@ -65,24 +67,7 @@ export default function MessageList(props) {
 
     }
 
-    //보낸메시지 삭제
-    function deletesend() {
-        console.log(msgid);
-        axios.delete(`/messages/${msgid}/${who}`, {
-            headers: { Authorization: `Bearer ${actoken}` },
-            headers: { Auth: retoken }
-        })
-            .then(response => {
-                console.log("메시지삭제성공")
-                //삭제성공하면 다시 메시지 api불러옴
-                receiveHandle();
-                setMsgId('');
-                window.location.replace("/my-page/chats");
-            })
-            .catch(error => {
-                console.log(error.response.data.result);
-            })
-    }
+    
    
     const url = "/my-page/chats/message/"
     return (
@@ -108,8 +93,15 @@ export default function MessageList(props) {
                     <tbody>
                         
                         {message ? message.messageList.map(a=> (
-                            <tr key={`tbodytr${a.id}`} onClick={()=>{navigate(url+a.id, {state:a.id})}}>
-                                <td ><input  type="checkbox"  value={msgid} onClick={()=>{setMsgId(a.id)}}></input></td>
+                            <tr key={`tbodytr${a.id}`} onClick={()=>{
+                                //copy에 쪽지id랑 받은쪽지인지 보낸쪽지인지 나타내는 who가 담김.
+                                let copy = [a.id, who];
+                                    console.log(copy);
+                                    //navigate로 이동할때 state로 전달 
+                                    navigate('/my-page/chats/message/'+a.id ,{state:{copy}});
+                            }}>
+                                <td ><input  type="checkbox"  value={msgid} 
+                                ></input></td>
                                 <td >{a.senderNickname}</td>
                                 <td> {a.postTitle}</td>
                                 <td >{a.content.length>20? a.content.substr(0,19)+"..." : a.content}</td>
@@ -119,9 +111,7 @@ export default function MessageList(props) {
                         )) : null}
                     </tbody>
                 </table>
-                <div className="message-button">
-                    <button onClick={deletesend} style={{ width: "80px", height: "50px" }}>삭제</button>
-                </div>
+                
                
                 <div className="message-pagination">
 
