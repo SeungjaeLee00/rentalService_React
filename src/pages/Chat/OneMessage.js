@@ -53,14 +53,11 @@ export default function OneMessage() {
             }
     }
     const [modalopen,setModalOpen]= useState(false);
-
-    
-    
-   
-    //쪽지 답장 함수
-    function reply()
-    {
-
+    //UTC -> 한국시간으로 바꿔주는 함수.
+    function time(msgtime) {
+        const kor = new Date(msgtime);
+        kor.setHours(kor.getHours()+9);
+        return kor.toLocaleString();
     }
 
     return (
@@ -73,7 +70,7 @@ export default function OneMessage() {
                             <div className="info-left">
                                 <div className="left-top">
                                     <div style={{ fontSize: "18px", marginLeft: "30px" }}>게시글제목:{msg.postTitle}</div>
-                                    <div style={{ marginLeft: "300px", marginLeft: "200px" }}>보낸날짜: {msg.createdDate}</div>
+                                    <div style={{ marginLeft: "300px", marginLeft: "200px" }}>보낸날짜: {time(msg.createdDate)}</div>
                                 </div>
                                 <div style={{ marginTop: "30px", marginLeft: "30px" }} className="left-bottom">발신자 : {msg.senderNickname}</div>
                             </div>

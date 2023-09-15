@@ -1,41 +1,34 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { Await, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Do_Report from '../Report/Do_Report';
-import { useSelector } from 'react-redux';
 import { useAuth } from '../../components/AuthContext'
-import HorizonLine from '../../components/HorizonLine';
 import Login from '../Login/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Chat from '../../pages/Chat/Chat';
-
-// Import Swiper React components
-// import { Swiper, SwiperSlide } from 'swiper/react';
-
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-// import 'swiper/css/scrollbar';
-// import { Navigation, Pagination, Mousewheel, Keyboard} from 'swiper/modules';
-
-
 import '../../style/modal.css';
-// Import Swiper styles
-import 'swiper/swiper-bundle.min.css';
-import 'swiper/components/navigation/navigation.min.css';
-import 'swiper/components/pagination/pagination.min.css';
-import 'swiper/components/scrollbar/scrollbar.min.css';
-import SwiperCore, { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/core';
 import axios from 'axios';
-SwiperCore.use([Navigation, Pagination, Mousewheel, Keyboard]);
-
-
 
 function Detail() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  let { id } = useParams();
+  //location -> post에서 호출한 상품 1개의 데이터
+  const location = useLocation();
+  //item -> 단일상품정보 
+  const [item, setItem] = useState();
+  //itemlike -> 단일상품 좋아요 표시
+  const [itemlike, setItemLike] = useState();
 
   const [showLoginPopup, setshowLoginPopup] = useState(false);
   const [showReportPopup, setshowReportPopup] = useState(false);
+
+  useEffect(() => {
+    axios.get('http://13.125.98.26:8080/posts/' + id)
+      .then(response => {
+        console.log(response.data.result.data);
+        setItem(response.data.result.data);
+        setItemLike(response.data.result.data.likes);
+      })
+  }, [])
 
   const openloginModal = () => {
     setshowLoginPopup(true);
@@ -51,24 +44,6 @@ function Detail() {
     setshowReportPopup(false);
   };
 
-  const onChatHandler = () => {
-    if (!isAuthenticated) {
-      openloginModal();
-    }
-    else {
-      navigate('/itemmain/detail/chat')
-    }
-  }
-
-  const onReportHandler = () => {
-    if (!isAuthenticated) {
-      openloginModal();
-    }
-    else {
-      openReportModal();
-    }
-  }
-
   const onUploaditemHandler = () => {
     if (!isAuthenticated) {
       openloginModal();
@@ -78,162 +53,81 @@ function Detail() {
     }
   }
 
-  let { id } = useParams();
-  //console.log(id);
-
-  const state = useLocation();
-
-  const [item, setItem] = useState();
-  const [itemlike, setItemLike] = useState();
-
-
-  useEffect(() => {
-    axios.get('http://13.125.98.26:8080/posts/' + id)
-      .then(response => {
-        console.log("useEffect성공");
-        console.log(response.data.result.data);
-        setItem(response.data.result.data);
-        setItemLike(response.data.result.data.likes);
-      })
-  }, [])
-
-
-  const likeadd = () => {
-    axios.post('http://13.125.98.26:8080/posts/' + id + '/likes')
-  }
-
-
-
-  const [comments, setComments] = useState([
-    { id: 1, content: 'I like it!' }
-  ]);
-
-  const nextId = useRef(1);
-
-  const onInsert = useCallback(
-    (content) => {
-      const comment = {
-        id: nextId.current,
-        content
-      };
-      console.log(content);
-      setComments(comments => comments.concat(comment));
-      nextId.current += 1;
-    },
-    [comments],
-  );
-
-  const [value, setValue] = useState({
-    content: ''
-  });
-
-  const onChangeContent = useCallback(
-    (e) => {
-      setValue({
-        content: e.target.value,
-      });
-    },
-    [value]
-  );
-
-  const onSubmit = useCallback(
-    e => {
-      onInsert(value.content);
-      setValue({
-        content: ''
-      });
-      e.preventDefault();
-    },
-    [onInsert, value],
-  );
-
   return (
-
     <div className='page-container'>
       <div className='Detail_Item_wrap'>
         <div className='Detail_Item_Img'>
-
-
-          {/* <Swiper
-            cssMode={true}
-            navigation={true}
-            pagination={true}
-            mousewheel={true}
-            keyboard={true}
-            modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-            className="mySwiper"
-          >
-            <SwiperSlide><img src={ExImg1} /></SwiperSlide>
-            <SwiperSlide><img src={ExImg2} /></SwiperSlide>
-            <SwiperSlide><img src={ExImg3} /></SwiperSlide>
-            <SwiperSlide><img src={ExImg4} /></SwiperSlide>
-          </Swiper> */}
-
-
           <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
           <Login open={showLoginPopup} close={closeloginModal} ></Login>
-          <div className='Detail_Item_wrap'>
-            <div className='Detail_Item_Img'>
-             {item ? <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + item.imageName} style={{width:"300px", height:"300px"}} /> : null}
-            </div>
-            {item ? <div>
-              <div className='Item_About'>
 
-
-                {/* <div style={{marginTop:"15px"}}>작성자 : {item.writer.nickname}</div> */}
-                <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {item.categoryName}&nbsp; {'>'} &nbsp; {item.title}</div>
-                <div className="Detail_Item_Name_Price">
-                  <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">{item.item ? item.item.name : "로딩중"}</div>
-                  <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{item.item ? item.item.price : "로딩중"}</div>
-                </div>
-                <div style={{ marginTop: 20 }}>
-                  <span>2023.08.13.16:00&nbsp;</span>
-                  
-
-            
-                  <div style={{ marginTop: "20px" }}>{item.content}</div>
-                  <div  style={{marginTop:"20px"}} >👤{item.writer.nickname}</div>
-                  
-
-                </div>
-                <div className='Item_Button'>
-                  <button onClick={() => {
-                    axios.post('http://13.125.98.26:8080/posts/' + id + '/likes', null, {
-                      headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${localStorage.accessToken}` },
-                      headers: { Auth: localStorage.refreshToken },
-                    })
-                      .then(response => {
-                        console.log("성공");
-                        
-                        let copy = item;
-                        copy.likes = 1;
-                        setItem(copy);
-                        {itemlike ? setItemLike(false) : setItemLike(true)}
-                        
-                      })
-                      .catch(error => {
-                        console.log(error.response.data.result);
-                      })
-                  }}   style={{ backgroundColor: "white", color: "black" }}>{itemlike ? <span>♥</span> : <span>♡</span>}</button>
-                  <button onClick={() => navigate('/itemmain/detail/chat', {state : item})}>쪽지보내기</button>
-                  <button onClick={openReportModal} variant="secondary" size="lg">❗️</button>
-                  <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
-
-                </div>
-              </div>
-            </div> : <div>로딩중</div>}
-          </div>
-          
+          <OneItem item={item} id={id} location={location} setItem={setItem} itemlike={itemlike} setItemLike={setItemLike}
+            navigate={navigate} openReportModal={openReportModal} showReportPopup={showReportPopup} closeReportnModal={closeReportnModal} />
 
           <div className='upload_item' style={{ position: "fixed", right: '45px', bottom: '30px' }}>
             <button style={{ borderRadius: "30px", fontSize: '20px', width: "100px", height: "50px", border: "none" }}
               onClick={onUploaditemHandler}> + 글쓰기 </button>
           </div>
-
         </div>
       </div>
     </div>
   )
 }
 
+function OneItem(props) {
+  function LikeAdd() {
+    axios.post('http://13.125.98.26:8080/posts/' + props.id + '/likes', null, {
+      headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${localStorage.accessToken}` },
+      headers: { Auth: localStorage.refreshToken },
+    })
+      .then(response => {
+        console.log("성공");
+        let copy = props.item;
+        copy.likes = 1;
+        props.setItem(copy);
+        { props.itemlike ? props.setItemLike(false) : props.setItemLike(true) }
+
+      })
+      .catch(error => {
+        console.log(error.response.data.result);
+      })
+  }
+  //UTC -> 한국시간으로 바꿔주는 함수.
+  function time(itemtime) {
+    const kor = new Date(itemtime);
+    kor.setHours(kor.getHours()+9);
+    return kor.toLocaleString();
+   }
+
+  return (
+    <div className='Detail_Item_wrap'>
+      <div className='Detail_Item_Img'>
+        {props.item ? <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + props.item.imageName}
+          style={{ width: "300px", height: "300px" }} /> : null}
+      </div>
+      {props.item ? <div>
+        <div className='Item_About'>
+          {/* <div style={{marginTop:"15px"}}>작성자 : {item.writer.nickname}</div> */}
+          <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {props.item.categoryName}&nbsp; {'>'} &nbsp; {props.item.title}</div>
+          <div className="Detail_Item_Name_Price">
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">{props.item.item ? props.item.item.name : "로딩중"}</div>
+            <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{props.item.item ? props.item.item.price : "로딩중"}</div>
+          </div>
+          <div style={{ marginTop: 20 }}>
+            <span>{time(props.location.state.createdTime)}&nbsp;</span>
+            <div style={{ marginTop: "20px" }}>{props.item.content}</div>
+            <div style={{ marginTop: "20px" }} >👤{props.item.writer.nickname}</div>
+          </div>
+          <div className='Item_Button'>
+            <button onClick={LikeAdd} style={{ backgroundColor: "white", color: "black" }}>{props.itemlike ? <span>♥</span> : <span>♡</span>}</button>
+            <button onClick={() => props.navigate('/itemmain/detail/chat', { state: props.item })}>쪽지보내기</button>
+            <button onClick={props.openReportModal} variant="secondary" size="lg">❗️</button>
+            <Do_Report open={props.showReportPopup} close={props.closeReportnModal} ></Do_Report>
+
+          </div>
+        </div>
+      </div> : <div>로딩중</div>}
+    </div>
+
+  )
+}
 export default Detail;

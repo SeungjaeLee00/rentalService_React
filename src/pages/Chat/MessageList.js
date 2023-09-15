@@ -9,7 +9,6 @@ export default function MessageList(props) {
 
     const [message, setMessage] = useState();
     const [msgid, setMsgId] = useState();
-    const [send, setSend] = useState();
 
     const navigate = useNavigate();
     const [who, setWho] = useState("received");
@@ -87,6 +86,12 @@ export default function MessageList(props) {
             }
         })
     }
+    //UTC -> 한국시간으로 바꿔주는 함수.
+    function time(msgtime) {
+    const kor = new Date(msgtime);
+    kor.setHours(kor.getHours()+9);
+    return kor.toLocaleString();
+   }
     
     const url = "/my-page/chats/message/"
     return (
@@ -126,8 +131,8 @@ export default function MessageList(props) {
                             }}>
                                 <td >{a.senderNickname}</td>
                                 <td> {a.postTitle}</td>
-                                <td >{a.content.length > 20 ? a.content.substr(0, 19) + "..." : a.content}</td>
-                                <td >{a.createdDate}</td>
+                                <td >{a.content.length > 20 ? a.content.substr(0, 15) + "..." : a.content}</td>
+                                <td >{time(a.createdDate)}</td>
                                 <td >{a.checked ? <div>읽음</div> : <div>읽지않음</div>}</td>
                             </tr>
                         )) : null}

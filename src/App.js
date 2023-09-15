@@ -38,13 +38,7 @@ import MyChat from './pages/Chat/MyChat'
 import OneMessage from './pages/Chat/OneMessage';
 import SearchItem from './pages/about_Item/SearchItem';
 
-// dayjs설정
-import dayjs from 'dayjs';
-import isLeapYear from 'dayjs/plugin/isLeapYear'; // 윤년 판단 플러그인
-import 'dayjs/locale/ko'; // 한국어 가져오기
 
-dayjs.extend(isLeapYear); // 플러그인 등록
-dayjs.locale('ko'); // 언어 등록
 
 function App() {
   return (
