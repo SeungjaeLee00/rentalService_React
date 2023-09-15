@@ -84,13 +84,7 @@ export default function OneMessage() {
                                 <button onClick={deletesend} style={{ marginLeft: "20px" }}>삭제</button>
                             </div>
                         </div>
-                    </div>
-                    <div className="modal">
-                        <div className="modal_body">
-                            <h2>모달창제목</h2>
-                            <p>모달창 내용</p>
-                        </div>
-                    </div>
+                    </div>                    
                     <div className="one-bottom">
                         <div className="msg-content">{msg.content}</div>
                         <div className="msg-bottom">

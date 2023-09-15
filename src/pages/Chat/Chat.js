@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import './ChatForm.css';
+import '../../style/ItemChat.css';
 import { useAuth } from '../../components/AuthContext';
 import axios from 'axios';
+import { TextField } from '@material-ui/core';
 
+// 디테일페이지에서 쪽지보내기 눌렀을때 보이는 컴포넌트
 function Chat() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,6 +48,7 @@ function Chat() {
         .then(response=>{
           console.log('메세지 전송 성공: ', response.data);
           alert('메시지가 전송되었습니다');
+          navigate(-1);
         })
         .catch(error=>{
           console.error('메세지 전송 실패:', error.response.data.result);
@@ -61,16 +64,16 @@ function Chat() {
       <div style={{fontSize:"20px",marginTop:"20px", fontWeight:"bold"}}>게시글제목 : {location.state.title}</div>
       <div style={{fontSize:"15px", marginTop:"15px"}}>{location.state.writer.nickname}님에게 쪽지</div>
       <form onSubmit={handleSubmit} className="chat-form" style={{marginTop:"50px"}}>
-        <input
-          type="text"
-          placeholder="메세지를 입력하세요..."
-          value={content}
-          onChange={handleContentChange}
-        />
-        <button type="submit"> 보내기 </button>
+        <TextField
+        label="쪽지내용"
+        multiline
+        rows={15}
+        onChange={handleContentChange}
+        style={{width:"500px"}}> 
+        </TextField>
+        <button type="submit" style={{marginTop:"30px", width:"80px", borderRadius:"10px",
+                                     backgroundColor:"white"}}> 보내기 </button>
       </form>
-
-      <Link className="to-chats" to="/my-page/chats">쪽지함 바로가기</Link>
     </div>
   );
 }

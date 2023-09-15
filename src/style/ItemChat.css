@@ -1,0 +1,12 @@
+.chat-form-container{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-form{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -222,30 +222,8 @@ function Detail() {
                 </div>
               </div>
             </div> : <div>로딩중</div>}
-
-
-
           </div>
-          <HorizonLine />
-
-          <div style={{ padding: "20px" }}>
-            <h3>댓글</h3>
-            <form className="CommentInsert" onSubmit={onSubmit}
-              style={{ display: 'flex' }}>
-              <textarea placeholder="    댓글을 입력하세요."
-                cols="90"
-                rows="2"
-                style={{
-                  background_color: "transparent",
-                  border: "2px solid rgba(0, 0, 0, 0.23)",
-                  borderRadius: "7px", marginLeft: "270px"
-                }}
-                value={value.content}
-                onChange={onChangeContent}
-              />
-              <button type="submit" style={{ border: 'none', marginLeft: "5px" }}>보내기</button>
-            </form>
-          </div>
+          
 
           <div className='upload_item' style={{ position: "fixed", right: '45px', bottom: '30px' }}>
             <button style={{ borderRadius: "30px", fontSize: '20px', width: "100px", height: "50px", border: "none" }}

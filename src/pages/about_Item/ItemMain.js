@@ -53,7 +53,8 @@ function ItemMain(props) {
   }
 
   let navigate = useNavigate();
-
+  
+ 
 
   const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
   const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
@@ -91,8 +92,8 @@ function ItemMain(props) {
 
       
 
-
-
+    
+      
       <div className='Main-Content'>
         방금 등록된 상품
       </div>
@@ -126,26 +127,6 @@ function ItemMain(props) {
   );
 };
 
-// function Category(){
-//   return(
-
-//     <div className="Category-li">
-//         <li>전체상품</li>
-//         <li>가전제품</li>
-//         <li>생활용품</li>
-//         <li>완구</li>
-//         <li>운동기구</li>
-//         <li>차량,오토바이</li>
-//         <li>악기</li>
-//         <li>책</li>
-//         <li>공구</li>
-//         <li onClick={()=>{
-//         }}>의류</li>
-
-//     </div>
-//   )
-// }
-
 // 아이템 생성 함수 지금사용 x , posts.js에서 아이템생성해줌.
 function ItemProduce(props) {
   return (
@@ -172,31 +153,5 @@ function ItemProduce(props) {
     })
   )
 }
-
-// function Card(props) {
-
-//   let navigate = useNavigate();
-
-//   const about = "이승재 \n 조회 수 회 ⋅ 1초 전"
-
-//   return (
-//     <div className="col-md-4" style={{ marginBottom: "30px" }}
-//       onClick={() => navigate('/itemmain/detail')}>
-//       <img src={'https://codingapple1.github.io/shop/shoes1.jpg'} width="60%" />
-//       <div className='etc' style={{ display: 'flex', flexDirection: 'row', padding: '20px' }}>
-//         <div style={{ textAlign: 'left', marginLeft: "60px" }}>
-//           <h5> 3번 신은 신발 </h5>
-//           <p style={{ color: 'gray', fontSize: "15px" }}>{about}</p>
-//         </div>
-//         <div style={{ textAlign: 'right' }}>
-//           <p style={{ color: 'green', fontSize: "12px" }}>대여 가능</p>
-//         </div>
-
-
-//       </div>
-
-//     </div>
-//   )
-// }
 
 export default ItemMain;

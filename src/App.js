@@ -38,61 +38,68 @@ import MyChat from './pages/Chat/MyChat'
 import OneMessage from './pages/Chat/OneMessage';
 import SearchItem from './pages/about_Item/SearchItem';
 
+// dayjs설정
+import dayjs from 'dayjs';
+import isLeapYear from 'dayjs/plugin/isLeapYear'; // 윤년 판단 플러그인
+import 'dayjs/locale/ko'; // 한국어 가져오기
+
+dayjs.extend(isLeapYear); // 플러그인 등록
+dayjs.locale('ko'); // 언어 등록
+
 function App() {
   return (
     <div className="root-wrap">
-      <ReNavBar/>
+      <ReNavBar />
       {/* <NavBar /> */}
       {/* <Router> */}
       <div className='body'>
-      <AuthProvider>
-        <Routes>
-          <Route exact path="/" element={<ItemMain />} />
-          <Route exact path="/search/:contents" element={<SearchItem/>}/>
-          <Route exact path="/signup" element={<Signup />} />
+        <AuthProvider>
+          <Routes>
+            <Route exact path="/" element={<ItemMain />} />
+            <Route exact path="/search/:contents" element={<SearchItem />} />
+            <Route exact path="/signup" element={<Signup />} />
 
-        <Route exact path="/find-id" element={<FindId />} />
-        <Route exact path="/find-pw" element={<FindPw />} />
-        <Route exact path='/reset-pw' element={<ResetPW />} />
+            <Route exact path="/find-id" element={<FindId />} />
+            <Route exact path="/find-pw" element={<FindPw />} />
+            <Route exact path='/reset-pw' element={<ResetPW />} />
 
-          <Route exact path="/found-id" element={<FoundId />} />
-          <Route exact path="/loginpage" element={<LoginPage />} />
-
-          
-          <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
-          <Route exact path='/itemmain/detail/:id' element={<Detail />} />
-          <Route exact path='/itemmain/detail/chat' element={<Chat />} />
-          <Route exact path='/category/:category' element={<Category/>}/>
-
-          <Route exact path="/my-page/upload-item" element={<Upload_Item />} />
-          <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
-          <Route exact path='/my-page/myitempage' element={<MyitemPage />} />
-          <Route exact path='/my-page/chats' element={<MyChat />} />
-          <Route exact path='/my-page/chats/message/:id' element={<OneMessage/>}/>
-          <Route exact path='/my-page/reports' element={<My_Reports />} />
-          <Route exact path='/my-page/all-trades' element={<AllTrade />} />
-
-          <Route exact path='/report' element={<Do_Report />} />
-          
-          <Route exact path='/reviews' element={<All_Review />} />
-          <Route exact path='/reviews/my-review' element={<My_Review />} />
-          <Route exact path='/reviews/write-review' element={<Write_Review />} />
-
-          <Route exact path="/my-page" element={<MyPage/>}>
-            <Route exact path="post" element={<MyPost/>}></Route>
-            <Route exact path="like" element={<MyLike/>}></Route>
-            <Route exact path='rent' element={<MyRent/>}></Route>
-            <Route exact path='borrow' element={<MyBorrow/>}></Route>
-          </Route>
-
-          <Route exact path='/my-change' element={<MyChange/>}/>
+            <Route exact path="/found-id" element={<FoundId />} />
+            <Route exact path="/loginpage" element={<LoginPage />} />
 
 
-         
-        </Routes>
-      </AuthProvider>
+            <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
+            <Route exact path='/itemmain/detail/:id' element={<Detail />} />
+            <Route exact path='/itemmain/detail/chat' element={<Chat />} />
+            <Route exact path='/category/:category' element={<Category />} />
+
+            <Route exact path="/my-page/upload-item" element={<Upload_Item />} />
+            <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
+            <Route exact path='/my-page/myitempage' element={<MyitemPage />} />
+            <Route exact path='/my-page/chats' element={<MyChat />} />
+            <Route exact path='/my-page/chats/message/:id' element={<OneMessage />} />
+            <Route exact path='/my-page/reports' element={<My_Reports />} />
+            <Route exact path='/my-page/all-trades' element={<AllTrade />} />
+
+            <Route exact path='/report' element={<Do_Report />} />
+
+            <Route exact path='/reviews' element={<All_Review />} />
+            <Route exact path='/reviews/my-review' element={<My_Review />} />
+            <Route exact path='/reviews/write-review' element={<Write_Review />} />
+
+            <Route exact path="/my-page" element={<MyPage />}>
+              <Route exact path="post" element={<MyPost />}></Route>
+              <Route exact path="like" element={<MyLike />}></Route>
+              <Route exact path='rent' element={<MyRent />}></Route>
+              <Route exact path='borrow' element={<MyBorrow />}></Route>
+            </Route>
+
+            <Route exact path='/my-change' element={<MyChange />} />
+
+
+
+          </Routes>
+        </AuthProvider>
       </div>
-      {/* </Router> */}
     </div>
   );
 }
