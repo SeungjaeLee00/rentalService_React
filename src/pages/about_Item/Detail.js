@@ -6,6 +6,7 @@ import Login from '../Login/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../style/modal.css';
 import axios from 'axios';
+import SetKST from '../../utils/SetKST';
 
 function Detail() {
   const navigate = useNavigate();
@@ -58,10 +59,6 @@ function Detail() {
 
   return (
     <div className='page-container'>
-      <ul>
-        <li>수정하기</li>
-        <li>삭제하기</li>
-      </ul>
       <div className='Detail_Item_wrap'>
         <div className='Detail_Item_Img'>
           <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
@@ -98,13 +95,7 @@ function OneItem(props) {
         console.log(error.response.data.result);
       })
   }
-  //UTC -> 한국시간으로 바꿔주는 함수.
-  function time(itemtime) {
-    const kor = new Date(itemtime);
-    kor.setHours(kor.getHours()+9);
-    return kor.toLocaleString();
-   }
-
+  
   return (
     <div className='Detail_Item_wrap'>
       {/* img */}
@@ -122,7 +113,7 @@ function OneItem(props) {
             <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{props.item.item ? props.item.item.price : "로딩중"}</div>
           </div>
           <div style={{ marginTop: 20 }}>
-            <span>{time(props.location.state)}&nbsp;</span>
+            <span>{SetKST(props.location.state)}&nbsp;</span>
             <div style={{ marginTop: "20px" }}>{props.item.content}</div>
             <div style={{ marginTop: "20px" }} >👤{props.item.writer.nickname}</div>
           </div>

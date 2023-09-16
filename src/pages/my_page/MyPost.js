@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
-
+import SetKST from "../../utils/SetKST";
 
 export default function MyPost(props) {
     const { mypost, setMyPost } = useOutletContext();
@@ -10,13 +10,6 @@ export default function MyPost(props) {
     console.log(mypost);
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
-
-    //UTC -> 한국시간으로 바꿔주는 함수.
-    function time(itemtime) {
-        const kor = new Date(itemtime);
-        kor.setHours(kor.getHours() + 9);
-        return kor.toLocaleString();
-    }
 
     function DeleteItem(id) {
         axios.post("/posts/" + id, {
@@ -34,22 +27,18 @@ export default function MyPost(props) {
     return (
         <div className="MyPost-wrap">
             {mypost ? <>
-
              <div className="post-top">
                 <p style={{ padding: "30px", fontSize: "25px", fontWeight: "bold" }}>게시물내역 조회</p>
             </div>
 
             {/* 게시물 생성 컴포넌트 */}
-            <ItemTable mypost={mypost} time={time} navigate={navigate} DeleteItem={DeleteItem} />
-            
+            <ItemTable mypost={mypost}  navigate={navigate} DeleteItem={DeleteItem} />
             </> : null}
         </div>
     )
 }
 
-
-
-function ItemTable({ mypost, time, navigate, DeleteItem }) {
+function ItemTable({ mypost, navigate, DeleteItem }) {
     return (
         <div className="post-bottom">
             <table style={{ width: "1200px" }}>
@@ -73,7 +62,7 @@ function ItemTable({ mypost, time, navigate, DeleteItem }) {
                                 </div>
 
                             </td>
-                            <td>{time(a.createdTime)}</td>
+                            <td>{SetKST(a.createdTime)}</td>
                             <td>{"대여가능"}</td>
                             <td>
                                 <button onClick={(e) => {

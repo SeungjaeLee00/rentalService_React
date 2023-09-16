@@ -5,7 +5,23 @@ import FormControl from "@mui/material/FormControl";
 import HorizonLine from '../../components/HorizonLine';
 import { useAuth } from '../../components/AuthContext';
 import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 
+let Button = styled.button`
+  color:black;
+  border-Radius:30px;
+  font-Size:20px;
+  width:100px;
+  height:50px;
+  border:none;
+  font-Weight:bold;
+  background-Color:rgb(220, 220, 220);
+  &:hover{
+    transform: translateY(-2px);
+    transition: 1s;
+    color:blue;
+}
+`;
 
 
 const Upload_Item = () => {
@@ -98,12 +114,9 @@ const Upload_Item = () => {
         headers: { Auth: retoken },
       })
     }
-    
     window.location.replace("/");
 
   }
-
-
 
   if (!isAuthenticated) {
     window.location.replace("/loginpage")
@@ -123,8 +136,8 @@ const Upload_Item = () => {
           itemquantity={itemquantity} saveFile={saveFile}  saveTitle={saveTitle} saveCategory={saveCategory} saveName={saveName} savePrice={savePrice}
             saveContent={saveContent} saveQuantity={saveQuantity} />
 
-          <button className='buttonstyle' style={{ fontSize: '20px', width: "100px", height: "50px" }}
-            onClick={produce}> 완료 </button>
+          <Button className='buttonstyle' style={{ fontSize: '20px', width: "100px", height: "50px" }}
+            onClick={produce}> 완료 </Button>
         </div>
       ) : (
         <p>로그인이 필요합니다.</p>
@@ -205,7 +218,6 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, 
       <div style={{ display: "flex" }}>
         <h5>가격</h5>
         <p style={{ color: 'red' }}>*</p>
-
         <input
           type="text"
           placeholder="  ₩ 숫자만 입력해주세요."

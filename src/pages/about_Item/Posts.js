@@ -1,17 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router";
-
-
+import SetKST from "../../utils/SetKST";
 
 const Posts = (props) => {
-  const navigate = useNavigate();
-  //UTC -> 한국시간으로 바꿔주는 함수.
-  function time(itemtime) {
-   const kor = new Date(itemtime);
-   kor.setHours(kor.getHours()+9);
-   return kor.toLocaleString();
-  }
   
+  const navigate = useNavigate();
+ 
   return (
     props.currentPosts ? props.currentPosts.slice(0, props.ItemIndex).map(item => (
       <div className="Item" key={item.id} onClick={() => {
@@ -24,17 +18,14 @@ const Posts = (props) => {
           <div className='Item-Name-Price-Date-Wrap'>
             <div className='Item-Name'>{item.title}</div>
             <div className='Item-Price'>{item.nickname}</div>
-            <div className='Item-Date'>{time(item.createdTime)}</div>
+            <div className='Item-Date'>{SetKST(item.createdTime)}</div>
           </div>
           <div className='Item-State'>
             {item.state}
           </div>
         </div>
       </div>
-
     )) : <div>로딩중</div>
-
-
   );
 };
 export default Posts;

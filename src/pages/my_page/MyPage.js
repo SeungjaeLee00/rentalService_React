@@ -1,12 +1,11 @@
 import '../../style/MyPage.css'
-import HorizonLine from '../../components/HorizonLine'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import Nav from "../SideNav/Index";
 import MyPageTop from '../../components/MyPageTop';
-
+import WriteBtn from '../../components/WriteBtn';
 
 export default function MyPage() {
   const actoken = localStorage.accessToken;
@@ -43,7 +42,7 @@ export default function MyPage() {
         {/* https://leejams.github.io/useOutletContext/ , sidebar클릭했을때 보이는 컴포넌트들(mypost,mylike...*/}
         <div className='bottom-right'><Outlet context={{ mypost,setMyPost}} /></div>
       </div>
-
+      <WriteBtn/>
     </div>
   )
 }

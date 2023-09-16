@@ -1,43 +1,54 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';  // 무한 스크롤용 라이브러리
-import axios, { Axios } from 'axios';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Logo from '../../assets/img/logo2.PNG';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Pagination from './Pagination';
 import Posts from './Posts';
-
-// import Category from '../../components/Category';
-
+import WriteBtn from '../../components/WriteBtn';
 
 function ItemMain() {
+  const navigate = useNavigate();
+
   const [store, setStore] = useState([]);
-  //package.json에서 proxy설정했기 때문에 /posts만 사용하여도 댐
+  const [loading, setLoading] = useState(false);
+  const [error,setError]=useState(null);
+
+  const fetchPosts = async() =>{
+    try{
+      //요청시작할때 error와 store 초기화
+      setError(null);
+      setStore(null);
+      //loading 상태를 true
+      setLoading(true);
+      const response = await axios.get('/posts');
+      console.log(response.data.result.data.postList);
+      setStore(response.data.result.data.postList);
+    }catch(e){
+      setError(e);
+    }
+    setLoading(false);
+  }  
+
+
   useEffect(() => {
-    axios.get('/posts')
-      .then(response => {
-        console.log(response.data.result.data.postList);
-        setStore(response.data.result.data.postList);
-      })
+    fetchPosts();
   }, [])
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(6);
-  const [ItemIndex, setItemIndex] = useState(6);
-
-  const navigate = useNavigate();
-
+  const postsPerPage = 6;
+  const ItemIndex =6;
   const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
   const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
 
-
-  //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts라는 곳에 담아줌.
+  //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts에 담아줍니다.
   const currentPosts = () => {
     let currentPosts = 0;
     currentPosts = store.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
+  if(loading) return <div>로딩중..</div>;
+  if(error) return <div>에러가 발생했습니다</div>;
 
   return (
     <div className='page-container'>
@@ -61,9 +72,8 @@ function ItemMain() {
         ></Pagination>
       </div>
 
-      
       {/* 본문하단 글쓰기버튼 */}
-        <WriteBtn navigate={navigate}/>
+        <WriteBtn/>
     </div>
   );
 };
@@ -83,20 +93,10 @@ function Dashboard() {
         <img style={{ width: "350px", height: "200px", paddingBottom: "30px", paddingLeft: "100px", marginLeft: "100px" }} src={Logo}></img>
       </div>
     </div>
-
   )
 }
 
-function WriteBtn(props)
-{
-  return(
-    <div className='upload_item' style={{ position: "fixed", right: '45px', bottom: '30px' }}>
-        <button style={{ borderRadius: "30px", fontSize: '20px', width: "100px", height: "50px", border: "none" }}
-          onClick={() => props.navigate('/itemmain/upload-item')}> + 글쓰기 </button>
-      </div>
-  )
 
-}
 
 
 export default ItemMain;
