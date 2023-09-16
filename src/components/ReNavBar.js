@@ -64,7 +64,7 @@ export default function ReNavBar() {
                         <input type="text"
                          value={search}
                          className='search'
-                         placeholder='어떤 상품을 찾으시나요?'
+                         placeholder='🔍어떤 상품을 찾으시나요?'
                           onChange={(e)=>{
                             setSearch(e.target.value);
                         }}></input>

@@ -3,9 +3,7 @@ import { Route, Routes, Router } from 'react-router-dom';
 import './style/App.css';
 import { AuthProvider } from './components/AuthContext';
 
-import NavBar from './components/NavBar';
 import Signup from './pages/SignUp/Signup';
-import Main from './pages/Initial_Screen/Main';
 import ItemMain from './pages/about_Item/ItemMain';
 import FindId from './pages/about_membership/FindId';
 import FindPw from './pages/about_membership/Find_pw';
@@ -16,7 +14,7 @@ import LoginPage from './pages/Login/LoginPage';
 import Chat from './pages/Chat/Chat';
 import Detail from './pages/about_Item/Detail';
 import Edit_membership from './pages/my_page/Edit_membership';
-import AllChats from './pages/Chat/AllChats';
+
 import MyitemPage from './pages/my_page/MyitemPage';
 import My_Reports from './pages/Report/My_Reports';
 import Do_Report from './pages/Report/Do_Report'
@@ -43,8 +41,6 @@ function App() {
   return (
     <div className="root-wrap">
       <ReNavBar />
-      {/* <NavBar /> */}
-      {/* <Router> */}
       <div className='body'>
         <AuthProvider>
           <Routes>
@@ -65,7 +61,6 @@ function App() {
             <Route exact path='/itemmain/detail/chat' element={<Chat />} />
             <Route exact path='/category/:search' element={<Category />} />
 
-            <Route exact path="/my-page/upload-item" element={<Upload_Item />} />
             <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
             <Route exact path='/my-page/myitempage' element={<MyitemPage />} />
             <Route exact path='/my-page/chats' element={<MyChat />} />

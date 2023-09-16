@@ -19,7 +19,7 @@
 }
 
 .body{
-  padding-top: 150px;
+  padding-top: 230px;
   padding-bottom:110px;
 }
 
@@ -146,7 +146,9 @@
 
 }
 .Item:hover{
-  /* transform:scaleY(1.02); */
+  transform: translateY(-15px);
+    transition: 1s;
+  /* transform : translate(5 px,5%); */
   box-shadow: 5px 5px 10px -10px gray;
 }
 

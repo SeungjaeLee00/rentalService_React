@@ -15,7 +15,7 @@ const Posts = (props) => {
   return (
     props.currentPosts ? props.currentPosts.slice(0, props.ItemIndex).map(item => (
       <div className="Item" key={item.id} onClick={() => {
-        navigate('/itemmain/detail/' + item.id, { state: item });
+        navigate('/itemmain/detail/' + item.id, { state: item.createdTime });
       }}>
         <div className='Item-Img'>
           <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + item.link} style={{ width: 200, height: 200 }} />

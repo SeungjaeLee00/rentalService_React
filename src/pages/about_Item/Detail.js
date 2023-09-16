@@ -10,9 +10,12 @@ import axios from 'axios';
 function Detail() {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  //id는 검색 '/' 뒤에 붙는 값
   let { id } = useParams();
-  //location -> post에서 호출한 상품 1개의 데이터
+
+  //navigate와 함께보내주는 데이터 location ->  단일상품에 시간 key가없어서 location으로 시간표시
   const location = useLocation();
+  
   //item -> 단일상품정보 
   const [item, setItem] = useState();
   //itemlike -> 단일상품 좋아요 표시
@@ -55,6 +58,10 @@ function Detail() {
 
   return (
     <div className='page-container'>
+      <ul>
+        <li>수정하기</li>
+        <li>삭제하기</li>
+      </ul>
       <div className='Detail_Item_wrap'>
         <div className='Detail_Item_Img'>
           <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
@@ -100,20 +107,22 @@ function OneItem(props) {
 
   return (
     <div className='Detail_Item_wrap'>
+      {/* img */}
       <div className='Detail_Item_Img'>
         {props.item ? <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + props.item.imageName}
-          style={{ width: "300px", height: "300px" }} /> : null}
+          style={{ width: "400px", height: "400px" }} /> : null}
       </div>
-      {props.item ? <div>
+
+      {/* 상품정보,설명 등 */}
+      {props.item ? <>
         <div className='Item_About'>
-          {/* <div style={{marginTop:"15px"}}>작성자 : {item.writer.nickname}</div> */}
           <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {props.item.categoryName}&nbsp; {'>'} &nbsp; {props.item.title}</div>
           <div className="Detail_Item_Name_Price">
             <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name">{props.item.item ? props.item.item.name : "로딩중"}</div>
             <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{props.item.item ? props.item.item.price : "로딩중"}</div>
           </div>
           <div style={{ marginTop: 20 }}>
-            <span>{time(props.location.state.createdTime)}&nbsp;</span>
+            <span>{time(props.location.state)}&nbsp;</span>
             <div style={{ marginTop: "20px" }}>{props.item.content}</div>
             <div style={{ marginTop: "20px" }} >👤{props.item.writer.nickname}</div>
           </div>
@@ -125,7 +134,7 @@ function OneItem(props) {
 
           </div>
         </div>
-      </div> : <div>로딩중</div>}
+      </> : <div>로딩중</div>}
     </div>
 
   )
