@@ -19,7 +19,7 @@
 }
 
 .body{
-  padding-top: 75px;
+  padding-top: 150px;
   padding-bottom:110px;
 }
 
@@ -146,7 +146,7 @@
 
 }
 .Item:hover{
-  transform:scaleY(1.02);
+  /* transform:scaleY(1.02); */
   box-shadow: 5px 5px 10px -10px gray;
 }
 
@@ -190,23 +190,6 @@
   justify-content: center;
   align-items: center;
   margin-top: 40px;
-}
-
-
-/* 상품검색바 css */
-
-.search_input {
-  padding: 2px;
-  margin-right: 5px;
-  margin-left:700px;
-  margin-top: 15px;
-  width: 25%;
-}
-
-.serach_submit {
-  position: absolute;
-  margin-top: 14px;
-  cursor: pointer;
 }
 
 

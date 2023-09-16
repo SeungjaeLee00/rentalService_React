@@ -14,9 +14,8 @@ export default function MyPost(props) {
             {mypost ? <> <div className="post-top">
                 <p style={{ padding:"30px", fontSize: "25px", fontWeight:"bold" }}>게시물내역 조회</p>
             </div>
-
                 <div className="post-bottom">
-                    <table style={{ width: "1200px", marginTop: "16px" }}>
+                    <table style={{ width: "1200px" }}>
                         <thead>
                             <tr>
                                 <th >게시물 정보</th>

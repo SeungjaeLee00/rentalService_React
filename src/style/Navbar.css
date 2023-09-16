@@ -4,8 +4,10 @@
     padding-top: 40px;
     padding-left:100px;
     border-bottom: 0.1rem solid gray;
-    position: sticky;
+    position: fixed;
     top:0;
+    left:0;
+    right:0;
     background-color: rgb(255, 255, 255);
     
 }
@@ -21,13 +23,12 @@
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    width:300px;
-    font-size: 25px;
+    width:250px;
+    font-size: 20px;
+    color:black;
 }
 
-.top-left Link{
-    text-decoration: "none";
-}
+
 .header-bottom{
     display:flex;
     flex-direction: row;
@@ -36,5 +37,14 @@
 
 .searchbar{
     display:flex;
-    margin-left:270px;
+    margin-left:100px;
+    margin-top:20px;
+    width:400px;
+}
+
+.search{
+    width:500px;
+    height:40px;
+    font-size:15px;
+    font-weight:400;
 }

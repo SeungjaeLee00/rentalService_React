@@ -9,7 +9,7 @@
 }
 
 .toptitle{
-    margin-left:25px;
+    margin-left:55px;
 }
 
 .topinfo{
@@ -59,9 +59,11 @@
 
 .bottom-leftnav{
     margin-top:23px;
+    
 }
-
-
+.bottom-right{
+    border-left:1px solid black;
+}
 .post-bottom{
     display:flex;
     flex-direction: row;

@@ -71,10 +71,10 @@ const Wrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   color: white;
-  font-size: 19px;
+  font-size: 14px;
   background: black;
-  width: 200px;
-  height: 50px;
+  width: 120px;
+  height: 40px;
   border-radius:7px;
   margin:20px 0px;
 `;
@@ -82,13 +82,11 @@ const Wrapper = styled.div`
 const DropdownContainer = styled.div`
   position: relative;
   text-align: center;
- 
-  
 `;
 
 const DropdownButton = styled.div`
   cursor: pointer;
-  font-size:25px;
+  font-size:20px;
   
 `;
 
@@ -97,7 +95,7 @@ const Menu = styled.div`
   position: absolute;
   top: 52px;
   left: 50%;
-  width: 200px;
+  width: 150px;
   text-align: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
@@ -132,7 +130,7 @@ const Menu = styled.div`
 
 const Ul = styled.ul`
   & > li {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   & > li:first-of-type {
@@ -155,7 +153,7 @@ const Li = styled.li`
 `;
 
 const LinkWrapper = styled.a`
-  font-size: 25px;
+  font-size: 18px;
   text-decoration: none;
   color: gray;
 

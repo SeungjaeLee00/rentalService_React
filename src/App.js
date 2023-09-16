@@ -63,7 +63,7 @@ function App() {
             <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
             <Route exact path='/itemmain/detail/:id' element={<Detail />} />
             <Route exact path='/itemmain/detail/chat' element={<Chat />} />
-            <Route exact path='/category/:category' element={<Category />} />
+            <Route exact path='/category/:search' element={<Category />} />
 
             <Route exact path="/my-page/upload-item" element={<Upload_Item />} />
             <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />

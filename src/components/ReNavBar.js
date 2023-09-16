@@ -28,19 +28,31 @@ export default function ReNavBar() {
         setIsLogin(prevState => !prevState)
     };
 
+    const [search,setSearch] = useState();
+   
+    function handleChange(e){
+        console.log(e.target.value);
+    }
+ 
+    function handleSubmit(e){
+        console.log(e.target.value);
+        // navigate("/search/"+search);
+        navigate("/category/"+search);
+    }
+
 
     return (
         <div className="header">
             <div className="header-top">
                 <div className="top-left">
-                    <Link style={{ textDecoration: "none", fontSize: "50px", color: "black" }} to="/">뭐든빌리개</Link>
+                    <Link style={{ textDecoration: "none", fontSize: "35px", color: "black" }} to="/">뭐든빌리개</Link>
                 </div>
                 <div className="top-right">
-                    {isAuthenticated ? <Link style={{ textDecoration: "none" }} onClick={handleLogout}>로그아웃</Link> :
+                    {isAuthenticated ? <Link style={{ textDecoration: "none",color: "black"  }} onClick={handleLogout}>로그아웃</Link> :
                         <Link style={{ textDecoration: "none" }} onClick={handleLogin}>로그인/회원가입</Link>}
 
                     {/* <div className="mypage" >마이페이지</div> */}
-                    {isAuthenticated? <Link style={{textDecoration:"none", marginRight:"40px"}} to={"my-page"}>마이페이지</Link> : 
+                    {isAuthenticated? <Link style={{textDecoration:"none", marginRight:"40px",color: "black" }} to={"my-page"}>마이페이지</Link> : 
                         <Link style={{textDecoration:"none"}} to={"/loginpage"}>마이페이지</Link>}
                     
                 </div>
@@ -48,33 +60,15 @@ export default function ReNavBar() {
             <div className="header-bottom">
                 <div className="category"><Category /></div>
                 <div className="searchbar">
-                    {/* https://mui.com/material-ui/react-text-field/#main-content 에서 가져옴*/}
-                    {/* https://iagreebut.tistory.com/271 */}
-                    {/* <Box
-                        component="form"
-                        sx={{
-                            '& .MuiTextField-root': { m: 1, width: '70ch'},
-                        }}
-                        noValidate
-                        autoComplete="off"
-                    >
-                        
-                            <TextField
-                                id="standard-search"
-                                label="어떤 상품을 찾으시나요?"
-                                type="search"
-                                variant="standard"
-                                style={{backgroundColor: "rgb(248, 248, 248)", borderRadius:"5px"}}
-                                value={content}
-                                onChange={(e)=>{setContent(e.target.value)}}
-                            />
-                        <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-                            <SearchIcon />
-                        </IconButton>
-                    </Box> */}
-
-
-
+                    <form  onSubmit={(e)=>{handleSubmit(e)}}>
+                        <input type="text"
+                         value={search}
+                         className='search'
+                         placeholder='어떤 상품을 찾으시나요?'
+                          onChange={(e)=>{
+                            setSearch(e.target.value);
+                        }}></input>
+                    </form>
                 </div>
             </div>
         </div>

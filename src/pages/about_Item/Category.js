@@ -9,74 +9,77 @@ import axios from "axios";
 
 
 export default function Category() {
-
-    const id = useParams(); //id.category에 카테고리 인덱스
+   
+    //id에는 사용자가 검색창에 입력한 데이터가 들어옴.(카테고리 인덱스도 있긴함)
+    const id = useParams(); 
     console.log(id);
 
+    //카테고리클릭했을때 useLocation()으로 카테고리명 데이터 불러옴
     const {state} = useLocation();
     console.log(state);
 
+    // state가 null이면 검색
+    // id가 숫자이면 카테고리
 
+    //stroe에 서버 api에서 불러온 데이터 
     const [store, setStore] = useState();
-    const [category, setCategory] = useState();
-
-    const [temp, setTemp] = useState();
-
-    useEffect(() => {
-            axios.get("/posts?categoryName="+state)
-            .then(response => {
-                console.log('카테고리페이지 post api 성공');
-                console.log(response.data.result.data.postList);
-                setStore(response.data.result.data.postList);
-            })
-    }, [state])
-
-    // useEffect(() => {
-    //         axios.get('/category')
-    //         .then(response=>{
-    //            console.log("카테고리 axios성공");
-    //            console.log(response.data.result.data[1].children);
-    //            response.data.result.data[1].children.map((data)=>{
-
-    //             if(id.category==data.id)
-    //             {
-    //                 setTemp(data.name);
-    //                 console.log(data.name);
-    //             }
-    //            })
-    //            setCategory(response.data.result.data[1].children);
-    //         })
-    //         .catch(error=>{
-    //            console.log("카테고리 axios실패")
-    //            console.log(error.response.data.result);
-    //         })
-    // },[])
-
-    // useEffect(()=>{
-    //     axios.get('/posts?categoryName=의류')
-    //         .then(response => {
-    //             console.log('카테고리페이지 post api 성공');
-    //             console.log(response.data.result.data.postList);
-    //             setStore(response.data.result.data.postList);
-    //         })
-    // },[temp])
-
-
-
-
-    //category에서 카테고리 인덱스에 맞는 카테고리명 찾아서
-    //categoryname에 저장
-    let categoryname = "";
     
+    const [items, setItems] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error,setError] = useState(null);
 
+    const fetchItem = async()=>{
+        try{
+            //요청이 시작할때 error와 items를 초기화
+            setError(null);
+            setItems(null);
+            //loading 상태를 treu
+            setLoading(true);
+            const response = await axios.get(`/posts?title=${id.search}`);
+            console.log(response);
+            setStore(response.data.result.data.postList);
+        }catch(e){
+            setError(e);
+         }
+        setLoading(false);
+    };
 
+    const fetchCategory = async()=>{
+        try{
+            setError(null);
+            setStore(null);
+            setLoading(true);
+            const response = await axios.get(`/posts?categoryName=${state}`);
+            console.log(response);
+            setStore(response.data.result.data.postList);
+        }catch(e){
+            setError(e);
+        }
+        setLoading(false);
+    };
+     
 
+    useEffect(()=>{
+        //검색했을때
+        if(state==null)
+        {
+            fetchItem();
+        }
+        //카테고리클릭했을때
+        else
+        {
+            fetchCategory();            
+        }
+    },[state]);
+
+    if(loading) return <div>로딩중..</div>
+    if(error) return <div>에러발생</div>
 
     return (
 
         <div className="category_page">
             {store ? <div> <div className="category_top">
-                <div style={{ fontSize: "27px" }}>{state} 카테고리 검색결과</div>
+                <div style={{ fontSize: "27px" }}>{state ?<div> {state} 검색결과</div>: <div> {id.search} 검색결과 </div>} </div>
                 <div style={{ marginLeft: "800px" }}>{store.length}개의 상품</div>
                 <div style={{ marginLeft: "30px" }}> <Dropdown style={{ marginBottom: "10px" }}>
                     <Dropdown.Toggle style={{ background: "white", color: "black" }} variant="success" id="dropdown-basic">
@@ -92,7 +95,7 @@ export default function Category() {
                 </Dropdown></div>
             </div>
                 <div className="Item-Wrap"><Posts currentPosts={store} ItemIndex={6} /></div>
-                <div>메인하단바</div> </div> : <div>로딩중입니다</div>}
+             </div> : <div>로딩중입니다</div>}
 
         </div>
     )
