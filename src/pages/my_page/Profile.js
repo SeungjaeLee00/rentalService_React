@@ -6,7 +6,7 @@ import HorizonLine from '../../components/HorizonLine';
 import '../../style/Profile.css'
 import { useAuth } from '../../components/AuthContext';
 import Do_Report from '../Report/Do_Report';
-import Posts from '../about_Item/Posts';
+import Detail from '../about_Item/Detail';
 
 function Profile() {
     const { state } = useLocation();
@@ -45,32 +45,27 @@ function Profile() {
         setIsActive1(false);
     };
 
-
-    const handlePostClick = (selectedPost) => {
-        <Posts selectedPost={selectedPost} />
-    };
-
     useEffect(() => {
         if (!isAuthenticated) {
             navigate('/loginpage');
             return;
         }
         if (isAuthenticated) {
-        const apiUrl = "http://13.125.98.26:8080/members/" + state;
-        axios.get(apiUrl, {
-            headers: {
-                Authorization: `Bearer ${actoken}`,
-                Auth: retoken
-            },
-        })
-            .then(response => {
-                console.log('회원 정보 불러오기 성공:', response.data);
-                setUserData(response.data.result.data);
+            const apiUrl = "http://13.125.98.26:8080/members/" + state;
+            axios.get(apiUrl, {
+                headers: {
+                    Authorization: `Bearer ${actoken}`,
+                    Auth: retoken
+                },
             })
-            .catch(error => {
-                console.error('API 요청 오류:', error);
-            });
-        viewReview(state);
+                .then(response => {
+                    console.log('회원 정보 불러오기 성공:', response.data);
+                    setUserData(response.data.result.data);
+                })
+                .catch(error => {
+                    console.error('API 요청 오류:', error);
+                });
+            viewReview(state);
         }
     }, [state]);
 
@@ -106,9 +101,6 @@ function Profile() {
                                 <a className="report-detail" onClick={openReportModal}> ⚠️신고하기 </a>
                             </div>
                             <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
-
-
-
                         </div>
                         <div className='Post-Review'>
                             <div className='Category'>
@@ -129,7 +121,7 @@ function Profile() {
                                                     {userData.posts.map((post, index) => (
                                                         <li key={index} className='single-post'>
                                                             <a className='product'
-                                                                onClick={() => handlePostClick(post)}>
+                                                                onClick={() => navigate('/itemmain/detail/' + post.id, { state: post })}>
                                                                 <img className="productImg" width="194" height="194"
                                                                     src={`https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/${post.link}`} />
                                                                 <div className='productdetail'>

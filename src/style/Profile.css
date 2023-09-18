@@ -4,6 +4,10 @@ a {
     background-color: transparent;
 }
 
+::after {
+    box-sizing: border-box;
+}
+
 .AboutProfile {
     /* padding: 20px */
 }
@@ -150,6 +154,13 @@ a {
     white-space: nowrap;
     overflow: hidden;
 }
+
+.productPrice-detail::after {
+    content: "원";
+    font-size: 13px;
+    margin-left: 3px;
+}
+
 
 
 .LookReview {
