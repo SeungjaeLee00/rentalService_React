@@ -117,7 +117,7 @@ const Upload_Item = () => {
         console.log(error.response.data.result);
       })
     }
-    else //게시글 수정
+    else //게시글 수정 
     {
       axios.patch("/posts/"+state, formData,{
         headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${actoken}` },
