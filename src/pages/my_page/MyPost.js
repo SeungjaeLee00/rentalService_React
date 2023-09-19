@@ -12,12 +12,17 @@ export default function MyPost(props) {
     const retoken = localStorage.refreshToken;
 
     function DeleteItem(id) {
-        axios.post("/posts/" + id, {
+        console.log(id);
+        axios.delete("/posts/" + id, {
             headers: { Authorization: `Bearer ${actoken}` },
             headers: { Auth: retoken }
         })
             .then(response => {
                 console.log("삭제성공")
+                if(window.confirm("정말 삭제 하시겠습니까?"))
+                {
+                    window.location.replace('/my-page/post');
+                }
             })
             .catch(error => {
                 console.log(error.response.data.result);

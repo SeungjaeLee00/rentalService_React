@@ -41,21 +41,30 @@ const Upload_Item = () => {
   //state에는 마이페이지에서 게시글 수정버튼 눌렀을때 게시물의 id가 담깁니다.
   const {state} = useLocation();
   console.log(state);
+
+  const [error,setError]=useState(null);
+
+  const updatePost = async()=>{
+    try{
+      setError(null);
+      const response = await axios.get('/posts/'+state);
+      console.log(response.data.result.data);
+      let copy=response.data.result.data;
+      setItemTitle(copy.title);
+      setItemContent(copy.content);
+      setItemCategoryName(copy.categoryName);
+      setItemName(copy.item.name);
+      setItemPrice(copy.item.price);
+      setItemQuantity(copy.item.quantity);
+    }catch(e){
+      setError(e);
+    }
+  }
   useEffect(()=>{
     //state가 null이 아니면 마이페이지에서 게시글 수정버튼을 누른것
-    if(state!=null)
+    if(state>=0)
     {
-      axios.get('http://13.125.98.26:8080/posts/' + state)
-      .then(response => {
-        console.log(response.data.result.data);
-        let copy=response.data.result.data;
-        setItemTitle(copy.title);
-        setItemContent(copy.content);
-        setItemCategoryName(copy.categoryName);
-        setItemName(copy.item.name);
-        setItemPrice(copy.item.price);
-        setItemQuantity(copy.item.quantity);
-      })     
+        updatePost();     
     }
   },[])
 
@@ -94,6 +103,7 @@ const Upload_Item = () => {
     formData.append('itemCreateRequestDto.quantity', itemquantity);
     formData.append('multipartFiles', file);
 
+    //게시글생성
     if(state==null)
     {
       axios.post('http://13.125.98.26:8080/posts', formData, {
@@ -107,11 +117,17 @@ const Upload_Item = () => {
         console.log(error.response.data.result);
       })
     }
-    else
+    else //게시글 수정
     {
-      axios.post("/posts/"+state, formData,{
+      axios.patch("/posts/"+state, formData,{
         headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${actoken}` },
         headers: { Auth: retoken },
+      })
+      .then(response=>{
+        console.log("수정성공");
+      })
+      .catch(error=>{
+        console.log(error.result.data.result);
       })
     }
     window.location.replace("/");
