@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { Await, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Await, NavLink, useLocation, useNavigate, useParams, Link } from 'react-router-dom';
 import Do_Report from '../Report/Do_Report';
 import { useAuth } from '../../components/AuthContext'
 import Login from '../Login/Login';
@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../style/modal.css';
 import axios from 'axios';
 import SetKST from '../../utils/SetKST';
+
 
 function Detail() {
   const navigate = useNavigate();
@@ -57,6 +58,11 @@ function Detail() {
     }
   }
 
+  const onProfileClick = () => {
+    navigate('/itemmain/detail/profile', { state: item.writer.nickname })
+  };
+
+
   return (
     <div className='page-container'>
       <div className='Detail_Item_wrap'>
@@ -65,11 +71,13 @@ function Detail() {
           <Login open={showLoginPopup} close={closeloginModal} ></Login>
 
           <OneItem item={item} id={id} location={location} setItem={setItem} itemlike={itemlike} setItemLike={setItemLike}
-            navigate={navigate} openReportModal={openReportModal} showReportPopup={showReportPopup} closeReportnModal={closeReportnModal} />
+            navigate={navigate} openReportModal={openReportModal} showReportPopup={showReportPopup} closeReportnModal={closeReportnModal}
+            onProfileClick={onProfileClick} />
 
           <div className='upload_item' style={{ position: "fixed", right: '45px', bottom: '30px' }}>
             <button style={{ borderRadius: "30px", fontSize: '20px', width: "100px", height: "50px", border: "none" }}
               onClick={onUploaditemHandler}> + 글쓰기 </button>
+
           </div>
         </div>
       </div>
@@ -115,7 +123,7 @@ function OneItem(props) {
           <div style={{ marginTop: 20 }}>
             <span>{SetKST(props.location.state)}&nbsp;</span>
             <div style={{ marginTop: "20px" }}>{props.item.content}</div>
-            <div style={{ marginTop: "20px" }} >👤{props.item.writer.nickname}</div>
+            <div onClick={props.onProfileClick} style={{ marginTop: "20px" }} >👤{props.item.writer.nickname}</div>
           </div>
           <div className='Item_Button'>
             <button onClick={LikeAdd} style={{ backgroundColor: "white", color: "black" }}>{props.itemlike ? <span>♥</span> : <span>♡</span>}</button>

@@ -36,6 +36,8 @@ import MyChat from './pages/Chat/MyChat'
 import OneMessage from './pages/Chat/OneMessage';
 import SearchItem from './pages/about_Item/SearchItem';
 import Footer from './components/Footer';
+import Profile from './pages/my_page/Profile';
+
 
 
 function App() {
@@ -53,8 +55,13 @@ function App() {
             <Route exact path="/find-pw" element={<FindPw />} />
             <Route exact path='/reset-pw' element={<ResetPW />} />
 
+
             <Route exact path="/found-id" element={<FoundId />} />
             <Route exact path="/loginpage" element={<LoginPage />} />
+
+            <Route exact path='/itemmain/detail/profile' element={<Profile />} />
+
+
 
 
             <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
@@ -87,7 +94,7 @@ function App() {
         </AuthProvider>
       </div>
       {/* 하단 footer */}
-      <Footer/>
+      <Footer />
     </div>
   );
 }

@@ -47,14 +47,14 @@ function ItemMain() {
     currentPosts = store.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
-  
+
   if(loading) return <div>로딩중..</div>;
   if(error) return <div>에러가 발생했습니다</div>;
 
   return (
     <div className='page-container'>
 
-      <Dashboard />
+      <Dashboard /> 
       <hr />
       <div className='Main-Content'> 방금 등록된 상품</div>
 

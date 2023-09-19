@@ -1,0 +1,264 @@
+a {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+::after {
+    box-sizing: border-box;
+}
+
+.AboutProfile {
+    /* padding: 20px */
+}
+
+.Profile-detail {
+    padding: 30px;
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+.Name-intro {
+    flex: 1 0 0%;
+    padding: 0px 30px;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-right: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(238, 238, 238);
+    display: flex;
+    height: 250px;
+    flex-direction: column;
+}
+
+.nickname {
+    font-size: 35px;
+    height: 100px;
+    font-weight: 600;
+    padding-top: 10px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.intro {
+    height: 60px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    border-top: 1px solid rgb(250, 250, 250);
+    border-bottom: 1px solid rgb(250, 250, 250);
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.report {
+    height: 56px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.report-detail {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+}
+
+.Looks {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Post-Review {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.Category-detail {
+    display: flex;
+    height: 50px;
+}
+
+.LookPost:first-child {
+    border-left: 1px solid rgb(238, 238, 238);
+}
+
+.LookPost {
+    flex: 1 1 0%;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: flex;
+    border-top: 1px solid rgb(33, 33, 33);
+    border-right: 1px solid rgb(33, 33, 33);
+    border-bottom: 1px solid rgb(238, 238, 238);
+    background: rgb(250, 250, 250);
+    color: rgb(33, 33, 33);
+}
+
+.single-post {
+    width: 196px;
+    margin-right: 11px;
+    margin-bottom: 11px;
+}
+
+a {
+    color: rgb(33, 33, 33);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.product {
+    border: 1px solid rgb(238, 238, 238);
+    background: rgb(255, 255, 255);
+    display: block;
+
+}
+
+.productdetail {
+    padding: 15px 10px;
+    height: 80px;
+}
+
+.productName {
+    position: relative;
+    font-size: 14px;
+    padding-bottom: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.productPrice {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 20px;
+}
+
+.productPrice-detail {
+    font-size: 16px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.productPrice-detail::after {
+    content: "원";
+    font-size: 13px;
+    margin-left: 3px;
+}
+
+
+
+.LookReview {
+    flex: 1 1 0%;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: flex;
+    border-top: 1px solid rgb(33, 33, 33);
+    border-left: 1px solid rgb(33, 33, 33);
+    border-bottom: 1px solid rgb(238, 238, 238);
+    background: rgb(250, 250, 250);
+    color: rgb(33, 33, 33);
+}
+
+.default1 {
+    flex: 1 1 0%;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: flex;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-right: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(33, 33, 33);
+    background: rgb(250, 250, 250);
+    color: rgb(136, 136, 136);
+}
+
+.default2 {
+    flex: 1 1 0%;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: flex;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-left: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(33, 33, 33);
+    background: rgb(250, 250, 250);
+    color: rgb(136, 136, 136);
+}
+
+/* .All {
+    margin-bottom: 25px;
+} */
+
+.nodisplay {
+    display: none;
+}
+
+.LookPosts {
+    display: block;
+}
+
+.Post {
+    font-size: 18px;
+    padding: 50px 0px 20px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.PostDetail {
+    margin-top: 30px;
+}
+
+.PostList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.noPost {
+    color: rgb(136, 136, 136);
+    margin: 30px 0px 100px;
+}
+
+.LookReviews {
+    display: block;
+}
+
+.Review {
+    font-size: 18px;
+    padding: 50px 0px 20px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.ReviewDetail {
+    margin-top: 30px;
+}
+
+.noReview {
+    color: rgb(136, 136, 136);
+    margin: 30px 0px 100px;
+}

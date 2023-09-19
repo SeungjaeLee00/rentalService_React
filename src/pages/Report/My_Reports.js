@@ -21,8 +21,10 @@ function My_Reports() {
             const apiUrl = 'http://13.125.98.26:8080/reports/myPage';
             try {
                 axios.get(apiUrl, {
-                    headers: { Authorization: `Bearer ${actoken}` },
-                    headers: { Auth: retoken },
+                    headers: {
+                        Authorization: `Bearer ${actoken}`,
+                        Auth: retoken
+                      },
                 })
                     .then(response => {
                         console.log('신고내역 불러오기 성공:', response.data);
@@ -51,7 +53,6 @@ function My_Reports() {
 
             if (response.data.success) {
                 console.log('신고 삭제 성공:', response.data);
-                // 삭제 후 신고 목록을 다시 불러옴
                 fetchReportList();
             } else {
                 console.error('서버 응답 오류:', response.data.error);
