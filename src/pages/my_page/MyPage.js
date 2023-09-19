@@ -11,38 +11,83 @@ export default function MyPage() {
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
 
-  //본인작성게시글 
-  const [mypost, setMyPost] = useState();
-  function MyPosts() {
-    axios.get('/posts/my', {
-      headers: { Authorization: `Bearer ${actoken}` },
-      headers: { Auth: retoken }
-    })
-      .then(response => {
-        // console.log("본인작성게시글조회성공");
-        setMyPost(response.data.result.data);
-      })
-      .catch(error => {
-        console.log(error.response.data.result);
-      })
 
+  const [mypost, setMyPost] = useState();
+  const [myrent, setMyRent] = useState();
+  const [myborrow, setMyBorrow] = useState();
+
+  const [postloading, setPostLoading] = useState(null);
+  const [rendloading, setRendLoading] = useState(null);
+  const [borrowloading, setBorrowLoading] = useState(null);
+  const [error, setError] = useState();
+
+  const fetchMyPosts = async () => {
+    setPostLoading(true);
+    try {
+      const response = await axios.get('/posts/my', {
+        headers: { Authorization: `Bearer ${actoken}` },
+        headers: { Auth: retoken }
+      })
+      setMyPost(response.data.result.data);
+      setPostLoading(false);
+    }
+    catch (e) {
+      console.log(e.response.data.result);
+    }
   }
+  const fetchMyRend = async () => {
+    setRendLoading(true);
+    try {
+      const response = await axios.get('/trades/rend-item?true,', {
+        headers: { Authorization: `Bearer ${actoken}` },
+        headers: { Auth: retoken }
+      })
+      console.log(response);
+      setMyRent(response.data.result.data);
+      setRendLoading(false);
+    }
+    catch (e) {
+      console.log(e.response.data.result);
+    }
+  }
+  const fetchMYBorrow = async () => {
+    setBorrowLoading(true);
+    try {
+      const response = await axios.get('/trades/borrow-item?true', {
+        headers: { Authorization: `Bearer ${actoken}` },
+        headers: { Auth: retoken }
+      })
+      console.log(response);
+      setMyBorrow(response.data.result.data);
+      setBorrowLoading(false);
+    }
+    catch (e) {
+      console.log(e.response.data.result);
+    }
+  }
+
   useEffect(() => {
-    MyPosts();
+    //본인작성게시글
+    fetchMyPosts();
+    fetchMyRend();
+    fetchMYBorrow();
   }, [])
 
+  if (postloading || rendloading || borrowloading) return <div>로딩중..</div>
 
   return (
     <div>
       {/* 마이페이지 상단 */}
-      <MyPageTop mypost={mypost} />
+      {mypost && myrent && myborrow ? <> <MyPageTop mypost={mypost.totalElements}
+        myrent={myrent.totalElements} myborrow={myborrow.totalElements} /></> : null}
+      
       <div className="mypagebottom">
         {/* 마이페이지 왼쪽 nav */}
         <div className="bottom-leftnav"><Sidebar /></div>
         {/* https://leejams.github.io/useOutletContext/ , sidebar클릭했을때 보이는 컴포넌트들(mypost,mylike...*/}
-        <div className='bottom-right'><Outlet context={{ mypost,setMyPost}} /></div>
+        <div className='bottom-right'><Outlet context={{ mypost, setMyPost }} /></div>
       </div>
-      <WriteBtn/>
+      <WriteBtn />
     </div>
   )
 }
