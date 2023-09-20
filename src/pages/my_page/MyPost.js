@@ -46,7 +46,7 @@ export default function MyPost(props) {
 function ItemTable({ mypost, navigate, DeleteItem }) {
     return (
         <div className="post-bottom">
-            <table style={{ width: "1200px" }}>
+            <table style={{ width: "1200px" , borderRight:"1px solid black"}}>
                 <thead>
                     <tr>
                         <th >게시물 제목</th>

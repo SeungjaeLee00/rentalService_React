@@ -23,7 +23,7 @@ export default function MyPageTop(props) {
                 headers: { Authorization: `Bearer ${actoken}` },
                 headers: { Auth: retoken }
             })
-            console.log(response);
+            console.log("내정보조회성공");
             setMyInfo(response.data.result.data);
             setLoading(false);
         }

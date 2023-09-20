@@ -5,7 +5,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../../style/OneMessage.css';
 import ReplyModal from "./ReplyModal";
 import SetKST from "../../utils/SetKST";
-import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 import TradeModal from "./TradeModal";
 export default function OneMessage() {

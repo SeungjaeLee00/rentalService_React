@@ -28,6 +28,7 @@ export default function MyPage() {
         headers: { Authorization: `Bearer ${actoken}` },
         headers: { Auth: retoken }
       })
+      console.log(response.data.result.data);
       setMyPost(response.data.result.data);
       setPostLoading(false);
     }
@@ -42,7 +43,8 @@ export default function MyPage() {
         headers: { Authorization: `Bearer ${actoken}` },
         headers: { Auth: retoken }
       })
-      console.log(response);
+      console.log("대여해주는 Rend 상품 api 성공");
+      console.log(response.data.result.data);
       setMyRent(response.data.result.data);
       setRendLoading(false);
     }
@@ -57,7 +59,8 @@ export default function MyPage() {
         headers: { Authorization: `Bearer ${actoken}` },
         headers: { Auth: retoken }
       })
-      console.log(response);
+      console.log("대여하는 Borrow 상품 api 성공");
+      console.log(response.data.result.data);
       setMyBorrow(response.data.result.data);
       setBorrowLoading(false);
     }
@@ -85,7 +88,7 @@ export default function MyPage() {
         {/* 마이페이지 왼쪽 nav */}
         <div className="bottom-leftnav"><Sidebar /></div>
         {/* https://leejams.github.io/useOutletContext/ , sidebar클릭했을때 보이는 컴포넌트들(mypost,mylike...*/}
-        <div className='bottom-right'><Outlet context={{ mypost, setMyPost }} /></div>
+        <div className='bottom-right'><Outlet context={{ mypost, setMyPost, myrent, setMyRent }} /></div>
       </div>
       <WriteBtn />
     </div>
@@ -116,14 +119,14 @@ function Sidebar() {
 
         <Nav.Item>
           <Nav.Link to="/my-page/rent" active={isActive("/my-page/rent")}>
-            대여해주는 상품
+           대여해주는 상품
           </Nav.Link>
         </Nav.Item>
         <Nav.Separator />
 
         <Nav.Item>
           <Nav.Link to="/my-page/borrow" active={isActive("/my-page/borrow")}>
-            대여받는 상품
+          대여받는 상품
           </Nav.Link>
         </Nav.Item>
       </Nav.List>

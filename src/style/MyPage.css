@@ -158,3 +158,64 @@ tbody button:hover
     box-shadow: 5px 5px 10px -10px gray;
     cursor:pointer;    
 }
+
+/* 대여해주는 상품 css */
+
+
+.rent-bottom table{
+    width:1000px;
+    text-align: center;
+}
+.rent-bottom thead{
+    border-top: 1px solid black;
+    border-bottom:1px solid black;
+    font-size: 18px;
+    height:50px;
+}
+.rent-bottom th td{
+    border-bottom: 1px solid black;
+    padding:20px;
+}
+.rent-bottom th{
+    padding-top:15px;
+}
+.rent-bottom td{
+    cursor:pointer;       
+}
+.rent-bottom tbody tr{
+    &:hover{
+        background-color: aliceblue;
+    } 
+}
+.RentModal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:100px;
+}
+.RentmodalBody{
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    padding: 40px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+}
+
+.RentmodalCloseBtn{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+    color: rgba(0, 0, 0, 0.7);
+    background-color: transparent;
+    font-size: 20px;
+}
