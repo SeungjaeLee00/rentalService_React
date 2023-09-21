@@ -40,7 +40,9 @@ const Upload_Item = () => {
 
   //state에는 마이페이지에서 게시글 수정버튼 눌렀을때 게시물의 id가 담깁니다.
   const {state} = useLocation();
+  
   console.log(state);
+  console.log(typeof(state));
 
   const [error,setError]=useState(null);
 
@@ -112,6 +114,7 @@ const Upload_Item = () => {
     })
       .then(response => {
         console.log("게시물생성성공");
+        window.location.replace("/");
       })
       .catch(error => {
         console.log(error.response.data.result);
@@ -125,12 +128,13 @@ const Upload_Item = () => {
       })
       .then(response=>{
         console.log("수정성공");
+        window.location.replace("/");
       })
       .catch(error=>{
         console.log(error.result.data.result);
       })
     }
-    window.location.replace("/");
+    
 
   }
 

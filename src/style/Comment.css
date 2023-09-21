@@ -1,0 +1,23 @@
+.comment-wrap{
+    display:flex;
+    flex-direction: column;
+}
+.comment-top{
+    display:flex;
+    flex-direction: column;
+}
+
+.comment-bottom{
+    display:flex;
+    flex-direction: column;
+}
+
+.one-comment{
+    display:flex;
+    flex-direction: column;
+}
+
+.comment-info{
+    display:flex;
+    flex-direction: column;
+}

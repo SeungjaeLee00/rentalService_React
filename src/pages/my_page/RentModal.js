@@ -5,7 +5,9 @@ import { useEffect } from "react";
 export default function RentModal(props) {
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
-    console.log(props.tradeid);
+    console.log(actoken);
+    console.log(retoken);
+
 
     const [tradeinfo, setTradeInfo] = useState();
     const [loadging, setLoading] = useState(null);
@@ -41,7 +43,7 @@ export default function RentModal(props) {
     if(!tradeinfo) return null;
 
     
-    function TradeComplete()
+    const TradeComplete= async()=>
     {
         axios.patch('/trades/'+props.tradeid, {
             headers: { Authorization: `Bearer ${actoken}` },
@@ -62,7 +64,7 @@ export default function RentModal(props) {
                     X
                 </button>
                 <div>
-                    <p>게시글제목:</p>
+                 <span style={{fontSize:"25px"}}>게시글제목:{props.tradetitle}</span>
                 </div>
                 <div>
                     <span>대여기간:</span>

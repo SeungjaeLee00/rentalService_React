@@ -1,0 +1,63 @@
+/* 상품디테일 css */
+.Detail-container {
+    border-bottom: 1px solid black;
+    padding-bottom: 50px;
+}
+
+.Detail_Item_wrap {
+    display: flex;
+    justify-content: right;
+
+}
+
+.Detail_Item_Img {
+    height: 400px;
+    margin-right: 100px;
+}
+
+.Item_About {
+
+    width: 530px;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Item_Button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.likebtn {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    border: none;
+    font-weight: bold;
+    border:0.5px solid black;
+    border-radius: 10px;
+    margin-right:5px;
+}
+.sendbtn {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+}
+
+.nickname-btn {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.nickname-btn button {
+    background-color: white;
+    width: 50px;
+    border: none;
+    padding-top:15px;
+}
+

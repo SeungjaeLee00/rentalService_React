@@ -10,11 +10,12 @@ export default function MyRent() {
     
     const [rentmodalopen,setRentModalOpen]= useState(false);
     const [tradeid, setTradeId]= useState();
+    const [tradetitle,setTradeTitle]=useState();
     return (
         <div className="MyRent-wrap">
             <div className="rent-top">
-                <p style={{ padding: "30px", fontSize: "25px", fontWeight: "bold" }}>대여받는상품조회</p>
-                {rentmodalopen&&<RentModal tradeid={tradeid} closeModal={()=>setRentModalOpen(!rentmodalopen)}/>}
+                <p style={{ padding: "30px", fontSize: "25px", fontWeight: "bold" }}>대여해주는 상품조회</p>
+                {rentmodalopen&&<RentModal tradeid={tradeid} tradetitle={tradetitle} closeModal={()=>setRentModalOpen(!rentmodalopen)}/>}
             </div>
             {/* 대여상품생성 컴포넌트 */}
             {myrent&&mypost? <> <div className="rent-bottom">
@@ -30,8 +31,9 @@ export default function MyRent() {
                             <tr onClick={()=>{
                             setRentModalOpen(!rentmodalopen);
                             setTradeId(a.tradeId);
+                            setTradeTitle(a.postTitle);
                         }}>
-                                <td>{a.postId}</td>
+                                <td>{a.postTitle}</td>
                                 <td style={{ borderLeft: "1px solid black" }}>{a.borrowerMember}</td>
                             </tr>
                             

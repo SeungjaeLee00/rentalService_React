@@ -39,13 +39,16 @@ export default function ReNavBar() {
         // navigate("/search/"+search);
         navigate("/category/"+search);
     }
+    useEffect(()=>{
+        
+    },[isAuthenticated])
 
 
     return (
         <div className="header">
             <div className="header-top">
                 <div className="top-left">
-                    <Link style={{ textDecoration: "none", fontSize: "35px", color: "black" }} to="/">뭐든빌리개</Link>
+                    <a style={{ textDecoration: "none", fontSize: "35px", color: "black" }} href="/">뭐든빌리개</a>
                 </div>
                 <div className="top-right">
                     {isAuthenticated ? <Link style={{ textDecoration: "none",color: "black"  }} onClick={handleLogout}>로그아웃</Link> :

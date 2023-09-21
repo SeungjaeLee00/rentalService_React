@@ -10,79 +10,79 @@ import WriteBtn from '../../components/WriteBtn';
 export default function MyPage() {
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
+  console.log(actoken);
+  console.log(retoken);
 
 
   const [mypost, setMyPost] = useState();
   const [myrent, setMyRent] = useState();
   const [myborrow, setMyBorrow] = useState();
 
-  const [postloading, setPostLoading] = useState(null);
-  const [rendloading, setRendLoading] = useState(null);
-  const [borrowloading, setBorrowLoading] = useState(null);
+  const [loading, setLoading] = useState(null);
   const [error, setError] = useState();
 
   const fetchMyPosts = async () => {
-    setPostLoading(true);
+    
     try {
+      setLoading(true);
       const response = await axios.get('/posts/my', {
         headers: { Authorization: `Bearer ${actoken}` },
         headers: { Auth: retoken }
       })
-      console.log(response.data.result.data);
+      
       setMyPost(response.data.result.data);
-      setPostLoading(false);
     }
     catch (e) {
       console.log(e.response.data.result);
     }
   }
   const fetchMyRend = async () => {
-    setRendLoading(true);
     try {
       const response = await axios.get('/trades/rend-item?true,', {
         headers: { Authorization: `Bearer ${actoken}` },
         headers: { Auth: retoken }
       })
       console.log("대여해주는 Rend 상품 api 성공");
-      console.log(response.data.result.data);
+      // console.log(response.data.result.data);
       setMyRent(response.data.result.data);
-      setRendLoading(false);
     }
     catch (e) {
       console.log(e.response.data.result);
     }
   }
   const fetchMYBorrow = async () => {
-    setBorrowLoading(true);
     try {
       const response = await axios.get('/trades/borrow-item?true', {
         headers: { Authorization: `Bearer ${actoken}` },
         headers: { Auth: retoken }
       })
       console.log("대여하는 Borrow 상품 api 성공");
-      console.log(response.data.result.data);
+      // console.log(response.data.result.data);
       setMyBorrow(response.data.result.data);
-      setBorrowLoading(false);
     }
     catch (e) {
       console.log(e.response.data.result);
     }
+    setLoading(false);
   }
 
   useEffect(() => {
     //본인작성게시글
     fetchMyPosts();
+    //본인이 대여해주는 상품
     fetchMyRend();
+    //본인이 대여받는(빌리는 상품)
     fetchMYBorrow();
   }, [])
 
-  if (postloading || rendloading || borrowloading) return <div>로딩중..</div>
+  if (loading) return <div>로딩중..</div>
+  if(!mypost || !myrent || !myborrow) return null 
 
   return (
     <div>
       {/* 마이페이지 상단 */}
-      {mypost && myrent && myborrow ? <> <MyPageTop mypost={mypost.totalElements}
-        myrent={myrent.totalElements} myborrow={myborrow.totalElements} /></> : null}
+       <MyPageTop mypost={mypost.totalElements}
+        myrent={myrent.totalElements} myborrow={myborrow.totalElements} />
       
       <div className="mypagebottom">
         {/* 마이페이지 왼쪽 nav */}
