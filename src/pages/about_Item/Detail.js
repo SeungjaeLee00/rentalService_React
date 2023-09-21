@@ -94,14 +94,11 @@ function Detail() {
             <OneItem item={item} id={id} location={location} setItem={setItem} itemlike={itemlike} setItemLike={setItemLike}
               navigate={navigate} openReportModal={openReportModal} showReportPopup={showReportPopup} closeReportnModal={closeReportnModal}
               onProfileClick={onProfileClick} />
-
-
-
             <WriteBtn />
           </div>
         </div>
       </div>
-      <Comment />
+      <Comment postid={id} />
     </>
   )
 }
