@@ -25,7 +25,17 @@
 
 .comment-info{
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
+}
+.comment-info button{
+    height:25px;
+    font-size:10px;
+    margin-left:440px;
+    border:0.5px solid gray;
+    background-color: white;
+    &:hover{
+        font-weight: bold;
+    }
 }
 
 .comment-top textarea{
@@ -55,22 +65,32 @@
 }
 .comment-comment button{
     border-radius: 10px;
-    
+    background-color: white;
+    border:none;
+    &:hover{
+        font-weight: bold;
+    }
 }
 
 .reply-one-wrap{
     margin-top:15px;
     margin-left:20px;  
+    border-bottom: 1px solid gray;
 }
 .reply-info{
-    border-bottom: 1px solid gray;
+    display:flex;
+    flex-direction: row;
     padding-bottom:10px;
 }
 .reply-info button{
-    background-color: black;
-    color:white;
-    border-radius: 10px;
-    margin-top:10px;
+    height:25px;
+    font-size:10px;
+    margin-left:440px;
+    border:0.5px solid gray;
+    background-color: white;
+    &:hover{
+        font-weight: bold;
+    }
     
 }
 

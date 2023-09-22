@@ -64,9 +64,11 @@ export default function Comment(props) {
                 headers: { Auth: retoken }
             }).then(response => {
                 console.log(response);
+                //댓글생성완료후 페이지 새로고침
+                window.location.replace('/itemmain/detail/' + props.postid)
             })
                 .catch(error => {
-                    console.log(error);
+                    console.log(error.response.data.result);
                 })
         }
         //그냥댓글임
@@ -96,23 +98,23 @@ export default function Comment(props) {
     const CommentToggle = () => {
         inputRef.current.focus();
     }
-    const CreateCommentBtn=(commentId, index)=>{
-         //대댓글인지 확인하기 위한 state
-         setCheckReply(true);
-         //대댓글 id 
-         setReplyId(commentId);
-         //selectreply를 false로 초기화를 시켜줘야한다.(한개만선택되어야하기때문)
-         let temp = [...selectreply];
-         temp.map((a, index) => {
-             temp[index] = false;
-         })
-         setSelectReply(temp);
-         //focus를 input으로 
-         CommentToggle();
-         //클릭한 div만 반대로되게.
-         let copy = [...temp];
-         copy[index] = !selectreply[index];
-         setSelectReply(copy);
+    const CreateCommentBtn = (commentId, index) => {
+        //대댓글인지 확인하기 위한 state
+        setCheckReply(true);
+        //대댓글 id 
+        setReplyId(commentId);
+        //selectreply를 false로 초기화를 시켜줘야한다.(한개만선택되어야하기때문)
+        let temp = [...selectreply];
+        temp.map((a, index) => {
+            temp[index] = false;
+        })
+        setSelectReply(temp);
+        //focus를 input으로 
+        CommentToggle();
+        //클릭한 div만 반대로되게.
+        let copy = [...temp];
+        copy[index] = !selectreply[index];
+        setSelectReply(copy);
     }
 
     useEffect(() => {
@@ -128,7 +130,7 @@ export default function Comment(props) {
     ${(p) =>
             p.active &&
             css`
-               background:rgb(230, 230, 230);
+               background:rgb(235, 235, 235);
             `}
     `;
 
@@ -149,8 +151,11 @@ export default function Comment(props) {
                     return (
                         <Div active={selectreply[index]} className="one-comment">
                             <div className="comment-info">
-                                <div className="comment-name">{a.nickname}</div>
-                                <div className="comment-time">{SetKST(a.createdTime)}</div>
+                                <div>
+                                    <div className="comment-name">{a.nickname}</div>
+                                    <div className="comment-time">{SetKST(a.createdTime)}</div>
+                                </div>
+                                <button onClick={() => { CreateCommentBtn(a.commentId, index) }}>답글 달기</button>
                             </div>
                             <div className="comment-content">{a.content}</div>
                             <div className="comment-comment">
@@ -161,25 +166,23 @@ export default function Comment(props) {
                                         setCheckReply(copy);
                                     }}>{a.children.length}개의 답글</button>
                                     : <button onClick={() => {
-                                        let id= a.commentId;
-                                        CreateCommentBtn(id,index);
+                                        let id = a.commentId;
+                                        CreateCommentBtn(id, index);
                                     }}>답글 달기</button>}
-                               
+
                             </div>
                             <div className='reply'>{checkreply[index] ? a.children.map((reply, replyindex) => {
                                 return (
                                     <div className='reply-one-wrap'>
                                         <div className='reply-info'>
-                                            <div className='comment-name'>{reply.nickname}</div>
-                                            <div className='comment-time'>{SetKST(reply.createdTime)}</div>
+                                            <div>
+                                                <div className='comment-name'>{reply.nickname}</div>
+                                                <div className='comment-time'>{SetKST(reply.createdTime)}</div>
+                                            </div>
+                                            
+                                            </div>    
                                             <div className='comment-comment' >{reply.content}</div>
-                                            <button>답글 달기</button>
-                                        </div>
-                                        <button className='reply-comment-btn' onClick={()=>{
-                                            let id = a.commentId;
-                                            CreateCommentBtn(id,index)
-                                        }}>답글 작성하기</button>
-                                        
+                            
                                     </div>
 
 
