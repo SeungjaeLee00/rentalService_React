@@ -13,6 +13,7 @@ export default function TradeModal(props) {
     }
 
     //api의 date에 맞게 형식변환함수
+
     function windowtransDate(date)
     {
         console.log(date);
@@ -37,6 +38,19 @@ export default function TradeModal(props) {
         console.log(result6);
         return result6;
     }
+     
+    // function macTransDate(date){
+    //     let result = date.split("/").reverse();
+    //     let temp = result[1];
+    //     result[1]=result[2];
+    //     result[2]=temp;
+    
+    //     if (Number(result[1]) < 10){
+    //         result[1] = "0" + result[1]
+    //     }
+    //     let fin_result = result[0] + "." + result[1] + "." + result[2]
+    //     return fin_result;
+    // }
 
     function tradesProduce()
     {
@@ -49,15 +63,17 @@ export default function TradeModal(props) {
             endDate : endDate.toLocaleDateString(),
         }
 
+
         console.log(dataToSend.startDate);
         console.log(dataToSend.endDate);
 
         dataToSend.startDate=windowtransDate(dataToSend.startDate);
         dataToSend.endDate=windowtransDate(dataToSend.endDate);
+        // dataToSend.startDate = macTransDate(dataToSend.startDate);
+        // dataToSend.endDate = macTransDate(dataToSend.endDate);
 
         axios.post('/trades/'+props.postId,dataToSend,{
-            headers: { Authorization: `Bearer ${actoken}` },
-            headers: { Auth: retoken },
+            headers: { Authorization: `Bearer ${actoken}`, Auth: retoken },
           })
           .then(response=>{
             console.log("거래생성완료");

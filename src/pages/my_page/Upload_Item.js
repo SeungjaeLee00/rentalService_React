@@ -39,38 +39,37 @@ const Upload_Item = () => {
 
 
   //state에는 마이페이지에서 게시글 수정버튼 눌렀을때 게시물의 id가 담깁니다.
-  const {state} = useLocation();
-  
+  const { state } = useLocation();
+
   console.log(state);
-  console.log(typeof(state));
+  console.log(typeof (state));
 
-  const [error,setError]=useState(null);
+  const [error, setError] = useState(null);
 
-  const updatePost = async()=>{
-    try{
+  const updatePost = async () => {
+    try {
       setError(null);
-      const response = await axios.get('/posts/'+state);
+      const response = await axios.get('/posts/' + state);
       console.log(response.data.result.data);
-      let copy=response.data.result.data;
+      let copy = response.data.result.data;
       setItemTitle(copy.title);
       setItemContent(copy.content);
       setItemCategoryName(copy.categoryName);
       setItemName(copy.item.name);
       setItemPrice(copy.item.price);
       setItemQuantity(copy.item.quantity);
-    }catch(e){
+    } catch (e) {
       setError(e);
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     //state가 null이 아니면 마이페이지에서 게시글 수정버튼을 누른것
-    if(state>=0)
-    {
-        updatePost();     
+    if (state >= 0) {
+      updatePost();
     }
-  },[])
+  }, [])
 
-  
+
 
   const saveFile = (e) => {
     setFile(e.target.files[0]);
@@ -96,45 +95,52 @@ const Upload_Item = () => {
 
   function produce() {
     //사용자의 데이터를 서버에 전달하기 위해 Form형식으로 데이터를 생성
-    const formData = new FormData();
-    formData.append('title', itemtitle);
-    formData.append('content', itemcontent);
-    formData.append('categoryName', itemcategoryName);
-    formData.append('itemCreateRequestDto.name', itemname);
-    formData.append('itemCreateRequestDto.price', itemprice);
-    formData.append('itemCreateRequestDto.quantity', itemquantity);
-    formData.append('multipartFiles', file);
-
     //게시글생성
-    if(state==null)
-    {
+    if (state == null) {
+      const formData = new FormData();
+      formData.append('title', itemtitle);
+      formData.append('content', itemcontent);
+      formData.append('categoryName', itemcategoryName);
+      formData.append('ItemCreateRequestDto.name', itemname);
+      formData.append('ItemCreateRequestDto.price', itemprice);
+      formData.append('ItemCreateRequestDto.quantity', itemquantity);
+      formData.append('multipartFiles', file);
       axios.post('http://13.125.98.26:8080/posts', formData, {
-      headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${actoken}` },
-      headers: { Auth: retoken },
-    })
-      .then(response => {
-        console.log("게시물생성성공");
-        window.location.replace("/");
-      })
-      .catch(error => {
-        console.log(error.response.data.result);
-      })
-    }
-    else //게시글 수정 
-    {
-      axios.patch("/posts/"+state, formData,{
         headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${actoken}` },
         headers: { Auth: retoken },
       })
-      .then(response=>{
-        console.log("수정성공");
-        window.location.replace("/");
-      })
-      .catch(error=>{
-        console.log(error.result.data.result);
-      })
+        .then(response => {
+          console.log("게시물생성성공");
+          //window.location.replace("/");
+        })
+        .catch(error => {
+          console.log(error.response.data.result);
+        })
     }
-    
+    else //게시글 수정 
+    {
+      const formData = new FormData();
+      formData.append('title', itemtitle);
+      formData.append('content', itemcontent);
+      formData.append('categoryName', itemcategoryName);
+      formData.append('ItemUpdateRequestDto.name', itemname);
+      formData.append('ItemUpdateRequestDto.price', itemprice);
+      formData.append('ItemUpdateRequestDto.quantity', itemquantity);
+      formData.append('multipartFiles', file);
+      axios.patch("/posts/" + state, formData, {
+        headers: { 'Content-Type': 'multipart/form-data'},
+        headers: { 'Authorization': `Bearer ${actoken}`},
+        headers: { 'Auth' : retoken },
+      })
+        .then(response => {
+          console.log("수정성공");
+          //window.location.replace("/");
+        })
+        .catch(error => {
+          console.log(error.result.data.result);
+        })
+    }
+
 
   }
 
@@ -152,8 +158,8 @@ const Upload_Item = () => {
           </div>
           <p style={{ border: "solid 1px #000000", marginTop: "10px" }}></p>
           <br />
-          <Input  itemtitle={itemtitle} itemcontent={itemcontent} itemcategoryName={itemcategoryName} itemname={itemname} itemprice={itemprice}
-          itemquantity={itemquantity} saveFile={saveFile}  saveTitle={saveTitle} saveCategory={saveCategory} saveName={saveName} savePrice={savePrice}
+          <Input itemtitle={itemtitle} itemcontent={itemcontent} itemcategoryName={itemcategoryName} itemname={itemname} itemprice={itemprice}
+            itemquantity={itemquantity} saveFile={saveFile} saveTitle={saveTitle} saveCategory={saveCategory} saveName={saveName} savePrice={savePrice}
             saveContent={saveContent} saveQuantity={saveQuantity} />
 
           <Button className='buttonstyle' style={{ fontSize: '20px', width: "100px", height: "50px" }}
@@ -166,9 +172,9 @@ const Upload_Item = () => {
   );
 };
 
-function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, itemquantity, saveFile,saveTitle, saveCategory, saveName, savePrice, saveContent, saveQuantity }) {
-  const [temp,setTemp]=useState("게시글제목");
-   return (
+function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, itemquantity, saveFile, saveTitle, saveCategory, saveName, savePrice, saveContent, saveQuantity }) {
+  const [temp, setTemp] = useState("게시글제목");
+  return (
     <>
       <div style={{ display: "flex" }}>
         <h5>상품이미지</h5>
@@ -182,7 +188,7 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, 
         <input
           type="text"
           placeholder="  게시글의 제목을 입력해주세요."
-          value= {itemtitle}
+          value={itemtitle}
           onChange={saveTitle}
           style={{
             background_color: "transparent",

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 export default function RentModal(props) {
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
+
     console.log(actoken);
     console.log(retoken);
 
@@ -45,9 +46,11 @@ export default function RentModal(props) {
     
     const TradeComplete= ()=>
     {
-        axios.patch('/trades/'+props.tradeid, {
-            headers: { Authorization: `Bearer ${actoken}` },
-            headers: { Auth: retoken }
+        console.log(actoken);
+        console.log(retoken);
+        axios.patch("/trades/trade/"+ props.tradeid,null, {
+            headers: { 'Authorization' : `Bearer ${actoken}` },
+            headers: { 'Auth' : retoken }
         })
         .then(response=>{
             console.log(response);

@@ -6,7 +6,7 @@ import HorizonLine from '../../components/HorizonLine';
 import '../../style/Profile.css'
 import { useAuth } from '../../components/AuthContext';
 import Do_Report from '../Report/Do_Report';
-import Detail from '../about_Item/Detail';
+// import Detail from '../about_Item/Detail';
 
 function Profile() {
     const { state } = useLocation();

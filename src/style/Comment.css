@@ -53,7 +53,30 @@
 .comment-comment{
     margin-top:15px;
 }
-
-.Reply-btn button{
+.comment-comment button{
+    border-radius: 10px;
     
+}
+
+.reply-one-wrap{
+    margin-top:15px;
+    margin-left:20px;  
+}
+.reply-info{
+    border-bottom: 1px solid gray;
+    padding-bottom:10px;
+}
+.reply-info button{
+    background-color: black;
+    color:white;
+    border-radius: 10px;
+    margin-top:10px;
+    
+}
+
+.reply-comment-btn{
+    margin-top:15px;
+    width:680px;
+
+    border-radius:10px;
 }

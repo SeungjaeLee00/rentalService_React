@@ -12,6 +12,8 @@ export default function MessageList(props) {
 
     const navigate = useNavigate();
     const [who, setWho] = useState("received");
+    const [isActive1, setIsActive1] = useState(true);
+    const [isActive2, setIsActive2] = useState(false);
 
     useEffect(() => {
         console.log(props.mypost);
@@ -33,6 +35,8 @@ export default function MessageList(props) {
     //받은쪽지 클릭 실행되는 함수 
     function receiveHandle() {
         setWho("received");
+        setIsActive1(true);
+        setIsActive2(false);
         axios.get("/messages/received", {
 
             headers: { Authorization: `Bearer ${actoken}` },
@@ -50,6 +54,8 @@ export default function MessageList(props) {
     //보낸쪽지 클릭 실행되는 함수 
     function sendHandle() {
         setWho("sent");
+        setIsActive1(false);
+        setIsActive2(true);
         axios.get("/messages/sent", {
 
             headers: { Authorization: `Bearer ${actoken}` },
@@ -65,20 +71,18 @@ export default function MessageList(props) {
             })
 
     }
-   
+
     //읽은쪽지 삭제함수
-    function readMsgDelete()
-    {
-        message.messageList.map(a=>{
-            if(a.checked)
-            {
+    function readMsgDelete() {
+        message.messageList.map(a => {
+            if (a.checked) {
                 axios.delete(`/messages/${a.id}/${who}`, {
                     headers: { Authorization: `Bearer ${actoken}` },
                     headers: { Auth: retoken }
                 })
                     .then(response => {
                         console.log("메시지삭제성공");
-                        receiveHandle();                       
+                        receiveHandle();
                     })
                     .catch(error => {
                         console.log(error.response.data.result);
@@ -88,17 +92,20 @@ export default function MessageList(props) {
     }
     //UTC -> 한국시간으로 바꿔주는 함수.
     function time(msgtime) {
-    const kor = new Date(msgtime);
-    kor.setHours(kor.getHours()+9);
-    return kor.toLocaleString();
-   }
-    
+        const kor = new Date(msgtime);
+        kor.setHours(kor.getHours() + 9);
+        return kor.toLocaleString();
+    }
+
     const url = "/my-page/chats/message/"
     return (
         <div>
             <div className="message-nav">
-                <button className="receivebtn" onClick={receiveHandle}>받은쪽지</button>
-                <button style={{ borderLeft: "1px solid black" }} className="sendbtn" onClick={sendHandle}>보낸쪽지</button>
+                <button className={isActive1 ? "receivebtn" : "inactiveBtn"}
+                    onClick={receiveHandle}>받은쪽지</button>
+                <button className={isActive2 ? "sendbtn" : "inactiveBtn"}
+                    onClick={sendHandle}>보낸쪽지</button>
+
 
             </div>
             <div className="message-mid">
@@ -126,7 +133,7 @@ export default function MessageList(props) {
                                 let copy = [a.id, who];
                                 console.log(copy);
                                 //navigate로 이동할때 state로 전달 
-                                
+
                                 navigate('/my-page/chats/message/' + a.id, { state: { copy } });
                             }}>
                                 <td >{a.senderNickname}</td>

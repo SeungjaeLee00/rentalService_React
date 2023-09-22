@@ -1,12 +1,14 @@
-import { useEffect } from 'react'
+import { useEffect, useHistory } from 'react'
 import axios from 'axios'
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import Edit_membership from '../pages/my_page/Edit_membership';
 
 export default function MyPageTop(props) {
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
     const [myinfo, setMyInfo] = useState();
+
     const [loading, setLoading] = useState();
     const [error, setError] = useState();
 
@@ -43,16 +45,25 @@ export default function MyPageTop(props) {
                 <div className="toptitle">
                     <h1>My Page</h1>
                     {/* Link태그에 props로 내가작성한 게시물 전송 */}
-                    <Link to="/my-page/chats" state={{ post: props.mypost }} style={{ textDecoration: "none", fontSize: "30px" }}>✉</Link>
+
+                    <div className='top-smallicon'>
+                        <Link to="/my-page/chats" state={{ post: props.mypost }}
+                            style={{ marginRight: "5px" }}>✉</Link>
+                        <Link to="/my-page/reports"
+                            style={{ borderLeft: "1px solid black", paddingLeft: "5px" }}>⚒︎</Link>
+                    </div>
                 </div>
                 <div className="topinfo">
                     <div className="infoleft">
                         <div className="name">{myinfo.nickname}</div>
-                        <Link to="my-change" style={{ textDecoration: "none", color: "gray", marginTop: "15px" }}>회원정보수정</Link>
+
+                        <Link to="/my-page/edit-membership" style={{ textDecoration: "none", color: "gray", marginTop: "15px" }}>회원정보수정</Link>
+
                     </div>
                     <div className="inforight">
                         <div className="userpost">
                             <div style={{ fontSize: "30px" }} className="title">게시물</div>
+
                             <div style={{ marginTop: "15px", fontSize: "20px" }} className="quantity">{props.mypost}개</div>
                         </div>
                         <div className="userrent">
@@ -62,12 +73,12 @@ export default function MyPageTop(props) {
                         <div className="userborrow">
                             <div style={{ fontSize: "30px" }} className="title">대여받는 상품</div>
                             <div style={{ marginTop: "15px", fontSize: "20px" }} className="quantity">{props.myborrow}개</div>
+
                         </div>
 
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

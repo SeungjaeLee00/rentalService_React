@@ -12,6 +12,13 @@
     margin-left:55px;
 }
 
+.top-smallicon{
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    font-size: 30px;
+}
+
 .topinfo{
     display: flex;
     flex-direction: row;
