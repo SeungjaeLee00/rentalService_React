@@ -43,7 +43,7 @@ export default function RentModal(props) {
     if(!tradeinfo) return null;
 
     
-    const TradeComplete= async()=>
+    const TradeComplete= ()=>
     {
         axios.patch('/trades/'+props.tradeid, {
             headers: { Authorization: `Bearer ${actoken}` },

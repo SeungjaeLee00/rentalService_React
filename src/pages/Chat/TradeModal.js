@@ -13,33 +13,47 @@ export default function TradeModal(props) {
     }
 
     //api의 date에 맞게 형식변환함수
-    function transDate(date)
+    function windowtransDate(date)
     {
+        console.log(date);
         let result = date.split(".");
+        console.log(result);
         let result2;
         //달이 1~9월 즉, 한자릿수이면 달앞에 0을 붙여준다. -> 01, 02 ...
-        if(result[1].indexOf(" ")==0)
+        if(Number(result[1])<10)
         {
             result2 = result[0]+".0"+result[1]+"."+result[2];
         }
         else result2 = result[0]+"."+result[1]+"."+result[2];
+        console.log(result2);
         //형식에서 공백제거 
         let result3 = result2.split(" ");
+        console.log(result3)
         let result4 = result3[0]+result3[1]+result[2];
+        console.log(result4);
         let result5 = result4.split(" ");
+        console.log(result5);
         let result6 = result5[0]+result5[1];
+        console.log(result6);
         return result6;
     }
 
     function tradesProduce()
     {
+        console.log(startDate);
+        console.log(endDate);
+
         const dataToSend={
             borrowerName : props.borrowerName,
             startDate : startDate.toLocaleDateString(),
             endDate : endDate.toLocaleDateString(),
         }
-        dataToSend.startDate=transDate(dataToSend.startDate);
-        dataToSend.endDate=transDate(dataToSend.endDate);
+
+        console.log(dataToSend.startDate);
+        console.log(dataToSend.endDate);
+
+        dataToSend.startDate=windowtransDate(dataToSend.startDate);
+        dataToSend.endDate=windowtransDate(dataToSend.endDate);
 
         axios.post('/trades/'+props.postId,dataToSend,{
             headers: { Authorization: `Bearer ${actoken}` },
@@ -50,7 +64,7 @@ export default function TradeModal(props) {
             alert("거래가 시작되었습니다");
             window.location.replace("my-page/chats");
           })
-          .catch(error=>{console.log(error.response.data.result)})
+          .catch(error=>{console.log(error.response.data)})
     }
 
 
