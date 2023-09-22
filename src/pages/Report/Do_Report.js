@@ -9,15 +9,11 @@ const Do_Report = (props) => {
   let navigate = useNavigate();
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
-  const { open, close } = props;
+  const { open, close, postId } = props;
 
-  const [reportType, setReportType] = useState("");
+  const [reportType, setReportType] = useState("POST_REPORT"); // 기본값으로 POST_REPORT 설정
   const [content, setContent] = useState("");
-  const [reportSuccess, setReportSuccess] = useState(false); // 신고 성공 여부를 추적하는 상태 변수
-
-  const onReportTypeHandler = (event) => {
-    setReportType(event.target.value);
-  }
+  const [reportSuccess, setReportSuccess] = useState(false);
 
   const onContentHandler = (event) => {
     setContent(event.target.value);
@@ -30,9 +26,13 @@ const Do_Report = (props) => {
       content: content,
     };
 
+    if (reportType === "POST_REPORT") {
+      dataToSend.postId = postId;
+    }
+
     try {
       const response = await axios.post('http://13.125.98.26:8080/reports', dataToSend, {
-        headers: {
+        headers: { 
           Authorization: `Bearer ${actoken}`,
           Auth: retoken
         },
@@ -60,7 +60,7 @@ const Do_Report = (props) => {
           </header>
 
           <main>
-            {reportSuccess ? ( // 신고 성공 시 메시지 표시
+            {reportSuccess ? (
               <div>
                 <p>신고가 성공적으로 제출되었습니다.</p>
                 <button onClick={close}>닫기</button>
@@ -73,14 +73,13 @@ const Do_Report = (props) => {
                   <InputLabel htmlFor="reportType">신고 종류</InputLabel>
                   <NativeSelect
                     value={reportType}
-                    onChange={onReportTypeHandler}
+                    onChange={(event) => setReportType(event.target.value)}
                     inputProps={{
                       name: 'reportType',
                       id: 'reportType',
                     }}
                   >
                     <option value="POST_REPORT">게시물 신고</option>
-                    {/* 게시물 ID */}
                     <option value="BUG">버그</option>
                   </NativeSelect>
                   <textarea type='input' class="inputField" style={{ marginTop: "20px", height: "100px" }}

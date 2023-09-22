@@ -17,7 +17,7 @@ function Detail() {
 
   //navigate와 함께보내주는 데이터 location ->  단일상품에 시간 key가없어서 location으로 시간표시
   const location = useLocation();
-  
+
   //item -> 단일상품정보 
   const [item, setItem] = useState();
   //itemlike -> 단일상품 좋아요 표시
@@ -43,7 +43,9 @@ function Detail() {
   };
 
   const openReportModal = () => {
+    // const postId = item.id; 
     setshowReportPopup(true);
+    // setPostId(postId);
   };
   const closeReportnModal = () => {
     setshowReportPopup(false);
@@ -103,7 +105,7 @@ function OneItem(props) {
         console.log(error.response.data.result);
       })
   }
-  
+
   return (
     <div className='Detail_Item_wrap'>
       {/* img */}
@@ -129,7 +131,8 @@ function OneItem(props) {
             <button onClick={LikeAdd} style={{ backgroundColor: "white", color: "black" }}>{props.itemlike ? <span>♥</span> : <span>♡</span>}</button>
             <button onClick={() => props.navigate('/itemmain/detail/chat', { state: props.item })}>쪽지보내기</button>
             <button onClick={props.openReportModal} variant="secondary" size="lg">❗️</button>
-            <Do_Report open={props.showReportPopup} close={props.closeReportnModal} ></Do_Report>
+            <Do_Report open={props.showReportPopup} close={props.closeReportnModal} postId={props.id} />
+
 
           </div>
         </div>

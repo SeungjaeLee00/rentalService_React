@@ -2,31 +2,50 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../style/modal.css'
 import { useAuth } from '../../components/AuthContext';
 
-function Edit_membership() {
+const Edit_membership = (props) => {
   const navigate = useNavigate();
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [userData, setUserData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedData, setEditedData] = useState(null);
-  const [imageFile, setImageFile] = useState(null); // 이미지 파일 상태
+  const [editedData, setEditedData] = useState('');
+  const [imageFile, setImageFile] = useState(null);
 
-  const handleLogout = () => {
-    logout();
+  const [store, setStore] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [password, setPassword] = useState('');
+  const [isPasswordVerified, setIsPasswordVerified] = useState(false);
+
+  const openModal = () => {
+    setIsEditing(false);
+    setIsPasswordVerified(false);
+    setIsModalOpen(true); 
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); 
   };
 
   const handleEditClick = () => {
-    setIsEditing(true);
-    setEditedData({ ...userData });
+    if (password === userData.password) {
+      setIsEditing(true);
+      closeModal(); 
+    } else {
+      alert('비밀번호가 일치하지 않습니다.');
+    }
   };
+
 
   const handleSaveClick = async () => {
     try {
       const formData = new FormData();
-      formData.append('username', editedData.username);
       formData.append('password', editedData.password);
       formData.append('nickname', editedData.nickname);
       formData.append('phoneNumber', editedData.phoneNumber);
@@ -36,14 +55,13 @@ function Edit_membership() {
         formData.append('image', imageFile);
       }
 
-      formData.append('city', editedData.address.city);
-      formData.append('district', editedData.address.district);
-      formData.append('street', editedData.address.street);
-      formData.append('zipCode', editedData.address.zipCode);
+      formData.append('address.city', editedData.address.city);
+      formData.append('address.district', editedData.address.district);
+      formData.append('address.street', editedData.address.street);
+      formData.append('address.zipCode', editedData.address.zipCode);
 
       const response = await axios.patch('http://13.125.98.26:8080/members', formData, {
-        headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${actoken}` },
-        headers: { Auth: retoken },
+        headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${actoken}`, Auth: retoken },
       });
 
       if (response.data.success) {
@@ -63,69 +81,117 @@ function Edit_membership() {
     }
   };
 
+  const myprofile = async () => {
+    const apiUrl = 'http://13.125.98.26:8080/members/my-profile';
+    try {
+      setError(null);
+      setStore(null);
+      setLoading(true);
+      axios.get(apiUrl, {
+        headers: { Authorization: `Bearer ${actoken}`, Auth: retoken },
+      })
+        .then(response => {
+          console.log('회원 정보 불러오기 성공:', response.data);
+          setUserData(response.data.result.data);
+        })
+        .catch(error => {
+          console.error('API 요청 오류:', error);
+
+          if (error.response && error.response.status === 401) {
+            console.error('AccessToken이 만료되었습니다. 로그인 페이지로 이동합니다.');
+            navigate('/loginpage');
+          }
+        });
+    } catch (error) {
+      console.error('API 요청 오류:', error);
+      setError(error);
+    }
+    setLoading(false);
+  }
+
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     setImageFile(selectedFile);
   };
 
+  const onPasswordHandler = (e) => {
+    setPassword(e.target.value);
+  };
+
+  // const onSubmitHandler = (e) => {
+  //   e.preventDefault();
+  //   if (password === userData.password) {
+  //     setIsPasswordVerified(true);
+  //     setIsModalOpen(false);
+  //   } else {
+  //     alert('비밀번호가 일치하지 않습니다.');
+  //   }
+  // };
+
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/loginpage');
-      return;
-    }
-
-    if (isAuthenticated) {
-      const apiUrl = 'http://13.125.98.26:8080/members/my-profile';
-      try {
-        axios.get(apiUrl, {
-          headers: { Authorization: `Bearer ${actoken}` },
-          headers: { Auth: retoken },
-        })
-          .then(response => {
-            console.log('회원 정보 불러오기 성공:', response.data);
-            setUserData(response.data.result.data);
-          })
-          .catch(error => {
-            console.error('API 요청 오류:', error);
-
-            if (error.response && error.response.status === 401) {
-              console.error('AccessToken이 만료되었습니다. 로그인 페이지로 이동합니다.');
-              navigate('/loginpage');
-            }
-          });
-      } catch (error) {
-        console.error('API 요청 오류:', error);
+    setEditedData({ ...userData });
+    return () => {
+      if (!isAuthenticated) {
+        navigate('/loginpage');
+        return;
+      }
+      if (isAuthenticated) {
+        myprofile();
       }
     }
-  }, [actoken, navigate]);
+  }, []);
+
+  if (loading) return <div>로딩 중...</div>;
+  if (error) return <div>에러</div>;
 
   return (
     <div>
-      <h2>User Profile</h2>
       {userData && !isEditing ? (
         <div>
-          <p>ID: {userData.id}</p>
-          <p>Username: {userData.username}</p>
-          <p>Nickname: {userData.nickname}</p>
-          <p>Phone Number: {userData.phoneNumber}</p>
-          {/* <p>Introduce: {userData.introduce}</p> */}
-          {/* <p>Image: {userData.image}</p> */}
-          <p>Address: {userData.address.city}, {userData.address.district}, {userData.address.street}, {userData.address.zipCode}</p>
-          <button onClick={handleEditClick}>본인정보 수정</button>
+          <p>이메일: {userData.username}</p>
+          <p>이름: {userData.nickname}</p>
+          <p>핸드폰 번호: {userData.phoneNumber}</p>
+          <p>주소 : {userData.address.city}, {userData.address.district}, {userData.address.street}, {userData.address.zipCode}</p>
+          <button onClick={openModal}>회원 정보 수정하기</button>
+        </div>
+      ) : null}
+
+      {isModalOpen ? (
+        <div className="openModal modal">
+          <section>
+            <header>
+              <button className="close" onClick={closeModal}> X </button>
+            </header>
+
+            <main>
+              <form onSubmit={handleEditClick}>
+                <h4>뭐든빌리개</h4>
+                <p style={{ fontSize: "13px", color: "#4A4F5A" }}>회원 정보 수정을 위해 비밀번호를 입력해주세요.</p>
+                <br />
+                <input
+                  type='password'
+                  className="inputField"
+                  placeholder="  비밀번호"
+                  value={password}
+                  onChange={onPasswordHandler}
+                />
+                <button color="dark" type="submit">확인</button>
+              </form>
+            </main>
+
+            <footer>
+              <button className="close" onClick={closeModal}>
+                close
+              </button>
+            </footer>
+          </section>
         </div>
       ) : null}
 
       {isEditing ? (
         <div>
-          <label htmlFor="username">이메일:</label>
-          <input
-            type="text"
-            id="username"
-            value={editedData.username}
-            onChange={(e) => setEditedData({ ...editedData, username: e.target.value })}
-          />
           <br />
-          <label htmlFor="password">비밀번호:</label>
+          <label htmlFor="password">새 비밀번호:</label>
           <input
             type="password"
             id="password"
@@ -133,7 +199,7 @@ function Edit_membership() {
             onChange={(e) => setEditedData({ ...editedData, password: e.target.value })}
           />
           <br />
-          <label htmlFor="nickname">이름:</label>
+          <label htmlFor="nickname">이름: </label>
           <input
             type="text"
             id="nickname"
@@ -156,15 +222,15 @@ function Edit_membership() {
             onChange={(e) => setEditedData({ ...editedData, introduce: e.target.value })}
           />
           <br />
-          <label htmlFor="image">사진:</label>
+          <label htmlFor="image">프로필 사진:</label>
           <input
             type="file"
             id="image"
-            accept=".jpg"
+            accept=".jpg, .png, .jpeg, .gif, .bmp"
             onChange={handleImageChange}
           />
           <br />
-          <label htmlFor="city">도시:</label>
+          <label htmlFor="city">시:</label>
           <input
             type="text"
             id="city"
@@ -172,7 +238,7 @@ function Edit_membership() {
             onChange={(e) => setEditedData({ ...editedData, address: { ...editedData.address, city: e.target.value } })}
           />
           <br />
-          <label htmlFor="district">지역(구):</label>
+          <label htmlFor="district">구:</label>
           <input
             type="text"
             id="district"
@@ -180,7 +246,7 @@ function Edit_membership() {
             onChange={(e) => setEditedData({ ...editedData, address: { ...editedData.address, district: e.target.value } })}
           />
           <br />
-          <label htmlFor="street">번지(동):</label>
+          <label htmlFor="street">동:</label>
           <input
             type="text"
             id="street"
@@ -196,11 +262,9 @@ function Edit_membership() {
             onChange={(e) => setEditedData({ ...editedData, address: { ...editedData.address, zipCode: e.target.value } })}
           />
           <br />
-          <button onClick={handleSaveClick}>저장</button>
+          <button onClick={handleSaveClick}>수정하기</button>
         </div>
       ) : null}
-
-      <button onClick={handleLogout}>로그아웃</button>
     </div>
   );
 }
