@@ -12,12 +12,17 @@ export default function MyPost(props) {
     const retoken = localStorage.refreshToken;
 
     function DeleteItem(id) {
-        axios.post("/posts/" + id, {
+        console.log(id);
+        axios.delete("/posts/" + id, {
             headers: { Authorization: `Bearer ${actoken}` },
             headers: { Auth: retoken }
         })
             .then(response => {
                 console.log("삭제성공")
+                if(window.confirm("정말 삭제 하시겠습니까?"))
+                {
+                    window.location.replace('/my-page/post');
+                }
             })
             .catch(error => {
                 console.log(error.response.data.result);
@@ -41,7 +46,7 @@ export default function MyPost(props) {
 function ItemTable({ mypost, navigate, DeleteItem }) {
     return (
         <div className="post-bottom">
-            <table style={{ width: "1200px" }}>
+            <table style={{ width: "1200px" , borderRight:"1px solid black"}}>
                 <thead>
                     <tr>
                         <th >게시물 제목</th>

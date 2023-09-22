@@ -30,17 +30,17 @@ const Edit_membership = (props) => {
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); 
+    setIsModalOpen(true); 
   };
 
-  const handleEditClick = () => {
-    if (password === userData.password) {
-      setIsEditing(true);
-      closeModal(); 
-    } else {
-      alert('비밀번호가 일치하지 않습니다.');
-    }
-  };
+  // const handleEditClick = () => {
+  //   if (password === userData.password) {
+  //     setIsEditing(true);
+  //     closeModal(); 
+  //   } else {
+  //     alert('비밀번호가 일치하지 않습니다.');
+  //   }
+  // };
 
 
   const handleSaveClick = async () => {
@@ -118,15 +118,26 @@ const Edit_membership = (props) => {
     setPassword(e.target.value);
   };
 
-  // const onSubmitHandler = (e) => {
-  //   e.preventDefault();
+  // const handleEditClick = () => {
   //   if (password === userData.password) {
-  //     setIsPasswordVerified(true);
-  //     setIsModalOpen(false);
+  //     setIsEditing(true);
+  //     closeModal(); 
   //   } else {
   //     alert('비밀번호가 일치하지 않습니다.');
   //   }
   // };
+
+  // redux 로 비밀번호 받고 확인
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (password === userData.password) {
+      setIsPasswordVerified(true);
+      setIsEditing(true);
+      setIsModalOpen(false);
+    } else {
+      alert('비밀번호가 일치하지 않습니다.');
+    }
+  };
 
   useEffect(() => {
     setEditedData({ ...userData });
@@ -164,7 +175,7 @@ const Edit_membership = (props) => {
             </header>
 
             <main>
-              <form onSubmit={handleEditClick}>
+              <form onSubmit={onSubmitHandler}>
                 <h4>뭐든빌리개</h4>
                 <p style={{ fontSize: "13px", color: "#4A4F5A" }}>회원 정보 수정을 위해 비밀번호를 입력해주세요.</p>
                 <br />

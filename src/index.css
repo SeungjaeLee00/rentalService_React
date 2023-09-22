@@ -63,69 +63,6 @@
   line-height: 25px;
 }
 
-.Detail_Item_wrap{
-  display:flex;
-  justify-content: right;
-  /* border: 1px solid green; */
-}
-
-.Detail_Item_Img{
-  /* width:400px; */
-  height:400px;
-  margin-right:100px;
-  /* border: 1px solid blue; */
-}
-
-.Item_About{
-  /* border:1px solid rebeccapurple; */
-  width:530px;
-  margin-right: 50px;
-  /* margin-left: 50px; */
-  display:flex;
-  flex-direction:column;
-}
-
-.Item_Button {
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 70px;
-
-}
-
-.Item_Button button{
-  background-color:black;
-  color : white;
-  width:200px;
-  height:50px;
-  border-radius: 10px;
-  font-weight: bold;
-
-}
-
-/* 상품상세페이지 이미지 슬라이드 css*/
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 /* 상품화면 css */ 
 

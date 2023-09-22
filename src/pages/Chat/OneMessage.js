@@ -4,7 +4,9 @@ import { useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../../style/OneMessage.css';
 import ReplyModal from "./ReplyModal";
-
+import SetKST from "../../utils/SetKST";
+import "react-datepicker/dist/react-datepicker.css"
+import TradeModal from "./TradeModal";
 export default function OneMessage() {
 
     const navigate = useNavigate();
@@ -53,24 +55,24 @@ export default function OneMessage() {
             }
     }
     const [modalopen,setModalOpen]= useState(false);
-    //UTC -> 한국시간으로 바꿔주는 함수.
-    function time(msgtime) {
-        const kor = new Date(msgtime);
-        kor.setHours(kor.getHours()+9);
-        return kor.toLocaleString();
-    }
+    const [trademodalopen, setTradeModalOpen] = useState(false);
 
     return (
         <div>
             {msg ? <>
                 <div className="one-wrap">
                     <div className="one-top">
-                        <div className="top-title"><h1 style={{ marginLeft: "30px" }}>쪽지함</h1></div>
+                        <div className="top-title">
+                            <div className="title"><h1 style={{ marginLeft: "30px" }}>쪽지함</h1></div>
+                            <div className="top-button"><button className="button" onClick={()=>{setTradeModalOpen(!trademodalopen)}} style={{marginLeft:"800px"}}>거래하기</button></div>
+                            {trademodalopen&&<TradeModal postId={msg.postId} borrowerName={msg.senderNickname}
+                            closeModal={()=>setTradeModalOpen(!trademodalopen)}/>}
+                        </div>
                         <div className="top-info">
                             <div className="info-left">
                                 <div className="left-top">
                                     <div style={{ fontSize: "18px", marginLeft: "30px" }}>게시글제목:{msg.postTitle}</div>
-                                    <div style={{ marginLeft: "300px", marginLeft: "200px" }}>보낸날짜: {time(msg.createdDate)}</div>
+                                    <div style={{ marginLeft: "300px", marginLeft: "200px" }}>보낸날짜: {SetKST(msg.createdDate)}</div>
                                 </div>
                                 <div style={{ marginTop: "30px", marginLeft: "30px" }} className="left-bottom">발신자 : {msg.senderNickname}</div>
                             </div>
