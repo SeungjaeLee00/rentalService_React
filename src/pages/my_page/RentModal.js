@@ -1,30 +1,30 @@
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function RentModal(props) {
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
-
-    console.log(actoken);
-    console.log(retoken);
-
+    const nickname = window.sessionStorage.getItem("nickname");
+    const navigate = useNavigate();
 
     const [tradeinfo, setTradeInfo] = useState();
     const [loadging, setLoading] = useState(null);
     const [error, setError] = useState(null);
 
+    //거래내역단건조회
     const fetchtradeinfo = async () => {
         try {
             setError(null);
             setTradeInfo(null);
 
             setLoading(true);
-            const response = await axios.get('/trades/'+props.tradeid)
+            const response = await axios.get('/trades/' + props.tradeid)
             console.log(response.data.result.data);
             setTradeInfo(response.data.result.data);
         }
-        catch(e){
+        catch (e) {
             console.log(e);
             setError(e);
         }
@@ -33,31 +33,37 @@ export default function RentModal(props) {
 
     useEffect(() => {
         fetchtradeinfo();
-    },[])
+    }, [])
 
     function closeModal() {
         props.closeModal();
     }
 
-    if(loadging) return <div>로딩중...</div>
-    if(error) return <div>에러가 발생했습니다</div>
-    if(!tradeinfo) return null;
+    if (loadging) return <div>로딩중...</div>
+    if (error) return <div>에러가 발생했습니다</div>
+    if (!tradeinfo) return null;
 
-    
-    const TradeComplete= ()=>
-    {
-        console.log(actoken);
-        console.log(retoken);
-        axios.patch("/trades/trade/"+ props.tradeid,null, {
-            headers: { 'Authorization' : `Bearer ${actoken}` },
-            headers: { 'Auth' : retoken }
-        })
-        .then(response=>{
-            console.log(response);
-        })
-        .catch(error=>{
-            console.log(error)
-        })
+
+    const TradeComplete = (tradecheck) => {
+        //이미 거래완료버튼을 눌렀으면 
+        if (tradecheck == true) {
+           alert("이미 거래를 완료하셨습니다");
+        }
+        else {
+            axios.patch("/trades/trade/" + props.tradeid, null, {
+                headers: { 'Authorization': `Bearer ${actoken}` },
+                headers: { 'Auth': retoken }
+            })
+                .then(response => {
+                    console.log(response);
+                    alert("거래가 완료되었습니다");
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+
+        }
+
     }
 
     return (
@@ -66,14 +72,19 @@ export default function RentModal(props) {
                 <button className="RentmodalCloseBtn" onClick={closeModal}>
                     X
                 </button>
-                <div>
-                 <span style={{fontSize:"25px"}}>게시글제목:{props.tradetitle}</span>
+                <div className="RentModal-content">
+                    <div className="Rent-title">
+                        <span style={{ fontSize: "25px" }}>게시글제목:{props.tradetitle}</span>
+                    </div>
+                    <div className="Rent-date">
+                        <span>대여기간 : </span>
+                        <span style={{ color: "#ff8906" }}>{tradeinfo.startDate[0]+"년"+tradeinfo.startDate[1]+"월"+tradeinfo.startDate[2]+"일"} ~ 
+                        {tradeinfo.endDate[0]+"년"+tradeinfo.endDate[1]+"월"+tradeinfo.endDate[2]+"일"}</span>
+                    </div>
+                    {/* 빌려주는사람닉네임이랑 현재유저의 닉네임이랑 같으면 거래완료생기기 */}
+                    {tradeinfo.renderMember == nickname ? <button onClick={()=>{TradeComplete(tradeinfo.tradeComplete)}}>거래 완료</button> : <button
+                        onClick={() => { navigate('/reviews/write-review') }}>📝리뷰작성</button>}
                 </div>
-                <div>
-                    <span>대여기간:</span>
-                    <span>{tradeinfo.startDate} ~ {tradeinfo.endDate}</span>                    
-                </div>
-                <button onClick={TradeComplete}>거래 완료</button>
             </div>
         </div>
     )

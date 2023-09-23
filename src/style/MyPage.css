@@ -193,6 +193,7 @@ tbody button:hover
         background-color: aliceblue;
     } 
 }
+/* 대여해주는상품 모달 */
 .RentModal{
     position: fixed;
     top: 0;
@@ -226,5 +227,26 @@ tbody button:hover
     color: rgba(0, 0, 0, 0.7);
     background-color: transparent;
     font-size: 20px;
+    &:hover{
+        font-weight: bold;
+    }
 }
 
+.RentModal-content{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Rent-date{
+    margin : 30px 0px;
+    font-size: 20px;
+}
+
+.RentModal-content button{
+    background-color: white;
+    border-radius: 5px;
+    &:hover{
+        font-weight: bold;
+    }
+}

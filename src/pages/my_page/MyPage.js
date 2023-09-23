@@ -10,8 +10,7 @@ import WriteBtn from '../../components/WriteBtn';
 export default function MyPage() {
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
-  console.log(actoken);
-  console.log(retoken);
+  
 
 
   const [mypost, setMyPost] = useState();
@@ -89,7 +88,7 @@ export default function MyPage() {
         {/* 마이페이지 왼쪽 nav */}
         <div className="bottom-leftnav"><Sidebar /></div>
         {/* https://leejams.github.io/useOutletContext/ , sidebar클릭했을때 보이는 컴포넌트들(mypost,mylike...*/}
-        <div className='bottom-right'><Outlet context={{ mypost, setMyPost, myrent, setMyRent }} /></div>
+        <div className='bottom-right'><Outlet context={{ mypost, setMyPost, myrent, setMyRent, myborrow, setMyBorrow }} /></div>
       </div>
       <WriteBtn />
     </div>

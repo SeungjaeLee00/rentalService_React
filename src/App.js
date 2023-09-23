@@ -78,7 +78,7 @@ function App() {
 
             <Route exact path='/report' element={<Do_Report />} />
 
-            <Route exact path='/reviews' element={<All_Review />} />
+            
             <Route exact path='/reviews/my-review' element={<My_Review />} />
             <Route exact path='/reviews/write-review' element={<Write_Review />} />
 
