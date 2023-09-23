@@ -6,16 +6,19 @@ import RentModal from "./RentModal";
 export default function MyBorrow()
 {
     const {myborrow, setMyBorrow}=useOutletContext();
+    console.log(myborrow);
     const {mypost, setMyPost}=useOutletContext();
+    console.log(mypost);
     
     const [rentmodalopen,setRentModalOpen]= useState(false);
     const [tradeid, setTradeId]= useState();
     const [tradetitle,setTradeTitle]=useState();
+    const [postid, setPostId]=useState();
     return(
         <div className="MyRent-wrap">
             <div className="rent-top">
                 <p style={{ padding: "30px", fontSize: "25px", fontWeight: "bold" }}>대여받는 상품조회</p>
-                {rentmodalopen&&<RentModal tradeid={tradeid} tradetitle={tradetitle} closeModal={()=>setRentModalOpen(!rentmodalopen)}/>}
+                {rentmodalopen&&<RentModal tradeid={tradeid} tradetitle={tradetitle} postid={postid} closeModal={()=>setRentModalOpen(!rentmodalopen)}/>}
             </div>
             {/* 대여상품생성 컴포넌트 */}
             {myborrow&&mypost? <> <div className="rent-bottom">
@@ -32,6 +35,7 @@ export default function MyBorrow()
                             setRentModalOpen(!rentmodalopen);
                             setTradeId(a.tradeId);
                             setTradeTitle(a.postTitle);
+                            setPostId(a.postId);
                         }}>
                                 <td>{a.postTitle}</td>
                                 <td style={{ borderLeft: "1px solid black" }}>{a.borrowerMember}</td>

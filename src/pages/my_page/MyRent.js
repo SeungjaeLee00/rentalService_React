@@ -5,6 +5,7 @@ import RentModal from "./RentModal";
 export default function MyRent() {
     const { mypost, setMyPost } = useOutletContext();
     const { myrent, setMyRent } = useOutletContext();
+    console.log(myrent);
     
     const [rentmodalopen,setRentModalOpen]= useState(false);
     const [tradeid, setTradeId]= useState();

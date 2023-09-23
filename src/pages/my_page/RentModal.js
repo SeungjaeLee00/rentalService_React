@@ -61,9 +61,23 @@ export default function RentModal(props) {
                 .catch(error => {
                     console.log(error)
                 })
-
         }
+    }
 
+    
+    const WriteReviewBtn=(tradecheck)=>{
+        navigate('/reviews/write-review',{state:{postid:props.postid, tradeid:props.tradeid}});
+        /*
+         //상품주인이 거래완료버튼을 클릭했으면 리뷰작성
+         if(tradecheck==true)
+         {
+            navigate('/reviews/write-review')
+         }
+         //거래완료버튼을 누르지 않았으면 리뷰작성못함
+         else{
+            alert('거래가 완료되지 않았습니다')
+         }
+         */
     }
 
     return (
@@ -83,7 +97,7 @@ export default function RentModal(props) {
                     </div>
                     {/* 빌려주는사람닉네임이랑 현재유저의 닉네임이랑 같으면 거래완료생기기 */}
                     {tradeinfo.renderMember == nickname ? <button onClick={()=>{TradeComplete(tradeinfo.tradeComplete)}}>거래 완료</button> : <button
-                        onClick={() => { navigate('/reviews/write-review') }}>📝리뷰작성</button>}
+                        onClick={() => { WriteReviewBtn(tradeinfo.tradeComplete) }}>📝리뷰작성</button>}
                 </div>
             </div>
         </div>
