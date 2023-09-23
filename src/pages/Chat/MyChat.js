@@ -15,9 +15,6 @@ export default function MyChat() {
         setData(state);
     },[data])
     
-    const actoken = localStorage.accessToken;
-    const retoken = localStorage.refreshToken;
-
     return (
         <div className="message-wrap">
             <div className="message-title">
@@ -25,9 +22,6 @@ export default function MyChat() {
             </div>
             {/* MessageList 컴포넌트에 Link props로 받아온 데이터 전달(postList만) */}
             {data ? < MessageList mypost={data.post.postList}/> : null}
-            
-            
-            
         </div>
     )
 }

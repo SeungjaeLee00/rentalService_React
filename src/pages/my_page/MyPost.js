@@ -52,7 +52,7 @@ function ItemTable({ mypost, navigate, DeleteItem }) {
                         <th >게시물 제목</th>
                         <th >작성일자</th>
                         <th >대여상태</th>
-                        <th> 수정,삭제</th>
+                        <th> 수정,  삭제</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,15 +73,14 @@ function ItemTable({ mypost, navigate, DeleteItem }) {
                                 <button onClick={(e) => {
                                     //이벤트버블링 예방 stopProgration()함수사용
                                     e.stopPropagation();
-
                                     navigate('/itemmain/upload-item', { state: a.id });
-                                    console.log("수정");
+                                    
                                 }}>수정</button>
-                                <button style={{ color: "red" }} onClick={(e) => {
+                                <button  onClick={(e) => {
                                     //이벤트버블링 예방 stopProgration()함수사용
                                     e.stopPropagation();
                                     DeleteItem(a.id);
-                                    console.log("삭제")
+                                    
                                 }}>삭제</button>
                             </td>
                         </tr>

@@ -16,6 +16,7 @@ export default function MyPage() {
   const [mypost, setMyPost] = useState();
   const [myrent, setMyRent] = useState();
   const [myborrow, setMyBorrow] = useState();
+  const [myreview,setMyReview]=useState();
 
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState();
@@ -41,7 +42,7 @@ export default function MyPage() {
         headers: { Authorization: `Bearer ${actoken}` },
         headers: { Auth: retoken }
       })
-      console.log("대여해주는 Rend 상품 api 성공");
+      
       // console.log(response.data.result.data);
       setMyRent(response.data.result.data);
     }
@@ -55,7 +56,7 @@ export default function MyPage() {
         headers: { Authorization: `Bearer ${actoken}` },
         headers: { Auth: retoken }
       })
-      console.log("대여하는 Borrow 상품 api 성공");
+      
       // console.log(response.data.result.data);
       setMyBorrow(response.data.result.data);
     }
@@ -63,6 +64,17 @@ export default function MyPage() {
       console.log(e.response.data.result);
     }
     setLoading(false);
+  }
+  const fetchMyReview = async() =>{
+    try{
+      const response = await axios.get('/reviews/my', {
+        headers: { Authorization: `Bearer ${actoken}` },
+        headers: { Auth: retoken }
+      })
+      setMyReview(response);
+    }catch(e){
+      console.log(e.response.data.result);
+    }
   }
 
   useEffect(() => {
@@ -72,17 +84,19 @@ export default function MyPage() {
     fetchMyRend();
     //본인이 대여받는(빌리는 상품)
     fetchMYBorrow();
+    //내가받은리뷰조회
+    fetchMyReview();
     
   }, [])
 
   if (loading) return <div>로딩중..</div>
-  if(!mypost || !myrent || !myborrow) return null 
+  if(!mypost || !myrent || !myborrow || !myreview) return null 
 
   return (
     <div>
       {/* 마이페이지 상단 */}
        <MyPageTop mypost={mypost.totalElements}
-        myrent={myrent.totalElements} myborrow={myborrow.totalElements} />
+        myrent={myrent.totalElements} myborrow={myborrow.totalElements} myreview={myreview.totalElements} />
       
       <div className="mypagebottom">
         {/* 마이페이지 왼쪽 nav */}

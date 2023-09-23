@@ -80,7 +80,7 @@ export default function OneMessage() {
                                 <button onClick={()=>{setModalOpen(!modalopen)}} >답장</button>
                                   {/* 모달창 컴포넌트 호출 (https://joylee-developer.tistory.com/184)*/}
                                  {modalopen&&<ReplyModal msgid={msg.postId} senderNickname={msg.senderNickname} closeModal={()=>setModalOpen(!modalopen)}/>}                                
-                                <button onClick={deletesend} style={{ marginLeft: "20px" }}>삭제</button>
+                                <button onClick={deletesend} style={{ marginLeft: "10px" }}>삭제</button>
                             </div>
                         </div>
                     </div>                    

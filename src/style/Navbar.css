@@ -28,6 +28,12 @@
     font-size: 20px;
     color:black;
 }
+.top-right a{
+    text-decoration: none;
+    &:hover{
+        font-weight: bold;
+      }
+}
 
 
 .header-bottom{

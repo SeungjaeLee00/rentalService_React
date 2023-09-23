@@ -43,6 +43,7 @@
 .message-content tbody tr{
     cursor:pointer;
     &:hover{
+        background-color: rgb(250, 246, 241);
         box-shadow: 10px 10px 20px -15px gray;
     }
 }
@@ -70,4 +71,14 @@
 
 .inactiveBtn {
     color: darkgray
+}
+
+.message-mid button{
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: black;
+    color:white;
+    &:hover{
+        background-color: rgb(66, 66, 253);
+    }
 }

@@ -77,16 +77,22 @@ const Wrapper = styled.div`
   height: 40px;
   border-radius:7px;
   margin:20px 0px;
+  &:hover{
+    font-weight:bold;
+    background-color: rgb(66, 66, 253);
+  }
 `;
 
 const DropdownContainer = styled.div`
   position: relative;
   text-align: center;
+  
 `;
 
 const DropdownButton = styled.div`
   cursor: pointer;
   font-size:20px;
+  
   
 `;
 

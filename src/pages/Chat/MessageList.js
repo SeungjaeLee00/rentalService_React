@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Link, useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import SetKST from "../../utils/SetKST";
 
 export default function MessageList(props) {
     const actoken = localStorage.accessToken;
@@ -90,26 +90,20 @@ export default function MessageList(props) {
             }
         })
     }
-    //UTC -> 한국시간으로 바꿔주는 함수.
-    function time(msgtime) {
-        const kor = new Date(msgtime);
-        kor.setHours(kor.getHours() + 9);
-        return kor.toLocaleString();
-    }
+    
 
-    const url = "/my-page/chats/message/"
     return (
         <div>
             <div className="message-nav">
                 <button className={isActive1 ? "receivebtn" : "inactiveBtn"}
                     onClick={receiveHandle}>받은쪽지</button>
-                <button className={isActive2 ? "sendbtn" : "inactiveBtn"}
+                <button className={isActive2 ? null : "inactiveBtn"}
                     onClick={sendHandle}>보낸쪽지</button>
 
 
             </div>
             <div className="message-mid">
-                <button onClick={readMsgDelete} style={{ marginTop: "10px", backgroundColor: "white", borderRadius: "5px" }}>읽은 쪽지 삭제하기</button>
+                <button onClick={readMsgDelete}>읽은 쪽지 삭제하기</button>
                 <div className="message-filter">필터</div>
                 <div className="message-dropbox">드롭박스</div>
             </div>
@@ -139,7 +133,7 @@ export default function MessageList(props) {
                                 <td >{a.senderNickname}</td>
                                 <td> {a.postTitle}</td>
                                 <td >{a.content.length > 20 ? a.content.substr(0, 15) + "..." : a.content}</td>
-                                <td >{time(a.createdDate)}</td>
+                                <td >{SetKST(a.createdDate)}</td>
                                 <td >{a.checked ? <div>읽음</div> : <div>읽지않음</div>}</td>
                             </tr>
                         )) : null}

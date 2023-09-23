@@ -25,7 +25,7 @@ export default function MyLike() {
 
     return (
         <div className="MyLike-wrap">
-            <div style={{ padding: "10px", borderBottom: "3px solid black", width: "1720px" }} className="Like-top">
+            <div style={{ padding: "10px", borderBottom: "3px solid black" }} className="Like-top">
                 <p style={{ fontSize: "30px" , padding:"20px"}}>찜</p>
             </div>
             <div className="Like-bottom">

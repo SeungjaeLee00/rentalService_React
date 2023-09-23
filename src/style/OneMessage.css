@@ -40,22 +40,30 @@
     margin-left:65px;
 }
 .button{
-    background-color: rgb(163, 191, 250);
+    background-color: black;
+    color:white;
     border:none;
     height:30px;
     border-radius:5px;
     font-weight: bold;
     margin-left:70px;
+    width:160px;
+    &:hover{
+        background-color: rgb(66, 66, 253);
+    }
 }
 
 .info-right button{
-    background-color: rgb(247, 177, 177);
+    background-color: black;
+    color:white;
     border:none;
     width:70px;
     height:30px;
-    padding:0px 20px;
     border-radius:5px;
     font-weight: bold;
+    &:hover{
+        background-color: rgb(66, 66, 253);
+    }
 }
 
 
@@ -82,9 +90,13 @@
     margin-bottom:15px;
 }
 .msg-bottom button{
-    background-color: white;
+    background-color: black;
+    color:white;
     border-radius: 5px;
     width:80px;
+    &:hover{
+        background-color: rgb(66, 66, 253);
+    }
 }
 
 
