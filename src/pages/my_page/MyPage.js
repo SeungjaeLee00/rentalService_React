@@ -73,6 +73,7 @@ export default function MyPage() {
     fetchMyRend();
     //본인이 대여받는(빌리는 상품)
     fetchMYBorrow();
+    
   }, [])
 
   if (loading) return <div>로딩중..</div>

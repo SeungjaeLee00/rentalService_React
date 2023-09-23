@@ -47,7 +47,6 @@ function LoginPage(props) {
                 login(accessToken, refreshToken);
 
                 console.log('토큰: ', returnData.result.data);
-
                 if ((response.status = 200)) {
                     window.location.replace("/");
 

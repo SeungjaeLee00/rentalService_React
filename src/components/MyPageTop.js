@@ -13,7 +13,6 @@ export default function MyPageTop(props) {
     const [error, setError] = useState();
 
     const fetchMyInfo = async () => {
-
         try {
             setLoading(true);
             const response = await axios.get('/members/my-profile', {

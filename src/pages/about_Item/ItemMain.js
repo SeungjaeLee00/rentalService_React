@@ -6,13 +6,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Pagination from './Pagination';
 import Posts from './Posts';
 import WriteBtn from '../../components/WriteBtn';
+import fetchMyInfo from '../../apis/FetchMyInfo';
 
 function ItemMain() {
   const navigate = useNavigate();
+  const actoken = localStorage.accessToken;
+  const retoken = localStorage.refreshToken;
 
   const [store, setStore] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error,setError]=useState(null);
+
+  const[myinfo,setMyInfo]=useState();
 
   const fetchPosts = async() =>{
     try{
@@ -29,12 +34,26 @@ function ItemMain() {
     }
     setLoading(false);
   }  
+  const fetchMyInfo = async()=>{
+    try{
+      const response = await axios.get('/members/my-profile', {
+        headers: { Authorization: `Bearer ${actoken}` },
+        headers: { Auth: retoken }
+    })
+    console.log(response);
+    setMyInfo(response.data.result.data);
+    //sessionstorage에 저장
+    window.sessionStorage.setItem("nickname", response.data.result.data.nickname);
+    }catch(e){
+      console.log(e);
+    }
+  }
 
 
   useEffect(() => {
     fetchPosts();
+    fetchMyInfo();
   }, [])
-
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
   const ItemIndex =6;
