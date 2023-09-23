@@ -8,6 +8,7 @@ import styled, { css } from "styled-components";
 import SetKST from '../../utils/SetKST';
 
 export default function Comment(props) {
+    const nickname = props.nickname;
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
     //사용자가 댓글에 입력하는곳
@@ -19,9 +20,13 @@ export default function Comment(props) {
     const [loading, setLoading] = useState();
     const [error, setError] = useState();
 
+    //해당댓글의 답글달기 클릭시 선택된듯한 효과주기 위한 state
     const [selectreply, setSelectReply] = useState([]);
+    //해당댓글의 대댓글보기 위한 state 
     const [openreply, setOpenReply] = useState([]);
+    //그냥 댓글인지, 댓글에대한 댓글(대댓글)인지 구분하기 위한 state 
     const [checkreply, setCheckReply] = useState(false);
+    //api를 사용할때 보내는 댓글의 id
     const [replyid, setReplyId] = useState();
 
 
@@ -35,7 +40,7 @@ export default function Comment(props) {
             const response = await axios.get(`/posts/${props.postid}/comments`);
             setComment(response.data.result.data);
             console.log(response.data.result.data);
-            //댓글개수만큼 대댓글상태(댓글이 5개면 openreply에 5개의 false가 들어감) -> 어떤댓글에대한
+            //댓글개수만큼 대댓글상태(댓글이 5개면 selectreply에 5개의 false가 들어감) -> 어떤댓글에대한
             //대댓글인지 확인하기 위해
             let copy = [];
             response.data.result.data.map((a, index) => {
@@ -101,7 +106,7 @@ export default function Comment(props) {
     const CreateCommentBtn = (commentId, index) => {
         //대댓글인지 확인하기 위한 state
         setCheckReply(true);
-        //대댓글 id 
+        //댓글 id 
         setReplyId(commentId);
         //selectreply를 false로 초기화를 시켜줘야한다.(한개만선택되어야하기때문)
         let temp = [...selectreply];
@@ -130,7 +135,7 @@ export default function Comment(props) {
     ${(p) =>
             p.active &&
             css`
-               background:rgb(235, 235, 235);
+               background:rgb(251, 236, 236);
             `}
     `;
 
@@ -152,31 +157,33 @@ export default function Comment(props) {
                         <Div active={selectreply[index]} className="one-comment">
                             <div className="comment-info">
                                 <div>
-                                    <div className="comment-name">{a.nickname}</div>
+                                    <div className={`comment-${nickname==a.nickname? "writername": "name"}`}>{a.nickname}</div>
                                     <div className="comment-time">{SetKST(a.createdTime)}</div>
                                 </div>
                                 <button onClick={() => { CreateCommentBtn(a.commentId, index) }}>답글 달기</button>
                             </div>
                             <div className="comment-content">{a.content}</div>
-                            <div className="comment-comment">
+                            <div className="comment-bottom">
                                 {a.children.length > 0 ?
                                     <button onClick={() => {
-                                        let copy = [...checkreply];
-                                        copy[index] = !checkreply[index];
-                                        setCheckReply(copy);
-                                    }}>{a.children.length}개의 답글</button>
+                                        //해당댓글에 대댓글 보여주기 위해
+                                        let copy = [...openreply];
+                                        copy[index] = !openreply[index];
+                                        setOpenReply(copy);
+                                    }}>+{a.children.length}개의 답글</button>
                                     : <button onClick={() => {
                                         let id = a.commentId;
                                         CreateCommentBtn(id, index);
                                     }}>답글 달기</button>}
 
                             </div>
-                            <div className='reply'>{checkreply[index] ? a.children.map((reply, replyindex) => {
+                            {/* 대댓글 */}
+                            <div className='reply'>{openreply[index] ? a.children.map((reply, replyindex) => {
                                 return (
                                     <div className='reply-one-wrap'>
                                         <div className='reply-info'>
                                             <div>
-                                                <div className='comment-name'>{reply.nickname}</div>
+                                                <div className={`comment-${nickname==reply.nickname? "writername": "name"}`}>{reply.nickname}</div>
                                                 <div className='comment-time'>{SetKST(reply.createdTime)}</div>
                                             </div>
                                             
@@ -184,12 +191,8 @@ export default function Comment(props) {
                                             <div className='comment-comment' >{reply.content}</div>
                             
                                     </div>
-
-
                                 )
-                            })
-
-                                : null}</div>
+                            }) : null}</div>
                         </Div>
                     )
                 })}

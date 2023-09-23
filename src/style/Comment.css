@@ -31,6 +31,7 @@
     height:25px;
     font-size:10px;
     margin-left:440px;
+    font-weight: bold;
     border:0.5px solid gray;
     background-color: white;
     &:hover{
@@ -53,16 +54,34 @@
 
 .comment-name{
     font-weight: bold;
+    font-size:15px;
+}
+.comment-writername{
+    font-weight:bold;
+    font-size:15px;
+    color:rgb(127, 127, 253);
 }
 .comment-time{
-    color:rgb(193, 192, 192);
+    color:rgb(147, 147, 147);
+    font-size:13px;
 }
 .comment-content{
     margin-top:15px;
 }
-.comment-comment{
+.comment-bottom{
     margin-top:15px;
 }
+.comment-bottom button{
+    width:100px;
+    margin-top:13px;
+    border-radius: 10px;
+    background-color: white;
+    border:none;
+    &:hover{
+        font-weight: bold;
+    }
+}
+
 .comment-comment button{
     border-radius: 10px;
     background-color: white;
@@ -76,6 +95,7 @@
     margin-top:15px;
     margin-left:20px;  
     border-bottom: 1px solid gray;
+    padding-bottom:10px;
 }
 .reply-info{
     display:flex;

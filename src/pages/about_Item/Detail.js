@@ -92,15 +92,17 @@ function Detail() {
           <div className='Detail_Item_Img'>
             <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
             <Login open={showLoginPopup} close={closeloginModal} ></Login>
-
+            {/* 상품정보컴포넌트 */}
             <OneItem item={item} id={id} location={location} setItem={setItem} itemlike={itemlike} setItemLike={setItemLike}
               navigate={navigate} openReportModal={openReportModal} showReportPopup={showReportPopup} closeReportnModal={closeReportnModal}
               onProfileClick={onProfileClick} />
+              {/* 글쓰기 컴포넌트 */}
             <WriteBtn />
           </div>
         </div>
       </div>
-      <Comment postid={id} />
+      {/* 페이지 하단 댓글 컴포넌트 */}
+      <Comment postid={id} nickname={item.writer.nickname} />
     </>
   )
 }
