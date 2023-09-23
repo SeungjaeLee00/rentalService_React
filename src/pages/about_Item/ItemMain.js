@@ -40,7 +40,7 @@ function ItemMain() {
         headers: { Authorization: `Bearer ${actoken}` },
         headers: { Auth: retoken }
     })
-    console.log(response);
+    console.log("본인정보조회성공");
     setMyInfo(response.data.result.data);
     //sessionstorage에 저장
     window.sessionStorage.setItem("nickname", response.data.result.data.nickname);
