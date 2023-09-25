@@ -63,7 +63,7 @@ function LoginPage(props) {
     return (
         <div style={{
             display: 'flex', justifyContent: 'center', alignItems: 'center',
-            width: '100%', height: '100vh', paddingTop: '10px', marginTop: "20px"
+            width: '100%', paddingTop: '10px', marginTop: "20px"
         }}>
             <Form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column' }} >
                 <FormGroup>
