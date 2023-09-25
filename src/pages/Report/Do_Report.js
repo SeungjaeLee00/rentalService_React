@@ -32,10 +32,8 @@ const Do_Report = (props) => {
 
     try {
       const response = await axios.post('http://13.125.98.26:8080/reports', dataToSend, {
-        headers: { 
-          Authorization: `Bearer ${actoken}`,
-          Auth: retoken
-        },
+        headers: { 'Authorization' : `Bearer ${actoken}`,
+        'Auth' : retoken }
       });
       console.log('신고 전송 성공: ', response.data);
       if (response.status === 201) {

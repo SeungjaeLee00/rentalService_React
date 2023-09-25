@@ -51,8 +51,8 @@ export default function RentModal(props) {
         }
         else {
             axios.patch("/trades/trade/" + props.tradeid, null, {
-                headers: { 'Authorization': `Bearer ${actoken}` },
-                headers: { 'Auth': retoken }
+                headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
             })
                 .then(response => {
                     console.log(response);

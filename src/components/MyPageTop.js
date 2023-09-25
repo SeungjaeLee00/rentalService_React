@@ -16,10 +16,12 @@ export default function MyPageTop(props) {
         try {
             setLoading(true);
             const response = await axios.get('/members/my-profile', {
-                headers: { Authorization: `Bearer ${actoken}` },
-                headers: { Auth: retoken }
+                headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
             })
             console.log("내정보조회성공");
+            console.log(response);
+            // localStorage.setItem('accessToken', response.headers.authorization);
             setMyInfo(response.data.result.data);
             setLoading(false);
         }

@@ -23,8 +23,8 @@ export default function OneMessage() {
     
     useEffect(() => {
         axios.get(`/messages/${state.copy[0]}/message`, {
-            headers: { Authorization: `Bearer ${actoken}` },
-            headers: { Auth: retoken }
+            headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
         })
             .then(response => {
                 console.log(response.data.result.data);

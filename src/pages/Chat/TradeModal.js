@@ -73,7 +73,8 @@ export default function TradeModal(props) {
         // dataToSend.endDate = macTransDate(dataToSend.endDate);
 
         axios.post('/trades/'+props.postId,dataToSend,{
-            headers: { Authorization: `Bearer ${actoken}`, Auth: retoken },
+            headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
           })
           .then(response=>{
             console.log("거래생성완료");

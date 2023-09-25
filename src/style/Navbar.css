@@ -30,6 +30,7 @@
 }
 .top-right a{
     text-decoration: none;
+    color:black;
     &:hover{
         font-weight: bold;
       }

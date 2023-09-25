@@ -40,10 +40,8 @@ function Chat() {
       }
       if (isAuthenticated) {
         axios.post('http://13.125.98.26:8080/messages', dataToSend, {
-          headers: {
-            Authorization: `Bearer ${actoken}`,
-            Auth: retoken
-          },
+          headers: { 'Authorization' : `Bearer ${actoken}`,
+          'Auth' : retoken }
         })
         .then(response=>{
           console.log('메세지 전송 성공: ', response.data);

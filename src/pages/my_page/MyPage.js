@@ -26,10 +26,10 @@ export default function MyPage() {
     try {
       setLoading(true);
       const response = await axios.get('/posts/my', {
-        headers: { Authorization: `Bearer ${actoken}` },
-        headers: { Auth: retoken }
+        headers: { 'Authorization' : `Bearer ${actoken}`,
+                   'Auth' : retoken }
       })
-      
+      // localStorage.setItem('accessToken', response.headers.authorization);
       setMyPost(response.data.result.data);
     }
     catch (e) {
@@ -39,10 +39,10 @@ export default function MyPage() {
   const fetchMyRend = async () => {
     try {
       const response = await axios.get('/trades/rend-item?true,', {
-        headers: { Authorization: `Bearer ${actoken}` },
-        headers: { Auth: retoken }
+        headers: { 'Authorization' : `Bearer ${actoken}`,
+        'Auth' : retoken }
       })
-      
+      // localStorage.setItem('accessToken', response.headers.authorization);
       // console.log(response.data.result.data);
       setMyRent(response.data.result.data);
     }
@@ -53,10 +53,10 @@ export default function MyPage() {
   const fetchMYBorrow = async () => {
     try {
       const response = await axios.get('/trades/borrow-item?true', {
-        headers: { Authorization: `Bearer ${actoken}` },
-        headers: { Auth: retoken }
+        headers: { 'Authorization' : `Bearer ${actoken}`,
+        'Auth' : retoken }
       })
-      
+      // localStorage.setItem('accessToken', response.headers.authorization);
       // console.log(response.data.result.data);
       setMyBorrow(response.data.result.data);
     }
@@ -68,9 +68,10 @@ export default function MyPage() {
   const fetchMyReview = async() =>{
     try{
       const response = await axios.get('/reviews/my', {
-        headers: { Authorization: `Bearer ${actoken}` },
-        headers: { Auth: retoken }
+        headers: { 'Authorization' : `Bearer ${actoken}`,
+        'Auth' : retoken }
       })
+      // localStorage.setItem('accessToken', response.headers.authorization);
       setMyReview(response);
     }catch(e){
       console.log(e.response.data.result);

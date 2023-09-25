@@ -30,10 +30,8 @@ function AllChats() {
     if (isAuthenticated) {
       try {
         const response = await axios.get(`http://13.125.98.26:8080/messages/${viewMode}`, {
-          headers: {
-            Authorization: `Bearer ${actoken}`,
-          },
-          headers: { Auth: retoken },
+          headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
         });
         if (response.data.success) {
           console.log('메시지 불러오기 성공:', response.data);
@@ -58,10 +56,8 @@ function AllChats() {
       : `http://13.125.98.26:8080/messages/received?senderName=${searchedMemberName}`;
 
     axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${actoken}`,
-        Auth: retoken,
-      },
+      headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
     })
       .then(response => {
         if (response.data.success) {
@@ -85,10 +81,8 @@ function AllChats() {
   const deleteMessage = async (messageId) => {
     try {
       const response = await axios.delete(`http://13.125.98.26:8080/messages/${messageId}/${viewMode}`, {
-        headers: {
-          Authorization: `Bearer ${actoken}`,
-          Auth: retoken
-        },
+        headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
       });
       if (response.data.success) {
         console.log('메시지 삭제 성공:', response.data);

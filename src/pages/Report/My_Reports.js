@@ -31,10 +31,8 @@ function My_Reports() {
             const apiUrl = 'http://13.125.98.26:8080/reports/myPage';
             try {
                 axios.get(apiUrl, {
-                    headers: {
-                        Authorization: `Bearer ${actoken}`,
-                        Auth: retoken
-                    },
+                    headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
                 })
                     .then(response => {
                         console.log('신고내역 불러오기 성공:', response.data);
@@ -58,8 +56,8 @@ function My_Reports() {
     const deleteReport = async (reportId) => {
         try {
             const response = await axios.delete(`http://13.125.98.26:8080/reports/${reportId}`, {
-                headers: { Authorization: `Bearer ${actoken}` },
-                headers: { Auth: retoken },
+                headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
             });
 
             if (response.data.success) {
@@ -76,10 +74,8 @@ function My_Reports() {
     // 신고 목록을 다시 불러옴
     const fetchReportList = () => {
         axios.get('http://13.125.98.26:8080/reports/myPage', {
-            headers: {
-                Authorization: `Bearer ${actoken}`,
-                Auth: retoken
-            }
+            headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
         })
             .then(response => {
                 if (response.data.success) {
@@ -98,10 +94,8 @@ function My_Reports() {
     const fetchPostInfo = async (postId) => {
         try {
             const response = await axios.get(`http://13.125.98.26:8080/posts/${postId}`, {
-                headers: {
-                    Authorization: `Bearer ${actoken}`,
-                    Auth: retoken
-                },
+                headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
             });
 
             if (response.data.success) {

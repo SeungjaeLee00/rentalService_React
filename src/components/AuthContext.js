@@ -1,4 +1,3 @@
-import { ConnectingAirportsOutlined } from '@mui/icons-material';
 import React, { createContext, useContext, useState, useEffect, useLayoutEffect } from 'react';
 
 export const AuthContext = createContext();

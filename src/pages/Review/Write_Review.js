@@ -41,8 +41,8 @@ function Write_Review() {
             content: review
         }
         axios.post('/reviews/' + state.tradeid, data, {
-            headers: { 'Authorization': `Bearer ${actoken}` },
-            headers: { 'Auth': retoken }
+            headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
         }).then(response => {
             console.log(response);
         }).catch(e => {

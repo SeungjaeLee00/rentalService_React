@@ -14,8 +14,8 @@ export default function MyPost(props) {
     function DeleteItem(id) {
         console.log(id);
         axios.delete("/posts/" + id, {
-            headers: { Authorization: `Bearer ${actoken}` },
-            headers: { Auth: retoken }
+            headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
         })
             .then(response => {
                 console.log("삭제성공")

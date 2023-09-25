@@ -10,8 +10,8 @@ export default function MyLike() {
     const navigate = useNavigate();
     useEffect(() => {
         axios.get('/posts/likes', {
-            headers: { Authorization: `Bearer ${actoken}` },
-            headers: { Auth: retoken }
+            headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
         })
             .then(response => {
                 console.log("본인찜조회성공");

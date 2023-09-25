@@ -37,8 +37,8 @@ function ItemMain() {
   const fetchMyInfo = async()=>{
     try{
       const response = await axios.get('/members/my-profile', {
-        headers: { Authorization: `Bearer ${actoken}` },
-        headers: { Auth: retoken }
+        headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
     })
     console.log("본인정보조회성공");
     setMyInfo(response.data.result.data);

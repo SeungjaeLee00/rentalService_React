@@ -19,8 +19,8 @@ export default function MessageList(props) {
         console.log(props.mypost);
         axios.get("/messages/received", {
 
-            headers: { Authorization: `Bearer ${actoken}` },
-            headers: { Auth: retoken }
+            headers: { 'Authorization' : `Bearer ${actoken}`,
+            'Auth' : retoken }
         })
             .then(response => {
                 console.log("received메시지조회성공");
@@ -39,8 +39,8 @@ export default function MessageList(props) {
         setIsActive2(false);
         axios.get("/messages/received", {
 
-            headers: { Authorization: `Bearer ${actoken}` },
-            headers: { Auth: retoken }
+            headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
         })
             .then(response => {
                 console.log("메시지조회성공");
@@ -58,8 +58,8 @@ export default function MessageList(props) {
         setIsActive2(true);
         axios.get("/messages/sent", {
 
-            headers: { Authorization: `Bearer ${actoken}` },
-            headers: { Auth: retoken }
+            headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
         })
             .then(response => {
                 console.log("메시지조회성공");
@@ -77,8 +77,8 @@ export default function MessageList(props) {
         message.messageList.map(a => {
             if (a.checked) {
                 axios.delete(`/messages/${a.id}/${who}`, {
-                    headers: { Authorization: `Bearer ${actoken}` },
-                    headers: { Auth: retoken }
+                    headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
                 })
                     .then(response => {
                         console.log("메시지삭제성공");

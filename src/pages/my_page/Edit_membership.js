@@ -61,7 +61,7 @@ const Edit_membership = (props) => {
       formData.append('address.zipCode', editedData.address.zipCode);
 
       const response = await axios.patch('http://13.125.98.26:8080/members', formData, {
-        headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${actoken}`, Auth: retoken },
+        headers: { 'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${actoken}`, 'Auth': retoken },
       });
 
       if (response.data.success) {
@@ -88,7 +88,8 @@ const Edit_membership = (props) => {
       setStore(null);
       setLoading(true);
       axios.get(apiUrl, {
-        headers: { Authorization: `Bearer ${actoken}`, Auth: retoken },
+        headers: { 'Authorization' : `Bearer ${actoken}`,
+        'Auth' : retoken }
       })
         .then(response => {
           console.log('회원 정보 불러오기 성공:', response.data);

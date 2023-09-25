@@ -53,10 +53,8 @@ function Profile() {
         if (isAuthenticated) {
             const apiUrl = "http://13.125.98.26:8080/members/" + state;
             axios.get(apiUrl, {
-                headers: {
-                    Authorization: `Bearer ${actoken}`,
-                    Auth: retoken
-                },
+                headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
             })
                 .then(response => {
                     console.log('회원 정보 불러오기 성공:', response.data);
@@ -72,10 +70,8 @@ function Profile() {
     const viewReview = async (state) => {
         try {
             const response = await axios.get("http://13.125.98.26:8080/reviews?nickname=" + state, {
-                headers: {
-                    Authorization: `Bearer ${actoken}`,
-                    Auth: retoken
-                },
+                headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
             })
             if (response.data.success) {
                 console.log('리뷰 불러오기 성공:', response.data);

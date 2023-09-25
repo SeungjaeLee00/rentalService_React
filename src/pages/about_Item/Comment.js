@@ -70,8 +70,8 @@ export default function Comment(props) {
             }
             console.log(data);
             axios.post(`/posts/${props.postid}/comments`, data, {
-                headers: { Authorization: `Bearer ${actoken}` },
-                headers: { Auth: retoken }
+                headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
             }).then(response => {
                 console.log(response);
                 //댓글생성완료후 페이지 새로고침
@@ -88,8 +88,8 @@ export default function Comment(props) {
             }
 
             axios.post(`/posts/${props.postid}/comments`, data, {
-                headers: { Authorization: `Bearer ${actoken}` },
-                headers: { Auth: retoken }
+                headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
             })
                 .then(response => {
                     console.log(response);
@@ -125,8 +125,8 @@ export default function Comment(props) {
     //댓글삭제 api 
     const DeleteComment = (id) => {
         axios.delete('/comments/' + id, {
-            headers: { Authorization: `Bearer ${actoken}` },
-            headers: { Auth: retoken }
+            headers: { 'Authorization' : `Bearer ${actoken}`,
+                'Auth' : retoken }
         }).then(response => {
             console.log(response);
             window.location.replace('/itemmain/detail/' + props.postid);
