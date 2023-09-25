@@ -13,7 +13,7 @@ import FoundId from './pages/about_membership/FoundId';
 import LoginPage from './pages/Login/LoginPage';
 import Chat from './pages/Chat/Chat';
 import Detail from './pages/about_Item/Detail';
-import Edit_membership from './pages/my_page/Edit_membership';
+import Edit_membership from './pages/my_page/Edit_Pages/Edit_membership';
 
 import MyitemPage from './pages/my_page/MyitemPage';
 import My_Reports from './pages/Report/My_Reports';

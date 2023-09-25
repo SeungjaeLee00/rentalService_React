@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../style/modal.css'
-import { useAuth } from '../../components/AuthContext';
+import '../../../style/modal.css'
+import { useAuth } from '../../../components/AuthContext';
 
 const Edit_membership = (props) => {
   const navigate = useNavigate();
@@ -21,27 +21,17 @@ const Edit_membership = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const [password, setPassword] = useState('');
-  const [isPasswordVerified, setIsPasswordVerified] = useState(false);
+  
 
   const openModal = () => {
-    setIsEditing(false);
-    setIsPasswordVerified(false);
-    setIsModalOpen(true); 
+    setIsEditing(true); // 수정 모드로 변경
+    // setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(true); 
+    setIsEditing(false); // 수정 모드 종료
+    setIsModalOpen(false);
   };
-
-  // const handleEditClick = () => {
-  //   if (password === userData.password) {
-  //     setIsEditing(true);
-  //     closeModal(); 
-  //   } else {
-  //     alert('비밀번호가 일치하지 않습니다.');
-  //   }
-  // };
-
 
   const handleSaveClick = async () => {
     try {
@@ -114,30 +104,20 @@ const Edit_membership = (props) => {
     setImageFile(selectedFile);
   };
 
-  const onPasswordHandler = (e) => {
-    setPassword(e.target.value);
-  };
+  // const onPasswordHandler = (e) => {
+  //   setPassword(e.target.value);
+  // };
 
-  // const handleEditClick = () => {
+  // const onSubmitHandler = (e) => {
+  //   e.preventDefault();
   //   if (password === userData.password) {
+  //     setIsPasswordVerified(true);
   //     setIsEditing(true);
-  //     closeModal(); 
+  //     setIsModalOpen(false);
   //   } else {
   //     alert('비밀번호가 일치하지 않습니다.');
   //   }
   // };
-
-  // redux 로 비밀번호 받고 확인
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    if (password === userData.password) {
-      setIsPasswordVerified(true);
-      setIsEditing(true);
-      setIsModalOpen(false);
-    } else {
-      alert('비밀번호가 일치하지 않습니다.');
-    }
-  };
 
   useEffect(() => {
     setEditedData({ ...userData });
@@ -167,7 +147,7 @@ const Edit_membership = (props) => {
         </div>
       ) : null}
 
-      {isModalOpen ? (
+      {/* {isModalOpen ? (
         <div className="openModal modal">
           <section>
             <header>
@@ -197,7 +177,7 @@ const Edit_membership = (props) => {
             </footer>
           </section>
         </div>
-      ) : null}
+      ) : null} */}
 
       {isEditing ? (
         <div>

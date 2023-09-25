@@ -2,7 +2,7 @@ import { useEffect, useHistory } from 'react'
 import axios from 'axios'
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import Edit_membership from '../pages/my_page/Edit_membership';
+import Edit_membership from '../pages/my_page/Edit_Pages/Edit_membership';
 
 export default function MyPageTop(props) {
     const actoken = localStorage.accessToken;
