@@ -45,6 +45,10 @@ function ItemMain() {
     //sessionstorage에 저장
     window.sessionStorage.setItem("nickname", response.data.result.data.nickname);
     }catch(e){
+      if (e.response.data.code == '511') {
+        alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+        window.location.replace('/loginpage');
+      }
       console.log(e);
     }
   }
@@ -69,6 +73,7 @@ function ItemMain() {
 
   if(loading) return <div>로딩중..</div>;
   if(error) return <div>에러가 발생했습니다</div>;
+  if(!store && !myinfo) return null;
 
   return (
     <div className='page-container'>
@@ -103,7 +108,7 @@ function Dashboard() {
     <div className='dashboard'>
       <div className='dashboard-right'>
         <div className='dashboard-title'>
-          <h1 style={{ fontWeight: "bold", fontSize: "50px" }}>뭐든빌리개는</h1>
+          <h1 style={{ fontWeight: "bold", fontSize: "50px" }}>Billim</h1>
         </div>
         <div style={{ marginTop: "20px" }} className='dashboard-decoration'>
           <h1>언제어디서든지 상품을 <br /> 대여해주고 받을 수 있는 서비스입니다. </h1>

@@ -59,6 +59,10 @@ export default function RentModal(props) {
                     alert("거래가 완료되었습니다");
                 })
                 .catch(error => {
+                    if (error.response.data.code == '511') {
+                        alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+                        window.location.replace('/loginpage');
+                      }
                     console.log(error)
                 })
         }

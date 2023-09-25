@@ -11,6 +11,7 @@ import GoogleLogin from '../../socialLogin/GoogleLLogIn';
 import { loginUser } from '../about_membership/user_action';
 import HorizonLine from '../../components/HorizonLine';
 import { useAuth } from '../../components/AuthContext';
+import { useEffect } from 'react';
 
 function LoginPage(props) {
     const dispatch = useDispatch();
@@ -26,6 +27,12 @@ function LoginPage(props) {
     const onPasswordHandler = (event) => {
         setPassword(event.currentTarget.value);
     }
+
+    useEffect(()=>{
+        //이전 토큰제거
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+    },[])
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -58,6 +65,8 @@ function LoginPage(props) {
                 setMessage('로그인에 실패하였습니다.');
             });
     };
+
+    
 
 
     return (

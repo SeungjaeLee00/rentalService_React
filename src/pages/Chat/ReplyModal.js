@@ -37,6 +37,10 @@ export default function ReplyModal(props) {
           navigate(-1)
         })
         .catch(error=>{
+            if (error.response.data.code == '511') {
+                alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+                window.location.replace('/loginpage');
+              }
           console.error('메세지 전송 실패:', error.response.data.result);
         })
 

@@ -25,22 +25,16 @@ export default function ReNavBar() {
 
     const [search,setSearch] = useState();
  
-    function handleSubmit(e){
-        console.log(e.target.value);
+    function handleSubmit(){
         // navigate("/search/"+search);
         navigate("/category/"+search);
     }
-    useEffect(()=>{
-                
-    },[])
-
-
+    
     return (
         <div className="header">
             <div className="header-top">
                 <div className="top-left">
-                    <a style={{ textDecoration: "none", fontSize: "35px", color: "black" }} href="/">뭐든빌리개</a>
-                    <button onClick={()=>{console.log(isAuthenticated)}}>확인</button>
+                    <a style={{ textDecoration: "none", fontSize: "45px", color: "black" }} href="/">Billim</a>
                 </div>
                 <div className="top-right">
                     {isAuthenticated ? <Link onClick={handleLogout}>로그아웃</Link> :
@@ -55,14 +49,15 @@ export default function ReNavBar() {
             <div className="header-bottom">
                 <div className="category"><Category /></div>
                 <div className="searchbar">
-                    <form  onSubmit={(e)=>{handleSubmit(e)}}>
+                    <form  className='searchform' onSubmit={(e)=>{handleSubmit(e)}}>
                         <input type="text"
                          value={search}
                          className='search'
-                         placeholder='  🔍 어떤 상품을 찾으시나요?'
+                         placeholder='   어떤 상품을 찾으시나요?'
                           onChange={(e)=>{
                             setSearch(e.target.value);
                         }}></input>
+                        <button className='searchbarbtn'>🔍</button>
                     </form>
                 </div>
             </div>

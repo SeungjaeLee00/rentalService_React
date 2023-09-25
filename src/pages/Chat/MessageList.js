@@ -26,9 +26,12 @@ export default function MessageList(props) {
                 console.log("received메시지조회성공");
                 setMessage(response.data.result.data);
                 console.log(response.data.result.data);
-
             })
             .catch(error => {
+                if (error.response.data.code == '511') {
+                    alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+                    window.location.replace('/loginpage');
+                  }
                 console.log(error.response.data.result);
             })
     }, [])

@@ -14,17 +14,13 @@ import LoginPage from './pages/Login/LoginPage';
 import Chat from './pages/Chat/Chat';
 import Detail from './pages/about_Item/Detail';
 import Edit_membership from './pages/my_page/Edit_Pages/Edit_membership';
-
 import MyitemPage from './pages/my_page/MyitemPage';
 import My_Reports from './pages/Report/My_Reports';
 import Do_Report from './pages/Report/Do_Report'
 import My_Review from './pages/Review/My_Review';
 import Write_Review from './pages/Review/Write_Review';
-
 import Category from './pages/about_Item/Category';
 import ReNavBar from './components/ReNavBar';
-
-
 import MyPage from './pages/my_page/MyPage';
 import MyPost from './pages/my_page/MyPost'
 import MyLike from './pages/my_page/MyLike'
@@ -50,16 +46,10 @@ function App() {
             <Route exact path="/find-id" element={<FindId />} />
             <Route exact path="/find-pw" element={<FindPw />} />
             <Route exact path='/reset-pw' element={<ResetPW />} />
-
-
             <Route exact path="/found-id" element={<FoundId />} />
             <Route exact path="/loginpage" element={<LoginPage />} />
 
             <Route exact path='/itemmain/detail/profile' element={<Profile />} />
-
-
-
-
             <Route exact path="/itemmain/upload-item" element={<Upload_Item />} />
             <Route exact path='/itemmain/detail/:id' element={<Detail />} />
             <Route exact path='/itemmain/detail/chat' element={<Chat />} />
@@ -72,8 +62,6 @@ function App() {
             <Route exact path='/my-page/reports' element={<My_Reports />} />
 
             <Route exact path='/report' element={<Do_Report />} />
-
-            
             <Route exact path='/reviews/my-review' element={<My_Review />} />
             <Route exact path='/reviews/write-review' element={<Write_Review />} />
 
@@ -83,8 +71,6 @@ function App() {
               <Route exact path='rent' element={<MyRent />}></Route>
               <Route exact path='borrow' element={<MyBorrow />}></Route>
             </Route>
-
-            
           </Routes>
         </AuthProvider>
       </div>

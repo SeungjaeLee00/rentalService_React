@@ -30,9 +30,13 @@ export default function OneMessage() {
                 console.log(response.data.result.data);
                 setMsg(response.data.result.data)
             })
-            .catch(error => (
-                console.log(error.response.data.result)
-            ))
+            .catch(error => {
+                if (error.response.data.code == '511') {
+                    alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+                    window.location.replace('/loginpage');
+                  }
+            }
+            )
     }, [])
 
 

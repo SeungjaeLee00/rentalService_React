@@ -43,6 +43,10 @@ function Detail() {
     }
     catch (e) {
       console.log(e);
+      if (e.response.data.code == '511') {
+        alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+        window.location.replace('/loginpage');
+      }
       setError(e);
     }
     setLoading(false);

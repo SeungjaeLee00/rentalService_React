@@ -81,7 +81,13 @@ export default function TradeModal(props) {
             alert("거래가 시작되었습니다");
             window.location.replace("my-page/chats");
           })
-          .catch(error=>{console.log(error.response.data)})
+          .catch(error=>{
+            if (error.response.data.code == '511') {
+                alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+                window.location.replace('/loginpage');
+              }
+            console.log(error.response.data)
+        })
     }
 
 
