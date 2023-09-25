@@ -1,0 +1,69 @@
+.my-data {
+    text-align: center;
+    white-space: pre-line;
+    height: 50vh;
+    margin: 0 auto;
+}
+
+.default-data {
+    justify-content: center;
+    padding-top: 10px;
+    border-width: 1px;
+}
+
+.email, .nme, .phoneNum, .address{
+    font-weight: bold;
+    font-size: large;
+}
+
+
+.startEditingbtn {
+    padding: 10px;
+    margin-top: 8px;
+    background-color: rgb(74, 79, 90);
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
+
+.edit-form {
+    text-align: center;
+    white-space: pre-line;
+    height: 110vh;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.editing-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    padding-top: 10px;
+    border-width: 1px;
+
+}
+
+.editing-data label{
+    text-align: left;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.editing-data input {
+    background-color: transparent;
+    height: 45px;
+    width: 300px;
+    border: 2px solid rgba(0, 0, 0, 0.23);
+    border-radius: 7px;
+}
+
+.endEditingbtn{
+    padding: 10px;
+    margin-top: 8px;
+    background-color: rgb(74, 79, 90);
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
