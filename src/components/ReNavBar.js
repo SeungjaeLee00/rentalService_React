@@ -13,7 +13,7 @@ export default function ReNavBar() {
     const [isLogin, setIsLogin] = useState(false);
     console.log(isAuthenticated);
     const handleLogout = () => {
-        logout()
+        logout();
         window.location.replace("/");
         setIsLogin(prevState => !prevState)
     };

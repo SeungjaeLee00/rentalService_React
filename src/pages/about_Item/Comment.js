@@ -2,7 +2,6 @@ import { useState } from 'react'
 import '../../style/Comment.css'
 import axios from 'axios';
 import { useEffect } from 'react';
-import Reply from './Reply';
 import { useRef } from 'react';
 import styled, { css } from "styled-components";
 import SetKST from '../../utils/SetKST';

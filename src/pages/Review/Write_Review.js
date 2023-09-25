@@ -35,7 +35,7 @@ function Write_Review() {
         fetchPost();
     }, [])
 
-    //댓글작성
+    //리뷰작성
     const CreateReview = () => {
         const data = {
             content: review

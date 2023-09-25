@@ -72,7 +72,8 @@ export default function MyPage() {
         headers: { 'Authorization' : `Bearer ${actoken}`,
         'Auth' : retoken }
       })
-      setMyReview(response);
+      console.log(response);
+      setMyReview(response.data.result.data);
     }catch(e){
       console.log(e.response.data.result);
     }

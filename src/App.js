@@ -18,23 +18,20 @@ import Edit_membership from './pages/my_page/Edit_Pages/Edit_membership';
 import MyitemPage from './pages/my_page/MyitemPage';
 import My_Reports from './pages/Report/My_Reports';
 import Do_Report from './pages/Report/Do_Report'
-import AllTrade from './pages/Trade/AllTrade';
 import My_Review from './pages/Review/My_Review';
 import Write_Review from './pages/Review/Write_Review';
 
 import Category from './pages/about_Item/Category';
 import ReNavBar from './components/ReNavBar';
 
-import All_Review from './pages/Review/All_Review';
+
 import MyPage from './pages/my_page/MyPage';
-import MyChange from './pages/my_page/MyChange'
 import MyPost from './pages/my_page/MyPost'
 import MyLike from './pages/my_page/MyLike'
 import MyRent from './pages/my_page/MyRent';
 import MyBorrow from './pages/my_page/MyBorrow';
 import MyChat from './pages/Chat/MyChat'
 import OneMessage from './pages/Chat/OneMessage';
-import SearchItem from './pages/about_Item/SearchItem';
 import Footer from './components/Footer';
 import Profile from './pages/my_page/Profile';
 
@@ -48,7 +45,6 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route exact path="/" element={<ItemMain />} />
-            <Route exact path="/search/:contents" element={<SearchItem />} />
             <Route exact path="/signup" element={<Signup />} />
 
             <Route exact path="/find-id" element={<FindId />} />
@@ -74,7 +70,6 @@ function App() {
             <Route exact path='/my-page/chats' element={<MyChat />} />
             <Route exact path='/my-page/chats/message/:id' element={<OneMessage />} />
             <Route exact path='/my-page/reports' element={<My_Reports />} />
-            <Route exact path='/my-page/all-trades' element={<AllTrade />} />
 
             <Route exact path='/report' element={<Do_Report />} />
 
@@ -89,7 +84,7 @@ function App() {
               <Route exact path='borrow' element={<MyBorrow />}></Route>
             </Route>
 
-            <Route exact path='/my-change' element={<MyChange />} />
+            
           </Routes>
         </AuthProvider>
       </div>

@@ -69,7 +69,7 @@ function Profile() {
 
     const viewReview = async (state) => {
         try {
-            const response = await axios.get("http://13.125.98.26:8080/reviews?nickname=" + state, {
+            const response = await axios.get("http://13.125.98.26:8080/reviews?nickname="+state, {
                 headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
             })
@@ -139,11 +139,11 @@ function Profile() {
 
                                 <div className={isActive2 ? 'LookReviews' : 'nodisplay'}>
                                     <div className="Review">상품 후기</div>
-                                    {showReviews ? (
-                                        userReview && userReview.reviewList && userReview.reviewList.length > 0 ? (
+                                    {showReviews ?  (
+                                        userReview  && userReview.length>0 ? (
                                             <div className="ReivewDetail">
                                                 <ul>
-                                                    {userReview.reviewList.map((review, index) => (
+                                                    {userReview.map((review, index) => (
                                                         <li key={index}>
                                                             <p>작성자: {review.writer}</p>
                                                             <p>내용: {review.content}</p>
