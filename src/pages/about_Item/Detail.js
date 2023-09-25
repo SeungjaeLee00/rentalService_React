@@ -147,13 +147,12 @@ function OneItem(props) {
           <div className='nickname-btn'>
             <div onClick={props.onProfileClick} style={{ marginTop: "20px" }} >👤{props.item.writer.nickname}</div>
             <button onClick={props.openReportModal} variant="secondary" size="lg">❗️</button>
-            <Do_Report open={props.showReportPopup} close={props.closeReportnModal} postId={props.id} />
           </div>
         </div>
         <div className='Item_Button'>
           <button className='likebtn' onClick={LikeAdd} style={{ backgroundColor: "white", color: "black" }}>{props.itemlike ? <span>♥</span> : <span>♡</span>}</button>
           <button className='sendbtn' onClick={() => props.navigate('/itemmain/detail/chat', { state: props.item })}>쪽지보내기</button>
-          <Do_Report open={props.showReportPopup} close={props.closeReportnModal} ></Do_Report>
+          <Do_Report open={props.showReportPopup} close={props.closeReportnModal} postId={props.id}/>
         </div>
 
       </div>
