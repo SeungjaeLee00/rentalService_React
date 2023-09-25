@@ -3,43 +3,42 @@ import React, { createContext, useContext, useState, useEffect, useLayoutEffect 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken') || null);
-  const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refreshToken') || null);
-  // accessToken 상태가 변경될 때 isAuthenticated 상태도 변경
-  const [isAuthenticated, setIsAuthenticated] = useState(accessToken !== null);
+  const [accessToken, setAccessToken] = useState();
+  const [refreshToken, setRefreshToken] = useState();
+  //refreshToken이 null이 아니면 true, 즉 값이 있으면 true(retoken이 null 인경우 : 처음페이지 들어왔을때 )
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('refreshToken'));
   console.log("isAuthenticated:"+ isAuthenticated);
-  
-  useEffect(() => {
-    if (accessToken) {
-      localStorage.setItem('accessToken', accessToken);
-      setIsAuthenticated(true);
-    } else {
-      localStorage.removeItem('accessToken');
-      setIsAuthenticated(false);
-    }
-  }, [accessToken]);
 
-  useEffect(() => {
-    if (refreshToken) {
-      localStorage.setItem('refreshToken', refreshToken);
-    } else {
-      localStorage.removeItem('refreshToken');
-    }
-  }, [refreshToken]);
+  // useEffect(() => {
+  //   if (refreshToken) {
+  //     localStorage.setItem('refreshToken', refreshToken);
+  //     setIsAuthenticated(true);
+  //   } else {
+  //     localStorage.removeItem('refreshToken');
+  //   }
+  // }, [refreshToken]);
+  // useEffect(()=>{
+  //   setIsAuthenticated(refreshToken!==null);
+  // },[refreshToken])
 
   const login = (newAccessToken, newRefreshToken) => {
+    localStorage.setItem('accessToken', newAccessToken);
+    localStorage.setItem('refreshToken', newRefreshToken);
+    setIsAuthenticated(true);
     setAccessToken(newAccessToken);
     setRefreshToken(newRefreshToken);
   };
 
   const logout = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    setIsAuthenticated(false);
     setAccessToken(null);
     setRefreshToken(null);
   };
   
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
-      
       {children}
     </AuthContext.Provider>
   );

@@ -167,8 +167,7 @@ export default function Comment(props) {
             <div className="comment-bottom">
                 {comment.map((a, index) => {
                     return (
-
-                        <Div active={selectreply[index]} className="one-comment">
+                        <Div key={index} active={selectreply[index]} className="one-comment">
                             <div className="onecomment-info">
                                 <div className='onecomment-nametime'>
                                     <div className={`comment-${nickname == a.nickname ? "writername" : "name"}`}>{a.nickname}</div>
@@ -178,7 +177,6 @@ export default function Comment(props) {
                                     <button onClick={() => { CreateCommentBtn(a.commentId, index) }}>답글 달기</button>
                                     {/* 현재 접속한 유저가 쓴 댓글이면 */}
                                     {usernickname == a.nickname ? <button className='btn-delete' onClick={() => { DeleteComment(a.commentId) }}>삭제</button> : null}
-
                                 </div>
 
                             </div>

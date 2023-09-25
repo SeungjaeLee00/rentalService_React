@@ -29,10 +29,13 @@ export default function MyPage() {
         headers: { 'Authorization' : `Bearer ${actoken}`,
                    'Auth' : retoken }
       })
-      // localStorage.setItem('accessToken', response.headers.authorization);
       setMyPost(response.data.result.data);
     }
     catch (e) {
+      if (e.response.data.code == '511') {
+        alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+        window.location.replace('/loginpage');
+    }
       console.log(e.response.data.result);
     }
   }
@@ -42,12 +45,11 @@ export default function MyPage() {
         headers: { 'Authorization' : `Bearer ${actoken}`,
         'Auth' : retoken }
       })
-      // localStorage.setItem('accessToken', response.headers.authorization);
       // console.log(response.data.result.data);
       setMyRent(response.data.result.data);
     }
     catch (e) {
-      console.log(e.response.data.result);
+      console.log(e);
     }
   }
   const fetchMYBorrow = async () => {
@@ -56,7 +58,6 @@ export default function MyPage() {
         headers: { 'Authorization' : `Bearer ${actoken}`,
         'Auth' : retoken }
       })
-      // localStorage.setItem('accessToken', response.headers.authorization);
       // console.log(response.data.result.data);
       setMyBorrow(response.data.result.data);
     }
@@ -71,7 +72,6 @@ export default function MyPage() {
         headers: { 'Authorization' : `Bearer ${actoken}`,
         'Auth' : retoken }
       })
-      // localStorage.setItem('accessToken', response.headers.authorization);
       setMyReview(response);
     }catch(e){
       console.log(e.response.data.result);

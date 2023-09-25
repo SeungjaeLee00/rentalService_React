@@ -1,7 +1,7 @@
 import { useEffect, useHistory } from 'react'
 import axios from 'axios'
 import { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Edit_membership from '../pages/my_page/Edit_membership';
 
 export default function MyPageTop(props) {
@@ -16,16 +16,20 @@ export default function MyPageTop(props) {
         try {
             setLoading(true);
             const response = await axios.get('/members/my-profile', {
-                headers: { 'Authorization' : `Bearer ${actoken}`,
-                'Auth' : retoken }
+                headers: {
+                    'Authorization': `Bearer ${actoken}`,
+                    'Auth': retoken
+                }
             })
             console.log("내정보조회성공");
-            console.log(response);
-            // localStorage.setItem('accessToken', response.headers.authorization);
             setMyInfo(response.data.result.data);
             setLoading(false);
         }
         catch (e) {
+            if (e.response.data.code == '511') {
+                alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+                window.location.replace('/loginpage');
+            }
             console.log(e);
             setError(e);
         }

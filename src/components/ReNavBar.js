@@ -11,7 +11,7 @@ export default function ReNavBar() {
     const navigate = useNavigate();
     const { isAuthenticated, logout } = useAuth();
     const [isLogin, setIsLogin] = useState(false);
-    // console.log(isAuthenticated);
+    console.log(isAuthenticated);
     const handleLogout = () => {
         logout()
         window.location.replace("/");
@@ -31,8 +31,8 @@ export default function ReNavBar() {
         navigate("/category/"+search);
     }
     useEffect(()=>{
-        
-    },[isAuthenticated])
+                
+    },[])
 
 
     return (
@@ -40,6 +40,7 @@ export default function ReNavBar() {
             <div className="header-top">
                 <div className="top-left">
                     <a style={{ textDecoration: "none", fontSize: "35px", color: "black" }} href="/">뭐든빌리개</a>
+                    <button onClick={()=>{console.log(isAuthenticated)}}>확인</button>
                 </div>
                 <div className="top-right">
                     {isAuthenticated ? <Link onClick={handleLogout}>로그아웃</Link> :
