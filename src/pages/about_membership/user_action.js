@@ -1,27 +1,34 @@
 import axios from 'axios';
-import {
-    LOGIN_USER,
-    REGISTER_USER,
-} from './types';
+import { LOGIN_USER, REGISTER_USER } from './types';
 
-export function loginUser(dataToSubmit) {
-
-    const request = axios.post('/itemmain', dataToSubmit)
-        .then(response => response.data)
+// 로그인 액션
+export function loginUser(dataToSubmit, password) {
+    const request = axios.post('/itemmain', dataToSubmit).then((response) => response.data);
 
     return {
         type: LOGIN_USER,
-        payload: request
-    }
+        payload: {
+            request,
+            password
+        }
+
+    };
 }
 
+// 회원가입 액션
 export function registerUser(dataToSubmit) {
-
-    const request = axios.post('/itemmain', dataToSubmit)
-        .then(response => response.data)
+    const request = axios.post('/itemmain', dataToSubmit).then((response) => response.data);
 
     return {
         type: REGISTER_USER,
-        payload: request
-    }
+        payload: request,
+    };
+}
+
+// 비밀번호 확인 액션
+export function verifyPassword(isPasswordVerified) {
+    return {
+        type: 'VERIFY_PASSWORD',
+        payload: isPasswordVerified,
+    };
 }

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Label, Input, Button, Form, FormGroup } from 'reactstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import KaKaoLogin from '../../socialLogin/KakaoLogin';
@@ -12,9 +12,8 @@ import { loginUser } from '../about_membership/user_action';
 import HorizonLine from '../../components/HorizonLine';
 import { useAuth } from '../../components/AuthContext';
 
-
 function LoginPage(props) {
-    let navigate = useNavigate();
+    const dispatch = useDispatch();
     const { login } = useAuth();
 
     const [username, setUsername] = useState("");
@@ -35,6 +34,8 @@ function LoginPage(props) {
             username: username,
             password: password
         };
+
+        dispatch(loginUser(userData, password));
 
         axios.post('http://13.125.98.26:8080/auth/login', userData)
             .then(response => {
