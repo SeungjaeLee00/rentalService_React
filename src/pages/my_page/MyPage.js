@@ -32,10 +32,6 @@ export default function MyPage() {
       setMyPost(response.data.result.data);
     }
     catch (e) {
-      if (e.response.data.code == '511') {
-        alert('로그인이 만료되어 로그인 페이지로 이동합니다');
-        window.location.replace('/loginpage');                
-    }
       console.log(e.response.data.result);
     }
   }
@@ -104,7 +100,7 @@ export default function MyPage() {
         {/* 마이페이지 왼쪽 nav */}
         <div className="bottom-leftnav"><Sidebar /></div>
         {/* https://leejams.github.io/useOutletContext/ , sidebar클릭했을때 보이는 컴포넌트들(mypost,mylike...*/}
-        <div className='bottom-right'><Outlet context={{ mypost, setMyPost, myrent, setMyRent, myborrow, setMyBorrow }} /></div>
+        <div className='bottom-right'><Outlet context={{ mypost, setMyPost, myrent, setMyRent, myborrow, setMyBorrow,myreview }} /></div>
       </div>
       <WriteBtn />
     </div>
@@ -145,6 +141,13 @@ function Sidebar() {
           대여받는 상품
           </Nav.Link>
         </Nav.Item>
+
+        <Nav.Item>
+          <Nav.Link to="/my-page/my-review" active={isActive("/my-page/my-review")}>
+          리뷰
+          </Nav.Link>
+        </Nav.Item>
+
       </Nav.List>
     </Nav>
   );

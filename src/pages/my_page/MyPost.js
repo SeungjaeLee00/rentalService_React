@@ -1,4 +1,4 @@
-import axios from "axios";
+  import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
@@ -25,10 +25,6 @@ export default function MyPost(props) {
                 }
             })
             .catch(error => {
-                if (error.response.data.code == '511') {
-                    alert('로그인이 만료되어 로그인 페이지로 이동합니다');
-                    window.location.replace('/loginpage');
-                  }
                 console.log(error.response.data.result);
             })
     }
@@ -50,7 +46,7 @@ export default function MyPost(props) {
 function ItemTable({ mypost, navigate, DeleteItem }) {
     return (
         <div className="post-bottom">
-            <table style={{ width: "1200px" , borderRight:"1px solid black"}}>
+            <table style={{ width:"100%",borderRight:"1px solid black"}}>
                 <thead>
                     <tr>
                         <th >게시물 제목</th>

@@ -81,7 +81,7 @@ export default function MyPageTop(props) {
                             <div style={{ marginTop: "15px", fontSize: "20px" }} className="quantity">{props.myborrow}개</div>
                         </div>
                         <div className="userreview">
-                            <div style={{ fontSize: "30px" }} className="title">리뷰작성</div>
+                            <div style={{ fontSize: "30px" }} className="title">리뷰</div>
                             <div style={{ marginTop: "15px", fontSize: "20px" }} className="quantity">{props.myreview}개</div>
                         </div>
 

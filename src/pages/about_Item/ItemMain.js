@@ -32,7 +32,6 @@ function ItemMain() {
     }catch(e){
       setError(e);
     }
-    setLoading(false);
   }  
   const fetchMyInfo = async()=>{
     try{
@@ -49,8 +48,10 @@ function ItemMain() {
         alert('로그인이 만료되어 로그인 페이지로 이동합니다');
         window.location.replace('/loginpage');
       }
+      setError(e);
       console.log(e);
     }
+    setLoading(false);
   }
 
 

@@ -1,0 +1,32 @@
+.reiview-wrap{
+    display: flex;
+    flex-direction: column;
+    width:max-content;
+}
+
+.review-top{
+    border-bottom:1px solid black;
+    width:100%;
+    padding: 20px;
+}
+
+.review-btm{
+    display:flex;
+    flex-direction: column;
+}
+
+.onereview{
+    display:flex;
+    flex-direction: column;
+    padding:50px 25px;
+    border-bottom:1px solid black;
+}
+
+.reviewtitle{
+    font-weight: bold;
+}
+
+.reviewcontent{
+    padding-top:10px;
+    padding-left:20px;
+}

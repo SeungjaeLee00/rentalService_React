@@ -62,7 +62,6 @@ function App() {
             <Route exact path='/my-page/reports' element={<My_Reports />} />
 
             <Route exact path='/report' element={<Do_Report />} />
-            <Route exact path='/reviews/my-review' element={<My_Review />} />
             <Route exact path='/reviews/write-review' element={<Write_Review />} />
 
             <Route exact path="/my-page" element={<MyPage />}>
@@ -70,6 +69,7 @@ function App() {
               <Route exact path="like" element={<MyLike />}></Route>
               <Route exact path='rent' element={<MyRent />}></Route>
               <Route exact path='borrow' element={<MyBorrow />}></Route>
+              <Route exact path='my-review' element={<My_Review />} />
             </Route>
           </Routes>
         </AuthProvider>

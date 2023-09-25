@@ -75,12 +75,11 @@
 }
 .bottom-right{
     border-left:1px solid black;
+    width:100%;
 }
 .post-bottom{
     display:flex;
     flex-direction: row;
-    justify-content: center;
-    align-items:center;
 }
 .post-bottom thead{
     border-top: 1px solid black;
@@ -177,7 +176,7 @@ tbody button:hover
 
 /* 대여해주는 상품 css */
 .rent-bottom table{
-    width:1000px;
+    width:100%;
     text-align: center;
     border-right:1px solid black;
 }

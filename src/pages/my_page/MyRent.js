@@ -22,7 +22,7 @@ export default function MyRent() {
                     <thead>
                         <tr>
                             <th>게시글 제목</th>
-                            <th style={{ borderLeft: "1px solid black" }}>대여받는사람</th>
+                            <th>대여받는사람</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +33,7 @@ export default function MyRent() {
                             setTradeTitle(a.postTitle);
                         }}>
                                 <td>{a.postTitle}</td>
-                                <td style={{ borderLeft: "1px solid black" }}>{a.borrowerMember}</td>
+                                <td>{a.borrowerMember}</td>
                             </tr>
                             
                         ))}
