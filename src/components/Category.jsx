@@ -16,7 +16,7 @@ export default function Category() {
         axios.get('/category')
          .then(response=>{
             // console.log("메인 카테고리 axios성공");
-            // console.log(response.data.result.data[1].children);
+            console.log(response.data.result.data[1].children);
             setCategory(response.data.result.data[1].children);
          })
          .catch(error=>{

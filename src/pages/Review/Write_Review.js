@@ -50,6 +50,9 @@ function Write_Review() {
                 alert('로그인이 만료되어 로그인 페이지로 이동합니다');
                 window.location.replace('/loginpage');
               }
+            if(e.response.data.code=='409'){
+                alert('이미 해당거래에 대한 리뷰가 존재합니다');
+            }
             console.log(e);
         })
     }

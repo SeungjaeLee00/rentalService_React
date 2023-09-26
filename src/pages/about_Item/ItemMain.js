@@ -32,6 +32,7 @@ function ItemMain() {
     }catch(e){
       setError(e);
     }
+    setLoading(false);
   }  
   const fetchMyInfo = async()=>{
     try{
@@ -48,10 +49,8 @@ function ItemMain() {
         alert('로그인이 만료되어 로그인 페이지로 이동합니다');
         window.location.replace('/loginpage');
       }
-      setError(e);
       console.log(e);
     }
-    setLoading(false);
   }
 
 
@@ -59,11 +58,18 @@ function ItemMain() {
     fetchPosts();
     fetchMyInfo();
   }, [])
+
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
   const ItemIndex =6;
   const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
   const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
+
+  
+  if(loading) return <div>로딩중..</div>;
+  if(error) return <div>에러가 발생했습니다</div>;
+  if(!store) return null;
+
 
   //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts에 담아줍니다.
   const currentPosts = () => {
@@ -71,10 +77,7 @@ function ItemMain() {
     currentPosts = store.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
-
-  if(loading) return <div>로딩중..</div>;
-  if(error) return <div>에러가 발생했습니다</div>;
-  if(!store && !myinfo) return null;
+  
 
   return (
     <div className='page-container'>

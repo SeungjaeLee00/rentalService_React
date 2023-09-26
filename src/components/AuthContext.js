@@ -8,7 +8,10 @@ export function AuthProvider({ children }) {
   //refreshToken이 null이 아니면 true, 즉 값이 있으면 true(retoken이 null 인경우 : 처음페이지 들어왔을때 )
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('refreshToken')
   );
-  console.log("isAuthenticated:"+ isAuthenticated);
+  useEffect(()=>{
+    //localstorage에 retoken 있으면 값존재, 없으면 null
+    setIsAuthenticated(localStorage.getItem('refreshToken'));
+  },[localStorage.getItem('refreshToken')])
 
   const login = (newAccessToken, newRefreshToken) => {
     localStorage.setItem('accessToken', newAccessToken);

@@ -70,18 +70,16 @@ export default function RentModal(props) {
 
     
     const WriteReviewBtn=(tradecheck)=>{
-        navigate('/reviews/write-review',{state:{postid:props.postid, tradeid:props.tradeid}});
-        /*
          //상품주인이 거래완료버튼을 클릭했으면 리뷰작성
          if(tradecheck==true)
          {
-            navigate('/reviews/write-review')
+            navigate('/reviews/write-review',{state:{postid:props.postid, tradeid:props.tradeid}})
          }
          //거래완료버튼을 누르지 않았으면 리뷰작성못함
          else{
             alert('거래가 완료되지 않았습니다')
          }
-         */
+         
     }
 
     return (
