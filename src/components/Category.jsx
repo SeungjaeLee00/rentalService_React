@@ -77,6 +77,7 @@ const Wrapper = styled.div`
   height: 40px;
   border-radius:7px;
   margin:20px 0px;
+  transition: all 0.5s;
   &:hover{
     font-weight:bold;
     background-color: rgb(66, 66, 253);

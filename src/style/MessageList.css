@@ -42,6 +42,7 @@
 }
 .message-content tbody tr{
     cursor:pointer;
+    transition: all 0.5s;
     &:hover{
         background-color: rgb(250, 246, 241);
         box-shadow: 10px 10px 20px -15px gray;

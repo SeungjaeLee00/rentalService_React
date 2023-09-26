@@ -43,9 +43,12 @@
     font-weight: bold;
     border:0.5px solid gray;
     border-radius: 5px;
-    background-color: white;
+    background-color: black;
+    color:white;
+    transition: all 0.5s;
     &:hover{
-        color:red;
+        font-weight:bold;
+        background-color: rgb(66, 66, 253);
     }
 }
 
@@ -61,6 +64,11 @@
     margin-top:20px;
     background-color: black;
     color:white;
+    transition: all 0.5s;
+    &:hover{
+        font-weight:bold;
+        background-color: rgb(66, 66, 253);
+    }
 }
 
 .comment-name{
@@ -70,7 +78,7 @@
 .comment-writername{
     font-weight:bold;
     font-size:15px;
-    color:rgb(127, 127, 253);
+    color:rgb(66, 66, 253);
 }
 .comment-time{
     color:rgb(147, 147, 147);
@@ -87,10 +95,12 @@
     margin-top:13px;
     background-color: white;
     border:none;
+    transition: all 0.5s;
     &:hover{
         font-weight: bold;
     }
 }
+
 
 .comment-comment button{
     border-radius: 10px;
@@ -121,9 +131,11 @@
     font-weight: bold;
     border:0.5px solid gray;
     border-radius: 5px;
-    background-color: white;
+    background-color: black;
+    color:white;
+    transition: all 0.5s;
     &:hover{
-        color:red;
+        font-weight:bold;
+        background-color: rgb(66, 66, 253);
     }
-    
 }

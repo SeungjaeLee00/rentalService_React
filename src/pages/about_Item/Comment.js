@@ -177,9 +177,10 @@ export default function Comment(props) {
                                     <div className="comment-time">{SetKST(a.createdTime)}</div>
                                 </div>
                                 <div className='onecomment-btn'>
-                                    <button onClick={() => { CreateCommentBtn(a.commentId, index) }}>답글 달기</button>
                                     {/* 현재 접속한 유저가 쓴 댓글이면 */}
                                     {usernickname == a.nickname ? <button className='btn-delete' onClick={() => { DeleteComment(a.commentId) }}>삭제</button> : null}
+                                    <button onClick={() => { CreateCommentBtn(a.commentId, index) }}>답글 달기</button>
+                                    
                                 </div>
 
                             </div>

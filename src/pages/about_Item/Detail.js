@@ -155,7 +155,7 @@ function OneItem(props) {
           </div>
         </div>
         <div className='Item_Button'>
-          <button className='likebtn' onClick={LikeAdd} style={{ backgroundColor: "white", color: "black" }}>{props.itemlike ? <span>♥</span> : <span>♡</span>}</button>
+          <button className='likebtn' onClick={LikeAdd}>{props.itemlike ? <span style={{color:"red"}}>♥</span> : <span>♥</span>}</button>
           <button className='sendbtn' onClick={() => props.navigate('/itemmain/detail/chat', { state: props.item })}>쪽지보내기</button>
           <Do_Report open={props.showReportPopup} close={props.closeReportnModal} postId={props.id}/>
         </div>

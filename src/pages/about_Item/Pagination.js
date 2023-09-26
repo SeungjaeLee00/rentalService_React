@@ -4,10 +4,8 @@ import styled from "styled-components";
 const PageUl = styled.ul`
   float: left;
   list-style: none;
-  text-align: center;
   border-radius: 3px;
   color: white;
-  padding: 1px;
   border-top: 3px solid #186ead;
   border-bottom: 3px solid #186ead;
   background-color: white;
@@ -15,10 +13,10 @@ const PageUl = styled.ul`
 
 const PageLi = styled.li`
   display: inline-block;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 600;
   border-radius: 5px;
-  width: 25px;
+  width: 30px;
   &:hover {
     cursor: pointer;
     color: white;
@@ -36,6 +34,11 @@ const PageSpan = styled.span`
     border-radius: 100%;
     color: white;
     background-color: #263a6c;
+  }
+  &:hover{
+    background-color: rgb(66, 66, 253);
+    color:white;
+    font-weight:bold;
   }
 `;
 

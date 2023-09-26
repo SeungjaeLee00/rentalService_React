@@ -103,6 +103,7 @@
 }
 
 .post-bottom tbody tr:hover{
+    transition: all 0.5s;
     background-color: rgb(250, 246, 241);
 }
 tbody button{

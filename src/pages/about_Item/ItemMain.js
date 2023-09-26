@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Pagination from './Pagination';
 import Posts from './Posts';
 import WriteBtn from '../../components/WriteBtn';
-import fetchMyInfo from '../../apis/FetchMyInfo';
 
 function ItemMain() {
   const navigate = useNavigate();
