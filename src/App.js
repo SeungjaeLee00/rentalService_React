@@ -30,6 +30,7 @@ import MyChat from './pages/Chat/MyChat'
 import OneMessage from './pages/Chat/OneMessage';
 import Footer from './components/Footer';
 import Profile from './pages/my_page/Profile';
+import NotFound from './components/NotFound';
 
 
 
@@ -42,6 +43,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<ItemMain />} />
             <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/*" element={<NotFound/>}/>
 
             <Route exact path="/find-id" element={<FindId />} />
             <Route exact path="/find-pw" element={<FindPw />} />

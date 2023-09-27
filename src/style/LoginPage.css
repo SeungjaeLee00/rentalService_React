@@ -1,0 +1,28 @@
+.Login-wrap{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
+
+.FormGroup h1, p{
+    text-align: center;
+}
+
+.FormGroup h1 {
+    font-weight: bold;
+}
+.FormGroup p{
+    font-size: 13px;
+    color:#4A4F5A;
+}
+
+.loginbtn Button{
+    
+    transition:all 1s;
+    width:300px;
+    &:hover{
+        background-color:rgb(66, 66, 253);
+    }
+}
