@@ -110,7 +110,7 @@ const Upload_Item = () => {
       })
         .then(response => {
           console.log("게시물생성성공");
-          //window.location.replace("/");
+          window.location.replace("/");
         })
         .catch(error => {
           console.log(error.response.data.result);
@@ -133,7 +133,7 @@ const Upload_Item = () => {
       })
         .then(response => {
           console.log("수정성공");
-          //window.location.replace("/");
+          window.location.replace("/");
         })
         .catch(error => {
           if (error.response.data.code == '511') {

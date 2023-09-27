@@ -38,7 +38,7 @@
 .inforight{
     display:flex;
     flex-direction: row;
-    margin-left:250px;
+    margin-left:200px;
 
 }
 
@@ -50,7 +50,7 @@
 .userrent{
     display:flex;
     flex-direction: column;
-    margin-left:150px;
+    margin-left:30px;
 }
 
 .userborrow{
@@ -61,7 +61,7 @@
 .userreview{
     display: flex;
     flex-direction: column;
-    margin-left: 150px;
+    margin-left: 100px;
 }
 
 .mypagebottom{

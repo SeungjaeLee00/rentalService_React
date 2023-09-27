@@ -69,7 +69,6 @@ export default function MyPageTop(props) {
                     <div className="inforight">
                         <div className="userpost">
                             <div style={{ fontSize: "30px" }} className="title">게시물</div>
-
                             <div style={{ marginTop: "15px", fontSize: "20px" }} className="quantity">{props.mypost}개</div>
                         </div>
                         <div className="userrent">

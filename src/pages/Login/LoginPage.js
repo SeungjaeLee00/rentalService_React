@@ -63,7 +63,6 @@ function LoginPage() {
                         icon:'error',
                         text:'존재하지 않는 회원입니다.'
                     })  
-                    //window.location.replace("/");
                 }
                 //비밀번호 틀린경우
                 if(error.response.data.code=='409')
@@ -72,9 +71,7 @@ function LoginPage() {
                         icon:'error',
                         text:'비밀번호를 확인해주세요'
                     })  
-                    //window.location.replace("/");
                 }
-                console.error(error);
             });
     };
 

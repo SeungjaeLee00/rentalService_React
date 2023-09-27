@@ -13,6 +13,7 @@
 .message-mid{
     display:flex;
     flex-direction: row;
+    margin-bottom:10px;
 }
 .message-nav button{
     background-color: white;
@@ -21,17 +22,18 @@
 }
 
 
-.message-filter{
-    margin-left:700px;
+.message-dropbox ul{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding:0px 10px;
 }
-
-.message-dropbox{
-    margin-left:20px;
+.message-dropbox span{
+    font-size: 20px;
+    margin-left: 20px;
 }
 
 .message-content table{
     border-top: 1px solid black;
-    margin-top:20px;
     width:1000px;
 }
 
@@ -76,6 +78,7 @@
 
 .message-mid button{
     margin-top: 10px;
+    height:35px;
     border-radius: 5px;
     background-color: black;
     color:white;

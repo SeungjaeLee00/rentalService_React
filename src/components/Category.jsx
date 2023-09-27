@@ -43,25 +43,6 @@ export default function Category() {
             </Ul>
           </Menu>
         </DropdownContainer>
-  
-        {/* <DropdownContainer>
-          <DropdownButton onClick={boardHandler} ref={boardRef}>
-            마이페이지
-          </DropdownButton>
-          <Menu isDropped={boardIsOpen}>
-            <Ul>
-              <Li>
-                <LinkWrapper href="#2-1">메뉴1</LinkWrapper>
-              </Li>
-              <Li>
-                <LinkWrapper href="#2-2">메뉴2</LinkWrapper>
-              </Li>
-              <Li>
-                <LinkWrapper href="#2-3">메뉴3</LinkWrapper>
-              </Li>
-            </Ul>
-          </Menu>
-        </DropdownContainer> */}
       </Wrapper>
     )
 }
