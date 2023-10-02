@@ -3,7 +3,6 @@ import '../style/Navbar.css'
 import { useAuth } from './AuthContext';
 import { useState } from 'react';
 import Category from './Category';
-import { useEffect } from 'react';
 
 
 
@@ -11,7 +10,6 @@ export default function ReNavBar() {
     const navigate = useNavigate();
     const { isAuthenticated, logout } = useAuth();
     const [isLogin, setIsLogin] = useState(false);
-    console.log(isAuthenticated);
     const handleLogout = () => {
         logout();
         window.location.replace("/");

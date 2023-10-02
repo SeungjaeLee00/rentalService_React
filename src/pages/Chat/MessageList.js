@@ -9,18 +9,31 @@ export default function MessageList(props) {
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
 
+    //originmsg -> 보낸쪽지, 받은쪽지 클릭시 저장되는 원본 메시지리스트
+    const [originmsg, setOriginMsg] = useState();
+    //message -> 화면에 보여주는 메시지리스트 (배열이 삭제, 삽입됨)
     const [message, setMessage] = useState();
-    const [loading, setLoading]=useState();
+    const [loading, setLoading] = useState();
     const [error, setError] = useState();
-    const [msgid, setMsgId] = useState();
+
     const navigate = useNavigate();
+    
+    //받은쪽지 클릭 -> received, 보낸쪽지 -> sent 
     const [who, setWho] = useState("received");
+    
+    //받은쪽지 ,보낸쪽지 클릭 표시하기위한 state
     const [isActive1, setIsActive1] = useState(true);
     const [isActive2, setIsActive2] = useState(false);
-    const [filter, setFilter] = useState(false);
+
+    //필터
+    //최신순,오래된순 클릭시 state, 오래된순 true, 최신순 =false 
+    const [sortcheck, setSortCheck] = useState(false);
+    //읽지않은쪽지 클릭시 true. 
+    const [readcheck, setReadCheck] = useState(false);
+
     const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
 
-    const FetchMessage = async () =>{
+    const FetchMessage = async () => {
         try {
             setLoading(true);
             const response = await axios.get('/messages/received', {
@@ -31,6 +44,7 @@ export default function MessageList(props) {
             })
             console.log("received메시지조회성공");
             setMessage(response.data.result.data.messageList);
+            setOriginMsg(response.data.result.data.messageList);
             console.log(response.data.result.data);
         }
         catch (e) {
@@ -41,58 +55,64 @@ export default function MessageList(props) {
     }
 
     useEffect(() => {
-        console.log(props.mypost);
+        //처음 메시지 받아올때(받은메시지)
         FetchMessage();
     }, [])
 
 
     //받은쪽지 클릭 실행되는 함수 
-    function receiveHandle() {
+    const receiveHandle = async () => {
         setWho("received");
         setIsActive1(true);
         setIsActive2(false);
-        axios.get("/messages/received", {
+        try {
+            setError(null);
+            setMessage(null);
+            setLoading(true);
+            const response = await axios.get('/messages/received', {
+                headers: {
+                    'Authorization': `Bearer ${actoken}`,
+                    'Auth': retoken
+                }
+            })
+            console.log("메시지조회성공");
+            setMessage(response.data.result.data.messageList);
+            setOriginMsg(response.data.result.data.messageList);
+        } catch (e) {
+            setError(e.response.data.result);
+            console.log(e.response.data.result);
 
-            headers: {
-                'Authorization': `Bearer ${actoken}`,
-                'Auth': retoken
-            }
-        })
-            .then(response => {
-                console.log("메시지조회성공");
-                setMessage(response.data.result.data.messageList);
-                console.log(response.data.result.data);
-            })
-            .catch(error => {
-                console.log(error.response.data.result);
-            })
+        }
+        setLoading(false);
     }
     //보낸쪽지 클릭 실행되는 함수 
-    function sendHandle() {
+    const sendHandle = async () => {
         setWho("sent");
         setIsActive1(false);
         setIsActive2(true);
-        axios.get("/messages/sent", {
-
-            headers: {
-                'Authorization': `Bearer ${actoken}`,
-                'Auth': retoken
-            }
-        })
-            .then(response => {
-                console.log("메시지조회성공");
-                setMessage(response.data.result.data);
-                console.log(response.data.result.data);
+        try {
+            setError(null);
+            setMessage(null);
+            setLoading(true);
+            const response = await axios.get("/messages/sent", {
+                headers: {
+                    'Authorization': `Bearer ${actoken}`,
+                    'Auth': retoken
+                }
             })
-            .catch(error => {
-                console.log(error.response.data.result);
-            })
-
+            console.log("메시지조회성공");
+            setMessage(response.data.result.data.messageList);
+            setOriginMsg(response.data.result.data.messageList);
+        } catch (e) {
+            setError(e.response.data.result);
+            console.log(e.response.data.result);
+        }
+        setLoading(false);
     }
 
     //읽은쪽지 삭제함수
     function readMsgDelete() {
-        message.messageList.map(a => {
+        message.map(a => {
             if (a.checked) {
                 axios.delete(`/messages/${a.id}/${who}`, {
                     headers: {
@@ -110,42 +130,76 @@ export default function MessageList(props) {
             }
         })
     }
-    function SortTime()
-    {
-        let temp = [...message];
-        console.log(temp);
-        temp.reverse();
-        console.log(temp);
-        setMessage(temp);
+    //필터 함수
+    //최신순, 오래된순 클릭시 실행되는 함수 
+    function SortTime() {
+        //필터에서 읽은쪽지 클릭한경우 message을 origin으로 초기화.
+        if (readcheck == true) {
+            let temp = [...originmsg];
+            temp.reverse();
+            console.log(temp);
+            setMessage(temp);
+            setReadCheck(!readcheck);
+        }
+        else {
+            let temp = [...message];
+            temp.reverse();
+            console.log(temp);
+            setMessage(temp);
+
+        }
+
+    }
+    //필터(읽지않은쪽지) 클릭시 실행되는 함수
+    function NoRead() {
+        const NoReadMsg = [];
+        message.map(a => {
+            if (a.checked == false) {
+                NoReadMsg.push(a);
+            }
+        })
+        console.log(NoReadMsg);
+        setMessage(NoReadMsg);
     }
 
-    if(loading) <div>메시지로딩중...</div>
-    if(error) <div>메시지에러...</div>
-    if(!message) return null;
+    if (loading) <div>메시지로딩중...</div>
+    if (error) <div>메시지에러...</div>
+    if (!message) return null;
 
     return (
         <div>
             <div className="message-nav">
                 <button className={isActive1 ? "receivebtn" : "inactiveBtn"}
-                    onClick={receiveHandle}>받은쪽지</button>
+                    onClick={() => { receiveHandle() }}>받은쪽지</button>
                 <button className={isActive2 ? null : "inactiveBtn"}
-                    onClick={sendHandle}>보낸쪽지</button>
+                    onClick={() => { sendHandle() }}>보낸쪽지</button>
             </div>
             <div className="message-mid">
-                <button onClick={readMsgDelete}>읽은 쪽지 삭제</button>
+                <button onClick={readMsgDelete}>읽은쪽지 삭제</button>
                 <div className="message-dropbox">
                     <Wrapper>
                         <DropdownContainer>
                             <DropdownButton onClick={myPageHandler} ref={myPageRef}>
-                                전체
+                                필터
                             </DropdownButton>
                             <Menu isDropped={myPageIsOpen}>
                                 <Ul >
                                     <Li>
-                                        <LinkWrapper onClick={()=>{SortTime()}}>최신순</LinkWrapper>
+                                        <LinkWrapper onClick={() => {
+                                            setMessage(originmsg);
+                                        }}>전체</LinkWrapper>
                                     </Li>
                                     <Li>
-                                        <LinkWrapper>읽지않은순</LinkWrapper>
+                                        {sortcheck == true ? <LinkWrapper onClick={() => {
+                                            SortTime(); setSortCheck(!sortcheck)
+                                        }}>오래된순</LinkWrapper> :
+                                            <LinkWrapper onClick={() => {
+                                                SortTime();
+                                                setSortCheck(!sortcheck);
+                                            }}>최신순</LinkWrapper>}
+                                    </Li>
+                                    <Li>
+                                        <LinkWrapper onClick={() => { setReadCheck(true); NoRead(); }}>읽지않은쪽지</LinkWrapper>
                                     </Li>
                                 </Ul>
                             </Menu>
@@ -156,8 +210,7 @@ export default function MessageList(props) {
             <div className="message-content">
                 <table>
                     <thead>
-                        <tr key={`theadtr${msgid}`}>
-
+                        <tr >
                             <th key={2}>보낸사람</th>
                             <th key={3}>게시물제목</th>
                             <th key={4} className="th3">내용</th>
@@ -178,7 +231,7 @@ export default function MessageList(props) {
                                 <td> {a.postTitle}</td>
                                 <td >{a.content.length > 20 ? a.content.substr(0, 15) + "..." : a.content}</td>
                                 <td >{SetKST(a.createdDate)}</td>
-                                <td >{a.checked ? <div>읽음</div> : <div>읽지않음</div>}</td>
+                                <td >{a.checked ? <div style={{ color: "gray" }}>읽음</div> : <div style={{ fontWeight: "bold" }}>읽지않음</div>}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -219,6 +272,7 @@ const DropdownContainer = styled.div`
 const DropdownButton = styled.div`
   cursor: pointer;
   font-size:15px;
+  font-weight:bold;
 `;
 
 const Menu = styled.div`
