@@ -1,25 +1,32 @@
 import React from 'react';
 
-const ViewProfile = ({ userData, startEditing }) => {
+const ViewProfile = (props) => {
+  console.log(props.userData);
+  if(!props.userData) return null;
   return (
     <div className='my-data'>
-      <h2 style={{ marginTop: "30px", marginBottom: "10px" }}>나의 정보</h2>
-      <h5 style={{ marginBottom: "20px" }}>나의 정보를 확인하세요</h5>
-      <div className='default-data'>
-        <br />
-        <label className='email'>이메일</label>
-        <p>{userData.username}</p>
-        <br />
-        <label className='nme'>이름</label>
-        <p>{userData.nickname}</p>
-        <br />
-        <label className='phoneNum'>핸드폰 번호</label>
-        <p>{userData.phoneNumber}</p>
-        <br />
-        <label className='address'>주소</label>
-        <p>{userData.address.city}, {userData.address.district}, {userData.address.street}, {userData.address.zipCode}</p>
-      </div>
-      <button className="startEditingbtn" onClick={startEditing}>회원 정보 수정하기</button>
+      <table className='my-datatable'>
+        <tbody className='my-datatbody'>
+          <tr>
+            <td>이메일</td>
+            <td style={{fontWeight:"bold"}}>{props.userData.username}</td>
+          </tr>
+          <tr>
+            <td>닉네임</td>
+            <td style={{fontWeight:"bold"}}>{props.userData.nickname}</td>
+          </tr>
+          <tr>
+            <td>핸드폰 번호</td>
+            <td style={{fontWeight:"bold"}}>{props.userData.phoneNumber}</td>
+          </tr>
+          <tr>
+            <td>주소</td>
+            <td style={{fontWeight:"bold"}}>{props.userData.address.city} {props.userData.address.district} {props.userData.address.street} {props.userData.address.zipCode}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button className="EditBtn" onClick={props.startEditing}>수정하기</button>
     </div>
   );
 }

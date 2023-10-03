@@ -64,31 +64,19 @@ const Edit_membership = (props) => {
   };
 
   const myprofile = async () => {
-    const apiUrl = 'http://13.125.98.26:8080/members/my-profile';
     try {
       setError(null);
       setStore(null);
       setLoading(true);
-      axios.get(apiUrl, {
+      const response = await axios.get("/members/my-profile", {
         headers: {
           'Authorization': `Bearer ${actoken}`,
           'Auth': retoken
         }
       })
-        .then(response => {
-          console.log('회원 정보 불러오기 성공:', response.data);
-          setUserData(response.data.result.data);
-        })
-        .catch(error => {
-          console.error('API 요청 오류:', error);
-
-          if (error.response && error.response.status === 401) {
-            console.error('AccessToken이 만료되었습니다. 로그인 페이지로 이동합니다.');
-            navigate('/loginpage');
-          }
-        });
+      setUserData(response.data.result.data);
     } catch (error) {
-      console.error('API 요청 오류:', error);
+      console(error);
       setError(error);
     }
     setLoading(false);
@@ -114,15 +102,14 @@ const Edit_membership = (props) => {
 
   if (loading) return <div>로딩 중...</div>;
   if (error) return <div>에러</div>;
-  if (!userData && !editedData) return null;
+  if (!userData) return null;
 
   return (
     <div>
-    {!isEditing ? (
-      <ViewProfile userData={userData} startEditing={startEditing} />
-    ) : (
-      <EditForm editedData={editedData} setEditedData={setEditedData} handleSaveClick={handleSaveClick} handleImageChange={handleImageChange} />
-    )}
+      <div className='editmy-top'>
+        <p>기본 회원정보</p>
+      </div>
+    <ViewProfile userData={userData} startEditing={startEditing} />
   </div>
   );
 }

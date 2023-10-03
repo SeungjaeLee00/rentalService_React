@@ -57,7 +57,7 @@ function App() {
             <Route exact path='/itemmain/detail/chat' element={<Chat />} />
             <Route exact path='/category/:search' element={<Category />} />
 
-            <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
+            
             <Route exact path='/my-page/myitempage' element={<MyitemPage />} />
             <Route exact path='/my-page/chats' element={<MyChat />} />
             <Route exact path='/my-page/chats/message/:id' element={<OneMessage />} />
@@ -72,6 +72,7 @@ function App() {
               <Route exact path='rent' element={<MyRent />}></Route>
               <Route exact path='borrow' element={<MyBorrow />}></Route>
               <Route exact path='my-review' element={<My_Review />} />
+              <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
             </Route>
           </Routes>
         </AuthProvider>
