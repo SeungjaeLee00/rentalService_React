@@ -83,7 +83,7 @@ function ItemMain() {
 
       <Dashboard /> 
       <hr />
-      <div className='Main-Content'> 방금 등록된 상품</div>
+      <div className='Main-Content'> 등록된 상품</div>
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
@@ -99,6 +99,9 @@ function ItemMain() {
           paginate={setCurrentPage} //CurrentPage변경하는함수.(첫번째페이지가정 6)
         ></Pagination>
       </div>
+      
+  
+      <div className='Main-Content'>최근 본 상품</div>
 
       {/* 본문하단 글쓰기버튼 */}
         <WriteBtn/>
