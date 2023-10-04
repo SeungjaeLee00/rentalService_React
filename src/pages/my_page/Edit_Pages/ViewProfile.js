@@ -23,10 +23,19 @@ const ViewProfile = (props) => {
             <td>주소</td>
             <td style={{fontWeight:"bold"}}>{props.userData.address.city} {props.userData.address.district} {props.userData.address.street} {props.userData.address.zipCode}</td>
           </tr>
+          <tr>
+            <td>소개</td>
+            <td style={{fontWeight:"bold"}}>{props.userData2.introduce}</td>
+          </tr>
+          <tr>
+            <td>프로필사진</td>
+            <td style={{fontWeight:"bold"}}><img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/'+
+          props.userData2.profileImage.uniqueName}></img></td>
+          </tr>
         </tbody>
       </table>
 
-      <button className="EditBtn" onClick={props.startEditing}>수정하기</button>
+      <button className="EditBtn" onClick={()=>{props.startEditing()}}>수정하기</button>
     </div>
   );
 }

@@ -12,61 +12,23 @@ const Edit_membership = (props) => {
   const navigate = useNavigate();
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
+  const username = sessionStorage.getItem('nickname'); 
   const { isAuthenticated } = useAuth();
   const [userData, setUserData] = useState(null);
+  const [userData2,setUserData2]=useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedData, setEditedData] = useState('');
-  const [imageFile, setImageFile] = useState(null);
-
-  const [store, setStore] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const startEditing = () => {
-    setIsEditing(true);
+    setIsEditing(!isEditing);
   };
 
-  const handleSaveClick = async () => {
-    try {
-      const formData = new FormData();
-      formData.append('nickname', editedData.nickname);
-      formData.append('phoneNumber', editedData.phoneNumber);
-      formData.append('introduce', editedData.introduce);
-
-      if (imageFile) {
-        formData.append('image', imageFile);
-      }
-
-      formData.append('address.city', editedData.address.city);
-      formData.append('address.district', editedData.address.district);
-      formData.append('address.street', editedData.address.street);
-      formData.append('address.zipCode', editedData.address.zipCode);
-
-      const response = await axios.patch('http://13.125.98.26:8080/members', formData, {
-        headers: { 'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${actoken}`, 'Auth': retoken },
-      });
-
-      if (response.data.success) {
-        console.log('회원 정보 수정 성공:', response.data);
-        setIsEditing(false);
-        setUserData(editedData);
-      } else {
-        console.error('서버 응답 오류:', response.data.error);
-      }
-    } catch (error) {
-      console.error('API members 요청 오류:', error);
-
-      if (error.response && error.response.status === 401) {
-        console.error('AccessToken이 만료되었습니다. 로그인 페이지로 이동합니다.');
-        navigate('/loginpage');
-      }
-    }
-  };
-
+  
   const myprofile = async () => {
     try {
       setError(null);
-      setStore(null);
+      setUserData(null);
       setLoading(true);
       const response = await axios.get("/members/my-profile", {
         headers: {
@@ -74,42 +36,59 @@ const Edit_membership = (props) => {
           'Auth': retoken
         }
       })
+      console.log(response);
       setUserData(response.data.result.data);
     } catch (error) {
-      console(error);
+      console.log(error);
       setError(error);
     }
     setLoading(false);
   }
+  const myprofile2= async() =>{
+    try{
+      setError(null);
+      setUserData2(null);
+      setLoading(true);
+      const response = await axios.get(`/members/${username}`, {
+        headers: {
+          'Authorization': `Bearer ${actoken}`,
+          'Auth': retoken
+        }
+      })
+      console.log(response.data.result.data);
+      setUserData2(response.data.result.data);
+    }catch(error){
+      console.log(error);
+      setError(error);
+    }
+  }
 
-  const handleImageChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setImageFile(selectedFile);
-  };
-
+  
   useEffect(() => {
-    setEditedData({ ...userData });
+    myprofile();
+    //introduce, image 불러오기 위한.
+    myprofile2();
     return () => {
       if (!isAuthenticated) {
         navigate('/loginpage');
         return;
       }
-      if (isAuthenticated) {
-        myprofile();
-      }
     }
   }, []);
 
+
   if (loading) return <div>로딩 중...</div>;
   if (error) return <div>에러</div>;
-  if (!userData) return null;
+  if (!userData||!userData2) return null;
 
   return (
     <div>
       <div className='editmy-top'>
         <p>기본 회원정보</p>
       </div>
-    <ViewProfile userData={userData} startEditing={startEditing} />
+      <button onClick={()=>{ startEditing();}}>확인</button>
+      {isEditing? <EditForm userData={userData} userData2={userData2}/> : 
+      <ViewProfile userData={userData} userData2={userData2} startEditing={startEditing} />}
   </div>
   );
 }
