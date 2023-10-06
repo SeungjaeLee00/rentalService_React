@@ -6,14 +6,14 @@
 }
 
 
-/* .FormGroup h1, p{
-    text-align: center;
-} */
 
-.FormGroup h1 {
+
+.login-FormGroup h1 {
+    text-align: center;
     font-weight: bold;
 }
-.FormGroup p{
+.login-FormGroup p{
+    text-align: center;
     font-size: 13px;
     color:#4A4F5A;
 }

@@ -13,10 +13,11 @@ const EditForm = (props) => {
         street:`${props.userData.address.street}`,
         zipcode:`${props.userData.address.zipCode}`,
         introduce:`${props.userData2.introduce}`,
-        image:`${props.userData2.profileImage.uniqueName}`
     });
+    const [file,setFile]=useState(props.userData2.profileImage.uniqueName);
 
-    const {email,nickname,phonenumber,city,district,street,zipcode,introduce,image} = inputs; //비구조화 할당을 통해 값 추출
+
+    const {email,nickname,phonenumber,city,district,street,zipcode,introduce} = inputs; //비구조화 할당을 통해 값 추출
 
     const onChange=(e)=>{
         const {value,name} = e.target; // e.target에서 name과 value를 추출
@@ -25,6 +26,9 @@ const EditForm = (props) => {
             [name]:value // name키를 가진 값을 value로 설정
         });
     };
+    const saveFile=(e)=>{
+        setFile(e.target.files[0]);
+    }
 
     const patchmyinfo = () =>{
         const formData = new FormData();
@@ -34,14 +38,18 @@ const EditForm = (props) => {
         formData.append('address.street', inputs.street);
         formData.append('address.zipCode', inputs.zipcode);
         formData.append('introduce', inputs.introduce);
-        formData.append('image', inputs.profileImage.uniqueName);
+        formData.append('image', file);
         axios.patch('/members',formData,{
             headers: { 'Content-Type': 'multipart/form-data',
          'Authorization': `Bearer ${actoken}`, 'Auth':retoken }
         }).then(response=>{
             console.log(response);
         }).catch(error=>{
-            console.log(error);
+            if(error.response.data.code=='409')
+            {
+                alert('해당 닉네임은 이미 사용중입니다')
+            }
+            console.log(error.response.data.result);
         })
     }
     
@@ -49,7 +57,7 @@ const EditForm = (props) => {
         <div className='edit-form'>
             <table className='my-datatable'>
                 <tbody className='my-datatbody'>
-                    {/* <button onClick={()=>{console.log(inputs)}}>데이터확인</button> */}
+                   
                     <tr>
                         <td>이메일</td>
                         <td><input  name="email" value={email} onChange={onChange}></input></td>
@@ -73,11 +81,11 @@ const EditForm = (props) => {
                     </tr>
                     <tr>
                         <td>프로필사진</td>
-                        <td><input  name="image" value={image} onChange={onChange}></input></td>
+                        <td><input type='file' name="image"  onChange={saveFile}></input></td>
                     </tr>
                 </tbody>
             </table>
-            <button onClick={patchmyinfo}>수정하기</button>
+            <button className="EditBtn" onClick={patchmyinfo}>수정하기</button>
         </div>
     );
 }

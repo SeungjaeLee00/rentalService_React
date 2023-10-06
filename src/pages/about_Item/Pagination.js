@@ -30,7 +30,7 @@ const PageSpan = styled.span`
   height:16px;
   box-shadow:0 3px 6px rgba(0,0,0,.16);
   border-radius:8px;
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
   ${(p)=>
         p.active&&css`
         background:black;

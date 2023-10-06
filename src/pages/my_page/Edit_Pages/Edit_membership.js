@@ -86,7 +86,6 @@ const Edit_membership = (props) => {
       <div className='editmy-top'>
         <p>기본 회원정보</p>
       </div>
-      <button onClick={()=>{ startEditing();}}>확인</button>
       {isEditing? <EditForm userData={userData} userData2={userData2}/> : 
       <ViewProfile userData={userData} userData2={userData2} startEditing={startEditing} />}
   </div>

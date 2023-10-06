@@ -2,7 +2,7 @@
   "name": "borroweverythings",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://13.125.98.26:8080",
+  "proxy": "http://3.34.145.62:8080/",
   "dependencies": {
     "@emotion/react": "11.1.5",
     "@emotion/styled": "11.1.5",

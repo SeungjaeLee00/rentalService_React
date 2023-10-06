@@ -44,7 +44,7 @@ function LoginPage() {
 
         
 
-        axios.post('http://13.125.98.26:8080/auth/login', userData)
+        axios.post('/auth/login', userData)
             .then(response => {
                 const returnData = response.data;
                 const { accessToken, refreshToken } = returnData.result.data;
@@ -81,7 +81,7 @@ function LoginPage() {
     return (
         <div className='Login-wrap'>
             <Form onSubmit={handleLogin}>
-                <FormGroup className='FormGroup'>
+                <FormGroup className='login-FormGroup'>
                     <h1>Billim</h1>
                     <p>서비스 이용을 위해 로그인 해주세요.</p>
 
