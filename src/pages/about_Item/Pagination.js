@@ -12,7 +12,7 @@ const PageLi = styled.li`
   font-size: 20px;
   font-weight: 600;
   width: 30px;
-  margin:0px 3px;
+  margin:0px 5px;
   // &:hover {
   //   cursor: pointer;
   //   color: white;
@@ -28,7 +28,7 @@ const PageSpan = styled.span`
   border:none;
   width:16px;
   height:16px;
-  box-shadow:0 3px 6px rgba(0,0,0,.16);
+  box-shadow:0 3px 6px rgba(0,0,0,.30);
   border-radius:8px;
   transition: all 0.5s ease-in-out;
   ${(p)=>
@@ -39,7 +39,7 @@ const PageSpan = styled.span`
 `;
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
-  const [paginumber,setPagiNumber]=useState([]);
+  const [paginumber,setPagiNumber]=useState([true]);
   const pageNumbers = [];
   const temp=[...paginumber];
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {

@@ -51,10 +51,17 @@ function Detail() {
     }
     setLoading(false);
   }
-
+   
   useEffect(() => {
     //상품한개정보
     fetchPostInfo();
+    //최근본상품
+    let output = localStorage.getItem('watched');
+    output = JSON.parse(output);
+    output.push(id);
+    output = new Set(output);
+    output = Array.from(output);
+    localStorage.setItem('watched',JSON.stringify(output));
   }, [])
 
   const openloginModal = () => {

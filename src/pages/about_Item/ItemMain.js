@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Pagination from './Pagination';
 import Posts from './Posts';
 import WriteBtn from '../../components/WriteBtn';
+import Watched from './Watched';
 
 function ItemMain() {
   const navigate = useNavigate();
@@ -13,13 +14,14 @@ function ItemMain() {
   const retoken = localStorage.refreshToken;
 
   const [store, setStore] = useState([]);
+  const [watched, setWatched] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error,setError]=useState(null);
+  const [error, setError] = useState(null);
 
-  const[myinfo,setMyInfo]=useState();
+  
 
-  const fetchPosts = async() =>{
-    try{
+  const fetchPosts = async () => {
+    try {
       //요청시작할때 error와 store 초기화
       setError(null);
       setStore(null);
@@ -28,27 +30,29 @@ function ItemMain() {
       const response = await axios.get('/posts');
       console.log(response.data.result.data.postList);
       setStore(response.data.result.data.postList);
-    }catch(e){
+    } catch (e) {
       setError(e);
+      console.log(e);
     }
     setLoading(false);
-  }  
-  const fetchMyInfo = async()=>{
-    try{
+  }
+
+  const fetchMyInfo = async () => {
+    try {
       const response = await axios.get('/members/my-profile', {
-        headers: { 'Authorization' : `Bearer ${actoken}`,
-                'Auth' : retoken }
-    })
-    console.log("본인정보조회성공");
-    setMyInfo(response.data.result.data);
-    //sessionstorage에 저장
-    window.sessionStorage.setItem("nickname", response.data.result.data.nickname);
-    }catch(e){
+        headers: {
+          'Authorization': `Bearer ${actoken}`,
+          'Auth': retoken
+        }
+      })
+      //sessionstorage에 저장
+      window.sessionStorage.setItem("nickname", response.data.result.data.nickname);
+    } catch (e) {
       if (e.response.data.code == '511') {
         alert('로그인이 만료되어 로그인 페이지로 이동합니다');
         window.location.replace('/loginpage');
       }
-      console.log(e);
+      console.log(e.response.data);
     }
   }
 
@@ -56,18 +60,24 @@ function ItemMain() {
   useEffect(() => {
     fetchPosts();
     fetchMyInfo();
+    //최근본상품 localstorage할당
+    //최근본상품이 없으면 생성
+    let localarray = localStorage.getItem('watched');
+    if (localarray == null) {
+      localStorage.setItem('watched', JSON.stringify([]));
+    }
   }, [])
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
-  const ItemIndex =6;
+  const ItemIndex = 6;
   const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
   const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
 
-  
-  if(loading) return <div>로딩중..</div>;
-  if(error) return <div>에러가 발생했습니다</div>;
-  if(!store) return null;
+
+  if (loading) return <div>로딩중..</div>;
+  if (error) return <div>에러가 발생했습니다</div>;
+  if (!store) return null;
 
 
   //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts에 담아줍니다.
@@ -76,18 +86,44 @@ function ItemMain() {
     currentPosts = store.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
-  
+
+  //최근본상품 
+  const currentPosts2 = () => {
+    let localarray = localStorage.getItem('watched');
+    //local에 최근본 상품의 id가 있으면 
+    
+    /*
+    localarray=JSON.parse(localarray);
+    let copy=[];
+    if(localarray&&store)
+    {
+      localarray.map((a,index)=>{
+        let storeindex;
+        storeindex = store.findIndex(item=>Number(item.id)==Number(a))
+        if(storeindex){
+          //console.log(storeindex);
+          copy.unshift(store[storeindex]);
+        }
+      })
+    }
+    //console.log(copy);
+    let currentPosts = [];
+    //최근본상품은 6개까지만보여주자.
+    currentPosts = copy.slice(1, 3);
+    //return currentPosts;
+    */
+  }
 
   return (
     <div className='page-container'>
-
-      <Dashboard /> 
+      <button onClick={()=>{console.log(watched)}}>확인</button>
+      <Dashboard />
       <hr />
       <div className='Main-Content'> 등록된 상품</div>
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
-        {currentPosts ? (<Posts currentPosts={currentPosts()} ItemIndex={ItemIndex} />) : (<div>로딩중입니다</div>)}
+        {store ? (<Posts currentPosts={currentPosts()} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} />) : (<div>로딩중입니다</div>)}
       </div>
 
       {/* 본문하단Pagination */}
@@ -99,12 +135,14 @@ function ItemMain() {
           paginate={setCurrentPage} //CurrentPage변경하는함수.(첫번째페이지가정 6)
         ></Pagination>
       </div>
-      
-  
+
+
       <div className='Main-Content'>최근 본 상품</div>
+       <Watched currentPosts={currentPosts2()} store={store}/>
+      
 
       {/* 본문하단 글쓰기버튼 */}
-        <WriteBtn/>
+      <WriteBtn />
     </div>
   );
 };
