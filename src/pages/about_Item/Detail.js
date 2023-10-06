@@ -58,7 +58,7 @@ function Detail() {
     //최근본상품
     let output = localStorage.getItem('watched');
     output = JSON.parse(output);
-    output.push(id);
+    output.unshift(id);
     output = new Set(output);
     output = Array.from(output);
     localStorage.setItem('watched',JSON.stringify(output));
@@ -79,15 +79,6 @@ function Detail() {
   const closeReportnModal = () => {
     setshowReportPopup(false);
   };
-
-  const onUploaditemHandler = () => {
-    if (!isAuthenticated) {
-      openloginModal();
-    }
-    else {
-      navigate('/itemmain/upload-item')
-    }
-  }
 
   const onProfileClick = () => {
     navigate('/itemmain/detail/profile', { state: item.writer.nickname })

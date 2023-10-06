@@ -116,7 +116,6 @@ function ItemMain() {
 
   return (
     <div className='page-container'>
-      <button onClick={()=>{console.log(watched)}}>확인</button>
       <Dashboard />
       <hr />
       <div className='Main-Content'> 등록된 상품</div>
