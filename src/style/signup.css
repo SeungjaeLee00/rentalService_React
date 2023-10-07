@@ -1,0 +1,38 @@
+
+.signupwrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.signupform form{
+    display:flex;
+    flex-direction: column;
+}
+.signupform button{
+    margin-top:10px;
+    border-radius: 5px;
+    background-color: black;
+    color:white;
+    transition: all 0.5s;
+    &:hover{
+        background-color: rgb(66, 66, 253);
+    }
+}
+.signupform input{
+    margin-top:5px;
+}
+
+.inputField{
+    width:300px;
+}
+
+.signupwrap label{
+    margin-top:10px;
+    font-weight: bold;
+}
+
+.signupform p{
+    margin-top:5px;
+    color: rgb(251, 68, 68);
+}
