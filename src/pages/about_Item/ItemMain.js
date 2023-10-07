@@ -87,33 +87,6 @@ function ItemMain() {
     return currentPosts;
   };
 
-  //최근본상품 
-  const currentPosts2 = () => {
-    let localarray = localStorage.getItem('watched');
-    //local에 최근본 상품의 id가 있으면 
-    
-    /*
-    localarray=JSON.parse(localarray);
-    let copy=[];
-    if(localarray&&store)
-    {
-      localarray.map((a,index)=>{
-        let storeindex;
-        storeindex = store.findIndex(item=>Number(item.id)==Number(a))
-        if(storeindex){
-          //console.log(storeindex);
-          copy.unshift(store[storeindex]);
-        }
-      })
-    }
-    //console.log(copy);
-    let currentPosts = [];
-    //최근본상품은 6개까지만보여주자.
-    currentPosts = copy.slice(1, 3);
-    //return currentPosts;
-    */
-  }
-
   return (
     <div className='page-container'>
       <Dashboard />
@@ -135,9 +108,8 @@ function ItemMain() {
         ></Pagination>
       </div>
 
-
       <div className='Main-Content'>최근 본 상품</div>
-       <Watched currentPosts={currentPosts2()} store={store}/>
+       <Watched store={store}/>
       
 
       {/* 본문하단 글쓰기버튼 */}
@@ -156,9 +128,6 @@ function Dashboard() {
         <div style={{ marginTop: "20px" }} className='dashboard-decoration'>
           <h1>언제어디서든지 상품을 <br /> 대여해주고 받을 수 있는 서비스입니다. </h1>
         </div>
-      </div>
-      <div className='dashboard-left'>
-        <img style={{ width: "350px", height: "200px", paddingBottom: "30px", paddingLeft: "100px", marginLeft: "100px" }} src={Logo}></img>
       </div>
     </div>
   )

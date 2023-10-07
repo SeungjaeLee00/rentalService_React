@@ -37,7 +37,6 @@ function Detail() {
       setError(null);
       setLoading(true);
       const response = await axios.get('/posts/' + id);
-      console.log(response.data.result.data);
       setItem(response.data.result.data);
       setItemLike(response.data.result.data.likes);
     }

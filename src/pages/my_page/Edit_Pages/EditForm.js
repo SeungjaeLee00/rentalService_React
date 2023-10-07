@@ -14,7 +14,7 @@ const EditForm = (props) => {
         zipcode:`${props.userData.address.zipCode}`,
         introduce:`${props.userData2.introduce}`,
     });
-    const [file,setFile]=useState(props.userData2.profileImage.uniqueName);
+    const [file,setFile]=useState(props.userData2.profileImageName);
 
 
     const {email,nickname,phonenumber,city,district,street,zipcode,introduce} = inputs; //비구조화 할당을 통해 값 추출
@@ -44,6 +44,8 @@ const EditForm = (props) => {
          'Authorization': `Bearer ${actoken}`, 'Auth':retoken }
         }).then(response=>{
             console.log(response);
+            alert('회원정보가 수정되었습니다');
+            window.location.replace('/');
         }).catch(error=>{
             if(error.response.data.code=='409')
             {

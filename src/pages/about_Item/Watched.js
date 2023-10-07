@@ -32,9 +32,7 @@ export default function Watched(props) {
     //최근본상품은 3개의 상품만 보여주기 때문에 아래와 같이 설정. 
     const currentPosts = () => {
         let currentPosts = 0;
-        console.log(watched);
         currentPosts = watched.slice(0, 3);
-        console.log(currentPosts);
         return currentPosts;
     };
 

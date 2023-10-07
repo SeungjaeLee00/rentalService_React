@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import KaKaoLogin from '../../socialLogin/KakaoLogin';
-import NaverLogin from '../../socialLogin/NaverLogin';
-import GoogleLogin from '../../socialLogin/GoogleLLogIn';
-import { registerUser } from '../about_membership/user_action';
 import { useNavigate } from 'react-router-dom';
-import HorizonLine from '../../components/HorizonLine';
 import axios from 'axios';
 
 function Signup () {
@@ -62,7 +55,7 @@ function Signup () {
     };
 
     const handleSendUserName = () => {
-        axios.post('http://13.125.98.26:8080/email/sign-up?email=' + username )
+        axios.post('/email/sign-up?email=' + username )
           .then(response => {
             console.log('이메일 전송 성공:', response.data);
           })
@@ -93,7 +86,7 @@ function Signup () {
             return alert('비밀번호와 비밀번호 확인이 같지 않습니다.')
         }
 
-        axios.post('http://13.125.98.26:8080/auth/sign-up', dataToSend)
+        axios.post('/auth/sign-up', dataToSend)
         .then(response => {
           console.log('회원가입 성공:', response.data);
           if ((response.status = 200)) {
@@ -109,7 +102,7 @@ function Signup () {
         <div className='App'>
         <h2 style={{marginTop:"30px", marginBottom:"10px"
             }}>회원가입</h2>
-            <h5 style={{marginBottom:"20px"}}>뭐든빌리개를 시작해보세요!</h5>
+            <h5 style={{marginBottom:"20px"}}>Billim을 시작해보세요!</h5>
 
         <div style={{ 
                 display: 'flex', justifyContent: 'center', alignItems: '', 
@@ -165,10 +158,7 @@ function Signup () {
                         
                         <button type="submit" style={{padding:"10px", marginTop:"8px", 
                                 backgroundColor:"#4A4F5A", color:"white", borderRadius:'10px', border:"none"}} >가입하기</button>
-                        <HorizonLine />
-                        <NaverLogin/>
-                        <KaKaoLogin/>
-                        <GoogleLogin />
+                        
                 </form>
             </div>
     </div>
