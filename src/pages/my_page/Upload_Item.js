@@ -105,7 +105,7 @@ const Upload_Item = () => {
       formData.append('ItemCreateRequestDto.price', itemprice);
       formData.append('ItemCreateRequestDto.quantity', itemquantity);
       formData.append('multipartFiles', file);
-      axios.post('http://13.125.98.26:8080/posts', formData, {
+      axios.post('/posts', formData, {
         headers: { 'Content-Type': 'multipart/form-data',
          'Authorization': `Bearer ${actoken}`, 'Auth':retoken }
       })

@@ -9,18 +9,30 @@
     display:flex;
     flex-direction: column;
 }
+
 .signupform button{
-    margin-top:10px;
+    margin-top:10px; 
     border-radius: 5px;
     background-color: black;
     color:white;
-    transition: all 0.5s;
+    transition: all 0.3s;
+    &:hover{
+        background-color: rgb(66, 66, 253);
+    }
+}
+.emailbtn{
+    width:60px;
+    margin-left:20px;
+    background-color: black;
+    color:white;
+    transition: all 0.3s;
     &:hover{
         background-color: rgb(66, 66, 253);
     }
 }
 .signupform input{
-    margin-top:5px;
+    margin-top:20px;
+    padding:10px;
 }
 
 .inputField{
@@ -28,11 +40,132 @@
 }
 
 .signupwrap label{
-    margin-top:10px;
+    margin-top:30px;
     font-weight: bold;
 }
 
 .signupform p{
-    margin-top:5px;
+    margin-top:30px;
+    margin-left:10px;
     color: rgb(251, 68, 68);
 }
+.email-wrap{
+    display: flex;
+    flex-direction: column;
+}
+.email-wrap h5{
+    font-size: 15px;
+    margin-top:5px;
+    margin-left:115px;
+}
+
+.email-wrap input{
+    margin-left:70px;
+    
+}
+.key-wrap{
+    display:flex;
+}
+.key-wrap input{
+    margin-left:23px;
+
+}
+.nickname-wrap{
+    display: flex;
+}
+.nickname-wrap input{
+    margin-left:70px;
+}
+.password-wrap{
+    display: flex;
+}
+.password-wrap input{
+    margin-left:55px;
+}
+.repassword-wrap input{
+    margin-left:23px;
+}
+.phone-wrap{
+    display: flex;
+}
+.phone-wrap input{
+    margin-left:38px;
+}
+
+.inputZipcode{
+    margin-left:85px;
+    width:150px;
+    height: 40px;
+    border:2px solid rgba(0,0,0,0.23);
+    border-radius: 7px;
+}
+.inputAddress{
+    margin-left:112px;
+    width:300px;
+    height: 40px;
+    border:2px solid rgba(0,0,0,0.23);
+    border-radius: 7px;
+
+}
+
+.address-wrap{
+    display:flex;
+    flex-direction: column;
+}
+.address-wrap button{
+    margin-left:10px;
+}
+.submitbtn{
+    margin-left:65px;
+    width:400px;
+    height:40px;
+}
+
+
+
+/* 주소 모달 */
+.Modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:100px;
+}
+.ModalBody{
+    position: absolute;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 460px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+}
+
+.ModalCloseBtn{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+    color: rgba(0, 0, 0, 0.7);
+    background-color: transparent;
+    font-size: 20px;
+    &:hover{
+        font-weight: bold;
+    }
+}
+
+.Modal-content{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+

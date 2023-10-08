@@ -5,16 +5,29 @@
     width:100%;
 }
 
-
-
-
+.find-id{
+    &:hover{
+        font-weight: bold;
+    }
+}
+.find-pw{
+    &:hover{
+        font-weight: bold;
+    }
+}
+.signup{
+    &:hover{
+        font-weight: bold;
+    }
+}
 .login-FormGroup h1 {
     text-align: center;
     font-weight: bold;
 }
 .login-FormGroup p{
     text-align: center;
-    font-size: 15px;
+    font-weight: bold;
+    font-size: 18px;
     color:#4A4F5A;
 }
 

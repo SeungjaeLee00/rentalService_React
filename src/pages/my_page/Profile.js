@@ -51,7 +51,7 @@ function Profile() {
             return;
         }
         if (isAuthenticated) {
-            const apiUrl = "http://13.125.98.26:8080/members/" + state;
+            const apiUrl = "/members/" + state;
             axios.get(apiUrl, {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,

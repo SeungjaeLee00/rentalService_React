@@ -25,7 +25,7 @@ export default function ReplyModal(props) {
         console.log(props.senderNickname);
         console.log(props.msgid);
 
-        axios.post('http://13.125.98.26:8080/messages', dataToSend, {
+        axios.post('/messages', dataToSend, {
           headers: {
             headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }

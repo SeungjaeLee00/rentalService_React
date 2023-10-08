@@ -34,6 +34,8 @@ export default function MessageList(props) {
     const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
 
     const FetchMessage = async () => {
+        console.log(actoken);
+        console.log(retoken);
         try {
             setLoading(true);
             const response = await axios.get('/messages/received', {
@@ -170,7 +172,7 @@ export default function MessageList(props) {
         <div>
             <div className="message-nav">
                 <button className={isActive1 ? "receivebtn" : "inactiveBtn"}
-                    onClick={() => { receiveHandle() }}>받은쪽지</button>
+                    onClick={() => { receiveHandle() }}>받은쪽지 </button>
                 <button className={isActive2 ? null : "inactiveBtn"}
                     onClick={() => { sendHandle() }}>보낸쪽지</button>
             </div>

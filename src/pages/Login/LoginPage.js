@@ -98,9 +98,9 @@ function LoginPage() {
                     </div>
 
                     <div className="small" style={{ marginLeft: "40px" }}>
-                        <NavLink style={({ isActive }) => ({ color: isActive ? 'yellow' : 'gray' })} to="/find-id">아이디 찾기</NavLink>{' | '}
-                        <NavLink style={({ isActive }) => ({ color: isActive ? 'yellow' : 'gray' })} to="/find-pw">비밀번호 찾기</NavLink>{' | '}
-                        <NavLink style={({ isActive }) => ({ color: isActive ? 'yellow' : 'gray' })} to="/signup">회원 가입</NavLink>
+                        <NavLink className="find-id"  to="/find-id">아이디 찾기</NavLink>{' | '}
+                        <NavLink  className="find-pw" to="/find-pw">비밀번호 찾기</NavLink>{' | '}
+                        <NavLink  className="signup" to="/signup">회원 가입</NavLink>
                     </div>
 
                     <HorizonLine />
