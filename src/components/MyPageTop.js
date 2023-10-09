@@ -48,18 +48,6 @@ export default function MyPageTop(props) {
     return (
         <div style={{ borderBottom: "1px solid black", paddingBottom: "45px" }} className="content">
             <div className="mypagetop">
-                <button onClick={()=>{
-                    axios.get('/messages/sent', {
-                        headers: {
-                            'Authorization': `Bearer ${actoken}`,
-                            'Auth': retoken
-                        }
-                    }).then(response=>{
-                        console.log(response);
-                    }).catch(error=>{
-                        console.log(error);
-                    })
-                }}>확인</button>
                 <div className="toptitle">
                     <h1>My Page</h1>
                     {/* Link태그에 props로 내가작성한 게시물 전송 */}

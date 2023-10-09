@@ -31,7 +31,7 @@ const Do_Report = (props) => {
     }
 
     try {
-      const response = await axios.post('http://13.125.98.26:8080/reports', dataToSend, {
+      const response = await axios.post('/reports', dataToSend, {
         headers: { 'Authorization' : `Bearer ${actoken}`,
         'Auth' : retoken }
       });

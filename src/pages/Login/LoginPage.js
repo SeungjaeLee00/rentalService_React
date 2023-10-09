@@ -13,6 +13,7 @@ import { useAuth } from '../../components/AuthContext';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import '../../style/LoginPage.css';
+import { useRef } from 'react';
 
 function LoginPage() {
     const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function LoginPage() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const InputId= useRef(null);
 
     const onUsernameHandler = (event) => {
         setUsername(event.currentTarget.value);
@@ -74,7 +76,9 @@ function LoginPage() {
                 }
             });
     };
-
+    useEffect(()=>{
+        InputId.current.focus();
+    },[])
     
 
 
@@ -86,19 +90,18 @@ function LoginPage() {
                     <p>서비스 이용을 위해 로그인 해주세요.</p>
 
                     <br />
-                    <input type='Id' className="inputField" placeholder="  아이디" value={username}
-                        onChange={onUsernameHandler} style={{ marginBottom: "20px" }} />
+                    <input type='Id' className="inputField" placeholder="아이디" value={username}
+                        onChange={onUsernameHandler} style={{ marginBottom: "20px" }} ref={InputId} />
 
                     <br />
-                    <input type='password' className="inputField" placeholder="  비밀번호" value={password}
+                    <input type='password' className="inputField" placeholder="비밀번호" value={password}
                         onChange={onPasswordHandler} />
 
                     <div className='loginbtn'>
                         <Button color="dark" type="submit">Login</Button>
                     </div>
 
-                    <div className="small" style={{ marginLeft: "40px" }}>
-                        <NavLink className="find-id"  to="/find-id">아이디 찾기</NavLink>{' | '}
+                    <div className="small" style={{ marginLeft: "80px" }}>
                         <NavLink  className="find-pw" to="/find-pw">비밀번호 찾기</NavLink>{' | '}
                         <NavLink  className="signup" to="/signup">회원 가입</NavLink>
                     </div>

@@ -111,7 +111,7 @@ function Detail() {
 
 function OneItem(props) {
   function LikeAdd() {
-    axios.post('http://13.125.98.26:8080/posts/' + props.id + '/likes', null, {
+    axios.post('/posts/' + props.id + '/likes', null, {
       headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${localStorage.accessToken}` },
       headers: { Auth: localStorage.refreshToken },
     })

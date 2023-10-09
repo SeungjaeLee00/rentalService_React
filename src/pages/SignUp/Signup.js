@@ -59,6 +59,10 @@ function Signup() {
 
                 })
                 .catch(error => {
+                    if(error.response.data.code=='409')
+                    {
+                        alert('이미 이메일을 전송하였습니다.');
+                    }
                     console.error('이메일 전송 실패:', error.response.data.result);
                 });
         }

@@ -1,103 +1,108 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
+import '../../style/LoginPage.css'
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
 
 
 
 function Find_pw() {
 
   let navigate = useNavigate();  // hook: page 이동을 도와줌
-  
-  const about = "비밀번호 재설정을 완료해주세요:D"
+  const { state } = useLocation();
+  const { register, handleSubmit, setError, formState: { errors }, } = useForm({ mode: 'onBlur' });
 
-  const [username, setUserName] = useState("");
-  const [authKey, setauthKey] = useState("");
-  const [password, setPassword] = useState('');
-  const [verifyPassword, setVerifyPassword] = useState("");
-  const [message, setMessage] = useState('');
-
-  const onUsernameHandler = (event) => {
-    setUserName(event.currentTarget.value);
-  }
-  const onAuthKeyHandler = (event) => {
-    setauthKey(event.currentTarget.value);
-  }
-  const onPasswordHandler = (event) => {
-    setPassword(event.currentTarget.value);
-  }
-  const onVerifyPasswordHandler = (event) => {
-    setVerifyPassword(event.currentTarget.value);
-  }
-
-  const handlePasswordReset = (event) => {
-    event.preventDefault();
-
-    const userData = {
-      username: username,
-      password: password,
-      verifyPassword: verifyPassword,
-      authKey: authKey,
-    };
-
-    if(password !== verifyPassword){
-        return alert('비밀번호와 비밀번호 확인이 같지 않습니다.')
+  //비밀번호 , 비밀번호 확인 
+  const onValid = (data) => {
+    if (data.password != data.verifyPassword) {
+      setError(
+        'verifyPassword',
+        { message: '비밀번호가 일치하지 않습니다' },
+        { shouldFocus: true },
+      );
     }
+  }
+  //변경하기 버튼 클릭시 실행되는 
+  const onSubmit = (data) => {
+    //비밀번호 == 비밀번호 확인
+    onValid(data);
+    data.username = state;
+    axios.post('/password-reset', data)
+    .then(response=>{
+      alert('비밀번호가 변경되었습니다. 로그인 페이지로 이동합니다.')
+      navigate("/loginpage");
+    })
+    .catch(error=>{
+      if (error.response.data.code == '404') {
+        alert('존재하지 않는 회원입니다. 아이디를 확인해주세요');
+      }
+      else if (error.response.data.code == '409') {
+        alert('인증코드를 확인해주세요');
+      }
+    })
 
-    axios.post('http://13.125.98.26:8080/password-reset', userData)
-      .then(response => {
-        setMessage('비밀번호가 성공적으로 재설정되었습니다.');
-        if ((response.status = 200)) {
-            return navigate("/loginpage");
-            }
-      })
-      .catch(error => {
-        console.error('비밀번호 재설정 실패:', error);
-        setMessage('비밀번호 재설정에 실패하였습니다.');
-      });
-  };
-  
+  }
+
   return (
-      <div className='App'>
-        <br />
-        <h3>비밀번호 재설정</h3>
-        <p>{about}</p>
-        <div style={{ 
-            display: 'flex', justifyContent: 'center', alignItems: '', 
-            width: '100%', height: '100vh', paddingTop: '10px'
-            }}>
-              
-          <form style={{ display: 'flex', flexDirection: 'column'}} onSubmit={handlePasswordReset}> 
+    <div className='App'>
+      <br />
+      <h3 style={{ fontWeight: "bold" }}>비밀번호 재설정</h3>
+      <div className='resetpw-wrap'>
 
-            <br />
-            <label style={{ textAlign:"left", fontSize:"15px", color:"#4A4F5A" }}>아이디</label>
-            <input type='username' class="inputField" 
-                    placeholder="  abcdef@google.com" value={username} onChange={onUsernameHandler}/>
+        <form onSubmit={handleSubmit(onSubmit)}>
 
-            <label style={{ textAlign:"left", fontSize:"15px", color:"#4A4F5A" }}>비밀번호</label>
-            <input type='password' class="inputField" 
-                    placeholder="  재설정 비밀번호" value={password} onChange={onPasswordHandler}/>
+          <br />
+          <label>인증코드</label>
+          <input className="inputField" placeholder="인증코드를 입력하세요"
+            {...register('authKey', {
+              required: '인증코드를 입력하세요'
+            })} />
+          {errors.authKey && <p>{errors.authKey.message}</p>}
 
-            <label style={{ textAlign:"left", fontSize:"15px", color:"#4A4F5A" }}>비밀번호 확인</label>
-            <input type='password' class="inputField" 
-                    placeholder="  비밀번호 확인" value={verifyPassword} onChange={onVerifyPasswordHandler}/>
+          <label>새로운 비밀번호</label>
+          <input type='password' className="inputField" placeholder="영문, 숫자, 특수문자 포함 8자 이상"
+            {...register('password', {
+              required: '비밀번호를 입력하세요',
+              minLength: {
+                value: 8,
+                message:
+                  '비밀번호는 숫자, 영문, 특수문자를 포함한 8글자 이상이어야 합니다.',
+              },
+              pattern: {
+                value:
+                  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                message:
+                  '비밀번호는 숫자, 영문, 특수문자를 포함한 8글자 이상이어야 합니다.',
+              },
+            })} />
+          {errors.password && <p>{errors.password.message}</p>}
 
-            <label style={{ textAlign:"left", fontSize:"15px", color:"#4A4F5A" }}>인증코드</label>
-            <input type='authKey' class="inputField" 
-                    placeholder="  인증코드를 입력하세요" value={authKey} onChange={onAuthKeyHandler}/>
+          <label>비밀번호 확인</label>
+          <input type='password' className="inputField" placeholder="비밀번호를 한번 더 입력해주세요"
+            {...register('verifyPassword', {
+              required: '비밀번호를 입력하세요',
+              minLength: {
+                value: 8,
+                message:
+                  '비밀번호는 숫자, 영문, 특수문자를 포함한 8글자 이상이어야 합니다.',
+              },
+              pattern: {
+                value:
+                  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                message:
+                  '비밀번호는 숫자, 영문, 특수문자를 포함한 8글자 이상이어야 합니다.',
+              },
+            })} />
+          {errors.verifyPassword && <p>{errors.verifyPassword.message}</p>}
+          <button type="submit" >변경하기</button>
+        </form>
 
-            <button style={{color:"black", border: "none",
-                            borderRadius:'10px', height: "50px", 
-                            marginLeft:"8px" , marginTop:"44px" }}
-                  type="submit" >변경하기</button>
-            </form>
-            
 
-        </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
 export default Find_pw;
 

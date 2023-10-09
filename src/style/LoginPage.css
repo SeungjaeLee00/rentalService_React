@@ -4,6 +4,9 @@
     align-items: center;
     width:100%;
 }
+.Login-wrap input{
+    padding:13px;
+}
 
 .find-id{
     &:hover{
@@ -39,4 +42,109 @@
     &:hover{
         background-color:rgb(66, 66, 253);
     }
+}
+
+/* 비밀번호찾기(Find_pw.js) css */
+
+.findpw-wrap{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.findpw-top{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    width:370px;
+    white-space: pre-wrap;
+}
+.findpw-wrap form{
+    display:flex;
+    flex-direction: column;
+}
+
+.findpw-top h3{
+    font-weight: bold;
+}
+.findpw-top p{
+    margin-top:20px;
+    text-align: left;
+    font-weight: bold;
+}
+.findpw-bottom p{
+    color:red;
+    font-size: 14px;
+}
+.findpw-wrap label{
+    font-weight: bold;
+}
+.findpw-wrap button{
+    margin-top:15px;
+    margin-left:100px;
+    width:100px;
+    height:40px;
+    border-radius: 10px;
+    background-color: black;
+    color:white;
+    transition: all 0.3s;
+    &:hover{
+        background-color: rgb(66, 66, 253);
+    }
+}
+
+.findpw-wrap input{
+    margin-top:8px;
+    width:310px;
+}
+
+/* 비밀번호 재설정(ResetPW.js) css */
+.resetpw-wrap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    white-space: pre-wrap;
+}
+
+.resetpw-wrap form{
+    display:flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+}
+.resetpw-wrap label{
+    text-align: left;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top:10px;
+}
+.inputField{
+    padding: 10px;
+}
+.resetpw-wrap button{
+    margin-top:20px;
+    height:40px;
+    border-radius: 10px;
+    background-color: black;
+    color:white;
+    transition: all 0.3s;
+    &:hover{
+        background-color: rgb(66, 66, 253);
+    }
+}
+
+.pwcheck{
+    margin-top:5px;
+    margin-right:55px;
+    color: rgb(248, 122, 122);
+}
+
+.resetpw-wrap p{
+    text-align: left;
+    width:300px;
+    color:red;
+    font-size: 14px;
 }
