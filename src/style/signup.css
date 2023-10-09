@@ -8,6 +8,7 @@
 .signupform form{
     display:flex;
     flex-direction: column;
+    width:545px;
 }
 
 .signupform button{
@@ -35,9 +36,9 @@
     padding:10px;
 }
 
-.inputField{
+/* .inputField{
     width:300px;
-}
+} */
 
 .signupwrap label{
     margin-top:30px;
@@ -45,9 +46,10 @@
 }
 
 .signupform p{
-    margin-top:30px;
-    margin-left:10px;
+    font-size: 15px;
+    margin-left:115px;
     color: rgb(251, 68, 68);
+    text-align: left;
 }
 .email-wrap{
     display: flex;
@@ -65,6 +67,7 @@
 }
 .key-wrap{
     display:flex;
+    flex-direction: column;
 }
 .key-wrap input{
     margin-left:23px;
@@ -72,12 +75,14 @@
 }
 .nickname-wrap{
     display: flex;
+    flex-direction: column;
 }
 .nickname-wrap input{
     margin-left:70px;
 }
 .password-wrap{
     display: flex;
+    flex-direction: column;
 }
 .password-wrap input{
     margin-left:55px;
@@ -87,6 +92,7 @@
 }
 .phone-wrap{
     display: flex;
+    flex-direction: column;
 }
 .phone-wrap input{
     margin-left:38px;
