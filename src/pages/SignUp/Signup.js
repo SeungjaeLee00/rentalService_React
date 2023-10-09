@@ -148,7 +148,13 @@ function Signup() {
                                 minLength: {
                                     value: 8,
                                     message: '최소 8자 이상의 비밀번호를 입력해주세요'
-                                }
+                                },
+                                pattern: {
+                                    value:
+                                      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                                    message:
+                                      '비밀번호는 숫자, 영문, 특수문자를 포함한 8글자 이상이어야 합니다.',
+                                  },
                             })} />
                         {errors.password && <p>{errors.password.message}</p>}
                     </div>
