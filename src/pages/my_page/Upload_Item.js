@@ -6,21 +6,20 @@ import HorizonLine from '../../components/HorizonLine';
 import { useAuth } from '../../components/AuthContext';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import '../../style/Upload.css';
 
 let Button = styled.button`
-  color:black;
-  border-Radius:30px;
-  font-Size:20px;
-  width:100px;
-  height:50px;
-  border:none;
-  font-Weight:bold;
-  background-Color:rgb(220, 220, 220);
-  &:hover{
-    transform: translateY(-2px);
-    transition: 1s;
-    color:blue;
-}
+  margin-left:830px;
+  margin-top:25px;
+  width:130px;
+  height:40px;
+  border-radius: 5px;
+    background-color: black;
+    color:white;
+    transition: all 0.3s;
+    &:hover{
+        background-color: rgb(66, 66, 253);
+    }
 `;
 
 
@@ -35,7 +34,7 @@ const Upload_Item = () => {
   const [itemcategoryName, setItemCategoryName] = useState('');
   const [itemname, setItemName] = useState('');
   const [itemprice, setItemPrice] = useState();
-  const [itemquantity, setItemQuantity] = useState();
+  
 
 
   //state에는 마이페이지에서 게시글 수정버튼 눌렀을때 게시물의 id가 담깁니다.
@@ -57,14 +56,13 @@ const Upload_Item = () => {
       setItemCategoryName(copy.categoryName);
       setItemName(copy.item.name);
       setItemPrice(copy.item.price);
-      setItemQuantity(copy.item.quantity);
     } catch (e) {
       setError(e);
     }
   }
   useEffect(() => {
     //state가 null이 아니면 마이페이지에서 게시글 수정버튼을 누른것
-    if (state >= 0) {
+    if (state != null) {
       updatePost();
     }
   }, [])
@@ -89,23 +87,20 @@ const Upload_Item = () => {
   const savePrice = (e) => {
     setItemPrice(e.target.value);
   }
-  const saveQuantity = (e) => {
-    setItemQuantity(e.target.value);
-  }
 
   function produce() {
-    //사용자의 데이터를 서버에 전달하기 위해 Form형식으로 데이터를 생성
     //게시글생성
     if (state == null) {
+      //사용자의 데이터를 서버에 전달하기 위해 Form형식으로 데이터를 생성
       const formData = new FormData();
       formData.append('title', itemtitle);
       formData.append('content', itemcontent);
       formData.append('categoryName', itemcategoryName);
-      formData.append('itemCreateRequestDto.name', itemname);
-      formData.append('itemCreateRequestDto.price', itemprice);
-      formData.append('itemCreateRequestDto.quantity', itemquantity);
+      formData.append('ItemCreateRequestDto.name', itemname);
+      formData.append('ItemCreateRequestDto.price', itemprice);
+      formData.append('ItemCreateRequestDto.quantity', 1);
       formData.append('multipartFiles', file);
-      axios.post('/api/posts', formData, {
+      axios.post("/api/posts", formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${actoken}`,
@@ -128,7 +123,7 @@ const Upload_Item = () => {
       formData.append('categoryName', itemcategoryName);
       formData.append('ItemUpdateRequestDto.name', itemname);
       formData.append('ItemUpdateRequestDto.price', itemprice);
-      formData.append('ItemUpdateRequestDto.quantity', itemquantity);
+      formData.append('ItemUpdateRequestDto.quantity', 1);
       formData.append('multipartFiles', file);
       axios.patch("/api/posts/" + state, formData, {
         headers : {
@@ -149,8 +144,6 @@ const Upload_Item = () => {
           console.log(error);
         })
     }
-
-
   }
 
   if (!isAuthenticated) {
@@ -158,58 +151,49 @@ const Upload_Item = () => {
   }
 
   return (
-    <div>
-      {isAuthenticated ? (
+    <div className='upload-wrap'>
         <div style={{ marginTop: "10px", marginLeft: "110px", marginRight: "110px", marginBottom: "80px" }}>
           <div style={{ display: "flex" }}>
-            <h3 >기본 정보</h3>
+            <h3 >상품 정보</h3>
             <p style={{ color: 'red', fontSize: "14px" }}>{"\u00A0"}{"\u00A0"}{"\u00A0"}{"\u00A0"}{"\u00A0"}*필수항목</p>
           </div>
           <p style={{ border: "solid 1px #000000", marginTop: "10px" }}></p>
           <br />
           <Input itemtitle={itemtitle} itemcontent={itemcontent} itemcategoryName={itemcategoryName} itemname={itemname} itemprice={itemprice}
-            itemquantity={itemquantity} saveFile={saveFile} saveTitle={saveTitle} saveCategory={saveCategory} saveName={saveName} savePrice={savePrice}
-            saveContent={saveContent} saveQuantity={saveQuantity} />
+            saveFile={saveFile} saveTitle={saveTitle} saveCategory={saveCategory} saveName={saveName} savePrice={savePrice}
+            saveContent={saveContent} />
 
-          <Button className='buttonstyle' style={{ fontSize: '20px', width: "100px", height: "50px" }}
-            onClick={produce}> 완료 </Button>
+          <Button 
+            onClick={produce}>등록하기</Button>
         </div>
-      ) : (
-        <p>로그인이 필요합니다.</p>
-      )}
     </div>
   );
 };
 
-function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, itemquantity, saveFile, saveTitle, saveCategory, saveName, savePrice, saveContent, saveQuantity }) {
-  const [temp, setTemp] = useState("게시글제목");
+function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,  saveFile, saveTitle, saveCategory, saveName, savePrice, saveContent }) {
+  
   return (
     <>
-      <div style={{ display: "flex" }}>
+      <div className='img-wrap'>
         <h5>상품이미지</h5>
         <p style={{ color: 'red' }}>*</p>
         <input type='file' onChange={saveFile} />
       </div>
       <HorizonLine />
-      <div style={{ display: "flex" }}>
+      <div className='title-wrap'>
         <h5>제목</h5>
         <p style={{ color: 'red' }}>*</p>
-        <input
-          type="text"
-          placeholder="  게시글의 제목을 입력해주세요."
+        <input          
+          placeholder="게시글의 제목을 입력해주세요."
           value={itemtitle}
           onChange={saveTitle}
-          style={{
-            background_color: "transparent",
-            border: "2px solid rgba(0, 0, 0, 0.23)",
-            borderRadius: "7px", marginLeft: "80px", width: "800px"
-          }} />
+           />
       </div>
       <HorizonLine />
-      <div style={{ display: "flex" }}>
+      <div className='category-wrap'>
         <h5>카테고리</h5>
         <p style={{ color: 'red' }}>*</p>
-        <FormControl sx={{ minWidth: 200, marginLeft: " 55px" }}>
+        <FormControl sx={{ minWidth: 50, marginLeft: " 55px" }}>
           <NativeSelect
             onChange={saveCategory}
             defaultValue={"none"}
@@ -218,7 +202,7 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, 
               name: "category",
               id: "uncontrolled-native",
             }}
-          >
+              >
             <option onClick={() => { saveCategory("가전제품") }} >가전제품</option>
             <option onClick={() => { saveCategory("생활용품") }} >생활용품</option>
             <option onClick={() => { saveCategory("악기") }} >악기</option>
@@ -230,7 +214,7 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, 
       </div>
       <HorizonLine />
 
-      <div style={{ display: "flex" }}>
+      <div className='name-wrap'>
         <h5>상품이름</h5>
         <p style={{ color: 'red' }}>*</p>
         <br />
@@ -239,36 +223,24 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, 
           placeholder="상품의 이름을 입력해주세요"
           value={itemname}
           onChange={saveName}
-          style={{
-            background_color: "transparent",
-            border: "2px solid rgba(0, 0, 0, 0.23)",
-            borderRadius: "7px", marginLeft: "50px",
-            width: "650px"
-          }}
         />
       </div>
 
       <HorizonLine />
 
-      <div style={{ display: "flex" }}>
+      <div className='price-wrap'>
         <h5>가격</h5>
         <p style={{ color: 'red' }}>*</p>
-        <input
-          type="text"
-          placeholder="  ₩ 숫자만 입력해주세요."
+        <input          
+          placeholder="숫자만 입력해주세요"
           value={itemprice}
           onChange={savePrice}
-          style={{
-            background_color: "transparent",
-            border: "2px solid rgba(0, 0, 0, 0.23)",
-            borderRadius: "7px", marginLeft: "80px"
-          }}
         />
-        <p style={{ marginLeft: "15px" }}> 원</p>
       </div>
+      
       <HorizonLine />
 
-      <div style={{ display: "flex" }}>
+      <div className='content-wrap'>
         <h5> 설명 </h5>
         <p style={{ color: 'red' }}>*</p>
         <br />
@@ -277,33 +249,9 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, 
           cols="90"
           rows="5"
           value={itemcontent}
-          placeholder="  여러 장의 상품 사진과 구입 연도, 브랜드, 사용감, 하자 유무 등 대여자에게 필요한 정보를 꼭 포함해주세요. (10자 이상)&#13;&#10;"
+          placeholder="상품 사진과 구입 연도, 브랜드, 사용감, 하자 유무 등 대여자에게 필요한 정보를 꼭 포함해주세요"
           onChange={saveContent}
-          style={{
-            background_color: "transparent",
-            border: "2px solid rgba(0, 0, 0, 0.23)",
-            borderRadius: "7px", marginLeft: "80px"
-          }}
-
         ></textarea>
-      </div>
-
-      <HorizonLine />
-      <div style={{ display: "flex" }}>
-        <h5>수량</h5>
-        <br />
-        <input
-          type="text"
-          placeholder='  1'
-          value={itemquantity}
-          onChange={saveQuantity}
-          style={{
-            background_color: "transparent",
-            border: "2px solid rgba(0, 0, 0, 0.23)",
-            borderRadius: "7px", marginLeft: "80px"
-          }}
-        />
-        <p style={{ marginLeft: "15px", }}> 개</p>
       </div>
     </>
   )

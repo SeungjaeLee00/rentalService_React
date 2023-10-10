@@ -13,7 +13,7 @@ import '../../style/ItemDetail.css'
 
 function Detail() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+ 
   //id는 검색 '/' 뒤에 붙는 값
   let { id } = useParams();
 
@@ -28,7 +28,6 @@ function Detail() {
   //itemlike -> 단일상품 좋아요 표시
   const [itemlike, setItemLike] = useState();
 
-  const [showLoginPopup, setshowLoginPopup] = useState(false);
   const [showReportPopup, setshowReportPopup] = useState(false);
 
   const fetchPostInfo = async () => {
@@ -63,12 +62,8 @@ function Detail() {
     localStorage.setItem('watched',JSON.stringify(output));
   }, [])
 
-  const openloginModal = () => {
-    setshowLoginPopup(true);
-  };
-  const closeloginModal = () => {
-    setshowLoginPopup(false);
-  };
+  
+ 
 
   const openReportModal = () => {
     // const postId = item.id; 
@@ -93,7 +88,7 @@ function Detail() {
         <div className='Detail_Item_wrap'>
           <div className='Detail_Item_Img'>
             <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
-            <Login open={showLoginPopup} close={closeloginModal} ></Login>
+            
             {/* 상품정보컴포넌트 */}
             <OneItem item={item} id={id} location={location} setItem={setItem} itemlike={itemlike} setItemLike={setItemLike}
               navigate={navigate} openReportModal={openReportModal} showReportPopup={showReportPopup} closeReportnModal={closeReportnModal}
@@ -127,7 +122,6 @@ function OneItem(props) {
         console.log(error.response.data.result);
       })
   }
-
   return (
     <div className='Detail_Item_wrap'>
       {/* img */}

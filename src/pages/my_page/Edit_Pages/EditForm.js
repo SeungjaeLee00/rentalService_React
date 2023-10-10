@@ -15,7 +15,7 @@ const EditForm = (props) => {
         introduce:`${props.userData2.introduce}`,
     });
     const [file,setFile]=useState(props.userData2.profileImageName);
-
+    console.log('test');
 
     const {email,nickname,phonenumber,city,district,street,zipcode,introduce} = inputs; //비구조화 할당을 통해 값 추출
 

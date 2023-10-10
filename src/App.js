@@ -12,7 +12,6 @@ import LoginPage from './pages/Login/LoginPage';
 import Chat from './pages/Chat/Chat';
 import Detail from './pages/about_Item/Detail';
 import Edit_membership from './pages/my_page/Edit_Pages/Edit_membership';
-import MyitemPage from './pages/my_page/MyitemPage';
 import My_Reports from './pages/Report/My_Reports';
 import Do_Report from './pages/Report/Do_Report'
 import My_Review from './pages/Review/My_Review';
@@ -54,7 +53,6 @@ function App() {
             <Route exact path='/category/:search' element={<Category />} />
 
             
-            <Route exact path='/my-page/myitempage' element={<MyitemPage />} />
             <Route exact path='/my-page/chats' element={<MyChat />} />
             <Route exact path='/my-page/chats/message/:id' element={<OneMessage />} />
             <Route exact path='/my-page/reports' element={<My_Reports />} />
