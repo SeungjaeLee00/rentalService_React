@@ -18,9 +18,9 @@ function Signup() {
     const [emailcheck, setEmailCheck] = useState(false);
     //우편번호 표시 state 
     const [zipcode, setZipCode] = useState();
-    //주소 오리지널 값 state 
+    //주소 오리지널 값 state , db에 넣기위한 형식 변경된 주소 값 
     const [originaddress, setOriginAddress] = useState();
-    //db에 넣기위한 형식 변경된 주소 값 
+    //사용자 화면에 표시하기 위한 주소값
     const [address, setAddress] = useState();
     //주소모달 open state 
     const [addressisopen, setAddressIsOpen] = useState(false);

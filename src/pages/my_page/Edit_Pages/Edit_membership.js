@@ -14,8 +14,11 @@ const Edit_membership = (props) => {
   const retoken = localStorage.refreshToken;
   const username = sessionStorage.getItem('nickname'); 
   const { isAuthenticated } = useAuth();
+  //아이디, 닉네임, 휴대폰번호, 주소 
   const [userData, setUserData] = useState(null);
+  //자기소개,프로필사진 
   const [userData2,setUserData2]=useState(null);
+
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

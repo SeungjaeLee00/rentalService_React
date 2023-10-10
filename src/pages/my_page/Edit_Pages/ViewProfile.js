@@ -21,7 +21,7 @@ const ViewProfile = (props) => {
           </tr>
           <tr>
             <td>주소</td>
-            <td style={{fontWeight:"bold"}}>{props.userData.address.city} {props.userData.address.district} {props.userData.address.street} {props.userData.address.zipCode}</td>
+            <td style={{fontWeight:"bold"}}>{props.userData.address.city} {props.userData.address.district} {props.userData.address.street}</td>
           </tr>
           <tr>
             <td>소개</td>
