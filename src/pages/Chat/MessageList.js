@@ -34,20 +34,19 @@ export default function MessageList(props) {
     const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
 
     const FetchMessage = async () => {
-        console.log(actoken);
-        console.log(retoken);
+       
         try {
             setLoading(true);
-            const response = await axios.get('/messages/received', {
+            const response = await axios.get('/api/messages/received', {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken
                 }
             })
             console.log("received메시지조회성공");
-            setMessage(response.data.result.data.messageList);
-            setOriginMsg(response.data.result.data.messageList);
-            console.log(response.data.result.data);
+            setMessage(response.data.messageList);
+            setOriginMsg(response.data.messageList);
+            console.log(response.data);
         }
         catch (e) {
             console.log(e);
@@ -71,18 +70,18 @@ export default function MessageList(props) {
             setError(null);
             setMessage(null);
             setLoading(true);
-            const response = await axios.get('/messages/received', {
+            const response = await axios.get('/api/messages/received', {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken
                 }
             })
             console.log("메시지조회성공");
-            setMessage(response.data.result.data.messageList);
-            setOriginMsg(response.data.result.data.messageList);
+            setMessage(response.data.messageList);
+            setOriginMsg(response.data.messageList);
         } catch (e) {
-            setError(e.response.data.result);
-            console.log(e.response.data.result);
+            setError(e);
+            console.log(e);
 
         }
         setLoading(false);
@@ -96,18 +95,18 @@ export default function MessageList(props) {
             setError(null);
             setMessage(null);
             setLoading(true);
-            const response = await axios.get("/messages/sent", {
+            const response = await axios.get("/api/messages/sent", {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken
                 }
             })
             console.log("메시지조회성공");
-            setMessage(response.data.result.data.messageList);
-            setOriginMsg(response.data.result.data.messageList);
+            setMessage(response.data.messageList);
+            setOriginMsg(response.data.messageList);
         } catch (e) {
-            setError(e.response.data.result);
-            console.log(e.response.data.result);
+            setError(e);
+            console.log(e);
         }
         setLoading(false);
     }
@@ -127,7 +126,7 @@ export default function MessageList(props) {
                         receiveHandle();
                     })
                     .catch(error => {
-                        console.log(error.response.data.result);
+                        console.log(error);
                     })
             }
         })

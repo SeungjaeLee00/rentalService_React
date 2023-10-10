@@ -4,24 +4,21 @@ import useDetectClose from "../hooks/useDetectClose";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Category() {
     const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
-    const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
     const navigate = useNavigate();
     
     const [category, setCategory] = useState();
     useEffect(()=>{
-        axios.get('/category')
+        axios.get('/api/category')
          .then(response=>{
-            // console.log("메인 카테고리 axios성공");
-            //console.log(response.data.result.data[1].children);
-            setCategory(response.data.result.data[1].children);
+            setCategory(response.data[1].children);
          })
          .catch(error=>{
             console.log("카테고리 axios실패")
-            console.log(error.response.data.result);
+            console.log(error);
          })
 
     }, [])

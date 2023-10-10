@@ -22,27 +22,27 @@ export default function MyPage() {
   const [error, setError] = useState();
 
   const fetchMyPosts = async () => {
-    
     try {
       setLoading(true);
-      const response = await axios.get('/posts/my', {
+      const response = await axios.get('/api/posts/my', {
         headers: { 'Authorization' : `Bearer ${actoken}`,
                    'Auth' : retoken }
       })
-      setMyPost(response.data.result.data);
+      console.log(response);
+      setMyPost(response.data.postList);
     }
     catch (e) {
-      console.log(e.response.data.result);
+      console.log(e);
     }
   }
   const fetchMyRend = async () => {
     try {
-      const response = await axios.get('/trades/rend-item?true,', {
+      const response = await axios.get('/api/trades/rend-item?true,', {
         headers: { 'Authorization' : `Bearer ${actoken}`,
         'Auth' : retoken }
       })
-      // console.log(response.data.result.data);
-      setMyRent(response.data.result.data);
+      console.log(response);
+      setMyRent(response.data.tradeList);
     }
     catch (e) {
       console.log(e);
@@ -50,28 +50,28 @@ export default function MyPage() {
   }
   const fetchMYBorrow = async () => {
     try {
-      const response = await axios.get('/trades/borrow-item?true', {
+      const response = await axios.get('/api/trades/borrow-item?true', {
         headers: { 'Authorization' : `Bearer ${actoken}`,
         'Auth' : retoken }
       })
-      // console.log(response.data.result.data);
-      setMyBorrow(response.data.result.data);
+      console.log(response);
+      
+      setMyBorrow(response.data.tradeList);
     }
     catch (e) {
-      console.log(e.response.data.result);
+      console.log(e);
     }
     setLoading(false);
   }
   const fetchMyReview = async() =>{
     try{
-      const response = await axios.get('/reviews/my', {
+      const response = await axios.get('/api/reviews/my', {
         headers: { 'Authorization' : `Bearer ${actoken}`,
         'Auth' : retoken }
       })
-      console.log(response);
-      setMyReview(response.data.result.data);
+      setMyReview(response.data.reviewList);
     }catch(e){
-      console.log(e.response.data.result);
+      console.log(e);
     }
   }
 
@@ -93,8 +93,8 @@ export default function MyPage() {
   return (
     <div>
       {/* 마이페이지 상단 */}
-       <MyPageTop mypost={mypost.totalElements}
-        myrent={myrent.totalElements} myborrow={myborrow.totalElements} myreview={myreview.totalElements} />
+       <MyPageTop mypost={mypost.length}
+        myrent={myrent.length} myborrow={myborrow.length} myreview={myreview.length} />
       
       <div className="mypagebottom">
         {/* 마이페이지 왼쪽 nav */}

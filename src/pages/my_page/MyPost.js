@@ -1,6 +1,4 @@
   import axios from "axios";
-import { useEffect } from "react";
-import { useState } from "react";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import SetKST from "../../utils/SetKST";
 
@@ -13,7 +11,7 @@ export default function MyPost(props) {
 
     function DeleteItem(id) {
         console.log(id);
-        axios.delete("/posts/" + id, {
+        axios.delete("/api/posts/" + id, {
             headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
         })
@@ -25,7 +23,7 @@ export default function MyPost(props) {
                 }
             })
             .catch(error => {
-                console.log(error.response.data.result);
+                console.log(error);
             })
     }
 
@@ -56,7 +54,7 @@ function ItemTable({ mypost, navigate, DeleteItem }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {mypost.postList.map(a => (
+                    {mypost.map(a => (
                         <tr onClick={() => navigate("/itemmain/detail/" + a.id, { state: a.createdTime })}>
                             <td className="first-td">
                                 <div>

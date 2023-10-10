@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import '../../style/LoginPage.css';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useEffect } from 'react';
-import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
 
@@ -20,14 +18,14 @@ function Find_pw() {
   const onSumbit=(data)=>{
     console.log(data);
 
-    axios.post('/email/password-reset?email=' + data.username)
+    axios.post('/api/email/password-reset?email=' + data.username)
       .then(response => {
-        
         if ((response.status = 200)) {
           return navigate("/reset-pw",{state:data.username});
         }
       })
       .catch(error => {
+        console.log(error);
         //존재하지 않는 회원 
         if(error.response.data.code=='404')
         {

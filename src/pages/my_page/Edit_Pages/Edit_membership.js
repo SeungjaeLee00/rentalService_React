@@ -30,14 +30,14 @@ const Edit_membership = (props) => {
       setError(null);
       setUserData(null);
       setLoading(true);
-      const response = await axios.get("/members/my-profile", {
+      const response = await axios.get("/api/members/my-profile", {
         headers: {
           'Authorization': `Bearer ${actoken}`,
           'Auth': retoken
         }
       })
       console.log(response);
-      setUserData(response.data.result.data);
+      setUserData(response.data);
     } catch (error) {
       console.log(error);
       setError(error);
@@ -49,14 +49,14 @@ const Edit_membership = (props) => {
       setError(null);
       setUserData2(null);
       setLoading(true);
-      const response = await axios.get(`/members/${username}`, {
+      const response = await axios.get(`/api/members/${username}`, {
         headers: {
           'Authorization': `Bearer ${actoken}`,
           'Auth': retoken
         }
       })
-      console.log(response.data.result.data);
-      setUserData2(response.data.result.data);
+      console.log(response.data);
+      setUserData2(response.data);
     }catch(error){
       console.log(error);
       setError(error);

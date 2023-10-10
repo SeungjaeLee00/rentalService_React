@@ -7,6 +7,7 @@ const Posts = (props) => {
   const navigate = useNavigate();
   //console.log(props.currentPosts);
   
+  
  
   if(!props.currentPosts) return null;
   
@@ -16,8 +17,8 @@ const Posts = (props) => {
       <div className="Item" key={item.id} onClick={() => {
         let copy = [...props.watched];
         copy.push(item);
-        console.log(copy);
         props.setWatched(copy);
+
         navigate('/itemmain/detail/' + item.id, { state: item.createdTime });
         
       }}>

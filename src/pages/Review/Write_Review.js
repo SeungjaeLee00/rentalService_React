@@ -22,12 +22,12 @@ function Write_Review() {
             setError(null);
 
             setLoading(true);
-            const response = await axios.get('/posts/' + state.postid);
-            setPost(response.data.result.data);
+            const response = await axios.get('/api/posts/' + state.postid);
+            setPost(response.data);
             console.log(response);
         } catch (e) {
             setError(e);
-            console.log(e.response.data.result);
+            console.log(e);
         }
         setLoading(false);
     }
@@ -40,7 +40,7 @@ function Write_Review() {
         const data = {
             content: review
         }
-        axios.post('/reviews/' + state.tradeid, data, {
+        axios.post('/api/reviews/' + state.tradeid, data, {
             headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
         }).then(response => {

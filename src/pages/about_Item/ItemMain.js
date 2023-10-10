@@ -27,9 +27,9 @@ function ItemMain() {
       setStore(null);
       //loading 상태를 true
       setLoading(true);
-      const response = await axios.get('/posts');
-      console.log(response.data.result.data.postList);
-      setStore(response.data.result.data.postList);
+      const response = await axios.get('/api/posts');
+      // console.log(response);
+      setStore(response.data.postList);
     } catch (e) {
       setError(e);
       console.log(e);
@@ -39,20 +39,21 @@ function ItemMain() {
 
   const fetchMyInfo = async () => {
     try {
-      const response = await axios.get('/members/my-profile', {
+      const response = await axios.get('/api/members/my-profile', {
         headers: {
           'Authorization': `Bearer ${actoken}`,
           'Auth': retoken
         }
       })
+      console.log(response);
       //sessionstorage에 저장
-      window.sessionStorage.setItem("nickname", response.data.result.data.nickname);
+      window.sessionStorage.setItem("nickname", response.data.nickname);
     } catch (e) {
       if (e.response.data.code == '511') {
         alert('로그인이 만료되어 로그인 페이지로 이동합니다');
         window.location.replace('/loginpage');
       }
-      console.log(e.response.data);
+      console.log(e);
     }
   }
 
@@ -65,6 +66,9 @@ function ItemMain() {
     let localarray = localStorage.getItem('watched');
     if (localarray == null) {
       localStorage.setItem('watched', JSON.stringify([]));
+    }
+    else{
+        setWatched(JSON.parse(localarray));
     }
   }, [])
 
@@ -109,7 +113,7 @@ function ItemMain() {
       </div>
 
       <div className='Main-Content'>최근 본 상품</div>
-       <Watched store={store}/>
+       <Watched store={store} watched={watched} setWatched={setWatched}/>
       
 
       {/* 본문하단 글쓰기버튼 */}

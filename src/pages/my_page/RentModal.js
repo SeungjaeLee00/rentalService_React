@@ -20,9 +20,9 @@ export default function RentModal(props) {
             setTradeInfo(null);
 
             setLoading(true);
-            const response = await axios.get('/trades/' + props.tradeid)
-            console.log(response.data.result.data);
-            setTradeInfo(response.data.result.data);
+            const response = await axios.get('/api/trades/' + props.tradeid)
+            console.log(response.data);
+            setTradeInfo(response.data);
         }
         catch (e) {
             console.log(e);
@@ -50,7 +50,7 @@ export default function RentModal(props) {
            alert("이미 거래를 완료하셨습니다");
         }
         else {
-            axios.patch("/trades/trade/" + props.tradeid, null, {
+            axios.patch("/api/trades/trade/" + props.tradeid, null, {
                 headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
             })

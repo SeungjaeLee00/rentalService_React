@@ -39,7 +39,7 @@ const EditForm = (props) => {
         formData.append('address.zipCode', inputs.zipcode);
         formData.append('introduce', inputs.introduce);
         formData.append('image', file);
-        axios.patch('/members',formData,{
+        axios.patch('/api/members',formData,{
             headers: { 'Content-Type': 'multipart/form-data',
          'Authorization': `Bearer ${actoken}`, 'Auth':retoken }
         }).then(response=>{
@@ -51,7 +51,7 @@ const EditForm = (props) => {
             {
                 alert('해당 닉네임은 이미 사용중입니다')
             }
-            console.log(error.response.data.result);
+            console.log(error);
         })
     }
     

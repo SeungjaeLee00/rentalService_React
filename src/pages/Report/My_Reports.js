@@ -13,8 +13,7 @@ function My_Reports() {
 
     const { isAuthenticated } = useAuth();
     const [reportList, setReportList] = useState([]);
-    const [title, setTitle] = useState([]);
-    const [content, setContent] = useState([]);
+    
     const [selectedType, setSelectedType] = useState("ALL");
     const [postInfo, setPostInfo] = useState({});
     const [isActive1, setIsActive1] = useState(true);
@@ -28,7 +27,7 @@ function My_Reports() {
             return;
         }
         if (isAuthenticated) {
-            const apiUrl = 'http://13.125.98.26:8080/reports/myPage';
+            const apiUrl = '/api/reports/myPage';
             try {
                 axios.get(apiUrl, {
                     headers: { 'Authorization' : `Bearer ${actoken}`,
@@ -36,7 +35,7 @@ function My_Reports() {
                 })
                     .then(response => {
                         console.log('신고내역 불러오기 성공:', response.data);
-                        setReportList(response.data.result.data.reportList);
+                        setReportList(response.data.reportList);
                     })
                     .catch(error => {
                         console.error('API 요청 오류:', error);
@@ -55,7 +54,7 @@ function My_Reports() {
     // 신고 삭제
     const deleteReport = async (reportId) => {
         try {
-            const response = await axios.delete(`http://13.125.98.26:8080/reports/${reportId}`, {
+            const response = await axios.delete(`/api/reports/${reportId}`, {
                 headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
             });
@@ -73,14 +72,14 @@ function My_Reports() {
 
     // 신고 목록을 다시 불러옴
     const fetchReportList = () => {
-        axios.get('http://13.125.98.26:8080/reports/myPage', {
+        axios.get('/api/reports/myPage', {
             headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
         })
             .then(response => {
                 if (response.data.success) {
                     console.log('신고내역 불러오기 성공:', response.data);
-                    setReportList(response.data.result.data.reportList);
+                    setReportList(response.data.reportList);
                 } else {
                     console.error('서버 응답 오류:', response.data.error);
                 }
@@ -93,17 +92,14 @@ function My_Reports() {
     // 게시물 정보를 가져오는 함수
     const fetchPostInfo = async (postId) => {
         try {
-            const response = await axios.get(`http://13.125.98.26:8080/posts/${postId}`, {
+            const response = await axios.get(`/api/posts/${postId}`, {
                 headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
             });
 
             if (response.data.success) {
-                return response.data.result.data;
-            } else {
-                console.error('게시물 정보 요청 실패:', response.data.error);
-                return null;
-            }
+                return response.data;
+            } 
         } catch (error) {
             console.error('API 요청 오류:', error);
             if (error.response.data.code == '511') {
