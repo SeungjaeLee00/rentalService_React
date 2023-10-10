@@ -23,10 +23,11 @@
     border-radius: 10px;
     margin-left: 500px;
     margin-top: 30px;
+}
 
-    &:hover {
-        font-weight: bold;
-        background-color: rgb(66, 66, 253);
-        transition: 0.5s;
-    }
+
+.EditBtn:hover {
+    font-weight: bold;
+    background-color: rgb(66, 66, 253);
+    transition: 0.5s;
 }
