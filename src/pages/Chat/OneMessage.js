@@ -16,7 +16,7 @@ export default function OneMessage() {
 
     //state에 MessageList의 copy가 담김.(copy에는 쪽지id, 받은쪽지인지 보낸쪽지인지 나타내는 값 총2개)
     let { state } = useLocation();
-    console.log(state.copy);
+    // console.log(state.copy);
 
     //단건메시지조회한 데이터
     const [msg, setMsg] = useState();
@@ -29,7 +29,7 @@ export default function OneMessage() {
             setError(null);
 
             setLoading(true);
-            const response = await axios.get(`/messages/${state.copy[0]}`, {
+            const response = await axios.get(`/api/messages/${state.copy[0]}`, {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken
@@ -37,7 +37,7 @@ export default function OneMessage() {
             })
             console.log(response);
             setLoading(false);
-            setMsg(response.data.result.data)
+            setMsg(response.data)
         } catch (error) {
             console.log(error);
             setError(error);
@@ -59,7 +59,7 @@ export default function OneMessage() {
         let deletecheck = window.confirm("정말 삭제하시겠습니까?");
         console.log(state.copy[1]);
         if (deletecheck) {
-            axios.delete(`/messages/${msg.id}/${state.copy[1]}`, {
+            axios.delete(`/api/messages/${msg.id}/${state.copy[1]}`, {
                 headers: { Authorization: `Bearer ${actoken}` },
                 headers: { Auth: retoken }
             })
@@ -68,7 +68,7 @@ export default function OneMessage() {
                     navigate(-1)
                 })
                 .catch(error => {
-                    console.log(error.response.data.result);
+                    console.log(error);
                 })
         }
     }

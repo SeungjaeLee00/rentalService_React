@@ -49,9 +49,9 @@ const Upload_Item = () => {
   const updatePost = async () => {
     try {
       setError(null);
-      const response = await axios.get('/posts/' + state);
-      console.log(response.data.result.data);
-      let copy = response.data.result.data;
+      const response = await axios.get('/api/posts/' + state);
+      console.log(response.data);
+      let copy = response.data;
       setItemTitle(copy.title);
       setItemContent(copy.content);
       setItemCategoryName(copy.categoryName);
@@ -101,20 +101,23 @@ const Upload_Item = () => {
       formData.append('title', itemtitle);
       formData.append('content', itemcontent);
       formData.append('categoryName', itemcategoryName);
-      formData.append('ItemCreateRequestDto.name', itemname);
-      formData.append('ItemCreateRequestDto.price', itemprice);
-      formData.append('ItemCreateRequestDto.quantity', itemquantity);
+      formData.append('itemCreateRequestDto.name', itemname);
+      formData.append('itemCreateRequestDto.price', itemprice);
+      formData.append('itemCreateRequestDto.quantity', itemquantity);
       formData.append('multipartFiles', file);
-      axios.post('/posts', formData, {
-        headers: { 'Content-Type': 'multipart/form-data',
-         'Authorization': `Bearer ${actoken}`, 'Auth':retoken }
+      axios.post('/api/posts', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${actoken}`,
+          'Auth' : retoken
+       }
       })
         .then(response => {
           console.log("게시물생성성공");
           window.location.replace("/");
         })
         .catch(error => {
-          console.log(error.response.data.result);
+          console.log(error);
         })
     }
     else //게시글 수정 
@@ -127,10 +130,12 @@ const Upload_Item = () => {
       formData.append('ItemUpdateRequestDto.price', itemprice);
       formData.append('ItemUpdateRequestDto.quantity', itemquantity);
       formData.append('multipartFiles', file);
-      axios.patch("/posts/" + state, formData, {
-        headers: { 'Content-Type': 'multipart/form-data'},
-        headers: { 'Authorization': `Bearer ${actoken}`},
-        headers: { 'Auth' : retoken },
+      axios.patch("/api/posts/" + state, formData, {
+        headers : {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${actoken}`,
+          'Auth' : retoken
+        }
       })
         .then(response => {
           console.log("수정성공");
@@ -141,7 +146,7 @@ const Upload_Item = () => {
             alert('로그인이 만료되어 로그인 페이지로 이동합니다');
             window.location.replace('/loginpage');
           }
-          console.log(error.result.data.result);
+          console.log(error);
         })
     }
 

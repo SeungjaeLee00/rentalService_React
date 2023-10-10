@@ -51,7 +51,7 @@ function Signup() {
             }
             else {
                 console.log(data);
-                axios.post('/auth/sign-up', data)
+                axios.post('/api/auth/sign-up', data)
                     .then(response => {
                         console.log(response);
                     }).catch(error => {

@@ -16,9 +16,9 @@ export default function TradeModal(props) {
 
     function windowtransDate(date)
     {
-        console.log(date);
+        //console.log(date);
         let result = date.split(".");
-        console.log(result);
+        //console.log(result);
         let result2;
         //달이 1~9월 즉, 한자릿수이면 달앞에 0을 붙여준다. -> 01, 02 ...
         if(Number(result[1])<10)
@@ -26,16 +26,16 @@ export default function TradeModal(props) {
             result2 = result[0]+".0"+result[1]+"."+result[2];
         }
         else result2 = result[0]+"."+result[1]+"."+result[2];
-        console.log(result2);
+        //console.log(result2);
         //형식에서 공백제거 
         let result3 = result2.split(" ");
-        console.log(result3)
+        //console.log(result3)
         let result4 = result3[0]+result3[1]+result[2];
-        console.log(result4);
+        //console.log(result4);
         let result5 = result4.split(" ");
-        console.log(result5);
+        //console.log(result5);
         let result6 = result5[0]+result5[1];
-        console.log(result6);
+        //console.log(result6);
         return result6;
     }
      
@@ -54,8 +54,8 @@ export default function TradeModal(props) {
 
     function tradesProduce()
     {
-        console.log(startDate);
-        console.log(endDate);
+        //console.log(startDate);
+        //console.log(endDate);
 
         const dataToSend={
             borrowerName : props.borrowerName,
@@ -64,15 +64,15 @@ export default function TradeModal(props) {
         }
 
 
-        console.log(dataToSend.startDate);
-        console.log(dataToSend.endDate);
+        //console.log(dataToSend.startDate);
+        //console.log(dataToSend.endDate);
 
         dataToSend.startDate=windowtransDate(dataToSend.startDate);
         dataToSend.endDate=windowtransDate(dataToSend.endDate);
         // dataToSend.startDate = macTransDate(dataToSend.startDate);
         // dataToSend.endDate = macTransDate(dataToSend.endDate);
 
-        axios.post('/trades/'+props.postId,dataToSend,{
+        axios.post('/api/trades/'+props.postId,dataToSend,{
             headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
           })
@@ -86,7 +86,11 @@ export default function TradeModal(props) {
                 alert('로그인이 만료되어 로그인 페이지로 이동합니다');
                 window.location.replace('/loginpage');
               }
-            console.log(error.response.data)
+            else if(error.response.data.code=='409')
+            {
+                alert('해당 게시물에 대한 거래가 이미 진행중입니다');
+            }
+            console.log(error)
         })
     }
 

@@ -7,7 +7,6 @@ import axios from 'axios';
 import KaKaoLogin from '../../socialLogin/KakaoLogin';
 import NaverLogin from '../../socialLogin/NaverLogin';
 import GoogleLogin from '../../socialLogin/GoogleLLogIn';
-import { loginUser } from '../about_membership/user_action';
 import HorizonLine from '../../components/HorizonLine';
 import { useAuth } from '../../components/AuthContext';
 import { useEffect } from 'react';
@@ -46,18 +45,19 @@ function LoginPage() {
 
         
 
-        axios.post('/auth/login', userData)
+        axios.post('/api/auth/login', userData)
             .then(response => {
+                console.log(response);
                 const returnData = response.data;
-                const { accessToken, refreshToken } = returnData.result.data;
+                const { accessToken, refreshToken } = returnData;
                 login(accessToken, refreshToken);
                 if(response.status=='200')
                 {
-                    dispatch(loginUser(userData, password));
                     window.location.replace("/");
                 }
             })
             .catch(error => {
+                console.log(error);
                 //회원가입 하지 않은 회원인경우
                 if(error.response.data.code=='404')
                 {

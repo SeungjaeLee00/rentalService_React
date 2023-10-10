@@ -18,7 +18,7 @@ export default function Watched(props) {
                 let itemindex = 0;
                 if (index < 3) {
                     itemindex = props.store.findIndex(item => Number(item.id) == Number(a))
-                    console.log(itemindex);
+                    //console.log(itemindex);
                     //local저장소의 watche에는 unshift로 넣는게 맞는데 여기서는 push를 해주어야 앞의 값부터 나오기때문에. 
                     //copy.unshift(props.store[itemindex]);
                     copy.push(props.store[itemindex]);
@@ -41,7 +41,7 @@ export default function Watched(props) {
     return (
         <div className='Item-Wrap'>
             {/* currentPosts에 위의 watched에 담긴 상품들을 전달 */}
-            <Posts currentPosts={currentPosts()} />
+            <Posts currentPosts={currentPosts()} watched={props.watched} setWatched={props.setWatched} />
         </div>
     )
 }

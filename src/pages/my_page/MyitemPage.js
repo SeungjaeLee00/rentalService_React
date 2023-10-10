@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../components/AuthContext';
 
 
@@ -10,7 +9,6 @@ function MyitemPage() {
 
   const { isAuthenticated } = useAuth();
 
-  let [item, setItem] = useState();
   const navigate = useNavigate();  // hook: page 이동을 도와줌
 
   if (!isAuthenticated) {

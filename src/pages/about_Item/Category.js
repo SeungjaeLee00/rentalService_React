@@ -1,6 +1,4 @@
 import { useLocation, useParams } from "react-router-dom"
-import store from "../../store";
-import { useSelector } from "react-redux";
 import Posts from "./Posts";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useEffect } from "react";
@@ -35,7 +33,7 @@ export default function Category() {
             setItems(null);
             //loading 상태를 treu
             setLoading(true);
-            const response = await axios.get(`/posts?title=${id.search}`);
+            const response = await axios.get(`/api/posts?title=${id.search}`);
             console.log(response);
             setStore(response.data.result.data.postList);
         }catch(e){
@@ -54,7 +52,7 @@ export default function Category() {
             setError(null);
             setStore(null);
             setLoading(true);
-            const response = await axios.get(`/posts?categoryName=${state}`);
+            const response = await axios.get(`/api/posts?categoryName=${state}`);
             console.log(response);
             setStore(response.data.result.data.postList);
         }catch(e){

@@ -41,13 +41,13 @@ export default function Comment(props) {
             setComment(null);
             setError(null);
             setLoading(true);
-            const response = await axios.get(`/posts/${props.postid}/comments`);
-            setComment(response.data.result.data);
-            console.log(response.data.result.data);
+            const response = await axios.get(`/api/posts/${props.postid}/comments`);
+            
+            setComment(response.data);
             //댓글개수만큼 대댓글상태(댓글이 5개면 selectreply에 5개의 false가 들어감) -> 어떤댓글에대한
             //대댓글인지 확인하기 위해
             let copy = [];
-            response.data.result.data.map((a, index) => {
+            response.data.map((a, index) => {
                 copy.push(false);
             })
             setSelectReply(copy);
@@ -68,7 +68,7 @@ export default function Comment(props) {
                 parentCommentId: replyid
             }
             console.log(data);
-            axios.post(`/posts/${props.postid}/comments`, data, {
+            axios.post(`/api/posts/${props.postid}/comments`, data, {
                 headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
             }).then(response => {
@@ -90,7 +90,7 @@ export default function Comment(props) {
                 content: content
             }
 
-            axios.post(`/posts/${props.postid}/comments`, data, {
+            axios.post(`/api/posts/${props.postid}/comments`, data, {
                 headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
             })
@@ -127,7 +127,7 @@ export default function Comment(props) {
     }
     //댓글삭제 api 
     const DeleteComment = (id) => {
-        axios.delete('/comments/' + id, {
+        axios.delete('/api/comments/' + id, {
             headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
         }).then(response => {

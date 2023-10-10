@@ -16,14 +16,13 @@ export default function MyPageTop(props) {
     const fetchMyInfo = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('/members/my-profile', {
+            const response = await axios.get('/api/members/my-profile', {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken
                 }
             })
-            console.log("내정보조회성공");
-            setMyInfo(response.data.result.data);
+            setMyInfo(response.data);
             setLoading(false);
         }
         catch (e) {

@@ -16,6 +16,7 @@ function Chat() {
 
   const [receiveMember, setReceiveMember] = useState(location.state.writer.nickname);
   const [content, setContent] = useState("");
+  
 
   
   
@@ -39,12 +40,12 @@ function Chat() {
         return;
       }
       if (isAuthenticated) {
-        axios.post('/messages', dataToSend, {
+        axios.post('/api/messages', dataToSend, {
           headers: { 'Authorization' : `Bearer ${actoken}`,
           'Auth' : retoken }
         })
         .then(response=>{
-          console.log('메세지 전송 성공: ', response.data);
+          console.log('메세지 전송 성공: ', response);
           alert('메시지가 전송되었습니다');
           navigate(-1);
         })

@@ -31,11 +31,11 @@ const Do_Report = (props) => {
     }
 
     try {
-      const response = await axios.post('/reports', dataToSend, {
+      const response = await axios.post('/api/reports', dataToSend, {
         headers: { 'Authorization' : `Bearer ${actoken}`,
         'Auth' : retoken }
       });
-      console.log('신고 전송 성공: ', response.data);
+      console.log('신고 전송 성공: ', response);
       if (response.status === 201) {
         console.log('신고: ', response.data);
         setReportSuccess(true); 

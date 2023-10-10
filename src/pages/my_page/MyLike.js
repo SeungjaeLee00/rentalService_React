@@ -9,21 +9,21 @@ export default function MyLike() {
     const [likepost, setLikePost] = useState();
     const navigate = useNavigate();
     useEffect(() => {
-        axios.get('/posts/likes', {
+        axios.get('/api/posts/likes', {
             headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
         })
             .then(response => {
                 console.log("본인찜조회성공");
-                console.log(response.data.result.data);
-                setLikePost(response.data.result.data);
+                console.log(response.data);
+                setLikePost(response.data);
             })
             .catch(error => {
                 if (error.response.data.code == '511') {
                     alert('로그인이 만료되어 로그인 페이지로 이동합니다');
                     window.location.replace('/loginpage');
                   }
-                console.log(error.response.data.result);
+                console.log(error);
             })
     }, [])
 

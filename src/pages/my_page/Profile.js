@@ -51,7 +51,7 @@ function Profile() {
             return;
         }
         if (isAuthenticated) {
-            const apiUrl = "/members/" + state;
+            const apiUrl = "/api/members/" + state;
             axios.get(apiUrl, {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
@@ -60,7 +60,7 @@ function Profile() {
             })
                 .then(response => {
                     console.log('회원 정보 불러오기 성공:', response.data);
-                    setUserData(response.data.result.data);
+                    setUserData(response.data);
                 })
                 .catch(error => {
                     if (error.response.data.code == '511') {
@@ -74,23 +74,18 @@ function Profile() {
     }, [state]);
 
     const viewReview = async (state) => {
+        console.log(state);
         try {
-
-
-            const response = await axios.get("/reviews?nickname=" + state, {
+            const response = await axios.get("/api/reviews?nickname=" + state, {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken
                 }
             })
-            if (response.data.success) {
-                console.log('리뷰 불러오기 성공:', response.data);
-                setUserReview(response.data.result.data.reviewList);
-            } else {
-                console.error('서버 응답 오류:', response.data.error);
-            }
+            console.log(response);
+            setUserReview(response.data.reviewList);
         } catch (error) {
-            console.error('API 요청 오류:', error);
+            console.log(error);
         }
     };
 

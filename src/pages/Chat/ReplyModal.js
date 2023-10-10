@@ -25,14 +25,12 @@ export default function ReplyModal(props) {
         console.log(props.senderNickname);
         console.log(props.msgid);
 
-        axios.post('/messages', dataToSend, {
-          headers: {
+        axios.post('/api/messages', dataToSend, {
             headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
-          },
         })
         .then(response=>{
-          console.log('메세지 전송 성공: ', response.data);
+          console.log('메세지 전송 성공: ', response);
           alert('메시지가 전송되었습니다');
           navigate(-1)
         })
@@ -41,7 +39,7 @@ export default function ReplyModal(props) {
                 alert('로그인이 만료되어 로그인 페이지로 이동합니다');
                 window.location.replace('/loginpage');
               }
-          console.error('메세지 전송 실패:', error.response.data.result);
+          console.error('메세지 전송 실패:', error);
         })
 
 

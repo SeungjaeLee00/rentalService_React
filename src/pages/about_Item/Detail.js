@@ -36,9 +36,9 @@ function Detail() {
       setItem(null);
       setError(null);
       setLoading(true);
-      const response = await axios.get('/posts/' + id);
-      setItem(response.data.result.data);
-      setItemLike(response.data.result.data.likes);
+      const response = await axios.get('/api/posts/' + id);
+      setItem(response.data);
+      setItemLike(response.data.likes);
     }
     catch (e) {
       console.log(e);
@@ -111,7 +111,7 @@ function Detail() {
 
 function OneItem(props) {
   function LikeAdd() {
-    axios.post('/posts/' + props.id + '/likes', null, {
+    axios.post('/api/posts/' + props.id + '/likes', null, {
       headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${localStorage.accessToken}` },
       headers: { Auth: localStorage.refreshToken },
     })

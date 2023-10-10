@@ -28,7 +28,7 @@ function Find_pw() {
     //비밀번호 == 비밀번호 확인
     onValid(data);
     data.username = state;
-    axios.post('/password-reset', data)
+    axios.post('/api/password-reset', data)
     .then(response=>{
       alert('비밀번호가 변경되었습니다. 로그인 페이지로 이동합니다.')
       navigate("/loginpage");
