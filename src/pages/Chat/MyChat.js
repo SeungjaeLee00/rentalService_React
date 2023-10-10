@@ -7,7 +7,8 @@ import { Link, useLocation } from "react-router-dom";
 //마이페이지에서 쪽지모양 눌렀을때 보이는 컴포넌트
 
 export default function MyChat() {
-    
+    const actoken = localStorage.accessToken;
+    const retoken = localStorage.refreshToken;
     //state -> 내가 작성한 게시물 목록
     const {state} = useLocation();
     const [data,setData] = useState();

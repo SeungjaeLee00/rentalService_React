@@ -23,11 +23,9 @@
 
 .top-right{
     display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width:250px;
     font-size: 20px;
     color:black;
+    margin-right:50px;
 }
 .top-right a{
     text-decoration: none;
@@ -36,6 +34,7 @@
     &:hover{
         font-weight: bold;
       }
+    margin-right:20px;
 }
 
 

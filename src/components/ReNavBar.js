@@ -35,11 +35,11 @@ export default function ReNavBar() {
                     <a style={{ textDecoration: "none", fontSize: "45px", color: "black" }} href="/">Billim</a>
                 </div>
                 <div className="top-right">
-                    {isAuthenticated ? <Link onClick={handleLogout}>로그아웃</Link> :
+                    {isAuthenticated ? <Link  onClick={handleLogout}>로그아웃</Link> :
                         <Link  onClick={handleLogin}>로그인/회원가입</Link>}
 
                     {/* <div className="mypage" >마이페이지</div> */}
-                    {isAuthenticated? <Link style={{ marginRight:"40px"}} to={"my-page"}>마이페이지</Link> : 
+                    {isAuthenticated? <Link to={"my-page"}>마이페이지</Link> : 
                         <Link  to={"/loginpage"}>마이페이지</Link>}
                     
                 </div>
