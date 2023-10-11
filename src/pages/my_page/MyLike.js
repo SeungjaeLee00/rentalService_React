@@ -34,7 +34,7 @@ export default function MyLike() {
             </div>
             <div className="Like-bottom">
                 {likepost ? likepost.postList.map(a => (
-                    <div className="Like-item" onClick={()=>{navigate("/itemmain/detail/"+a.id)}}>
+                    <div key={a.id} className="Like-item" onClick={()=>{navigate("/itemmain/detail/"+a.id)}}>
                         <div className="item-img">
                             <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + a.link} style={{ width: "200px", height: "200px" }}></img>
                         </div>

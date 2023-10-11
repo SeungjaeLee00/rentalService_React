@@ -28,7 +28,7 @@ function ItemMain() {
       //loading 상태를 true
       setLoading(true);
       const response = await axios.get('/api/posts');
-      console.log(response);
+      console.log(response.data.postList);
       setStore(response.data.postList);
     } catch (e) {
       setError(e);
@@ -45,11 +45,12 @@ function ItemMain() {
           'Auth': retoken
         }
       })
-      console.log(response);
+      console.log(response.data);
       //sessionstorage에 저장
       window.sessionStorage.setItem("nickname", response.data.nickname);
     } catch (e) {
       if (e.response.data.code == '511') {
+        console.log(e);
         alert('로그인이 만료되어 로그인 페이지로 이동합니다');
         window.location.replace('/loginpage');
       }

@@ -32,7 +32,7 @@ const PageSpan = styled.span`
   border-radius:8px;
   transition: all 0.5s ease-in-out;
   ${(p)=>
-        p.active&&css`
+        p.$active&&css`
         background:black;
         width:30px;
         `}
@@ -73,7 +73,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
         <PageUl className="pagination">
           {pageNumbers.map((number,index) => (
             <PageLi key={number} className="page-item">
-              <PageSpan active={paginumber[index]} onClick={() => click(number,index)} className="page-link">
+              <PageSpan $active={paginumber[index]} onClick={() => click(number,index)} className="page-link">
               </PageSpan>
             </PageLi>
           ))}

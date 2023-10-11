@@ -28,7 +28,7 @@ export default function MyPage() {
         headers: { 'Authorization' : `Bearer ${actoken}`,
                    'Auth' : retoken }
       })
-      console.log(response);
+      //console.log(response);
       setMyPost(response.data.postList);
     }
     catch (e) {
@@ -41,7 +41,7 @@ export default function MyPage() {
         headers: { 'Authorization' : `Bearer ${actoken}`,
         'Auth' : retoken }
       })
-      console.log(response);
+      //console.log(response);
       setMyRent(response.data.tradeList);
     }
     catch (e) {
@@ -54,7 +54,7 @@ export default function MyPage() {
         headers: { 'Authorization' : `Bearer ${actoken}`,
         'Auth' : retoken }
       })
-      console.log(response);
+      //console.log(response);
       
       setMyBorrow(response.data.tradeList);
     }
@@ -118,32 +118,32 @@ function Sidebar() {
     <Nav>
       <Nav.List>
         <Nav.Item>
-          <Nav.Link to="/my-page/post" active={isActive("/my-page/post")}>
+          <Nav.Link to="/my-page/post" $active={isActive("/my-page/post")}>
             내 게시물 조회
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link to="/my-page/like" active={isActive("/my-page/like")}>
+          <Nav.Link to="/my-page/like" $active={isActive("/my-page/like")}>
             좋아요
           </Nav.Link>
         </Nav.Item>
         <Nav.Separator />
 
         <Nav.Item>
-          <Nav.Link to="/my-page/rent" active={isActive("/my-page/rent")}>
+          <Nav.Link to="/my-page/rent" $active={isActive("/my-page/rent")}>
            대여해주는 상품
           </Nav.Link>
         </Nav.Item>
         <Nav.Separator />
 
         <Nav.Item>
-          <Nav.Link to="/my-page/borrow" active={isActive("/my-page/borrow")}>
+          <Nav.Link to="/my-page/borrow" $active={isActive("/my-page/borrow")}>
           대여받는 상품
           </Nav.Link>
         </Nav.Item>
 
         <Nav.Item>
-          <Nav.Link to="/my-page/my-review" active={isActive("/my-page/my-review")}>
+          <Nav.Link to="/my-page/my-review" $active={isActive("/my-page/my-review")}>
           리뷰
           </Nav.Link>
         </Nav.Item>

@@ -32,7 +32,7 @@ export default function Category() {
           </DropdownButton>
           
           
-          <Menu isDropped={myPageIsOpen}>
+          <Menu $isDropped={myPageIsOpen}>
             <Ul >
             {category ? category.map(data=>(
                 <Li key={"li"+data.id}> <LinkWrapper key={"w"+data.id} onClick={()=>{navigate("category/"+data.id, {state:data.name})}}>{data.name}</LinkWrapper></Li>
@@ -103,8 +103,8 @@ const Menu = styled.div`
     border-bottom-color: gray;
   }
 
-  ${({ isDropped }) =>
-    isDropped &&
+  ${({ $isDropped }) =>
+    $isDropped &&
     css`
       opacity: 1;
       visibility: visible;

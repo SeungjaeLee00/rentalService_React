@@ -14,7 +14,7 @@ const Link = styled.a`
   
 
   ${(p) =>
-    p.active &&
+    p.$active &&
     css`
       color: #ff8906;
       font-weight: bold;
@@ -34,11 +34,11 @@ const Link = styled.a`
   }
 `;
 
-function NavLink({ children, to, active = false }) {
+function NavLink({ children, to, $active = false }) {
   return (
     <Link
       href={to}
-      active={active}
+      $active={$active}
       aria-current={isCurrent(to) ? "page" : null}
     >
       {children}

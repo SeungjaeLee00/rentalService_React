@@ -7,6 +7,7 @@ import ReplyModal from "./ReplyModal";
 import SetKST from "../../utils/SetKST";
 import "react-datepicker/dist/react-datepicker.css"
 import TradeModal from "./TradeModal";
+import styled from "styled-components";
 export default function OneMessage() {
 
     const navigate = useNavigate();
@@ -85,18 +86,20 @@ export default function OneMessage() {
                 <div className="one-wrap">
                     <div className="one-top">
                         <div className="top-title">
-                            <div className="title"><h1 style={{ marginLeft: "30px" }}>쪽지함</h1></div>
-                            <div className="top-button"><button className="button" onClick={() => { setTradeModalOpen(!trademodalopen) }} style={{ marginLeft: "800px" }}>거래하기</button></div>
+                            <Title className="title">쪽지함</Title>
+                            <div className="top-button">
+                                <button className="trade-button" onClick={() => { setTradeModalOpen(!trademodalopen) }}>거래하기</button>
+                                </div>
                             {trademodalopen && <TradeModal postId={msg.postId} borrowerName={msg.senderNickname}
                                 closeModal={() => setTradeModalOpen(!trademodalopen)} />}
                         </div>
                         <div className="top-info">
                             <div className="info-left">
                                 <div className="left-top">
-                                    <div style={{ fontSize: "18px", marginLeft: "30px" }}>게시글제목:{msg.postTitle}</div>
-                                    <div style={{ marginLeft: "300px", marginLeft: "200px" }}>보낸날짜: {SetKST(msg.createdDate)}</div>
+                                    <PostTitle >게시글제목 : {msg.postTitle}</PostTitle>
+                                    <SendTime>보낸날짜: {SetKST(msg.createdDate)}</SendTime>
                                 </div>
-                                <div style={{ marginTop: "30px", marginLeft: "30px" }} className="left-bottom">발신자 : {msg.senderNickname}</div>
+                                <Sender className="left-bottom">발신자 : {msg.senderNickname}</Sender>
                             </div>
                             <div className="info-right">
                                 <button onClick={() => { setModalOpen(!modalopen) }} >답장</button>
@@ -118,3 +121,24 @@ export default function OneMessage() {
         </div>
     )
 }
+let Title = styled.div`
+margin-left:30px;
+font-size:30px;
+`
+
+let PostTitle = styled.div`
+font-size:20px;
+margin-left:30px;
+font-weight:bold;
+`
+
+let SendTime = styled.div`
+margin-left:300px;
+font-weight:bold;
+`
+
+let Sender = styled.div`
+margin-top:30px;
+margin-left:30px;
+font-weight:bold;
+`

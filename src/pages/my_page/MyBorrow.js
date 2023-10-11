@@ -6,7 +6,7 @@ import RentModal from "./RentModal";
 export default function MyBorrow()
 {
     const {myborrow, setMyBorrow}=useOutletContext();
-    //console.log(myborrow);
+    console.log(myborrow);
     const {mypost, setMyPost}=useOutletContext();
     //console.log(mypost);
     
@@ -31,7 +31,7 @@ export default function MyBorrow()
                     </thead>
                     <tbody>
                         {myborrow.map(a => (
-                            <tr onClick={()=>{
+                            <tr key={a.tradeId} onClick={()=>{
                             setRentModalOpen(!rentmodalopen);
                             setTradeId(a.tradeId);
                             setTradeTitle(a.postTitle);
