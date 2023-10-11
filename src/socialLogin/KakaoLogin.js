@@ -16,43 +16,33 @@ function KaKaoLogin() {
   };
   const kakaoLogin = async () => {
     await Kakao.Auth.login({
-      success(res) {
-        console.log(res);
-        Kakao.Auth.setAccessToken(res.access_token);
+      success: async (authObj) => {
+        console.log(authObj);
+        Kakao.Auth.setAccessToken(authObj.access_token);
         console.log("카카오 로그인 성공");
-
-        Kakao.API.request({
-          url: "/login",
-          success(res) {
-            console.log("카카오 인가 요청 성공");
-            setIsLogin(true);
-            const kakaoAccount = res.kakao_account;
-            localStorage.setItem("email", kakaoAccount.email);
-            localStorage.setItem(
-              "profileImg",
-              kakaoAccount.profile.profile_image_url
-            );
-            localStorage.setItem("nickname", kakaoAccount.profile.nickname);
-          },
-          fail(error) {
-            console.log(error);
-          },
-        });
+  
+        try {
+          const response = await Kakao.API.request({
+            url: "/login",
+            method: "POST", // 로그인 요청
+            data: { accessToken: authObj.access_token },
+          });
+  
+          console.log("카카오 인가 요청 성공");
+          setIsLogin(true);
+          const kakaoAccount = response.kakao_account;
+          localStorage.setItem("email", kakaoAccount.email);
+          localStorage.setItem("nickname", kakaoAccount.profile.nickname);
+  
+          // 성공하면 메인으로 
+          window.location.href = "/";
+        } catch (error) {
+          console.error("카카오 인가 요청 실패:", error);
+        }
       },
-      fail(error) {
+      fail: (error) => {
         console.log(error);
       },
-    });
-  };
-
-  const kakaoLogout = () => {
-    Kakao.Auth.logout((res) => {
-      console.log(Kakao.Auth.getAccessToken());
-      console.log(res);
-      localStorage.removeItem("email");
-      localStorage.removeItem("profileImg");
-      localStorage.removeItem("nickname");
-      setUser(null);
     });
   };
 
@@ -62,11 +52,9 @@ function KaKaoLogin() {
   }, []);
 
   useEffect(() => {
-    //console.log(isLogin);
     if (isLogin) {
       setUser({
         email: localStorage.getItem("email"),
-        profileImg: localStorage.getItem("profileImg"),
         nickname: localStorage.getItem("nickname"),
       });
     }
