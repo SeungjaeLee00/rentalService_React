@@ -53,6 +53,8 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
   //pagination 기호 클릭할때 실행되는 함수 
   const click=(number,index)=>{
+    console.log(number);
+    console.log(index);
     paginate(number);
     //어떤 기호를 클릭했는지 표시(css)처리하기 위한 로직 
     let temp=[...paginumber];

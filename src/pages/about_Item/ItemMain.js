@@ -28,7 +28,7 @@ function ItemMain() {
       //loading 상태를 true
       setLoading(true);
       const response = await axios.get('/api/posts');
-      // console.log(response);
+      console.log(response);
       setStore(response.data.postList);
     } catch (e) {
       setError(e);
