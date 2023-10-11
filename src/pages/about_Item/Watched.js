@@ -8,8 +8,10 @@ export default function Watched(props) {
 
     useEffect(() => {
         let localarray = localStorage.getItem('watched');
+         
+        
         //localStorage watche에 상품들의 id가 존재하면 
-        if (localarray) {
+        if (localarray.length>0) {
             setWatched(null);
             localarray = JSON.parse(localarray);
             let copy = [];
@@ -37,11 +39,12 @@ export default function Watched(props) {
     };
 
     if (!watched) return null;
+    console.log(watched);
 
     return (
         <div className='Item-Wrap'>
             {/* currentPosts에 위의 watched에 담긴 상품들을 전달 */}
-            <Posts currentPosts={currentPosts()} watched={props.watched} setWatched={props.setWatched} />
+            {watched? <Posts currentPosts={currentPosts()} watched={props.watched} setWatched={props.setWatched} /> : null}
         </div>
     )
 }

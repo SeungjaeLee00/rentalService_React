@@ -1,24 +1,41 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import SetKST from "../../utils/SetKST";
+import { useState } from "react";
 
 const Posts = (props) => {
   
   const navigate = useNavigate();
-  //console.log(props.currentPosts);
+  const [posts,setPosts]= useState(''); 
+  const [postlength,setPostLength] =useState(props.currentPosts.length);
+
+  useEffect(()=>{
+    setPosts(props.currentPosts);
+    if(props.currentPosts.length<6)
+    {
+      setPostLength(props.currentPosts.length);
+    }
+    else if(props.currentPosts.length>6)
+    {
+      setPostLength(props.ItemIndex);
+    }
+  },[props.currentPosts]);
+  
+  console.log(posts);
+  console.log(postlength);
+  //ItemIndex가 지금 6인데 만약 게시물이 6미만이라면 오류발생. 따라서 
+  //6미만이면 그에맞는 값할당. 
   
   
- 
-  if(!props.currentPosts) return null;
-  
+  if(postlength==null) return null;
 
   return (
-    props.currentPosts ? props.currentPosts.slice(0, props.ItemIndex).map(item => (
+    <>
+    {posts ? posts.slice(0, postlength).map(item => (
       <div className="Item" key={item.id} onClick={() => {
         let copy = [...props.watched];
         copy.push(item);
         props.setWatched(copy);
-
         navigate('/itemmain/detail/' + item.id, { state: item.createdTime });
         
       }}>
@@ -36,7 +53,8 @@ const Posts = (props) => {
           </div>
         </div>
       </div>
-    )) : <div>로딩중</div>
+    )) : <div>로딩중</div>}
+    </>
   );
 };
 export default Posts;

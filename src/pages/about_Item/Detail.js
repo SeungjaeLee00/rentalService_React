@@ -38,6 +38,7 @@ function Detail() {
       const response = await axios.get('/api/posts/' + id);
       setItem(response.data);
       setItemLike(response.data.likes);
+      console.log(response);
     }
     catch (e) {
       console.log(e);
@@ -55,7 +56,11 @@ function Detail() {
     fetchPostInfo();
     //최근본상품
     let output = localStorage.getItem('watched');
-    output = JSON.parse(output);
+    //0이면 parse 할수없음. 값이 없기때문
+    if(output.length>0)
+    {
+      output = JSON.parse(output);
+    }    
     output.unshift(id);
     output = new Set(output);
     output = Array.from(output);

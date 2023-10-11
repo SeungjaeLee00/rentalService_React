@@ -31,7 +31,7 @@ const Upload_Item = () => {
   const [file, setFile] = useState();
   const [itemtitle, setItemTitle] = useState('');
   const [itemcontent, setItemContent] = useState('');
-  const [itemcategoryName, setItemCategoryName] = useState('');
+  const [itemcategoryName, setItemCategoryName] = useState('가전제품');
   const [itemname, setItemName] = useState('');
   const [itemprice, setItemPrice] = useState();
   
@@ -96,9 +96,9 @@ const Upload_Item = () => {
       formData.append('title', itemtitle);
       formData.append('content', itemcontent);
       formData.append('categoryName', itemcategoryName);
-      formData.append('ItemCreateRequestDto.name', itemname);
-      formData.append('ItemCreateRequestDto.price', itemprice);
-      formData.append('ItemCreateRequestDto.quantity', 1);
+      formData.append('itemCreateRequest.name', itemname);
+      formData.append('itemCreateRequest.price', itemprice);
+      formData.append('itemCreateRequest.quantity', 1);
       formData.append('multipartFiles', file);
       axios.post("/api/posts", formData, {
         headers: {
@@ -121,9 +121,9 @@ const Upload_Item = () => {
       formData.append('title', itemtitle);
       formData.append('content', itemcontent);
       formData.append('categoryName', itemcategoryName);
-      formData.append('ItemUpdateRequestDto.name', itemname);
-      formData.append('ItemUpdateRequestDto.price', itemprice);
-      formData.append('ItemUpdateRequestDto.quantity', 1);
+      formData.append('ItemUpdateRequest.name', itemname);
+      formData.append('ItemUpdateRequest.price', itemprice);
+      formData.append('ItemUpdateRequest.quantity', 1);
       formData.append('multipartFiles', file);
       axios.patch("/api/posts/" + state, formData, {
         headers : {

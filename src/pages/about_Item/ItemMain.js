@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Logo from '../../assets/img/logo2.PNG';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Pagination from './Pagination';
 import Posts from './Posts';
@@ -13,7 +12,7 @@ function ItemMain() {
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
 
-  const [store, setStore] = useState([]);
+  const [store, setStore] = useState(null);
   const [watched, setWatched] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -28,6 +27,11 @@ function ItemMain() {
       //loading 상태를 true
       setLoading(true);
       const response = await axios.get('/api/posts');
+      //게시물이 모두 삭제되었을때 로컬도 초기화 해줘야함. 
+      if(response.data.postList.length==0)
+      {
+        localStorage.setItem('watched',JSON.stringify([]));
+      }
       console.log(response.data.postList);
       setStore(response.data.postList);
     } catch (e) {
@@ -68,7 +72,7 @@ function ItemMain() {
     if (localarray == null) {
       localStorage.setItem('watched', JSON.stringify([]));
     }
-    else{
+    else if(localarray.length>0){
         setWatched(JSON.parse(localarray));
     }
   }, [])
@@ -82,15 +86,16 @@ function ItemMain() {
 
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다</div>;
-  if (!store) return null;
+  
 
 
   //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts에 담아줍니다.
-  const currentPosts = () => {
-    let currentPosts = 0;
-    currentPosts = store.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
-  };
+  // const currentPosts = () => {
+  //   let currentPosts = 0;
+  //   currentPosts = store.slice(indexOfFirst, indexOfLast);
+  //   return currentPosts;
+    
+  // };
 
   return (
     <div className='page-container'>
@@ -100,23 +105,22 @@ function ItemMain() {
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
-        {store ? (<Posts currentPosts={currentPosts()} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} />) : (<div>로딩중입니다</div>)}
+        {store!=null ? (<Posts currentPosts={store} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} />) : (<div>로딩중입니다</div>)}
       </div>
 
       {/* 본문하단Pagination */}
       <div className="Item-Pagination">
-        <Pagination
+        {store? <Pagination
           // 총데이터를 postsPerPage만큼 등분해서 보여준다. 6개씩보여주자.
           postsPerPage={postsPerPage} //각각 페이지당 포스트개수
           totalPosts={store.length} //전체 데이터 개수 
           paginate={setCurrentPage} //CurrentPage변경하는함수.(첫번째페이지가정 6)
-        ></Pagination>
+        ></Pagination>: null}
+        
       </div>
 
       <div className='Main-Content'>최근 본 상품</div>
-       <Watched store={store} watched={watched} setWatched={setWatched}/>
-      
-
+      {store?<Watched store={store} watched={watched} setWatched={setWatched}/> : null }
       {/* 본문하단 글쓰기버튼 */}
       <WriteBtn />
     </div>
