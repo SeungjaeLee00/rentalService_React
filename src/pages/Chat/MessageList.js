@@ -49,7 +49,7 @@ export default function MessageList(props) {
     const FetchMessage = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`/api/messages/received?page=${pagenumbers}`, {
+            const response = await axios.get(`/api/messages/${who}?page=${pagenumbers}`, {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken
@@ -89,6 +89,7 @@ export default function MessageList(props) {
                 }
             })
             console.log("메시지조회성공");
+            setMessageLength(response.data.totalElements);
             setMessage(response.data.messageList);
             setOriginMsg(response.data.messageList);
         } catch (e) {
@@ -107,14 +108,16 @@ export default function MessageList(props) {
             setError(null);
             setMessage(null);
             setLoading(true);
-            const response = await axios.get("/api/messages/sent", {
+            const response = await axios.get(`/api/messages/sent?page=${pagenumbers}`, {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken
                 }
             })
+            setMessageLength(response.data.totalElements);
             setMessage(response.data.messageList);
             setOriginMsg(response.data.messageList);
+            console.log(response.data.messageList);
         } catch (e) {
             setError(e);
             console.log(e);
