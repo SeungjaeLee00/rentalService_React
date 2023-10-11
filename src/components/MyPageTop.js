@@ -2,10 +2,12 @@ import { useEffect, useHistory } from 'react'
 import axios from 'axios'
 import { useState } from 'react';
 
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Edit_membership from '../pages/my_page/Edit_Pages/Edit_membership';
+import styled from 'styled-components';
 
 export default function MyPageTop(props) {
+    const navigate = useNavigate();
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
     const [myinfo, setMyInfo] = useState();
@@ -48,7 +50,7 @@ export default function MyPageTop(props) {
         <div style={{ borderBottom: "1px solid black", paddingBottom: "45px" }} className="content">
             <div className="mypagetop">
                 <div className="toptitle">
-                    <h1>My Page</h1>
+                    <h1 onClick={()=>{navigate("/my-page")}}>My Page</h1>
                     {/* Link태그에 props로 내가작성한 게시물 전송 */}
 
                     <div className='top-smallicon'>
@@ -67,20 +69,20 @@ export default function MyPageTop(props) {
                     </div>
                     <div className="inforight">
                         <div className="userpost">
-                            <div style={{ fontSize: "30px" }} className="title">게시물</div>
-                            <div style={{ marginTop: "15px", fontSize: "20px" }} className="quantity">{props.mypost}개</div>
+                            <UserDiv>게시물</UserDiv>
+                            <QuantityDiv >{props.mypost}개</QuantityDiv>
                         </div>
                         <div className="userrent">
-                            <div style={{ fontSize: "30px" }} className="title">대여해주는 상품</div>
-                            <div style={{ marginTop: "15px", fontSize: "20px" }} className="quantity">{props.myrent}개</div>
+                            <UserDiv >대여해주는 상품</UserDiv>
+                            <QuantityDiv >{props.myrent}개</QuantityDiv>
                         </div>
                         <div className="userborrow">
-                            <div style={{ fontSize: "30px" }} className="title">대여받는 상품</div>
-                            <div style={{ marginTop: "15px", fontSize: "20px" }} className="quantity">{props.myborrow}개</div>
+                            <UserDiv >대여받는 상품</UserDiv>
+                            <QuantityDiv >{props.myborrow}개</QuantityDiv>
                         </div>
                         <div className="userreview">
-                            <div style={{ fontSize: "30px" }} className="title">리뷰</div>
-                            <div style={{ marginTop: "15px", fontSize: "20px" }} className="quantity">{props.myreview}개</div>
+                            <UserDiv>리뷰</UserDiv>
+                            <QuantityDiv>{props.myreview}개</QuantityDiv>
                         </div>
 
                     </div>
@@ -89,3 +91,14 @@ export default function MyPageTop(props) {
         </div>
     )
 }
+let QuantityDiv = styled.div`
+font-size:20px;
+margin-top:15px;
+margin-left:30px;
+`
+
+let UserDiv = styled.div`
+font-size:30px;
+font-weight:bold;
+margin-left:30px;
+  `
