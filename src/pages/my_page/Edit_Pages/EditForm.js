@@ -120,7 +120,7 @@ const EditForm = (props) => {
                     </tr>
                 </tbody>
             </table>
-            <button className="EditBtn" onClick={patchmyinfo}>수정하기</button>
+            <button className="CompleteEditBtn" onClick={patchmyinfo}>수정완료</button>
         </div>
     );
 }

@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ViewProfile = (props) => {
   console.log(props.userData);
+  const navigate = useNavigate();
   if(!props.userData||!props.userData.address) return null;
   return (
     <div className='my-data'>
@@ -21,7 +23,8 @@ const ViewProfile = (props) => {
           </tr>
           <tr>
             <td>주소</td>
-            <td style={{fontWeight:"bold"}}>{props.userData.address.city} {props.userData.address.district} {props.userData.address.street}</td>
+            <td style={{fontWeight:"bold"}}>{props.userData.address.city} {props.userData.address.district}
+             {props.userData.address.street} {props.userData.address.zipCode}</td>
           </tr>
           <tr>
             <td>소개</td>
@@ -34,8 +37,10 @@ const ViewProfile = (props) => {
           </tr>
         </tbody>
       </table>
-
-      <button className="EditBtn" onClick={()=>{props.startEditing()}}>수정하기</button>
+      <div className='btn-wrap'>
+      <button className="EditBtn" onClick={()=>{props.startEditing()}}>회원정보수정</button>
+      <button className="EditBtn" onClick={()=>{navigate('/find-pw')}}>비밀번호변경</button>
+      </div>
     </div>
   );
 }
