@@ -3,10 +3,17 @@
   font-weight: normal;
   font-style: normal;
   src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff');
- }
+}
+
+body {
+  font-family: 'NanumBarunGothic', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .main-bg {
-  height: 500px;
+  height: 50vh;
   background-image: url('../assets/img/logo.png');
   background-size: cover;
   background-position: center;
@@ -14,48 +21,39 @@
 
 .App {
   text-align: center;
-  font-family: 'NanumBarunGothic';
   white-space: pre-line;
-  height: 100vh;
-
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.sub{
-  font-family: 'NanumBarunGothic';
-}
-
-.item_list {
-  font-family: 'NanumBarunGothic';
-}
-
-.d-flex {
-  font-family: 'NanumBarunGothic';
+.sub, .item_list, .d-flex {
+  font-family: 'NanumBarunGothic', sans-serif;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
 }
 
-.social_login{
+.social_login {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
-
 .more_info {
-  padding-top: 50px;
-  padding-bottom: 20px;
+  padding: 5vh 0;
 }
 
 .login {
-  padding-bottom: 100px;
+  padding-bottom: 10vh;
 }
 
 .Makers {
-  padding-top: 10px;
+  padding-top: 5vh;
 }
 
 .App-header {
@@ -65,7 +63,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 2vw; /* 유동적인 폰트 크기 */
   color: white;
 }
 
@@ -82,33 +80,39 @@
   }
 }
 
-.inputField { 
-    background-color: transparent;
-    height: 45px;
-    width: 300px;
-    border: 2px solid rgba(0, 0, 0, 0.23);
-    border-radius: 7px;
+.inputField {
+  background-color: transparent;
+  height: 3vh;
+  width: 20vw;
+  width: 300px;
+  border: 2px solid rgba(0, 0, 0, 0.23);
+  border-radius: 7px;
+  margin-bottom: 1vh;
+  padding: 1vh;
+  box-sizing: border-box;
 }
 
 .inputField:hover {
-    border: 2px solid black;
+  border: 2px solid black;
 }
 
-.inputField:focus-visible  {
-    outline: none!important;
-    border: 2px solid #1976d2;
+.inputField:focus-visible {
+  outline: none!important;
+  border: 2px solid #1976d2;
 }
 
 .signUp {
   color: aqua;
 }
 
-.buttonstyle{
+.buttonstyle {
   background-color: #4A4F5A;
   color: white;
   border-radius: 30px;
   border: 0;
   position: fixed;
-  right: 45px;
-  bottom: 30px;  
+  right: 5vw;
+  bottom: 3vh;
+  padding: 1vw 2vw; /* 유동적인 패딩 */
+  /* font-size: 1.5vw; 유동적인 폰트 크기 */
 }

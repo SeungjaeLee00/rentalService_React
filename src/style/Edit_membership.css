@@ -1,28 +1,33 @@
 .editmy-top {
-    border-bottom: 3px solid black;
-    font-size: 25px;
+    border-bottom: 0.2vw solid black; /* 유동 선굵기 */
     font-weight: bold;
-    margin-top: 40px;
-    padding-bottom: 10px;
+    margin-top: 4vh; /* 유동 마진 */
+    padding-bottom: 1vh; /* 유동 패딩 */
 }
 
 .my-data {
-    margin-top: 10px;
+    margin-top: 2vh; /* 유동 마진 */
 }
 
 .my-data table {
-    width: 100%;
+    width: 100%; /* 유동 너비 */
     border: none;
 }
 
 .EditBtn {
+    position: absolute; /* 버튼 중앙에 정렬 */
+    left: 50%;
+    transform: translateX(-50%);
     background-color: black;
     color: white;
-    width: 150px;
-    height: 40px;
-    border-radius: 10px;
-    margin-left: 500px;
-    margin-top: 30px;
+    width: 20vw; /* 유동 너비 */
+    max-width: 150px;
+    height: 6vh; /* 유동 높이 */
+    border-radius: 2vw; /* 유동 경계 반지름 */
+    margin-top: 3vh; /* 유동 마진 */
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
 }
 
 
