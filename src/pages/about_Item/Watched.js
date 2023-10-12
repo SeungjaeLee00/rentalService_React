@@ -39,7 +39,7 @@ export default function Watched(props) {
     };
 
     if (!watched) return null;
-    console.log(watched);
+    
 
     return (
         <div className='Item-Wrap'>

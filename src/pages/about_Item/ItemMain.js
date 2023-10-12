@@ -32,7 +32,7 @@ function ItemMain() {
       {
         localStorage.setItem('watched',JSON.stringify([]));
       }
-      console.log(response.data.postList);
+      //console.log(response.data.postList);
       setStore(response.data.postList);
     } catch (e) {
       setError(e);
@@ -49,7 +49,7 @@ function ItemMain() {
           'Auth': retoken
         }
       })
-      console.log(response.data);
+      //console.log(response.data);
       //sessionstorage에 저장
       window.sessionStorage.setItem("nickname", response.data.nickname);
     } catch (e) {
@@ -86,16 +86,17 @@ function ItemMain() {
 
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다</div>;
+  if(!store) return null;
   
 
 
   //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts에 담아줍니다.
-  // const currentPosts = () => {
-  //   let currentPosts = 0;
-  //   currentPosts = store.slice(indexOfFirst, indexOfLast);
-  //   return currentPosts;
+  const currentPosts = () => {
+    let currentPosts = 0;
+    currentPosts = store.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
     
-  // };
+  };
 
   return (
     <div className='page-container'>
@@ -105,7 +106,7 @@ function ItemMain() {
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
-        {store!=null ? (<Posts currentPosts={store} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} />) : (<div>로딩중입니다</div>)}
+        {store!=null ? (<Posts currentPosts={currentPosts()} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} />) : (<div>로딩중입니다</div>)}
       </div>
 
       {/* 본문하단Pagination */}

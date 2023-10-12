@@ -41,6 +41,7 @@ export default function Category() {
                 alert('로그인이 만료되어 로그인 페이지로 이동합니다');
                 window.location.replace('/loginpage');
             }
+            console.log(e);
             setError(e);
 
          }
@@ -54,8 +55,9 @@ export default function Category() {
             setLoading(true);
             const response = await axios.get(`/api/posts?categoryName=${state}`);
             console.log(response);
-            setStore(response.data.result.data.postList);
+            setStore(response.data.postList);
         }catch(e){
+            console.log(e);
             setError(e);
         }
         setLoading(false);

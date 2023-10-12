@@ -21,13 +21,11 @@ const Posts = (props) => {
     }
   },[props.currentPosts]);
   
-  console.log(posts);
-  console.log(postlength);
   //ItemIndex가 지금 6인데 만약 게시물이 6미만이라면 오류발생. 따라서 
   //6미만이면 그에맞는 값할당. 
   
   
-  if(postlength==null) return null;
+  //if(postlength==null) return null;
 
   return (
     <>
