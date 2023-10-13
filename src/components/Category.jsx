@@ -49,11 +49,11 @@ export default function Category() {
             {category.map(data => (
               <Li key={data.id}>
                 <LinkWrapper key={"w" + data.id}>
-                  <LinkWrapper1 onClick={() => { navigate("category/" + data.id, { state: data.name }) }}>
+                  <LinkWrapper1 key={"L"+data.id} onClick={() => { navigate("category/" + data.id, { state: data.name }) }}>
                     {data.name}
                   </LinkWrapper1>
                   {data.children.map(item => (
-                    <LinkWrapper2 onClick={() => { navigate("category/" + item.id, { state: item.name })}}>
+                    <LinkWrapper2 key={item.id} onClick={() => { navigate("category/" + item.id, { state: item.name })}}>
                       {item.name}
                     </LinkWrapper2>
                   ))}
@@ -104,7 +104,7 @@ const Menu = styled.div`
   margin-left:340px;
   width: 800px;
   //text-align: left;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   opacity: 0;
   visibility: hidden;
@@ -117,7 +117,7 @@ const Menu = styled.div`
     height: 0;
     width: 0;
     position: absolute;
-    top: -3px;
+    top: -2px;
     left: 8%;
     transform: translate(-50%, -50%);
     border: 12px solid transparent;
@@ -152,15 +152,16 @@ const Ul = styled.ul`
   flex-direction: column;
   justify-content: space-between;
   // align-items: center;
-  //border:1px solid green;
+  //border-bottom:1px solid green;
   
 `;
 
 const Li = styled.li`
   //width:200px;
-  margin-top:10px;
+  //margin-top:13px;
   //border:1px solid blue; 
-  //border-bottom:1px solid gray;
+  border-bottom:1px solid rgb(221, 218, 218);
+  
   
 `;
 
@@ -171,6 +172,8 @@ const LinkWrapper = styled.a`
   color:gray;
   flex-direction:row;
   justify-content : left;
+  
+  
 `;
 
 const LinkWrapper1 = styled.a`
@@ -178,10 +181,12 @@ width:130px;
 font-size: 18px;
 //border:1px solid blue;
 text-decoration: none;
+margin-top:15px;
 margin-right:0px;
 &:hover{
   color:blue;
   cursor:pointer;
+  font-weight:bold;
 }
 `
 
@@ -189,6 +194,7 @@ const LinkWrapper2 = styled.a`
 font-size: 18px;
 text-decoration: none;
 padding-left:50px;
+margin-top:15px;
 //border:1px solid red;
 &:hover{
   color:blue;

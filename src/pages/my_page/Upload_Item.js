@@ -8,20 +8,6 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import '../../style/Upload.css';
 
-let Button = styled.button`
-  margin-left:830px;
-  margin-top:25px;
-  width:130px;
-  height:40px;
-  border-radius: 5px;
-    background-color: black;
-    color:white;
-    transition: all 0.3s;
-    &:hover{
-        background-color: rgb(66, 66, 253);
-    }
-`;
-
 
 const Upload_Item = () => {
 
@@ -44,6 +30,17 @@ const Upload_Item = () => {
   console.log(typeof (state));
 
   const [error, setError] = useState(null);
+  
+  const [category, setCategory]= useState('');
+  const fetchCategory = async() =>{
+    try{
+      const response = await axios.get('/api/category')
+      setCategory(response.data[1].children);
+      console.log(response.data[1].children);           
+    }catch(e){
+      console.log(e);
+    }
+  }
 
   const updatePost = async () => {
     try {
@@ -65,6 +62,7 @@ const Upload_Item = () => {
     if (state != null) {
       updatePost();
     }
+    fetchCategory();
   }, [])
 
 
@@ -100,6 +98,7 @@ const Upload_Item = () => {
       formData.append('itemCreateRequest.price', itemprice);
       formData.append('itemCreateRequest.quantity', 1);
       formData.append('multipartFiles', file);
+      console.log(itemcategoryName);
       axios.post("/api/posts", formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -125,6 +124,7 @@ const Upload_Item = () => {
       formData.append('ItemUpdateRequest.price', itemprice);
       formData.append('ItemUpdateRequest.quantity', 1);
       formData.append('multipartFiles', file);
+      console.log(formData);
       axios.patch("/api/posts/" + state, formData, {
         headers : {
           'Content-Type': 'multipart/form-data',
@@ -150,6 +150,8 @@ const Upload_Item = () => {
     window.location.replace("/loginpage")
   }
 
+  if(!category) return null;
+
   return (
     <div className='upload-wrap'>
         <div style={{ marginTop: "10px", marginLeft: "110px", marginRight: "110px", marginBottom: "80px" }}>
@@ -161,7 +163,7 @@ const Upload_Item = () => {
           <br />
           <Input itemtitle={itemtitle} itemcontent={itemcontent} itemcategoryName={itemcategoryName} itemname={itemname} itemprice={itemprice}
             saveFile={saveFile} saveTitle={saveTitle} saveCategory={saveCategory} saveName={saveName} savePrice={savePrice}
-            saveContent={saveContent} />
+            saveContent={saveContent}  category={category}/>
 
           <Button 
             onClick={produce}>등록하기</Button>
@@ -170,7 +172,8 @@ const Upload_Item = () => {
   );
 };
 
-function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,  saveFile, saveTitle, saveCategory, saveName, savePrice, saveContent }) {
+function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,  
+  saveFile, saveTitle, saveCategory, saveName, savePrice, saveContent,category }) {
   
   return (
     <>
@@ -193,22 +196,30 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, 
       <div className='category-wrap'>
         <h5>카테고리</h5>
         <p style={{ color: 'red' }}>*</p>
-        <FormControl sx={{ minWidth: 50, marginLeft: " 55px" }}>
+        <FormControl sx={{ minWidth: 300, marginLeft: " 55px" }}>
           <NativeSelect
             onChange={saveCategory}
-            defaultValue={"none"}
             value={itemcategoryName}
             inputProps={{
               name: "category",
               id: "uncontrolled-native",
             }}
               >
-            <option onClick={() => { saveCategory("가전제품") }} >가전제품</option>
+                {category.map(a=>(
+                  <>
+                  <option onClick={()=>{saveCategory(a.name)}} >{a.name}</option>
+                  {a.children.map(item=>(
+                    <option onClick={()=>{saveCategory(item.name)}}>{item.name}</option>
+                  ))}
+                  </>
+                  ))
+                  }
+            {/* <option onClick={() => { saveCategory("가전제품") }} >가전제품</option>
             <option onClick={() => { saveCategory("생활용품") }} >생활용품</option>
             <option onClick={() => { saveCategory("악기") }} >악기</option>
             <option onClick={() => { saveCategory("완구") }} >완구</option>
             <option onClick={() => { saveCategory("의류") }} >의류</option>
-            <option onClick={() => { saveCategory("기타") }} >기타</option>
+            <option onClick={() => { saveCategory("기타") }} >기타</option> */}
           </NativeSelect>
         </FormControl>
       </div>
@@ -218,8 +229,7 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, 
         <h5>상품이름</h5>
         <p style={{ color: 'red' }}>*</p>
         <br />
-        <input
-          type="text"
+        <input          
           placeholder="상품의 이름을 입력해주세요"
           value={itemname}
           onChange={saveName}
@@ -258,3 +268,17 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice, 
 
 }
 export default Upload_Item;
+
+let Button = styled.button`
+  margin-left:830px;
+  margin-top:25px;
+  width:130px;
+  height:40px;
+  border-radius: 5px;
+    background-color: black;
+    color:white;
+    transition: all 0.3s;
+    &:hover{
+        background-color: rgb(66, 66, 253);
+    }
+`;
