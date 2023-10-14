@@ -43,8 +43,12 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
   const temp=[...paginumber];
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    pageNumbers.push(i);
-    temp[i]=false;
+    //등록된상품 Pagination 10개까지만 보여주기(보여지는 게시물은 총 60개)
+    if(i<=10)
+    {
+      pageNumbers.push(i);
+      temp[i]=false;
+    }
   }
   
   useState(()=>{
