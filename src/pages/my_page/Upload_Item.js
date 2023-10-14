@@ -26,8 +26,8 @@ const Upload_Item = () => {
   //state에는 마이페이지에서 게시글 수정버튼 눌렀을때 게시물의 id가 담깁니다.
   const { state } = useLocation();
 
-  console.log(state);
-  console.log(typeof (state));
+  // console.log(state);
+  // console.log(typeof (state));
 
   const [error, setError] = useState(null);
   
@@ -77,7 +77,13 @@ const Upload_Item = () => {
     setItemContent(e.target.value);
   }
   const saveCategory = (e) => {
-    setItemCategoryName(e.target.value);
+    //세부카테고리선택하면 세부카테고리만 짤라서 setState해준다.
+    let str = e.target.value.split(' ');
+    console.log(str);
+    if(str.length==2) str = str[1];
+    else str=str[0];
+    console.log(str);
+    setItemCategoryName(str);
   }
   const saveName = (e) => {
     setItemName(e.target.value);
@@ -111,6 +117,10 @@ const Upload_Item = () => {
           window.location.replace("/");
         })
         .catch(error => {
+          if (error.response.data.code == '511') {
+            alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+            window.location.replace('/loginpage');
+          }
           console.log(error);
         })
     }
@@ -199,7 +209,7 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,
         <FormControl sx={{ minWidth: 300, marginLeft: " 55px" }}>
           <NativeSelect
             onChange={saveCategory}
-            value={itemcategoryName}
+            //value={itemcategoryName}
             inputProps={{
               name: "category",
               id: "uncontrolled-native",
@@ -207,9 +217,9 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,
               >
                 {category.map(a=>(
                   <>
-                  <option onClick={()=>{saveCategory(a.name)}} >{a.name}</option>
+                  <option style={{fontWeight:"bold"}}  >{a.name}</option>
                   {a.children.map(item=>(
-                    <option onClick={()=>{saveCategory(item.name)}}>{item.name}</option>
+                    <option>{a.name} {item.name}</option>
                   ))}
                   </>
                   ))

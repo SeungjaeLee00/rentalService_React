@@ -53,6 +53,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
   //pagination 기호 클릭할때 실행되는 함수 
   const click=(number,index)=>{
+    console.log(pageNumbers);
     console.log(number);
     console.log(index);
     paginate(number);
@@ -74,6 +75,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
           {pageNumbers.map((number,index) => (
             <PageLi key={number} className="page-item">
               <PageSpan $active={paginumber[index]} onClick={() => click(number,index)} className="page-link">
+                
               </PageSpan>
             </PageLi>
           ))}
