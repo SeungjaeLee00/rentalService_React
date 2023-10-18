@@ -140,7 +140,8 @@ function OneItem(props) {
         <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {props.item.categoryName}&nbsp; {'>'} &nbsp; {props.item.title}</div>
         <div className="Detail_Item_Name_Price">
           <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name"> {props.item.item.name}</div>
-          <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{props.item.item.price}</div>
+          <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">
+            {props.item.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
         </div>
         <div style={{ marginTop: 20 }}>
           <span>{SetKST(props.location.state)}&nbsp;</span>

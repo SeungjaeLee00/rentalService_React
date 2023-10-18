@@ -143,16 +143,20 @@
   margin-left:150px;
   margin-top:100px;
 }
-.category_page{
+
+/* 카테고리 , 검색페이지 */
+.category-page{
   display:flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-top:80px;
 }
-.category_top{
+.category-top{
   display:flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content:space-around;
+}
+.top-right{
+  margin-left:35%;
 }
 
 .dashboard{
