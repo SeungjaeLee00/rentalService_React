@@ -32,7 +32,7 @@ function ItemMain() {
       {
         localStorage.setItem('watched',JSON.stringify([]));
       }
-      //console.log(response.data.postList);
+      console.log(response.data.postList);
       setStore(response.data.postList);
     } catch (e) {
       setError(e);

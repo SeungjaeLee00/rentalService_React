@@ -111,12 +111,7 @@
   margin-top:15px;
 }
 
-.Item-Name{
 
-  width:300px;
-  margin-left: 80px;
-  text-align: left;
-}
 .Item-State
 {
   font-weight: bold;
@@ -129,7 +124,9 @@
   font-weight: bold;
   margin:12px 0px;
 }
-
+.Item-Date{
+  font-size: 15px;
+}
 .Item-Pagination{
   display:flex;
   justify-content: center;

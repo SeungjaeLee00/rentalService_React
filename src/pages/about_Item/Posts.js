@@ -21,13 +21,8 @@ const Posts = (props) => {
       setPostLength(props.ItemIndex);
     }
   },[props.currentPosts]);
-  
-  //ItemIndex가 지금 6인데 만약 게시물이 6미만이라면 오류발생. 따라서 
-  //6미만이면 그에맞는 값할당. 
-  
-  
-  //if(postlength==null) return null;
 
+  
   return (
     <>
     {posts ? posts.slice(0, postlength).map(item => (
@@ -44,7 +39,7 @@ const Posts = (props) => {
         <div className='Item-Information-Wrap'>
           <div className='Item-Name-Price-Date-Wrap'>
             <div className='Item-Name'>{item.title}</div>
-            <div className='Item-Price'>{item.nickname}</div>
+            <div className='Item-Price'>{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
             <div className='Item-Date'>{SetKST(item.createdTime)}</div>
           </div>
           <div className='Item-State'>

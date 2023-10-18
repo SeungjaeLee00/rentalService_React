@@ -77,12 +77,13 @@ const Upload_Item = () => {
     setItemContent(e.target.value);
   }
   const saveCategory = (e) => {
-    //세부카테고리선택하면 세부카테고리만 짤라서 setState해준다.
+    //세부카테고리선택하면 세부카테고리로 설정(db에 저장된 카테고리에맞게)
     let str = e.target.value.split(' ');
-    console.log(str);
+    //console.log(str);
     if(str.length==2) str = str[1];
+    else if(str.length==3) str=str[1]+' '+str[2];
     else str=str[0];
-    console.log(str);
+    //console.log(str);
     setItemCategoryName(str);
   }
   const saveName = (e) => {
@@ -105,6 +106,7 @@ const Upload_Item = () => {
       formData.append('itemCreateRequest.quantity', 1);
       formData.append('multipartFiles', file);
       console.log(itemcategoryName);
+      
       axios.post("/api/posts", formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -224,12 +226,6 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,
                   </>
                   ))
                   }
-            {/* <option onClick={() => { saveCategory("가전제품") }} >가전제품</option>
-            <option onClick={() => { saveCategory("생활용품") }} >생활용품</option>
-            <option onClick={() => { saveCategory("악기") }} >악기</option>
-            <option onClick={() => { saveCategory("완구") }} >완구</option>
-            <option onClick={() => { saveCategory("의류") }} >의류</option>
-            <option onClick={() => { saveCategory("기타") }} >기타</option> */}
           </NativeSelect>
         </FormControl>
       </div>

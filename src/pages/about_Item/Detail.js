@@ -146,7 +146,7 @@ function OneItem(props) {
           <span>{SetKST(props.location.state)}&nbsp;</span>
           <div style={{ marginTop: "20px" }}>{props.item.content}</div>
           <div className='nickname-btn'>
-            <div onClick={props.onProfileClick} style={{ marginTop: "20px" }} >👤{props.item.writer.nickname}</div>
+            <div className='profile' onClick={props.onProfileClick}  >👤{props.item.writer.nickname}</div>
             <button onClick={props.openReportModal} variant="secondary" size="lg">❗️</button>
           </div>
         </div>

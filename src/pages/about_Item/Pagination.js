@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 const PageUl = styled.ul`
   float: left;
   list-style: none;
+  transition : all 1s;
 `;
 
 const PageLi = styled.li`
@@ -13,6 +14,7 @@ const PageLi = styled.li`
   font-weight: 600;
   width: 30px;
   margin:0px 5px;
+  transition : all 1s;
   // &:hover {
   //   cursor: pointer;
   //   color: white;
@@ -43,7 +45,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
   const temp=[...paginumber];
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    //등록된상품 Pagination 10개까지만 보여주기(보여지는 게시물은 총 60개)
+    //메인의 등록된상품 Pagination 10개까지만 보여주기(보여지는 게시물은 총 60개)
     if(i<=10)
     {
       pageNumbers.push(i);
@@ -57,9 +59,6 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
   //pagination 기호 클릭할때 실행되는 함수 
   const click=(number,index)=>{
-    console.log(pageNumbers);
-    console.log(number);
-    console.log(index);
     paginate(number);
     //어떤 기호를 클릭했는지 표시(css)처리하기 위한 로직 
     let temp=[...paginumber];
