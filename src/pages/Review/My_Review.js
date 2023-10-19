@@ -1,7 +1,6 @@
 import { useOutletContext } from 'react-router-dom';
 import '../../style/MyReview.css'
 
-// 내가 받은 리뷰
 function My_Review() {
     const { myreview } = useOutletContext();
     console.log(myreview);

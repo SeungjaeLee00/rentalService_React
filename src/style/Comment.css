@@ -1,141 +1,117 @@
-.comment-wrap{
-    display:flex;
+.comment-wrap {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top:50px;
-}
-.comment-top{
-    display:flex;
-    flex-direction: column;
+    margin-top: 5vh; /* 유동 마진 */
 }
 
-.comment-bottom{
-    display:flex;
+.comment-top {
+    display: flex;
     flex-direction: column;
+    width: 90vw; /* 유동 너비 */
+    max-width: 700px;
 }
 
-.one-comment{
-    display:flex;
+.comment-bottom {
+    display: flex;
     flex-direction: column;
-    width:700px;
-    padding:20px 0px;
+    width: 90vw; /* 유동 너비 */
+    max-width: 700px;
+}
+
+.one-comment {
+    display: flex;
+    flex-direction: column;
+    width: 90vw; /* 유동 너비 */
+    max-width: 700px;
+    padding: 2vh 0;
     border-bottom: 1px solid rgb(174, 173, 173);
 }
 
-.onecomment-info{
-    display:flex;
+.onecomment-info {
+    display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
-.onecomment-nametime{
-    display:flex;
-    flex-direction: column;
-}
-.onecomment-btn{
-    display:flex;
-    flex-direction: row;
-    margin-left:410px;
-}
-.onecomment-btn button{
-    height:25px;
-    font-size:10px;
-    width:70px;
+
+.onecomment-btn button {
+    height: 2.5vh;
+    font-size: 1vw; /* 유동 폰트 사이즈 */
+    width: 8vw; /* 유동 너비 */
     font-weight: bold;
-    border:0.5px solid gray;
+    border: 0.5px solid gray;
     border-radius: 5px;
     background-color: black;
-    color:white;
+    color: white;
     transition: all 0.5s;
-    &:hover{
-        font-weight:bold;
+    &:hover {
+        font-weight: bold;
         background-color: rgb(66, 66, 253);
     }
 }
 
-
-.comment-top textarea{
-    width:700px;
-    height:100px;
+.comment-top textarea {
+    width: 90vw; /* 유동 너비 */
+    max-width: 700px;
+    height: 20vh; /* 유동 높이 */
+    margin-bottom: 2vh; /* 유동 마진 */
 }
 
-.comment-top button{
-    width:100px;
-    margin-left:600px;
-    margin-top:20px;
+.comment-top button {
+    width: 20vw; /* 유동 너비 */
+    max-width: 200px;
+    margin-left: auto; /* 자동 왼쪽 정렬 */
+    margin-top: 2vh; /* 유동 마진 */
     background-color: black;
-    color:white;
+    color: white;
     transition: all 0.5s;
-    &:hover{
-        font-weight:bold;
+    &:hover {
+        font-weight: bold;
         background-color: rgb(66, 66, 253);
     }
 }
 
-.comment-name{
+.comment-name, .comment-writername {
     font-weight: bold;
-    font-size:15px;
+    font-size: 1.5vw; /* 유동 폰트 사이즈 */
 }
-.comment-writername{
-    font-weight:bold;
-    font-size:15px;
-    color:rgb(66, 66, 253);
+
+.comment-time {
+    color: rgb(147, 147, 147);
+    font-size: 1vw; /* 유동 폰트 시ㅏㅇ즈 */
 }
-.comment-time{
-    color:rgb(147, 147, 147);
-    font-size:13px;
+
+.onecomment-content, .onecomment-bottom {
+    margin-top: 1.5vh; /* 유동 마진 */
 }
-.onecomment-content{
-    margin-top:15px;
-}
-.onecomment-bottom{
-    margin-top:15px;
-}
-.onecomment-bottom button{
-    width:100px;
-    margin-top:13px;
+
+.onecomment-bottom button {
+    width: 20vw; /* 유동 너비 */
+    max-width: 200px;
+    margin-top: 1.3vh; /* 유동 마진 */
     background-color: white;
-    border:none;
+    border: none;
     transition: all 0.5s;
-    &:hover{
+    &:hover {
         font-weight: bold;
     }
 }
 
-
-.comment-comment button{
-    border-radius: 10px;
+.comment-comment button, .reply-info button {
+    border-radius: 1vw; /* 유동 버튼테두리 */
     background-color: white;
-    border:none;
-    &:hover{
+    border: none;
+    transition: all 0.5s;
+    &:hover {
         font-weight: bold;
     }
 }
 
-.reply-one-wrap{
-    margin-top:15px;
-    margin-left:20px;  
-    padding-top:15px;
-    border-top:1px solid rgb(197, 197, 197);
-    padding-bottom:10px;
-}
-.reply-info{
-    display:flex;
-    flex-direction: row;
-    padding-bottom:10px;
-}
-.reply-info button{
-    margin-left:460px;
-    height:25px;
-    font-size:10px;
-    width:70px;
-    font-weight: bold;
-    border:0.5px solid gray;
-    border-radius: 5px;
-    background-color: black;
-    color:white;
-    transition: all 0.5s;
-    &:hover{
-        font-weight:bold;
-        background-color: rgb(66, 66, 253);
-    }
+.reply-one-wrap {
+    margin-top: 1.5vh; /* 유동 마진 */
+    margin-left: 2vw; /* 유동 마진 */
+    padding-top: 1.5vh; /* 유동 패딩 */
+    border-top: 1px solid rgb(197, 197, 197);
+    padding-bottom: 1vh; /* 유동 패딩 */
 }

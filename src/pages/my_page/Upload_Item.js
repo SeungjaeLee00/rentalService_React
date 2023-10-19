@@ -20,7 +20,7 @@ const Upload_Item = () => {
   const [itemcategoryName, setItemCategoryName] = useState('가전제품');
   const [itemname, setItemName] = useState('');
   const [itemprice, setItemPrice] = useState();
-  
+
 
 
   //state에는 마이페이지에서 게시글 수정버튼 눌렀을때 게시물의 id가 담깁니다.
@@ -30,14 +30,14 @@ const Upload_Item = () => {
   // console.log(typeof (state));
 
   const [error, setError] = useState(null);
-  
-  const [category, setCategory]= useState('');
-  const fetchCategory = async() =>{
-    try{
+
+  const [category, setCategory] = useState('');
+  const fetchCategory = async () => {
+    try {
       const response = await axios.get('/api/category')
       setCategory(response.data[1].children);
-      console.log(response.data[1].children);           
-    }catch(e){
+      console.log(response.data[1].children);
+    } catch (e) {
       console.log(e);
     }
   }
@@ -68,7 +68,16 @@ const Upload_Item = () => {
 
 
   const saveFile = (e) => {
-    setFile(e.target.files[0]);
+    console.log(e.target.files[0]);
+    //이미지크기 1mb이하.
+    if (e.target.files[0] != null) {
+      if (e.target.files[0].size >= 1050000) {
+        alert('이미지 파일이 너무 큽니다');
+
+      }
+      else if (e.target.files[0].size <= 1050000) setFile(e.target.files[0]);
+
+    }
   }
   const saveTitle = (e) => {
     setItemTitle(e.target.value);
@@ -80,9 +89,9 @@ const Upload_Item = () => {
     //세부카테고리선택하면 세부카테고리로 설정(db에 저장된 카테고리에맞게)
     let str = e.target.value.split(' ');
     //console.log(str);
-    if(str.length==2) str = str[1];
-    else if(str.length==3) str=str[1]+' '+str[2];
-    else str=str[0];
+    if (str.length == 2) str = str[1];
+    else if (str.length == 3) str = str[1] + ' ' + str[2];
+    else str = str[0];
     //console.log(str);
     setItemCategoryName(str);
   }
@@ -106,25 +115,33 @@ const Upload_Item = () => {
       formData.append('itemCreateRequest.quantity', 1);
       formData.append('multipartFiles', file);
       console.log(itemcategoryName);
-      
-      axios.post("/api/posts", formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${actoken}`,
-          'Auth' : retoken
-       }
-      })
-        .then(response => {
-          console.log("게시물생성성공");
-          window.location.replace("/");
-        })
-        .catch(error => {
-          if (error.response.data.code == '511') {
-            alert('로그인이 만료되어 로그인 페이지로 이동합니다');
-            window.location.replace('/loginpage');
+      console.log(file);
+      if(file==null)
+      {
+        alert('이미지를 등록해주세요');
+      }
+      else
+      {
+        axios.post("/api/posts", formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${actoken}`,
+            'Auth': retoken
           }
-          console.log(error);
         })
+          .then(response => {
+            console.log("게시물생성성공");
+            window.location.replace("/");
+          })
+          .catch(error => {
+            if (error.response.data.code == '511') {
+              alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+              window.location.replace('/loginpage');
+            }
+            console.log(error);
+          })
+      }
+      
     }
     else //게시글 수정 
     {
@@ -137,24 +154,32 @@ const Upload_Item = () => {
       formData.append('ItemUpdateRequest.quantity', 1);
       formData.append('multipartFiles', file);
       console.log(formData);
-      axios.patch("/api/posts/" + state, formData, {
-        headers : {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${actoken}`,
-          'Auth' : retoken
-        }
-      })
-        .then(response => {
-          console.log("수정성공");
-          window.location.replace("/");
-        })
-        .catch(error => {
-          if (error.response.data.code == '511') {
-            alert('로그인이 만료되어 로그인 페이지로 이동합니다');
-            window.location.replace('/loginpage');
+
+      if(file==null)
+      {
+        alert('이미지를 등록해주세요');
+      }
+      else
+      {
+        axios.patch("/api/posts/" + state, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${actoken}`,
+            'Auth': retoken
           }
-          console.log(error);
         })
+          .then(response => {
+            console.log("수정성공");
+            window.location.replace("/");
+          })
+          .catch(error => {
+            if (error.response.data.code == '511') {
+              alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+              window.location.replace('/loginpage');
+            }
+            console.log(error);
+          })
+      }
     }
   }
 
@@ -162,31 +187,31 @@ const Upload_Item = () => {
     window.location.replace("/loginpage")
   }
 
-  if(!category) return null;
+  if (!category) return null;
 
   return (
     <div className='upload-wrap'>
-        <div style={{ marginTop: "10px", marginLeft: "110px", marginRight: "110px", marginBottom: "80px" }}>
-          <div style={{ display: "flex" }}>
-            <h3 >상품 정보</h3>
-            <p style={{ color: 'red', fontSize: "14px" }}>{"\u00A0"}{"\u00A0"}{"\u00A0"}{"\u00A0"}{"\u00A0"}*필수항목</p>
-          </div>
-          <p style={{ border: "solid 1px #000000", marginTop: "10px" }}></p>
-          <br />
-          <Input itemtitle={itemtitle} itemcontent={itemcontent} itemcategoryName={itemcategoryName} itemname={itemname} itemprice={itemprice}
-            saveFile={saveFile} saveTitle={saveTitle} saveCategory={saveCategory} saveName={saveName} savePrice={savePrice}
-            saveContent={saveContent}  category={category}/>
-
-          <Button 
-            onClick={produce}>등록하기</Button>
+      <div style={{ marginTop: "10px", marginLeft: "110px", marginRight: "110px", marginBottom: "80px" }}>
+        <div style={{ display: "flex" }}>
+          <h3 >상품 정보</h3>
+          <p style={{ color: 'red', fontSize: "14px" }}>{"\u00A0"}{"\u00A0"}{"\u00A0"}{"\u00A0"}{"\u00A0"}*필수항목</p>
         </div>
+        <p style={{ border: "solid 1px #000000", marginTop: "10px" }}></p>
+        <br />
+        <Input itemtitle={itemtitle} itemcontent={itemcontent} itemcategoryName={itemcategoryName} itemname={itemname} itemprice={itemprice}
+          saveFile={saveFile} saveTitle={saveTitle} saveCategory={saveCategory} saveName={saveName} savePrice={savePrice}
+          saveContent={saveContent} category={category} />
+
+        <Button
+          onClick={produce}>등록하기</Button>
+      </div>
     </div>
   );
 };
 
-function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,  
-  saveFile, saveTitle, saveCategory, saveName, savePrice, saveContent,category }) {
-  
+function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,
+  saveFile, saveTitle, saveCategory, saveName, savePrice, saveContent, category }) {
+
   return (
     <>
       <div className='img-wrap'>
@@ -198,11 +223,11 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,
       <div className='title-wrap'>
         <h5>제목</h5>
         <p style={{ color: 'red' }}>*</p>
-        <input          
+        <input
           placeholder="게시글의 제목을 입력해주세요."
           value={itemtitle}
           onChange={saveTitle}
-           />
+        />
       </div>
       <HorizonLine />
       <div className='category-wrap'>
@@ -216,16 +241,16 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,
               name: "category",
               id: "uncontrolled-native",
             }}
-              >
-                {category.map(a=>(
-                  <>
-                  <option style={{fontWeight:"bold"}}  >{a.name}</option>
-                  {a.children.map(item=>(
-                    <option>{a.name} {item.name}</option>
-                  ))}
-                  </>
-                  ))
-                  }
+          >
+            {category.map(a => (
+              <>
+                <option style={{ fontWeight: "bold" }}  >{a.name}</option>
+                {a.children.map(item => (
+                  <option>{a.name} {item.name}</option>
+                ))}
+              </>
+            ))
+            }
           </NativeSelect>
         </FormControl>
       </div>
@@ -235,7 +260,7 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,
         <h5>상품이름</h5>
         <p style={{ color: 'red' }}>*</p>
         <br />
-        <input          
+        <input
           placeholder="상품의 이름을 입력해주세요"
           value={itemname}
           onChange={saveName}
@@ -247,13 +272,13 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,
       <div className='price-wrap'>
         <h5>가격</h5>
         <p style={{ color: 'red' }}>*</p>
-        <input          
+        <input
           placeholder="숫자만 입력해주세요"
           value={itemprice}
           onChange={savePrice}
         />
       </div>
-      
+
       <HorizonLine />
 
       <div className='content-wrap'>
