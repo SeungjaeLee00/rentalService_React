@@ -88,8 +88,12 @@ const Upload_Item = () => {
   const saveCategory = (e) => {
     //세부카테고리선택하면 세부카테고리로 설정(db에 저장된 카테고리에맞게)
     let str = e.target.value.split(' ');
-    //console.log(str);
-    if (str.length == 2) str = str[1];
+    console.log(str);
+    //차랑, 오토바이 카테고리 경우 처리 
+    if(str[0].includes(',')==true) str=str[0]+' '+str[1];
+     //나머지 세부카테고리 선택했을때
+    else if (str.length == 2) str = str[1]; 
+    //가전제품 오디오/영상관련 기기 -> 3글자로 이루어진 카테고리 선택시 
     else if (str.length == 3) str = str[1] + ' ' + str[2];
     else str = str[0];
     //console.log(str);
@@ -115,7 +119,7 @@ const Upload_Item = () => {
       formData.append('itemCreateRequest.quantity', 1);
       formData.append('multipartFiles', file);
       console.log(itemcategoryName);
-      console.log(file);
+      //console.log(file);
       if(file==null)
       {
         alert('이미지를 등록해주세요');
