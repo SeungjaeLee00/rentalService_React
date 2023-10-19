@@ -91,7 +91,7 @@ function LoginPage() {
                         onChange={onPasswordHandler} />
 
                     <div className='loginbtn'>
-                        <Button color="dark" type="submit">Login</Button>
+                        <Button color="dark" type="submit">로그인</Button>
                     </div>
 
                     <div className="small" style={{ marginLeft: "80px" }}>

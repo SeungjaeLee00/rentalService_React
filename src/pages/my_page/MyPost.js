@@ -1,11 +1,13 @@
   import axios from "axios";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import SetKST from "../../utils/SetKST";
+import MessagePagination from "../Chat/MessagePagination";
+import { useState } from "react";
 
 export default function MyPost(props) {
     const { mypost, setMyPost } = useOutletContext();
     const navigate = useNavigate();
-    //console.log(mypost);
+    console.log(mypost);
     
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
@@ -27,22 +29,44 @@ export default function MyPost(props) {
                 console.log(error);
             })
     }
+    const [currentPage,setCurrentPage] = useState(1);
+    const postsPerPage = 10;
+    const ItemIndex = 10;
+    const indexOfLast = currentPage * postsPerPage; 
+    const indexOfFirst = indexOfLast - postsPerPage;    
+
+    //pagenumbers state 변경함수. 아래 페이지네이션 번호 클릭할때 해당 번호의 값이 들어온다. 
+    const HandlePageNumbers = (x)=>{
+        setCurrentPage(x);
+    }
+
+    const currentPosts=()=>{
+        let currentPosts = 0;
+        currentPosts=mypost.slice(indexOfFirst,indexOfLast);
+        return currentPosts;
+    }
+
+    if(!mypost) return null;
 
     return (
         <div className="MyPost-wrap">
-            {mypost ? <>
+            
              <div className="post-top">
                 <p style={{ padding: "30px", fontSize: "25px", fontWeight: "bold" }}>게시물내역 조회</p>
             </div>
 
-            {/* 게시물 생성 컴포넌트 */}
-            <ItemTable mypost={mypost}  navigate={navigate} DeleteItem={DeleteItem} />
-            </> : null}
+            {/* 게시물 컴포넌트 */}
+            {mypost? <ItemTable mypost={currentPosts()}  navigate={navigate} DeleteItem={DeleteItem} /> : null}
+            
+            
+            <MessagePagination length={mypost.length} HandlePageNumbers={HandlePageNumbers}/>
         </div>
     )
 }
 
 function ItemTable({ mypost, navigate, DeleteItem }) {
+    console.log(mypost);
+
     return (
         <div className="post-bottom">
             <table style={{ width:"100%",borderRight:"1px solid black"}}>

@@ -49,7 +49,8 @@ export default function MessageList(props) {
     const FetchMessage = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`/api/messages/${who}?page=${pagenumbers}`, {
+            //쪽지는 페이지네이션이 0부터시작. 따라서 -1. 
+            const response = await axios.get(`/api/messages/${who}?page=${pagenumbers-1}`, {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken

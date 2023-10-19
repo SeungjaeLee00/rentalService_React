@@ -59,7 +59,7 @@
     width: 45vw; /* 화면 너비의 45%로 설정 */
     max-width: 400px; /* 최대 너비를 400px로 제한 */
     height: 40px; /* 고정된 높이로 설정 */
-    font-size: 1.2vw; /* 화면 너비의 1.2%로 폰트 크기 설정 */
+    font-size: 0.8vw; /* 화면 너비의 1.2%로 폰트 크기 설정 */
     font-weight: 400;
     background-color: rgb(250, 250, 250);
     border-right: none;

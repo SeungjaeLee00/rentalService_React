@@ -41,6 +41,8 @@ const PageSpan = styled.span`
 `;
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+  //console.log("total : " +totalPosts);
+  //console.log("postsper : "+postsPerPage);
   const [paginumber,setPagiNumber]=useState([true]);
   const pageNumbers = [];
   const temp=[...paginumber];
