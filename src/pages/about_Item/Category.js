@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import MessagePagination from "../../components/Pagination";
 
 
 export default function Category() {
@@ -107,6 +108,21 @@ export default function Category() {
         setWatched(JSON.parse(localarray));
 
     }, [state]);
+    const [currentPage,setCurrentPage] = useState(1);
+    const postsPerPage = 6;
+    const ItemIndex = 6;
+    const indexOfLast = currentPage * postsPerPage; 
+    const indexOfFirst = indexOfLast - postsPerPage;    
+
+    //pagenumbers state 변경함수. 아래 페이지네이션 번호 클릭할때 해당 번호의 값이 들어온다. 
+    const HandlePageNumbers = (x)=>{
+        setCurrentPage(x);
+    }
+
+    const currentPosts=()=>{
+        let currentPosts=store.slice(indexOfFirst,indexOfLast);
+        return currentPosts;
+    }
 
     if (loading) return <div>로딩중..</div>
     if (error) return <div>에러발생</div>
@@ -119,12 +135,14 @@ export default function Category() {
                 <div>{state ? <Div> {state} 검색결과</Div> : <Div> {id.search} 검색결과 </Div>} </div>
                 <div className="top-right">
                     <div style={{fontWeight:"bold"}} >{store.length}개의 상품</div>
+                    {/* react bootstrap으로 필터 드랍다운 구현 */}
                      <Dropdown style={{ marginLeft:"15px"}}>
-                        <Dropdown.Toggle style={{ background: "white", color: "black",borderColor:"black" }} 
+                        <Dropdown.Toggle style={{ background: "white", color: "black",
+                        borderColor:"black", fontWeight:"bold" }} 
                         variant="success" id="dropdown-basic">{filtername}
                         </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
+                        <Dropdown.Menu >
                             <Dropdown.Item key={1} onClick={()=>{sortLatestItem()}} >최신순</Dropdown.Item>
                             <Dropdown.Item key={3} onClick={()=>{sortLowerItem()}} >가격낮은순</Dropdown.Item>
                             <Dropdown.Item key={4} onClick={()=>{sortHigherItem()}}>가격높은순</Dropdown.Item>
@@ -132,7 +150,8 @@ export default function Category() {
                     </Dropdown>
                 </div>
             </div>
-            <div className="Item-Wrap"><Posts currentPosts={store} ItemIndex={6} watched={watched} setWatched={setWatched} /></div>
+            <div className="Item-Wrap"><Posts currentPosts={currentPosts()} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} /></div>
+            <MessagePagination length={store.length} HandlePageNumbers={HandlePageNumbers}/>
 
 
         </div>
@@ -142,4 +161,6 @@ export default function Category() {
 let Div = styled.div`
   font-size:30px;
   font-weight: bold;
+  margin-left:5vw;
+
   `

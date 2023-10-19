@@ -1,7 +1,7 @@
   import axios from "axios";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import SetKST from "../../utils/SetKST";
-import MessagePagination from "../Chat/MessagePagination";
+import MessagePagination from "../../components/Pagination";
 import { useState } from "react";
 
 export default function MyPost(props) {

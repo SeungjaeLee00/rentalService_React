@@ -101,7 +101,7 @@ function ItemMain() {
     <div className='page-container'>
       <Dashboard />
       <hr />
-      <div className='Main-Content'> 등록된 상품</div>
+      <div className='Main-Content'>등록된 상품</div>
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">

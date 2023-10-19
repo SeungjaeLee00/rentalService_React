@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 import useDetectClose from "../../hooks/useDetectClose";
 import MessageListBody from "./MessageListBody";
 import Pagination from "../about_Item/Pagination";
-import MessagePagination from "./MessagePagination";
+import MessagePagination from "../../components/Pagination";
 
 export default function MessageList(props) {
     const actoken = localStorage.accessToken;

@@ -131,7 +131,7 @@
   display:flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 7vh;
 }
 
 
@@ -139,9 +139,9 @@
 .Main-Content{
   font-size:30px;
   font-weight: bold;
-  margin-bottom:30px;
-  margin-left:150px;
-  margin-top:100px;
+  margin-bottom:5vh;
+  margin-left:11vw;
+  margin-top:15vh;
 }
 
 /* 카테고리 , 검색페이지 */
@@ -152,11 +152,10 @@
 }
 .category-top{
   display:flex;
-  flex-direction: row;
-  justify-content:space-around;
+  justify-content: space-evenly;
 }
 .top-right{
-  margin-left:35%;
+  margin-left:48vw;  
 }
 
 .dashboard{
