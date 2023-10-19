@@ -2,5 +2,5 @@
 export default function SetKST(time) {
     const kor = new Date(time);
     kor.setHours(kor.getHours() + 9);
-    return kor.toLocaleString().slice(0,21)
+    return kor.toLocaleString('ko-KR').slice(0,21)
 }

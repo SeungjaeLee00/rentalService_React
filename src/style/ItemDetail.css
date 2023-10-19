@@ -19,8 +19,8 @@
 }
 
 .Item_About {
-
-    width: 530px;
+    width:40vw;
+    margin-right:5vw;
     display: flex;
     flex-direction: column;
     margin-left:80px;
