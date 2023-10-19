@@ -142,5 +142,4 @@ export default function Category() {
 let Div = styled.div`
   font-size:30px;
   font-weight: bold;
-  
   `

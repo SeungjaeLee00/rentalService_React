@@ -10,7 +10,6 @@ import GoogleLogin from '../../socialLogin/GoogleLLogIn';
 import HorizonLine from '../../components/HorizonLine';
 import { useAuth } from '../../components/AuthContext';
 import { useEffect } from 'react';
-import Swal from 'sweetalert2';
 import '../../style/LoginPage.css';
 import { useRef } from 'react';
 
@@ -61,18 +60,12 @@ function LoginPage() {
                 //회원가입 하지 않은 회원인경우
                 if(error.response.data.code=='404')
                 {
-                    Swal.fire({
-                        icon:'error',
-                        text:'존재하지 않는 회원입니다.'
-                    })  
+                    alert('존재하지 않는 회원입니다.')
                 }
                 //비밀번호 틀린경우
                 if(error.response.data.code=='409')
                 {
-                    Swal.fire({
-                        icon:'error',
-                        text:'비밀번호를 확인해주세요'
-                    })  
+                    alert('비밀번호를 확인해주세요.')
                 }
             });
     };
