@@ -1,0 +1,55 @@
+.upload-wrap h5{
+    font-weight: bold;
+}
+.img-wrap{
+    display: flex;
+}
+.img-wrap input{
+    margin-left:30px;
+}
+.title-wrap{
+    display:flex;
+}
+.title-wrap input{
+    margin-left:80px;
+    width:400px;
+    padding:7px;
+    border-radius: 5px;
+}
+
+.category-wrap{
+    display:flex;
+}
+
+
+.name-wrap{
+    display: flex;
+}
+.name-wrap input{
+    margin-left:45px;
+    padding: 7px;
+    border-radius: 5px;
+    width:400px;
+}
+
+.price-wrap{
+    display:flex;
+    flex-direction: row;
+}
+.price-wrap input{
+    padding: 7px;
+    margin-left:80px;
+    border-radius: 5px;
+    width:150px;
+}
+
+
+.content-wrap{
+    display:flex;
+}
+.content-wrap textarea{
+    padding:7px;
+    margin-left:80px;
+    border-radius: 5px;
+    border:2px solid black;
+}

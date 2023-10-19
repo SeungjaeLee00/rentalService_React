@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 const PageUl = styled.ul`
   float: left;
   list-style: none;
+  transition : all 1s;
 `;
 
 const PageLi = styled.li`
@@ -13,6 +14,7 @@ const PageLi = styled.li`
   font-weight: 600;
   width: 30px;
   margin:0px 5px;
+  transition : all 1s;
   // &:hover {
   //   cursor: pointer;
   //   color: white;
@@ -32,7 +34,7 @@ const PageSpan = styled.span`
   border-radius:8px;
   transition: all 0.5s ease-in-out;
   ${(p)=>
-        p.active&&css`
+        p.$active&&css`
         background:black;
         width:30px;
         `}
@@ -43,8 +45,12 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
   const temp=[...paginumber];
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    pageNumbers.push(i);
-    temp[i]=false;
+    //메인의 등록된상품 Pagination 10개까지만 보여주기(보여지는 게시물은 총 60개)
+    if(i<=10)
+    {
+      pageNumbers.push(i);
+      temp[i]=false;
+    }
   }
   
   useState(()=>{
@@ -71,7 +77,8 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
         <PageUl className="pagination">
           {pageNumbers.map((number,index) => (
             <PageLi key={number} className="page-item">
-              <PageSpan active={paginumber[index]} onClick={() => click(number,index)} className="page-link">
+              <PageSpan $active={paginumber[index]} onClick={() => click(number,index)} className="page-link">
+                
               </PageSpan>
             </PageLi>
           ))}

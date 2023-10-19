@@ -10,7 +10,7 @@ function Find_pw() {
 
   let navigate = useNavigate();  // hook: page 이동을 도와줌
 
-  const ABOUT = '비밀번호를 잃어버리셨나요?\nBillim에 가입한 이메일을 정확히 입력해 주세요.\n이메일을 통해 비밀번호 변경 인증번호가 전송됩니다.'
+  const ABOUT = 'Billim에 가입한 이메일을 정확히 입력해 주세요.\n이메일을 통해 비밀번호 변경 인증번호가 전송됩니다.'
 
   
   const {register, handleSubmit, formState:{errors},} = useForm();
@@ -47,7 +47,7 @@ function Find_pw() {
   return (
     <div className='findpw-wrap'>
       <div className='findpw-top'>
-        <h3>비밀번호 찾기</h3>
+        <h3>비밀번호 변경</h3>
         <p>{ABOUT}</p>
       </div>
       <div className='findpw-bottom'>

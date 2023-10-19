@@ -13,6 +13,11 @@
     width: 100%; /* 유동 너비 */
     border: none;
 }
+.btn-wrap{
+    display:flex;
+    margin-left: 500px;
+    margin-top: 30px;
+}
 
 .EditBtn {
     position: absolute; /* 버튼 중앙에 정렬 */
@@ -35,4 +40,85 @@
     font-weight: bold;
     background-color: rgb(66, 66, 253);
     transition: 0.5s;
+
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    margin-left:5px;
+    &:hover {
+        font-weight: bold;
+        background-color: rgb(66, 66, 253);
+        transition: 0.5s;
+    }
 }
+
+.CompleteEditBtn{
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    margin-left: 420px;
+    margin-top: 30px;
+    &:hover {
+        font-weight: bold;
+        background-color: rgb(66, 66, 253);
+        transition: 0.5s;
+    }
+}
+.my-datatable{
+    width:100%;
+}
+.my-datatbody p{
+    font-size: 15px;
+    color: rgb(251, 68, 68);
+}
+.my-datatbody td{
+    font-weight: bold;
+}
+
+.td-address{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputzipcode{
+    width:150px;
+    height: 40px;
+    border:2px solid rgba(0,0,0,0.23);
+    border-radius: 7px;
+}
+.inputaddress{
+    width:300px;
+    height: 40px;
+    border:2px solid rgba(0,0,0,0.23);
+    border-radius: 7px;
+}
+
+.input-email{
+    border:2px solid rgba(0,0,0,0.23);
+    border-radius: 7px;
+    width:300px;
+    height:40px;
+}
+.input-nickname{
+    border:2px solid rgba(0,0,0,0.23);
+    border-radius: 7px;
+    width:300px;
+    height:40px;
+}
+.input-phone{
+    border:2px solid rgba(0,0,0,0.23);
+    border-radius: 7px;
+    width:300px;
+    height:40px;
+}
+
+.input-introduce{
+    width:400px;
+    height:60px;
+    border:2px solid rgba(0,0,0,0.23);
+    border-radius: 7px;
+    
+}
+

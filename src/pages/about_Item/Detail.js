@@ -13,7 +13,7 @@ import '../../style/ItemDetail.css'
 
 function Detail() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+ 
   //id는 검색 '/' 뒤에 붙는 값
   let { id } = useParams();
 
@@ -28,7 +28,6 @@ function Detail() {
   //itemlike -> 단일상품 좋아요 표시
   const [itemlike, setItemLike] = useState();
 
-  const [showLoginPopup, setshowLoginPopup] = useState(false);
   const [showReportPopup, setshowReportPopup] = useState(false);
 
   const fetchPostInfo = async () => {
@@ -39,6 +38,7 @@ function Detail() {
       const response = await axios.get('/api/posts/' + id);
       setItem(response.data);
       setItemLike(response.data.likes);
+      console.log(response);
     }
     catch (e) {
       console.log(e);
@@ -56,19 +56,19 @@ function Detail() {
     fetchPostInfo();
     //최근본상품
     let output = localStorage.getItem('watched');
-    output = JSON.parse(output);
+    //0이면 parse 할수없음. 값이 없기때문
+    if(output.length>0)
+    {
+      output = JSON.parse(output);
+    }    
     output.unshift(id);
     output = new Set(output);
     output = Array.from(output);
     localStorage.setItem('watched',JSON.stringify(output));
   }, [])
 
-  const openloginModal = () => {
-    setshowLoginPopup(true);
-  };
-  const closeloginModal = () => {
-    setshowLoginPopup(false);
-  };
+  
+ 
 
   const openReportModal = () => {
     // const postId = item.id; 
@@ -93,7 +93,7 @@ function Detail() {
         <div className='Detail_Item_wrap'>
           <div className='Detail_Item_Img'>
             <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
-            <Login open={showLoginPopup} close={closeloginModal} ></Login>
+            
             {/* 상품정보컴포넌트 */}
             <OneItem item={item} id={id} location={location} setItem={setItem} itemlike={itemlike} setItemLike={setItemLike}
               navigate={navigate} openReportModal={openReportModal} showReportPopup={showReportPopup} closeReportnModal={closeReportnModal}
@@ -127,7 +127,6 @@ function OneItem(props) {
         console.log(error.response.data.result);
       })
   }
-
   return (
     <div className='Detail_Item_wrap'>
       {/* img */}
@@ -141,13 +140,14 @@ function OneItem(props) {
         <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {props.item.categoryName}&nbsp; {'>'} &nbsp; {props.item.title}</div>
         <div className="Detail_Item_Name_Price">
           <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name"> {props.item.item.name}</div>
-          <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">{props.item.item.price}</div>
+          <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">
+            {props.item.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
         </div>
         <div style={{ marginTop: 20 }}>
           <span>{SetKST(props.location.state)}&nbsp;</span>
           <div style={{ marginTop: "20px" }}>{props.item.content}</div>
           <div className='nickname-btn'>
-            <div onClick={props.onProfileClick} style={{ marginTop: "20px" }} >👤{props.item.writer.nickname}</div>
+            <div className='profile' onClick={props.onProfileClick}  >👤{props.item.writer.nickname}</div>
             <button onClick={props.openReportModal} variant="secondary" size="lg">❗️</button>
           </div>
         </div>

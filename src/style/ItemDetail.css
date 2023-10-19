@@ -14,7 +14,12 @@
     max-width: 100%; /* 최대 너비 설정 */
     height: auto; /* 높이 자동 조정 */
     margin-right: 5vw; /* 유동적인 마진 */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left:150px;
 }
+
 
 
 .Item_About {
@@ -22,6 +27,7 @@
     margin-right: 5vw; /* 유동적인 마진 */
     display: flex;
     flex-direction: column;
+    margin-left:80px;
 }
 
 .Item_Button {
@@ -71,4 +77,9 @@
     width: 10vw; /* 유동적인 너비 */
     border: none;
     padding-top: 2vh; /* 유동적인 패딩 */
+}
+
+.profile{
+    margin-Top:20px;
+    cursor: pointer;
 }

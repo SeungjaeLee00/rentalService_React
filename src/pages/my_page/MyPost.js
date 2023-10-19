@@ -5,7 +5,8 @@ import SetKST from "../../utils/SetKST";
 export default function MyPost(props) {
     const { mypost, setMyPost } = useOutletContext();
     const navigate = useNavigate();
-    console.log(mypost);
+    //console.log(mypost);
+    
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
 
@@ -49,13 +50,12 @@ function ItemTable({ mypost, navigate, DeleteItem }) {
                     <tr>
                         <th >게시물 제목</th>
                         <th >작성일자</th>
-                        <th >대여상태</th>
                         <th> 수정,  삭제</th>
                     </tr>
                 </thead>
                 <tbody>
                     {mypost.map(a => (
-                        <tr onClick={() => navigate("/itemmain/detail/" + a.id, { state: a.createdTime })}>
+                        <tr  key={a.id} onClick={() => navigate("/itemmain/detail/" + a.id, { state: a.createdTime })}>
                             <td className="first-td">
                                 <div>
                                     <img style={{ width: "100px", height: "100px" }} src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + a.link}></img>
@@ -65,8 +65,7 @@ function ItemTable({ mypost, navigate, DeleteItem }) {
                                 </div>
 
                             </td>
-                            <td>{SetKST(a.createdTime)}</td>
-                            <td>{"대여가능"}</td>
+                            <td>{SetKST(a.createdTime)}</td>                            
                             <td>
                                 <button onClick={(e) => {
                                     //이벤트버블링 예방 stopProgration()함수사용

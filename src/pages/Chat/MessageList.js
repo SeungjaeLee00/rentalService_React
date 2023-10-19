@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import SetKST from "../../utils/SetKST";
 import styled, { css } from "styled-components";
 import useDetectClose from "../../hooks/useDetectClose";
+import MessageListBody from "./MessageListBody";
+import Pagination from "../about_Item/Pagination";
+import MessagePagination from "./MessagePagination";
 
 export default function MessageList(props) {
     const actoken = localStorage.accessToken;
@@ -11,39 +14,48 @@ export default function MessageList(props) {
 
     //originmsg -> 보낸쪽지, 받은쪽지 클릭시 저장되는 원본 메시지리스트
     const [originmsg, setOriginMsg] = useState();
-    //message -> 화면에 보여주는 메시지리스트 (배열이 삭제, 삽입됨)
+    //message -> 화면에 보여주는 메시지리스트 (배열이 삭제, 삽입됨 -> 필터(최신순, 읽지않은순) 클릭시 )
     const [message, setMessage] = useState();
     const [loading, setLoading] = useState();
     const [error, setError] = useState();
 
     const navigate = useNavigate();
-    
+
     //받은쪽지 클릭 -> received, 보낸쪽지 -> sent 
     const [who, setWho] = useState("received");
-    
+
     //받은쪽지 ,보낸쪽지 클릭 표시하기위한 state
     const [isActive1, setIsActive1] = useState(true);
     const [isActive2, setIsActive2] = useState(false);
 
-    //필터
-    //최신순,오래된순 클릭시 state, 오래된순 true, 최신순 =false 
+
+    //필터 : 최신순,오래된순 클릭시 state, 오래된순 true, 최신순 =false 
     const [sortcheck, setSortCheck] = useState(false);
     //읽지않은쪽지 클릭시 true. 
     const [readcheck, setReadCheck] = useState(false);
 
     const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
 
+    //FetchMessage의 get에 같이 보내는 메시지페이지네이션 변수. 0,1,2..의 값을 가진다
+    const [pagenumbers, setPageNumbers] = useState(0);
+    //메시지의 총개수.
+    const [messagelength, setMessageLength] = useState('');
+
+    //pagenumbers state 변경함수. 아래 페이지네이션 번호 클릭할때 해당 번호의 값이 들어온다. 
+    const HandlePageNumbers = (x)=>{
+        setPageNumbers(x);
+    }
+    //페이지네이션에 해당하는 메시지들을 불러오는 함수 ex) 0~9, 10~19 
     const FetchMessage = async () => {
-       
         try {
             setLoading(true);
-            const response = await axios.get('/api/messages/received', {
+            const response = await axios.get(`/api/messages/${who}?page=${pagenumbers}`, {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken
                 }
             })
-            console.log("received메시지조회성공");
+            setMessageLength(response.data.totalElements);
             setMessage(response.data.messageList);
             setOriginMsg(response.data.messageList);
             console.log(response.data);
@@ -58,7 +70,7 @@ export default function MessageList(props) {
     useEffect(() => {
         //처음 메시지 받아올때(받은메시지)
         FetchMessage();
-    }, [])
+    }, [pagenumbers])
 
 
     //받은쪽지 클릭 실행되는 함수 
@@ -77,6 +89,7 @@ export default function MessageList(props) {
                 }
             })
             console.log("메시지조회성공");
+            setMessageLength(response.data.totalElements);
             setMessage(response.data.messageList);
             setOriginMsg(response.data.messageList);
         } catch (e) {
@@ -95,15 +108,16 @@ export default function MessageList(props) {
             setError(null);
             setMessage(null);
             setLoading(true);
-            const response = await axios.get("/api/messages/sent", {
+            const response = await axios.get(`/api/messages/sent?page=${pagenumbers}`, {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken
                 }
             })
-            console.log("메시지조회성공");
+            setMessageLength(response.data.totalElements);
             setMessage(response.data.messageList);
             setOriginMsg(response.data.messageList);
+            console.log(response.data.messageList);
         } catch (e) {
             setError(e);
             console.log(e);
@@ -131,8 +145,8 @@ export default function MessageList(props) {
             }
         })
     }
-    //필터 함수
-    //최신순, 오래된순 클릭시 실행되는 함수 
+
+    //필터함수. 최신순, 오래된순 클릭시 실행되는 함수 
     function SortTime() {
         //필터에서 읽은쪽지 클릭한경우 message을 origin으로 초기화.
         if (readcheck == true) {
@@ -186,18 +200,11 @@ export default function MessageList(props) {
                             <Menu isDropped={myPageIsOpen}>
                                 <Ul >
                                     <Li>
-                                        <LinkWrapper onClick={() => {
-                                            setMessage(originmsg);
-                                        }}>전체</LinkWrapper>
+                                        <LinkWrapper onClick={() => { setMessage(originmsg);}}>전체</LinkWrapper>
                                     </Li>
                                     <Li>
-                                        {sortcheck == true ? <LinkWrapper onClick={() => {
-                                            SortTime(); setSortCheck(!sortcheck)
-                                        }}>오래된순</LinkWrapper> :
-                                            <LinkWrapper onClick={() => {
-                                                SortTime();
-                                                setSortCheck(!sortcheck);
-                                            }}>최신순</LinkWrapper>}
+                                        {sortcheck == true ? <LinkWrapper onClick={() => { SortTime(); setSortCheck(!sortcheck)}}>오래된순</LinkWrapper> :
+                                            <LinkWrapper onClick={() => {SortTime(); setSortCheck(!sortcheck);}}>최신순</LinkWrapper>}
                                     </Li>
                                     <Li>
                                         <LinkWrapper onClick={() => { setReadCheck(true); NoRead(); }}>읽지않은쪽지</LinkWrapper>
@@ -208,42 +215,14 @@ export default function MessageList(props) {
                     </Wrapper>
                 </div>
             </div>
-            <div className="message-content">
-                <table>
-                    <thead>
-                        <tr >
-                            <th key={2}>보낸사람</th>
-                            <th key={3}>게시물제목</th>
-                            <th key={4} className="th3">내용</th>
-                            <th key={5}>날짜</th>
-                            <th key={6}>읽음상태</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {message.map(a => (
-                            <tr key={`tbodytr${a.id}`} onClick={() => {
-                                //copy에 쪽지id랑 받은쪽지인지 보낸쪽지인지 나타내는 who가 담김.
-                                let copy = [a.id, who];
-                                console.log(copy);
-                                //navigate로 이동할때 state로 전달 
-                                navigate('/my-page/chats/message/' + a.id, { state: { copy } });
-                            }}>
-                                <td >{a.senderNickname}</td>
-                                <td> {a.postTitle}</td>
-                                <td >{a.content.length > 20 ? a.content.substr(0, 15) + "..." : a.content}</td>
-                                <td >{SetKST(a.createdDate)}</td>
-                                <td >{a.checked ? <div style={{ color: "gray" }}>읽음</div> : <div style={{ fontWeight: "bold" }}>읽지않음</div>}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <div style={{ marginTop: "20px" }} className="message-bottom">
-
-                </div>
-            </div>
+            {/* 메시지 내용 */}
+            {message ? < MessageListBody message={message} who={who}/> : null}
+            {/* 하단 페이지네이션 */}
+            <MessagePagination  length={messagelength}  HandlePageNumbers={HandlePageNumbers}/>
         </div>
     )
 }
+
 
 
 

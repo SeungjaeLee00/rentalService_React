@@ -10,7 +10,7 @@ function My_Review() {
                 <h2>받은 리뷰</h2>
             </div>
             <div className="review-btm">
-                {myreview.reviewList.map((item, index) => {
+                {myreview.map((item, index) => {
                     return (
                         <div className="onereview">
                             <div className="reviewtitle">{item.writer}</div>

@@ -58,9 +58,9 @@ function My_Reports() {
                 headers: { 'Authorization' : `Bearer ${actoken}`,
                             'Auth' : retoken }
             });
-
             if (response.status==200) {
-                console.log('신고 삭제 성공:', response.data);
+                console.log('신고 삭제 성공:', response);
+
                 fetchReportList();
             } else {
                 console.error('삭제 응답 오류:', response.data.error);
@@ -77,9 +77,11 @@ function My_Reports() {
                 'Auth' : retoken }
         })
             .then(response => {
+
                     console.log('신고내역 불러오기 성공:', response.data);
                     setReportList(response.data.reportList);
                 })
+
             .catch(error => {
                 console.error('API 요청 오류:', error);
             });
