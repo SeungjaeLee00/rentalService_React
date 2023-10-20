@@ -1,7 +1,7 @@
 .header {
     display: flex;
     flex-direction: column;
-    padding: 40px 5% 40px 10%; /* 상단 40px, 우측 10%, 하단 40px, 좌측 5% */
+    padding: 10px 5% 10px 5%; /* 상하 10px, 좌우 5% */
     border-bottom: 0.1rem solid gray;
     position: fixed;
     top: 0;
@@ -9,6 +9,7 @@
     right: 0;
     z-index: 1;
     background-color: white;
+    min-height: 50px; /* 최소 높이를 50px로 지정 (원하는 크기로 조절 가능) */
 }
 
 .header-top {
@@ -16,7 +17,9 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 2vw; /* 화면 너비의 2%만큼 간격 설정 */
+    margin-top: 1vw; /* 상단 여백을 화면 너비의 1%로 설정 (조절 가능) */
 }
+
 
 
 .top-right {

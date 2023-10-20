@@ -1,3 +1,4 @@
+/* 초기 설정 */
 @import './style/reset.css';
 
 @font-face {
@@ -5,8 +6,9 @@
   font-weight: normal;
   font-style: normal;
   src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff');
- }
+}
 
+/* 기본 레이아웃 설정 */
 .root-wrap{
   font-family: 'NanumBarunGothic';
   position:absolute;
@@ -23,169 +25,186 @@
   padding-bottom:110px;
 }
 
-
-.foot{
-   width:100%;
-   border-top: 1px solid rgb(228, 226, 226);
-   display: flex;
-   flex-direction: row;
-   padding-top:50px;
-   padding-bottom:100px;
-   padding-left:100px;
-
+/* 푸터 설정 */
+.foot {
+  width: 100vw;
+  border-top: 0.2vw solid rgb(228, 226, 226);
+  display: flex;
+  flex-direction: row;
+  padding-top: 3vw;
+  padding-bottom: 6vw;
+  padding-left: 6vw;
 }
-.footer-right{
+
+.footer-right {
   display: flex;
   flex-direction: column;
-  margin-left:100px;
+  margin-left: 6vw;
 }
-.footer-right a{
+
+.footer-right a {
   text-decoration: none;
 }
 
-.page-container{
-  max-width:1900px;
-  margin:0 auto;
-  padding:32px 0;
-  /* border: 1px solid red; */
-  /* text-align: center; -> 가운데정렬*/ 
-}
-
-.page-container-main{
-  max-width:1400px;
-  margin:0 auto;
-  padding:32px 0;
-  /* border: 1px solid red; */
+/* 페이지 컨테이너 설정 */
+.page-container {
+  max-width: 100vw;
+  margin: 0 auto;
+  padding: 2vw 0;
   text-align: center;
 }
 
-.Makers{
-  line-height: 25px;
+.page-container-main {
+  max-width: 70vw;
+  margin: 0 auto;
+  padding: 2vw 0;
+  text-align: center;
 }
 
+/* 메이커스 설정 */
+.Makers {
+  line-height: 4vw;
+}
 
-/* 상품화면 css */ 
-
+/* 상품화면 설정 */
 .Item-Wrap {
-  display:flex;
+  display: flex;
   flex-direction: row;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
- 
 }
 
-/* 상품한개부분섹션 */
-.Item{
-  display:flex;
+/* 상품 부분 설정 */
+.Item {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width:500px;
-  cursor:pointer;
+  width: 40vw;
+  max-width: 500px; /* 최대 너비를 00px로 제한 (원하는 크기로 조절 가능) */
+  cursor: pointer;
   transition: 0.2s;
-  margin-top: 30px;
-  font-size: 20px;
-
-}
-.Item:hover{
-  transform: translateY(-15px);
-    transition: 1s;
-  /* transform : translate(5 px,5%); */
-  box-shadow: 5px 5px 10px -10px gray;
+  margin-top: 3vw;
+  font-size: 2vw; /* 최대 글자 크기를 2vw로 제한 (원하는 크기로 조절 가능) */
 }
 
-/* 상품 이름 가격 올린날짜 상품상태 섹션 */
-.Item-Information-Wrap
-{
-  display:flex;
-
+.Item:hover {
+  transform: translateY(-1vw); /* 최대 마진을 1vw로 제한 (원하는 크기로 조절 가능) */
+  box-shadow: 0.75vw 0.75vw 1.5vw -1.5vw gray; /* 그림자 크기도 조절 가능 */
+  transition: 1s;
 }
 
-.Item-Name-Price-Date-Wrap
-{
-  display:flex;
+/* 상품 정보 부분 설정 */
+.Item-Name-Price-Date-Wrap {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top:15px;
+  margin-top: 0.8vw; /* 최대 마진을 0.8vw로 제한 (원하는 크기로 조절 가능) */
 }
 
-
-.Item-State
-{
+.Item-State {
   font-weight: bold;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1vw; /* 최대 글자 크기를 1vw로 제한 (원하는 크기로 조절 가능) */
 }
 
-.Item-Price{
+.Item-Price {
   font-weight: bold;
-  margin:12px 0px;
+  margin: 0.1vw 0; /* 최대 마진을 0.6vw로 제한 (원하는 크기로 조절 가능) */
+  font-size: 1vw; /* 최대 글자 크기를 0.8vw로 제한 (원하는 크기로 조절 가능) */
 }
-.Item-Date{
-  font-size: 15px;
+
+.Item-Date {
+  font-size: 1vw; /* 최대 글자 크기를 0.8vw로 제한 (원하는 크기로 조절 가능) */
 }
-.Item-Pagination{
-  display:flex;
+
+.Item-Pagination {
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 1vw; /* 최대 마진을 1vw로 제한 (원하는 크기로 조절 가능) */
 }
 
-
-/* 메인화면의 방금 등록된 상품 문구*/
-.Main-Content{
-  font-size:30px;
+/* 메인화면 설정 */
+.Main-Content {
+  font-size: 2vw; /* 폰트 크기를 3vw로 조정 */
   font-weight: bold;
-  margin-bottom:30px;
-  margin-left:150px;
-  margin-top:100px;
+  margin-bottom: 2vw; /* 마진을 2vw로 조정 */
+  margin-left: 4vw; /* 마진을 4vw로 조정 */
+  margin-top: 4vw; /* 마진을 8vw로 조정 */
 }
 
-/* 카테고리 , 검색페이지 */
-.category-page{
-  display:flex;
+/* 카테고리, 검색 페이지 설정 */
+.category-page {
+  display: flex;
   flex-direction: column;
-  margin-top:80px;
+  margin-top: 4vw; /* 마진을 4vw로 조정 */
 }
-.category-top{
-  display:flex;
+
+.category-top {
+  display: flex;
   flex-direction: row;
-  justify-content:space-around;
-}
-.top-right{
-  margin-left:35%;
+  justify-content: space-around;
 }
 
-.dashboard{
-  display:flex;
-  padding:50px 50px;
-  font-size:50px;
-  height:400px;
-  font-weight: 500;
-  margin-left:200px;
+.top-right {
+  margin-left: 8vw; /* 마진을 8vw로 조정 */
 }
 
-.bar{
+.dashboard {
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 배치 */
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1vw 3vw;
+  padding-bottom: 5vw;
+  margin-left: 5vw;
+  min-height: 20vw; /* 최소 높이를 20vw로 설정 (조절 가능) */
+}
+
+
+.dashboard-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 2vw; /* 20px을 2vw로 변경 */
+}
+
+.dashboard-title h1 {
+  font-weight: bold;
+  font-size: 5vw; /* 50px을 5vw로 변경 */
+  margin-top: 2vw; /* 20px을 2vw로 변경 */
+}
+
+.dashboard-decoration h1 {
+  white-space: pre-line;
+  margin-top: 2vw; /* 20px을 2vw로 변경 */
+  text-align: left; /* 왼쪽 정렬 */
+}
+
+
+.bar {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.nav-bottom{
-  display:flex;
+.nav-bottom {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  
+  margin-top: 1.5vw; /* 마진을 1.5vw로 조정 */
 }
 
-.nav-category{
-  margin-left: 200px;
-  margin-top:10px;
-  font-size: 20px;
+.nav-category {
+  margin-left: 5vw; /* 마진을 5vw로 조정 */
+  margin-top: 0.3vw; /* 마진을 0.3vw로 조정 */
+  font-size: 1vw; /* 폰트 크기를 1vw로 조정 */
 }

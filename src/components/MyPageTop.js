@@ -69,20 +69,20 @@ export default function MyPageTop(props) {
                     </div>
                     <div className="inforight">
                         <div className="userpost">
-                            <UserDiv>게시물</UserDiv>
-                            <QuantityDiv >{props.mypost}개</QuantityDiv>
+                            <div className='UserDiv'>게시물</div>
+                            <div className='QuantityDiv'>{props.mypost}개</div>
                         </div>
                         <div className="userrent">
-                            <UserDiv >대여해주는 상품</UserDiv>
-                            <QuantityDiv >{props.myrent}개</QuantityDiv>
+                            <div className='UserDiv'>대여해주는 상품</div>
+                            <div className='QuantityDiv'>{props.myrent}개</div>
                         </div>
                         <div className="userborrow">
-                            <UserDiv >대여받는 상품</UserDiv>
-                            <QuantityDiv >{props.myborrow}개</QuantityDiv>
+                            <div className='UserDiv'>대여받는 상품</div>
+                            <div className='QuantityDiv'>{props.myborrow}개</div>
                         </div>
                         <div className="userreview">
-                            <UserDiv>리뷰</UserDiv>
-                            <QuantityDiv>{props.myreview}개</QuantityDiv>
+                            <div className='UserDiv'>리뷰</div>
+                            <div className='QuantityDiv'>{props.myreview}개</div>
                         </div>
 
                     </div>
@@ -91,14 +91,3 @@ export default function MyPageTop(props) {
         </div>
     )
 }
-let QuantityDiv = styled.div`
-font-size:20px;
-margin-top:15px;
-margin-left:30px;
-`
-
-let UserDiv = styled.div`
-font-size:30px;
-font-weight:bold;
-margin-left:30px;
-  `

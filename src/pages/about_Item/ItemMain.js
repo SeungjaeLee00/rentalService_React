@@ -130,16 +130,21 @@ function ItemMain() {
 
 function Dashboard() {
   return (
-    <div className='dashboard'>
-      <div className='dashboard-right'>
-        <div className='dashboard-title'>
-          <h1 style={{ fontWeight: "bold", fontSize: "50px" }}>Billim</h1>
-        </div>
-        <div style={{ marginTop: "20px" }} className='dashboard-decoration'>
-          <h1>언제어디서든지 상품을 <br /> 대여해주고 받을 수 있는 서비스입니다. </h1>
-        </div>
-      </div>
+<div className='dashboard'>
+  <div className='dashboard-right'>
+    <div className='dashboard-title'>
+      <h1>Billim</h1>
     </div>
+    <div className='dashboard-decoration'>
+    <h1>
+    언제 어디서든지 상품을{'\n'}
+    대여해주고 받을 수 있는 서비스입니다.
+    </h1>
+
+    </div>
+  </div>
+</div>
+
   )
 }
 

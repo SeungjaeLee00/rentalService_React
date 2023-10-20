@@ -28,44 +28,41 @@
     margin-top:45px;
 }
 
-.infoleft{
-    display:flex;
-    flex-direction: column;
-    margin-left:100px;
-}
-
-.name{
-    font-size:50px;
-}
-
-.inforight{
-    display:flex;
-    flex-direction: row;
-    margin-left:200px;
-
-}
-
-.userpost{
-    display:flex;
-    flex-direction: column;
-}
-
-.userrent{
-    display:flex;
-    flex-direction: column;
-    margin-left:100px;
-}
-
-.userborrow{
-    display:flex;
-    flex-direction: column;
-    margin-left:150px;
-}
-.userreview{
+.infoleft {
     display: flex;
     flex-direction: column;
-    margin-left: 100px;
+    margin-left: 10vw;
 }
+
+.name {
+    font-size: 3vw; /* vw 단위 사용 */
+    font-weight: bold; /* 굵은 글꼴로 설정 */
+}
+
+.inforight {
+    display: flex;
+    flex-direction: row;
+    margin-left: 13vw; 
+
+}
+
+
+.userpost, .userrent, .userborrow, .userreview {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5vw; 
+}
+
+.UserDiv {
+    font-size: 2vw; 
+    margin-bottom: 1vw; 
+}
+
+.QuantityDiv {
+    font-size: 1.5vw;
+    margin-bottom: 1vw; 
+}
+
 
 .mypagebottom{
     display:flex;
@@ -73,7 +70,7 @@
 }
 
 .bottom-leftnav{
-    margin-top:23px;
+    margin-top:2vw;
     
 }
 .bottom-right{
