@@ -3,6 +3,7 @@ import '../style/Navbar.css'
 import { useAuth } from './AuthContext';
 import { useState } from 'react';
 import Category from './Category';
+import styled from 'styled-components';
 
 
 
@@ -10,6 +11,8 @@ export default function ReNavBar() {
     const navigate = useNavigate();
     const { isAuthenticated, logout } = useAuth();
     const [isLogin, setIsLogin] = useState(false);
+    const [view, setView] = useState(false);
+    const [searchfilter, setSearchFilter] = useState('게시글 제목');
     const handleLogout = () => {
         logout();
         window.location.replace("/");
@@ -24,8 +27,10 @@ export default function ReNavBar() {
     const [search,setSearch] = useState();
  
     function handleSubmit(){
-        // navigate("/search/"+search);
-        navigate("/category/"+search);
+        let temp = search;
+        if(searchfilter=='게시글 제목') temp='title'+' '+temp;
+        else temp='categoryName' + ' '+temp;
+        navigate("/category/"+temp);
     }
     
     return (
@@ -48,6 +53,10 @@ export default function ReNavBar() {
                 <div className="category"><Category /></div>
                 <div className="searchbar">
                     <form  className='searchform' onSubmit={(e)=>{handleSubmit(e)}}>
+                        <UlDiv>
+                        <Ul onClick={()=>{setView(!view)}}>{searchfilter}</Ul>
+                        {view&&<Dropdown setSearchFilter={setSearchFilter} view={view} setView={setView}/>}
+                        </UlDiv>
                         <input type="text"
                          value={search}
                          className='search'
@@ -62,3 +71,49 @@ export default function ReNavBar() {
         </div>
     )
 }
+
+function Dropdown({setSearchFilter, view, setView}){
+    return(
+        <>
+        <LiWrapper>
+          <Li  onClick={()=>{setSearchFilter('게시글 제목'); setView(!view)}}>게시글 제목</Li>
+          <Li onClick={()=>{setSearchFilter('카테고리'); setView(!view)}}>카테고리</Li>
+        </LiWrapper>
+        </>
+    )
+}
+
+const UlDiv = styled.div`
+display:flex;
+flex-direction:column;
+width:5vw;
+font-size:0.8vw;
+font-weight:bold;
+position:fixed;
+`
+
+const Ul = styled.ul`
+border: 2px solid black;
+border-right:none;
+height:45px;
+padding-top:0.7vw;
+padding-left:0.8vw;
+margin-bottom:0px;
+background-color: rgb(250, 250, 250);
+cursor:pointer;
+`
+
+const Li = styled.li`
+list-style-type:none;
+margin-top:0.4vh;
+padding-left:0.8vw;
+cursor:pointer;
+ &:hover{
+    color:blue;
+ }
+
+`
+const LiWrapper = styled.div`
+border:1px solid black;
+
+`

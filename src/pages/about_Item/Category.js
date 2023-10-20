@@ -17,11 +17,35 @@ export default function Category() {
 
     //id에는 사용자가 검색창에 입력한 데이터가 들어옴.(카테고리 인덱스도 있긴함)
     const id = useParams();
-    //console.log(id);
+    console.log(id);
+    console.log(id.search.split(' '));
+    const searcharray= id.search.split(' ');
+    let title='';
+    let titleerror='';
+    let query='';
+    //게시글제목으로 검색한경우.
+    if(searcharray[0]=='title')
+    {
+        query='title='+searcharray[1];
+        title=searcharray[1];
+    }
+    //카테고리로 필터 클릭후 검색한경우.
+    else if(searcharray[0]=='categoryName')
+    {
+        //카테고리명 + 제품  검색할때 ex)'전자제품 소니' 
+        if(searcharray[2]!=null)
+        {
+            query='categoryName='+searcharray[1]+'&title='+searcharray[2];
+            title=searcharray[2];
+        }
+        //제품, 카테고리 한개만 입력하여 검색한경우 
+        else titleerror='카테고리, 제품을 입력해주세요 ex)가전제품 아이폰'
+    }
+
 
     //카테고리클릭했을때 useLocation()으로 카테고리명 데이터 불러옴
     const { state } = useLocation();
-    //console.log(state);
+    console.log(state);
 
 
     //stroe에 서버 api에서 불러온 데이터 
@@ -31,6 +55,8 @@ export default function Category() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    // const response = await axios.get(`/api/posts?categoryName=가전제품&title=소니`);
+    //검색했을경우. 
     const fetchItem = async () => {
         try {
             //요청이 시작할때 error와 items를 초기화
@@ -38,7 +64,7 @@ export default function Category() {
             setItems(null);
             //loading 상태를 treu
             setLoading(true);
-            const response = await axios.get(`/api/posts?title=${id.search}`);
+            const response = await axios.get(`/api/posts?${query}`);
             console.log(response);
             setStore(response.data.postList);
         } catch (e) {
@@ -52,7 +78,6 @@ export default function Category() {
         }
         setLoading(false);
     };
-
     const fetchCategory = async () => {
         try {
             setError(null);
@@ -131,8 +156,9 @@ export default function Category() {
     return (
 
         <div className="category-page">
+            {titleerror? <P>{titleerror}</P>:null}
             <div className="category-top">
-                <div>{state ? <Div> {state} 검색결과</Div> : <Div> {id.search} 검색결과 </Div>} </div>
+                <div>{state ? <Div> {state} 검색결과</Div> : <Div> {title} 검색결과 </Div>} </div>                
                 <div className="top-right">
                     <div style={{fontWeight:"bold"}} >{store.length}개의 상품</div>
                     {/* react bootstrap으로 필터 드랍다운 구현 */}
@@ -159,8 +185,14 @@ export default function Category() {
 }
 
 let Div = styled.div`
-  font-size:30px;
+  font-size:2vw;
   font-weight: bold;
   margin-left:5vw;
+  `
 
+  let P = styled.p`
+  text-align:center;
+  font-size:1.2vw;
+  color:red;
+  font-weight:bold;
   `

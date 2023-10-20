@@ -43,6 +43,8 @@ export default function MessageList(props) {
 
     //pagenumbers state 변경함수. 아래 페이지네이션 번호 클릭할때 해당 번호의 값이 들어온다. 
     const HandlePageNumbers = (x)=>{
+        console.log(x);
+        if(x==0||x==1) x=0;
         setPageNumbers(x);
     }
     //페이지네이션에 해당하는 메시지들을 불러오는 함수 ex) 0~9, 10~19 
@@ -50,7 +52,7 @@ export default function MessageList(props) {
         try {
             setLoading(true);
             //쪽지는 페이지네이션이 0부터시작. 따라서 -1. 
-            const response = await axios.get(`/api/messages/${who}?page=${pagenumbers-1}`, {
+            const response = await axios.get(`/api/messages/${who}?page=${pagenumbers}`, {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
                     'Auth': retoken
