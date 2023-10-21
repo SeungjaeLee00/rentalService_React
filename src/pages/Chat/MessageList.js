@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Link, useNavigate } from "react-router-dom";
-import SetKST from "../../utils/SetKST";
 import styled, { css } from "styled-components";
 import useDetectClose from "../../hooks/useDetectClose";
 import MessageListBody from "./MessageListBody";
-import Pagination from "../about_Item/Pagination";
 import MessagePagination from "../../components/Pagination";
 
 export default function MessageList(props) {

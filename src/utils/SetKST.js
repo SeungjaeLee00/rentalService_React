@@ -1,8 +1,12 @@
 //UTC -> 한국시간으로 바꿔주는 함수.
 export default function SetKST(time) {
-    const kor = new Date(time);
+    let kor = new Date(time);
+    //한국시간 +9
     kor.setHours(kor.getHours() + 9);
-
-    // console.log(kor.toLocaleString(0,20));
-    return kor.toLocaleString('ko-KR').slice(0,21)  // 'ko-KR': 한국시간에 맞춰서
+    //데이터 가공
+    kor = kor.toLocaleString('ko-KR').slice(0,22);
+    // 1시~ 9시 
+    if(kor[kor.length-1]==':') return kor.slice(0,21);
+    // 10시~ 12시
+    else return kor 
 }
