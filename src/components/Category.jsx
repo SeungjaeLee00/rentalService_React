@@ -103,7 +103,6 @@ const Menu = styled.div`
   left: 50%;
   margin-left:340px;
   width: 800px;
-  //text-align: left;
   box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   opacity: 0;
@@ -112,19 +111,6 @@ const Menu = styled.div`
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   z-index: 9;
   background-color:rgb(253, 253, 253);
-  &:after {
-    content: "";
-    height: 0;
-    width: 0;
-    position: absolute;
-    top: -2px;
-    left: 8%;
-    transform: translate(-50%, -50%);
-    border: 12px solid transparent;
-    border-top-width: 0;
-    border-bottom-color: gray;
-    
-  }
 
   ${({ $isDropped }) =>
     $isDropped &&

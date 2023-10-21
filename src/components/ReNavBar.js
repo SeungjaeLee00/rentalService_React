@@ -12,7 +12,7 @@ export default function ReNavBar() {
     const { isAuthenticated, logout } = useAuth();
     const [isLogin, setIsLogin] = useState(false);
     const [view, setView] = useState(false);
-    const [searchfilter, setSearchFilter] = useState('게시글 제목');
+    const [searchfilter, setSearchFilter] = useState('제목');
     const handleLogout = () => {
         logout();
         window.location.replace("/");
@@ -28,7 +28,7 @@ export default function ReNavBar() {
  
     function handleSubmit(){
         let temp = search;
-        if(searchfilter=='게시글 제목') temp='title'+' '+temp;
+        if(searchfilter=='제목') temp='title'+' '+temp;
         else temp='categoryName' + ' '+temp;
         navigate("/category/"+temp);
     }
@@ -76,19 +76,20 @@ function Dropdown({setSearchFilter, view, setView}){
     return(
         <>
         <LiWrapper>
-          <Li  onClick={()=>{setSearchFilter('게시글 제목'); setView(!view)}}>게시글 제목</Li>
+          <Li  onClick={()=>{setSearchFilter('제목'); setView(!view)}}>제목</Li>
           <Li onClick={()=>{setSearchFilter('카테고리'); setView(!view)}}>카테고리</Li>
         </LiWrapper>
+       
         </>
     )
 }
 
+
 const UlDiv = styled.div`
 display:flex;
 flex-direction:column;
-width:5vw;
-font-size:0.8vw;
-font-weight:bold;
+width:4vw;
+font-size:0.7vw;
 position:fixed;
 `
 
@@ -96,7 +97,7 @@ const Ul = styled.ul`
 border: 2px solid black;
 border-right:none;
 height:45px;
-padding-top:0.7vw;
+padding-top:0.6vw;
 padding-left:0.8vw;
 margin-bottom:0px;
 background-color: rgb(250, 250, 250);
@@ -115,5 +116,4 @@ cursor:pointer;
 `
 const LiWrapper = styled.div`
 border:1px solid black;
-
 `

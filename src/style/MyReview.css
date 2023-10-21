@@ -18,7 +18,7 @@
 .onereview{
     display:flex;
     flex-direction: column;
-    padding:50px 25px;
+    padding:2vh 2vw;
     border-bottom:1px solid black;
 }
 
@@ -27,6 +27,7 @@
 }
 
 .reviewcontent{
-    padding-top:10px;
-    padding-left:20px;
+    width:48vw;
+    padding-top:2vh;
+    padding-left:1vw;
 }
