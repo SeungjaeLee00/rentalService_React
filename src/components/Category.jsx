@@ -22,7 +22,7 @@ export default function Category() {
       setLoading(true);
       const response = await axios.get('/api/category')
       setCategory(response.data[1].children);
-      console.log(response.data[1].children);
+      //console.log(response.data[1].children);
     } catch (error) {
       setError(error);
       console.log(error);
@@ -162,13 +162,15 @@ const LinkWrapper = styled.a`
   
 `;
 
-const LinkWrapper1 = styled.a`
+const LinkWrapper1 = styled.button`
 width:130px;
 font-size: 18px;
 //border:1px solid blue;
 text-decoration: none;
 margin-top:15px;
 margin-right:0px;
+background-color:white;
+border:none;
 &:hover{
   color:blue;
   cursor:pointer;
@@ -176,9 +178,11 @@ margin-right:0px;
 }
 `
 
-const LinkWrapper2 = styled.a`
+const LinkWrapper2 = styled.button`
 font-size: 18px;
 text-decoration: none;
+background-color:white;
+border:none;
 padding-left:50px;
 margin-top:15px;
 //border:1px solid red;

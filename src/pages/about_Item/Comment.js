@@ -16,7 +16,6 @@ export default function Comment(props) {
     //사용자가 댓글에 입력하는곳
     const [content, setContent] = useState();
     const inputRef = useRef();
-    const [temp, setTemp] = useState();
     //게시물에 대한 댓글들
     const [comment, setComment] = useState();
     const [loading, setLoading] = useState();
@@ -31,10 +30,6 @@ export default function Comment(props) {
     //api를 사용할때 보내는 댓글의 id
     const [replyid, setReplyId] = useState();
 
-
-
-
-
     //댓글 불러오는 api 함수
     const FetchComment = async () => {
         try {
@@ -42,7 +37,7 @@ export default function Comment(props) {
             setError(null);
             setLoading(true);
             const response = await axios.get(`/api/posts/${props.postid}/comments`);
-            
+            //console.log(response);
             setComment(response.data);
             //댓글개수만큼 대댓글상태(댓글이 5개면 selectreply에 5개의 false가 들어감) -> 어떤댓글에대한
             //대댓글인지 확인하기 위해
@@ -57,6 +52,7 @@ export default function Comment(props) {
             console.log(e);
             setError(e);
         }
+        setLoading(false);
     }
     //댓글생성 api 함수.
     const CreateComment = () => {
@@ -69,8 +65,10 @@ export default function Comment(props) {
             }
             console.log(data);
             axios.post(`/api/posts/${props.postid}/comments`, data, {
-                headers: { 'Authorization' : `Bearer ${actoken}`,
-                'Auth' : retoken }
+                headers: {
+                    'Authorization': `Bearer ${actoken}`,
+                    'Auth': retoken
+                }
             }).then(response => {
                 console.log(response);
                 //댓글생성완료후 페이지 새로고침
@@ -89,10 +87,11 @@ export default function Comment(props) {
             const data = {
                 content: content
             }
-
             axios.post(`/api/posts/${props.postid}/comments`, data, {
-                headers: { 'Authorization' : `Bearer ${actoken}`,
-                'Auth' : retoken }
+                headers: {
+                    'Authorization': `Bearer ${actoken}`,
+                    'Auth': retoken
+                }
             })
                 .then(response => {
                     console.log(response);
@@ -128,8 +127,10 @@ export default function Comment(props) {
     //댓글삭제 api 
     const DeleteComment = (id) => {
         axios.delete('/api/comments/' + id, {
-            headers: { 'Authorization' : `Bearer ${actoken}`,
-                'Auth' : retoken }
+            headers: {
+                'Authorization': `Bearer ${actoken}`,
+                'Auth': retoken
+            }
         }).then(response => {
             console.log(response);
             window.location.replace('/itemmain/detail/' + props.postid);
@@ -145,16 +146,6 @@ export default function Comment(props) {
     if (loading) <div>로딩중..</div>
     if (error) <div>에러가 발생했습니다..</div>
     if (!comment) return null;
-
-    const Div = styled.div`
-    color:black;
-    ${(p) =>
-            p.active &&
-            css`
-               background:rgb(250, 246, 241);
-            `}
-    `;
-
     return (
         <div className="comment-wrap">
             <div className="comment-top">
@@ -163,28 +154,29 @@ export default function Comment(props) {
                     placeholder='댓글을 작성하세요'
                     ref={inputRef}
                     value={content}
-
                     onChange={(e) => { setContent(e.target.value) }}></textarea>
                 <button onClick={CreateComment}>댓글작성</button>
             </div>
             <div className="comment-bottom">
                 {comment.map((a, index) => {
                     return (
-                        <Div key={index} active={selectreply[index]} className="one-comment">
-                            <div className="onecomment-info">
-                                <div className='onecomment-nametime'>
-                                    <div className={`comment-${nickname == a.nickname ? "writername" : "name"}`}>{a.nickname}</div>
-                                    <div className="comment-time">{SetKST(a.createdTime)}</div>
-                                </div>
-                                <div className='onecomment-btn'>
-                                    {/* 현재 접속한 유저가 쓴 댓글이면 */}
-                                    {usernickname == a.nickname ? <button className='btn-delete' onClick={() => { DeleteComment(a.commentId) }}>삭제</button> : null}
-                                    <button onClick={() => { CreateCommentBtn(a.commentId, index) }}>답글 달기</button>
-                                    
-                                </div>
+                        <div key={a.commentId} className="one-comment">
+                            <Div active={selectreply[index]}>
+                                <div className="onecomment-info">
+                                    <div className='onecomment-nametime'>
+                                        <div className={`comment-${nickname == a.nickname ? "writername" : "name"}`}>{a.nickname}</div>
+                                        <div className="comment-time">{SetKST(a.createdTime)}</div>
+                                    </div>
+                                    <div className='onecomment-btn'>
+                                        {/* 현재 접속한 유저가 쓴 댓글이면 */}
+                                        {usernickname == a.nickname ? <button className='btn-delete' onClick={() => { DeleteComment(a.commentId) }}>삭제</button> : null}
+                                        <button onClick={() => { CreateCommentBtn(a.commentId, index) }}>답글 달기</button>
 
-                            </div>
-                            <div className="onecomment-content">{a.content}</div>
+                                    </div>
+
+                                </div>
+                                <div className="onecomment-content">{a.content}</div>
+                            </Div>
                             <div className="onecomment-bottom">
                                 {a.children.length > 0 ?
                                     <button onClick={() => {
@@ -199,10 +191,11 @@ export default function Comment(props) {
                                     }}>답글 달기</button>}
 
                             </div>
+
                             {/* 대댓글 */}
                             <div className='reply'>{openreply[index] ? a.children.map((reply, replyindex) => {
                                 return (
-                                    <div className='reply-one-wrap'>
+                                    <div key={reply.commentId} className='reply-one-wrap'>
                                         <div className='reply-info'>
                                             <div>
                                                 <div className={`comment-${nickname == reply.nickname ? "writername" : "name"}`}>{reply.nickname}</div>
@@ -210,14 +203,13 @@ export default function Comment(props) {
                                             </div>
                                             {/* 현재 접속한 유저가 쓴 댓글이면 */}
                                             {usernickname == reply.nickname ? <button className='btn-delete' onClick={() => { DeleteComment(reply.commentId) }}>삭제</button> : null}
-
                                         </div>
                                         <div className='comment-comment' >{reply.content}</div>
 
                                     </div>
                                 )
                             }) : null}</div>
-                        </Div>
+                        </div>
                     )
                 })}
 
@@ -225,3 +217,10 @@ export default function Comment(props) {
         </div>
     )
 }
+
+const Div = styled.div`
+    color:black;
+    ${(props) => props.active && css`
+     background:rgb(250, 246, 241);
+    `}
+`;

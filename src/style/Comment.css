@@ -34,20 +34,17 @@
     flex-direction: row;
     justify-content: space-between;
 }
-
+/* 댓글 상단오른쪽 삭제, 답글 달기  */
 .onecomment-btn button {
-    height: 2.5vh;
+    height: 3.5vh;
     font-size: 1vw; /* 유동 폰트 사이즈 */
-    width: 8vw; /* 유동 너비 */
-    font-weight: bold;
+    width: 6vw; /* 유동 너비 */
     border: 0.5px solid gray;
-    border-radius: 5px;
-    background-color: black;
-    color: white;
+    background-color: white;
+    border-radius: 0.2vw;
     transition: all 0.5s;
     &:hover {
         font-weight: bold;
-        background-color: rgb(66, 66, 253);
     }
 }
 
@@ -57,12 +54,13 @@
     height: 20vh; /* 유동 높이 */
     margin-bottom: 2vh; /* 유동 마진 */
 }
-
+/* 댓글입력칸 바로 아래 댓글작성 버튼 */
 .comment-top button {
-    width: 20vw; /* 유동 너비 */
+    width: 8vw; /* 유동 너비 */
+    border-radius: 0.5vw;
     max-width: 200px;
     margin-left: auto; /* 자동 왼쪽 정렬 */
-    margin-top: 2vh; /* 유동 마진 */
+    margin-top: 1vh; /* 유동 마진 */
     background-color: black;
     color: white;
     transition: all 0.5s;
@@ -74,7 +72,7 @@
 
 .comment-name, .comment-writername {
     font-weight: bold;
-    font-size: 1.5vw; /* 유동 폰트 사이즈 */
+    font-size: 1.2vw; /* 유동 폰트 사이즈 */
 }
 
 .comment-time {
@@ -85,11 +83,10 @@
 .onecomment-content, .onecomment-bottom {
     margin-top: 1.5vh; /* 유동 마진 */
 }
-
+/* 댓글 아래의 답글 달기 , +..개의 답글 버튼 */
 .onecomment-bottom button {
-    width: 20vw; /* 유동 너비 */
+    width: 10vw; /* 유동 너비 */
     max-width: 200px;
-    margin-top: 1.3vh; /* 유동 마진 */
     background-color: white;
     border: none;
     transition: all 0.5s;
@@ -97,12 +94,16 @@
         font-weight: bold;
     }
 }
-
-.comment-comment button, .reply-info button {
-    border-radius: 1vw; /* 유동 버튼테두리 */
+/* 대댓글삭제버튼 */
+.reply-info button {
+    height: 3vh;
+    font-size: 1vw; /* 유동 폰트 사이즈 */
+    width: 6vw; /* 유동 너비 */
+    border: 0.5px solid gray;
     background-color: white;
-    border: none;
+    border-radius: 0.2vw;
     transition: all 0.5s;
+    margin-left:37.5vw;
     &:hover {
         font-weight: bold;
     }

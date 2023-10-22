@@ -37,15 +37,14 @@ export default function ReNavBar() {
         <div className="header">
             <div className="header-top">
                 <div className="top-left">
-                    <a style={{ textDecoration: "none", fontSize: "45px", color: "black" }} href="/">Billim</a>
+                    <Link to="/">Billim</Link>
                 </div>
                 <div className="top-right">
                     {isAuthenticated ? <Link  onClick={handleLogout}>로그아웃</Link> :
                         <Link  onClick={handleLogin}>로그인/회원가입</Link>}
 
-                    {/* <div className="mypage" >마이페이지</div> */}
-                    {isAuthenticated? <Link to={"my-page"}>마이페이지</Link> : 
-                        <Link  to={"/loginpage"}>마이페이지</Link>}
+                    {isAuthenticated? <Link to="my-page">마이페이지</Link> : 
+                        <Link  to="/loginpage">마이페이지</Link>}
                     
                 </div>
             </div>
@@ -55,7 +54,7 @@ export default function ReNavBar() {
                     <form  className='searchform' onSubmit={(e)=>{handleSubmit(e)}}>
                         <UlDiv>
                         <Ul onClick={()=>{setView(!view)}}>{searchfilter}</Ul>
-                        {view&&<Dropdown setSearchFilter={setSearchFilter} view={view} setView={setView}/>}
+                        {view&&<SearchDropdown setSearchFilter={setSearchFilter} view={view} setView={setView}/>}
                         </UlDiv>
                         <input type="text"
                          value={search}
@@ -72,7 +71,7 @@ export default function ReNavBar() {
     )
 }
 
-function Dropdown({setSearchFilter, view, setView}){
+function SearchDropdown({setSearchFilter, view, setView}){
     return(
         <>
         <LiWrapper>
@@ -88,8 +87,8 @@ function Dropdown({setSearchFilter, view, setView}){
 const UlDiv = styled.div`
 display:flex;
 flex-direction:column;
-width:4vw;
-font-size:0.7vw;
+width:5vw;
+font-size:0.9vw;
 position:fixed;
 `
 

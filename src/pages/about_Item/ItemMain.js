@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Pagination from './Pagination';
@@ -8,7 +7,6 @@ import WriteBtn from '../../components/WriteBtn';
 import Watched from './Watched';
 
 function ItemMain() {
-  const navigate = useNavigate();
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
 
@@ -49,7 +47,6 @@ function ItemMain() {
           'Auth': retoken
         }
       })
-      //console.log(response.data);
       //sessionstorage에 저장
       window.sessionStorage.setItem("nickname", response.data.nickname);
     } catch (e) {
@@ -65,8 +62,7 @@ function ItemMain() {
   useEffect(() => {
     fetchPosts();
     fetchMyInfo();
-    //최근본상품 localstorage할당
-    //최근본상품이 없으면 생성
+    //최근본상품 localstorage할당 , 최근본상품이 없으면 생성
     let localarray = localStorage.getItem('watched');
     if (localarray == null) {
       localStorage.setItem('watched', JSON.stringify([]));
@@ -105,7 +101,7 @@ function ItemMain() {
 
       {/* 본문가운데상품진열 */}
       <div className="Item-Wrap">
-        {store!=null ? (<Posts currentPosts={currentPosts()} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} />) : (<div>로딩중입니다</div>)}
+        {store ? (<Posts currentPosts={currentPosts()} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} />) : (<div>로딩중입니다</div>)}
       </div>
 
       {/* 본문하단Pagination */}

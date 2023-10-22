@@ -1,14 +1,18 @@
 /* 상품디테일 css */
 .Detail-container {
     border-bottom: 1px solid black;
-    padding-bottom: 5vh; /* 유동적인 패딩 */
+    margin-top:7vh;
+    padding-bottom: 10vh; /* 유동적인 패딩 */
 }
 
 .Detail_Item_wrap {
     display: flex;
     justify-content: flex-end;
-    
 }
+.Detail_Item_Category{
+    margin-bottom: 2vh;
+}
+
 
 .Detail_Item_Img {
     max-width: 100%; /* 최대 너비 설정 */
@@ -74,7 +78,8 @@
 
 .nickname-btn button {
     background-color: white;
-    width: 10vw; /* 유동적인 너비 */
+    width: 2vw; /* 유동적인 너비 */
+    margin-left:2vw;
     border: none;
     padding-top: 2vh; /* 유동적인 패딩 */
 }

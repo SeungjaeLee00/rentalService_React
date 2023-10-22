@@ -1,8 +1,6 @@
-import { useState,  useEffect } from 'react';
-import {  useLocation, useNavigate, useParams} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Do_Report from '../Report/Do_Report';
-import { useAuth } from '../../components/AuthContext'
-import Login from '../Login/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../style/modal.css';
 import axios from 'axios';
@@ -13,7 +11,7 @@ import '../../style/ItemDetail.css'
 
 function Detail() {
   const navigate = useNavigate();
- 
+
   //id는 검색 '/' 뒤에 붙는 값
   let { id } = useParams();
 
@@ -38,7 +36,7 @@ function Detail() {
       const response = await axios.get('/api/posts/' + id);
       setItem(response.data);
       setItemLike(response.data.likes);
-      console.log(response);
+      //console.log(response);
     }
     catch (e) {
       console.log(e);
@@ -50,25 +48,25 @@ function Detail() {
     }
     setLoading(false);
   }
-   
+
   useEffect(() => {
     //상품한개정보
     fetchPostInfo();
     //최근본상품
     let output = localStorage.getItem('watched');
     //0이면 parse 할수없음. 값이 없기때문
-    if(output.length>0)
-    {
+    if (output.length > 0) {
       output = JSON.parse(output);
-    }    
+    }
     output.unshift(id);
+    //값이 2번씩들어가서 set사용.
     output = new Set(output);
     output = Array.from(output);
-    localStorage.setItem('watched',JSON.stringify(output));
+    localStorage.setItem('watched', JSON.stringify(output));
   }, [])
 
-  
- 
+
+
 
   const openReportModal = () => {
     // const postId = item.id; 
@@ -93,12 +91,12 @@ function Detail() {
         <div className='Detail_Item_wrap'>
           <div className='Detail_Item_Img'>
             <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
-            
+
             {/* 상품정보컴포넌트 */}
             <OneItem item={item} id={id} location={location} setItem={setItem} itemlike={itemlike} setItemLike={setItemLike}
               navigate={navigate} openReportModal={openReportModal} showReportPopup={showReportPopup} closeReportnModal={closeReportnModal}
               onProfileClick={onProfileClick} />
-              {/* 글쓰기 컴포넌트 */}
+            {/* 글쓰기 컴포넌트 */}
             <WriteBtn />
           </div>
         </div>
@@ -116,7 +114,6 @@ function OneItem(props) {
       headers: { Auth: localStorage.refreshToken },
     })
       .then(response => {
-        console.log("성공");
         let copy = props.item;
         copy.likes = 1;
         props.setItem(copy);
@@ -124,7 +121,12 @@ function OneItem(props) {
 
       })
       .catch(error => {
-        console.log(error.response.data.result);
+        if(error.response.data.code==511)
+        {
+          alert('로그인이 필요한 요청입니다.');
+        }
+        else alert('다시 시도해 주세요');
+        console.log(error.response);
       })
   }
   return (
@@ -137,24 +139,28 @@ function OneItem(props) {
 
       {/* 상품정보,설명 등 */}
       <div className='Item_About'>
-        <div className='Detail_Item_Category'>홈 &nbsp; {'>'}&nbsp; {props.item.categoryName}&nbsp; {'>'} &nbsp; {props.item.title}</div>
+        <div className='Detail_Item_Category'>
+          <span><Link to='/'>홈</Link></span> &nbsp; {'>'}&nbsp;
+          <span> {props.item.categoryName}</span>&nbsp; {'>'} &nbsp;
+          <span>{props.item.title}</span>
+        </div>
         <div className="Detail_Item_Name_Price">
           <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name"> {props.item.item.name}</div>
           <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">
             {props.item.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
         </div>
         <div style={{ marginTop: 20 }}>
-          <span>{SetKST(props.location.state)}&nbsp;</span>
+          <span>{SetKST(props.location.state)}</span>
           <div style={{ marginTop: "20px" }}>{props.item.content}</div>
           <div className='nickname-btn'>
             <div className='profile' onClick={props.onProfileClick}  >👤{props.item.writer.nickname}</div>
-            <button onClick={props.openReportModal} variant="secondary" size="lg">❗️</button>
+            <button onClick={props.openReportModal} variant="secondary">❗️</button>
           </div>
         </div>
         <div className='Item_Button'>
-          <button className='likebtn' onClick={LikeAdd}>{props.itemlike ? <span style={{color:"red"}}>♥</span> : <span>♥</span>}</button>
+          <button className='likebtn' onClick={LikeAdd}>{props.itemlike ? <span style={{ color: "red" }}>♥</span> : <span>♥</span>}</button>
           <button className='sendbtn' onClick={() => props.navigate('/itemmain/detail/chat', { state: props.item })}>쪽지보내기</button>
-          <Do_Report open={props.showReportPopup} close={props.closeReportnModal} postId={props.id}/>
+          <Do_Report open={props.showReportPopup} close={props.closeReportnModal} postId={props.id} />
         </div>
 
       </div>
