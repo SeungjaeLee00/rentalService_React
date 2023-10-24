@@ -81,8 +81,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40vw;
-  max-width: 500px; /* 최대 너비를 00px로 제한 (원하는 크기로 조절 가능) */
+  width: 50vw;
+  max-width: 600px; /* 최대 너비를 00px로 제한 (원하는 크기로 조절 가능) */
   cursor: pointer;
   transition: 0.2s;
   margin-top: 3vw;
@@ -110,6 +110,12 @@
   justify-content: center;
   align-items: center;
   font-size: 1vw; /* 최대 글자 크기를 1vw로 제한 (원하는 크기로 조절 가능) */
+}
+
+.Item-Name {
+  font-weight: bold;
+  margin: 0 0.1vw;
+  font-size: 1.2vw;
 }
 
 .Item-Price {

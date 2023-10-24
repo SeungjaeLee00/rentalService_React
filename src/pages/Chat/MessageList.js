@@ -194,7 +194,7 @@ export default function MessageList(props) {
                 <div className="message-dropbox">
                     <Wrapper>
                         <DropdownContainer>
-                            <DropdownButton onClick={myPageHandler} ref={myPageRef}>
+                            <DropdownButton onClick={myPageHandler} ref={myPageRef} >
                                 필터
                             </DropdownButton>
                             <Menu isDropped={myPageIsOpen}>
