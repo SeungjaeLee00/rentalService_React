@@ -4,9 +4,9 @@ import SetKST from "../../utils/SetKST";
 import { useState } from "react";
 
 const Posts = (props) => {
-  
+  console.log(props.currentPosts);
   const navigate = useNavigate();
-  const [posts,setPosts]= useState(''); 
+  const [posts,setPosts]= useState([]); 
   const [postlength,setPostLength] =useState(props.currentPosts.length);
 
   useEffect(()=>{
@@ -20,12 +20,16 @@ const Posts = (props) => {
     {
       setPostLength(props.ItemIndex);
     }
+   
   },[props.currentPosts]);
 
+  if(!posts||posts.length===0) return null;
+  //초기에 posts에 undefined값이 들어오는 현상 발생 -> 예외처리
+  if(posts[0]==undefined) return null;
   
   return (
     <>
-    {posts ? posts.slice(0, postlength).map(item => (
+    {posts&&posts.length>0? posts.slice(0, postlength).map(item => (
       <div className="Item" key={item.id} onClick={() => {
         let copy = [...props.watched];
         copy.push(item);
@@ -33,12 +37,12 @@ const Posts = (props) => {
         navigate('/itemmain/detail/' + item.id, { state: item.createdTime });
       }}>
         <div className='Item-Img'>
-          <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + item.link} style={{ width: 200, height: 200 }} />
+          <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/'+item.link } style={{ width: 200, height: 200 }} />
         </div>
         <div className='Item-Information-Wrap'>
           <div className='Item-Name-Price-Date-Wrap'>
             <div className='Item-Name'>{item.title}</div>
-            <div className='Item-Price'>{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
+            <div className='Item-Price'>{String(item.itemPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
             <div className='Item-Date'>{SetKST(item.createdTime)}</div>
           </div>
           <div className='Item-State'>

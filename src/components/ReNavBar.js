@@ -84,6 +84,8 @@ function SearchDropdown({setSearchFilter, view, setView}){
 }
 
 
+
+
 const UlDiv = styled.div`
 display:flex;
 flex-direction:column;

@@ -31,9 +31,18 @@ export default function Watched(props) {
 
     //최근본상품은 3개의 상품만 보여주기 때문에 아래와 같이 설정. 
     const currentPosts = () => {
-        let currentPosts = 0;
-        currentPosts = watched.slice(0, 3);
-        return currentPosts;
+        //페이지처음접속시 최근본 상품 목록이 3개미만일때 
+        if(watched.length<3)
+        {
+            return watched;
+        }
+        //3개이상일때 앞에서부터 3개짤라서 보여줌.
+        else if(watched.length>=3)
+        {
+            let currentPosts = 0;
+            currentPosts = watched.slice(0, 3);
+            return currentPosts;
+        }
     };
 
     if (!watched) return null;
