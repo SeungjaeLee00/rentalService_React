@@ -1,7 +1,7 @@
 .header {
     display: flex;
     flex-direction: column;
-    padding: 40px 5% 50px 10%; /* 상단 40px, 우측 10%, 하단 40px, 좌측 5% */
+    padding: 5vh 5% 1vw 10%; /* 상단 40px, 우측 10%, 하단 40px, 좌측 5% */
     border-bottom: 0.1rem solid gray;
     position: fixed;
     top: 0;
@@ -65,7 +65,7 @@
 .search {
     width: 25vw; /* 화면 너비의 45%로 설정 */
     max-width: 500px; /* 최대 너비를 400px로 제한 */
-    height: 45px; /* 고정된 높이로 설정 */
+    height: 6vh; /* 고정된 높이로 설정 */
     font-size: 0.9vw; /* 화면 너비의 1.2%로 폰트 크기 설정 */
     font-weight: 400;
     background-color : rgb(250, 250, 250);
@@ -78,7 +78,7 @@
 .searchbarbtn {
     background-color: rgb(250, 250, 250);
     width: 40px; /* 고정된 너비로 설정 */
-    height: 45px; /* 고정된 높이로 설정 */
+    height: 6vh; /* 고정된 높이로 설정 */
     border-left: none;
     border-bottom-right-radius: 1vw;
     border-top-right-radius: 1vw;

@@ -97,12 +97,14 @@ position:fixed;
 const Ul = styled.ul`
 border: 2px solid black;
 border-right:none;
-height:45px;
+height:6vh;
 padding-top:0.6vw;
 padding-left:0.8vw;
 margin-bottom:0px;
 background-color: rgb(250, 250, 250);
 cursor:pointer;
+border-top-left-radius:1vw;
+border-bottom-left-radius:1vw;
 `
 
 const Li = styled.li`
