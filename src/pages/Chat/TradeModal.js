@@ -79,7 +79,7 @@ export default function TradeModal(props) {
           .then(response=>{
             console.log("거래생성완료");
             alert("거래가 시작되었습니다");
-            window.location.replace("my-page/chats");
+            //window.location.replace("my-page/chats");
           })
           .catch(error=>{
             if (error.response.data.code == '511') {

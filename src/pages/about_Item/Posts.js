@@ -46,7 +46,7 @@ const Posts = (props) => {
             <div className='Item-Date'>{SetKST(item.createdTime)}</div>
           </div>
           <div className='Item-State'>
-            {item.state}
+            {item.complete==true ? <p style={{color:"red"}}>대여중</p>:<p></p>}
           </div>
         </div>
       </div>

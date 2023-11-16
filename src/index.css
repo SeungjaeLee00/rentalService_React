@@ -118,6 +118,8 @@
   display:flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.87vw;
+  width:2.4vw;
 }
 
 .Item-Price{

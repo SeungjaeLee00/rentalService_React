@@ -11,10 +11,11 @@ function ItemMain() {
   const retoken = localStorage.refreshToken;
 
   const [store, setStore] = useState(null);
+  const [filterstore,setFilterStore]=useState([]);
   const [watched, setWatched] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  let filter;
   
 
   const fetchPosts = async () => {
@@ -88,9 +89,10 @@ function ItemMain() {
   //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts에 담아줍니다.
   const currentPosts = () => {
     let currentPosts = 0;
-    currentPosts = store.slice(indexOfFirst, indexOfLast);
+    filter=store.filter(item=>item.complete===false);
+    console.log(filter);
+    currentPosts = filter.slice(indexOfFirst, indexOfLast);
     return currentPosts;
-    
   };
 
   return (
@@ -109,7 +111,7 @@ function ItemMain() {
         {store? <Pagination
           // 총데이터를 postsPerPage만큼 등분해서 보여준다. 6개씩보여주자.
           postsPerPage={postsPerPage} //각각 페이지당 포스트개수
-          totalPosts={store.length} //전체 데이터 개수 
+          totalPosts={filter.length} //전체 데이터 개수 
           paginate={setCurrentPage} //CurrentPage변경하는함수.(첫번째페이지가정 6)
         ></Pagination>: null}
         
