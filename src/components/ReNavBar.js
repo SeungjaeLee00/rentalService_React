@@ -112,6 +112,7 @@ list-style-type:none;
 margin-top:0.4vh;
 padding-left:0.8vw;
 cursor:pointer;
+
  &:hover{
     color:blue;
  }
@@ -119,4 +120,6 @@ cursor:pointer;
 `
 const LiWrapper = styled.div`
 border:1px solid black;
+background-color: rgb(250, 250, 250);
+
 `

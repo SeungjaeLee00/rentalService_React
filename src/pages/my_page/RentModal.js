@@ -115,7 +115,7 @@ export default function RentModal(props) {
                         {/* 빌려주는사람닉네임이랑 현재유저의 닉네임이랑 같으면 거래완료생기기 */}
                         {tradeinfo.renderMember == nickname ? <button onClick={() => { TradeComplete(tradeinfo.tradeComplete) }}>거래 완료</button> : <button
                             onClick={() => { WriteReviewBtn(tradeinfo.tradeComplete) }}>📝리뷰작성</button>}
-                        {tradeinfo.tradeComplete ? <button onClick={DeleteTrade()}>거래삭제</button> : null}
+                        {tradeinfo.tradeComplete ? <button onClick={()=>{DeleteTrade()}}>거래삭제</button> : null}
                     </div>
                 </div>
             </div>

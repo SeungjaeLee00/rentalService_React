@@ -10,14 +10,12 @@ import WriteBtn from '../../components/WriteBtn';
 export default function MyPage() {
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
-  
-
-
+  const nickname = window.sessionStorage.getItem("nickname");
   const [mypost, setMyPost] = useState();
   const [myrent, setMyRent] = useState();
   const [myborrow, setMyBorrow] = useState();
   const [myreview,setMyReview]=useState();
-
+  const [mywriterw,setMyWriteRw] = useState();
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState();
 
@@ -38,6 +36,7 @@ export default function MyPage() {
         window.location.replace('/loginpage');
       }
     }
+    setLoading(false);
   }
   const fetchMyRend = async () => {
     try {
@@ -51,6 +50,7 @@ export default function MyPage() {
     catch (e) {
       console.log(e);
     }
+    setLoading(false);
   }
   const fetchMYBorrow = async () => {
     try {
@@ -59,7 +59,6 @@ export default function MyPage() {
         'Auth' : retoken }
       })
       //console.log(response);
-      
       setMyBorrow(response.data.tradeList);
     }
     catch (e) {
@@ -77,9 +76,25 @@ export default function MyPage() {
     }catch(e){
       console.log(e);
     }
+    setLoading(false);
   }
+  const fetchWriteReivew = async()=>{
+    try{
+      console.log("nickname:"+nickname);
+      const response = await axios.get('/api/reviews?nickname='+nickname,{
+        headers:{'Authorization':`Bearer ${actoken}`,
+      'Auth':retoken}
+      })
+      //console.log(response);
+      setMyWriteRw(response.data.reviewList);
+    }catch(e){
+      console.log(e);  
+  }
+  setLoading(false);
+}
 
   useEffect(() => {
+    
     //본인작성게시글
     fetchMyPosts();
     //본인이 대여해주는 상품
@@ -88,23 +103,24 @@ export default function MyPage() {
     fetchMYBorrow();
     //내가받은리뷰조회
     fetchMyReview();
-    
+    //내가작성한리뷰조회
+    fetchWriteReivew();
   }, [])
 
   if (loading) return <div>로딩중..</div>
-  if(!mypost || !myrent || !myborrow || !myreview) return null 
+  if(!mypost || !myrent || !myborrow || !myreview|| !mywriterw) return null 
 
   return (
     <div>
       {/* 마이페이지 상단 */}
        <MyPageTop mypost={mypost.length}
-        myrent={myrent.length} myborrow={myborrow.length} myreview={myreview.length} />
+        myrent={myrent.length} myborrow={myborrow.length} myreview={myreview.length} mywriterw={mywriterw.length} />
       
       <div className="mypagebottom">
         {/* 마이페이지 왼쪽 nav */}
         <div className="bottom-leftnav"><Sidebar /></div>
         {/* https://leejams.github.io/useOutletContext/ , sidebar클릭했을때 보이는 컴포넌트들(mypost,mylike...*/}
-        <div className='bottom-right'><Outlet context={{ mypost, setMyPost, myrent, setMyRent, myborrow, setMyBorrow,myreview }} /></div>
+        <div className='bottom-right'><Outlet context={{ mypost,  myrent,  myborrow, myreview, mywriterw}} /></div>
       </div>
       <WriteBtn />
     </div>
@@ -147,10 +163,17 @@ function Sidebar() {
         </Nav.Item>
 
         <Nav.Item>
-          <Nav.Link to="/my-page/my-review" $active={isActive("/my-page/my-review")}>
-          리뷰
+          <Nav.Link to="/my-page/my-write-review" $active={isActive("/my-page/my-write-review")}>
+          작성한 리뷰
           </Nav.Link>
         </Nav.Item>
+        
+        <Nav.Item>
+          <Nav.Link to="/my-page/my-review" $active={isActive("/my-page/my-review")}>
+          받은 리뷰
+          </Nav.Link>
+        </Nav.Item>
+
 
       </Nav.List>
     </Nav>

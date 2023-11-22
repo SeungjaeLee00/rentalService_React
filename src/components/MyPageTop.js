@@ -1,9 +1,8 @@
-import { useEffect, useHistory } from 'react'
+import { useEffect } from 'react'
 import axios from 'axios'
 import { useState } from 'react';
 
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import Edit_membership from '../pages/my_page/Edit_Pages/Edit_membership';
 import styled from 'styled-components';
 
 export default function MyPageTop(props) {
@@ -81,7 +80,11 @@ export default function MyPageTop(props) {
                             <QuantityDiv >{props.myborrow}개</QuantityDiv>
                         </div>
                         <div className="userreview">
-                            <UserDiv>리뷰</UserDiv>
+                            <UserDiv>작성한 리뷰</UserDiv>
+                            <QuantityDiv>{props.mywriterw}개</QuantityDiv>
+                        </div>
+                        <div className="userreview">
+                            <UserDiv>받은 리뷰</UserDiv>
                             <QuantityDiv>{props.myreview}개</QuantityDiv>
                         </div>
 
@@ -92,13 +95,13 @@ export default function MyPageTop(props) {
     )
 }
 let QuantityDiv = styled.div`
-font-size:20px;
+font-size:1vw;
 margin-top:15px;
-margin-left:30px;
+margin-left:0.1vw;
 `
 
 let UserDiv = styled.div`
-font-size:30px;
+font-size:1.5vw;
 font-weight:bold;
-margin-left:30px;
+margin-left:0.1vw;
   `

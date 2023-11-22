@@ -1,9 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, Routes, Router } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './style/App.css';
 import { AuthProvider } from './components/AuthContext';
-
-
 import Signup from './pages/SignUp/Signup';
 import ItemMain from './pages/about_Item/ItemMain';
 import FindPw from './pages/about_membership/Find_pw';
@@ -29,6 +27,7 @@ import OneMessage from './pages/Chat/OneMessage';
 import Footer from './components/Footer';
 import Profile from './pages/my_page/Profile';
 import NotFound from './components/NotFound';
+import My_WriteReview from './pages/Review/My_WriteReview';
 
 
 
@@ -67,6 +66,7 @@ function App() {
               <Route exact path='rent' element={<MyRent />}></Route>
               <Route exact path='borrow' element={<MyBorrow />}></Route>
               <Route exact path='my-review' element={<My_Review />} />
+              <Route exact path='my-write-review' element={<My_WriteReview/>}/>
               <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
             </Route>
           </Routes>

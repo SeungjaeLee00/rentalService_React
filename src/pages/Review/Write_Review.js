@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import '../../style/WriteReview.css';
 
 // 거래에 대한 리뷰 작성
 function Write_Review() {
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
+    const navigate = useNavigate();
     const { state } = useLocation();
     console.log(state);
     const [post, setPost] = useState();
@@ -45,6 +46,11 @@ function Write_Review() {
                 'Auth' : retoken }
         }).then(response => {
             console.log(response);
+            if(response.status=='201') 
+            {
+                alert('리뷰가 작성되었습니다');
+                navigate(-1);
+            }
         }).catch(e => {
             if (e.response.data.code == '511') {
                 alert('로그인이 만료되어 로그인 페이지로 이동합니다');
@@ -52,6 +58,7 @@ function Write_Review() {
               }
             if(e.response.data.code=='409'){
                 alert('이미 해당거래에 대한 리뷰가 존재합니다');
+                navigate(-1);
             }
             console.log(e);
         })
