@@ -66,6 +66,7 @@ export default function ReNavBar() {
                         <button className='searchbarbtn'>🔍</button>
                     </form>
                 </div>
+                <div className='admin-link'><Link>관리자 페이지</Link></div>
             </div>
         </div>
     )

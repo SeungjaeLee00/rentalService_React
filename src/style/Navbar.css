@@ -49,6 +49,16 @@
     
     /* margin-top:15px; */
 }
+.admin-link{
+    margin-left:36.5vw;
+    margin-top:3vh;
+    text-decoration: none;
+    font-size: min(2vw, 25px);
+    color:black;
+    &:hover{
+        font-weight: bold;
+      }
+}
 
 .searchbar{
     display:flex;

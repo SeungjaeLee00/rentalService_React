@@ -163,10 +163,7 @@
 .dashboard{
   display:flex;
   padding:50px 50px;
-  font-size:50px;
   height:400px;
-  font-weight: 500;
-  margin-left:200px;
 }
 
 .bar{

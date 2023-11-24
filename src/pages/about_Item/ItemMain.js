@@ -5,17 +5,21 @@ import Pagination from './Pagination';
 import Posts from './Posts';
 import WriteBtn from '../../components/WriteBtn';
 import Watched from './Watched';
+import Carousel from '../../components/Carousel';
+import dash1 from '../../assets/img/dash1.PNG';
+import dash2 from '../../assets/img/dash2.PNG';
 
 function ItemMain() {
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
 
   const [store, setStore] = useState(null);
-  const [filterstore,setFilterStore]=useState([]);
   const [watched, setWatched] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   let filter;
+  
+  const CAROUSEL_IMAGES=[{dash1},{dash2}];
   
 
   const fetchPosts = async () => {
@@ -97,7 +101,7 @@ function ItemMain() {
 
   return (
     <div className='page-container'>
-      <Dashboard />
+      <Dashboard carouselList={CAROUSEL_IMAGES}/>
       <hr />
       <div className='Main-Content'>등록된 상품</div>
 
@@ -125,17 +129,19 @@ function ItemMain() {
   );
 };
 
-function Dashboard() {
+function Dashboard(props) {
   return (
     <div className='dashboard'>
-      <div className='dashboard-right'>
+      {console.log(props.CAROUSEL_IMAGES)}
+      <Carousel carouselList={props.CAROUSEL_IMAGES}/>
+      {/* <div className='dashboard-right'>
         <div className='dashboard-title'>
           <h1 style={{ fontWeight: "bold", fontSize: "50px" }}>Billim</h1>
         </div>
         <div style={{ marginTop: "20px" }} className='dashboard-decoration'>
-          <h1>언제어디서든지 상품을 <br /> 대여해주고 받을 수 있는 서비스입니다. </h1>
+          <h1 style={{marginBottom:"50px"}}>Billim이 처음이시라면?</h1>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
