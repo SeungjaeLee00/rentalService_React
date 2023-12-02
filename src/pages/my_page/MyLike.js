@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function MyLike() {
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
+    
     const [likepost, setLikePost] = useState();
     const navigate = useNavigate();
     useEffect(() => {

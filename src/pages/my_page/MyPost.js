@@ -4,10 +4,10 @@ import SetKST from "../../utils/SetKST";
 import MessagePagination from "../../components/Pagination";
 import { useState } from "react";
 
-export default function MyPost(props) {
+export default function MyPost() {
     const { mypost, setMyPost } = useOutletContext();
     const navigate = useNavigate();
-    console.log(mypost);
+    //console.log(mypost);
     
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
@@ -42,11 +42,9 @@ export default function MyPost(props) {
 
     const currentPosts=()=>{
         let currentPosts = 0;
-        currentPosts=mypost.slice(indexOfFirst,indexOfLast);
+        currentPosts=mypost.data.postList.slice(indexOfFirst,indexOfLast);
         return currentPosts;
     }
-
-    if(!mypost) return null;
 
     return (
         <div className="MyPost-wrap">

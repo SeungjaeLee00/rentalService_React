@@ -1,120 +1,29 @@
 import '../../style/MyPage.css'
-import { useEffect } from 'react'
-import axios from 'axios'
-import { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Nav from "../SideNav/Index";
 import MyPageTop from '../../components/MyPageTop';
 import WriteBtn from '../../components/WriteBtn';
+import useGet from '../../hooks/useGet';
 
 export default function MyPage() {
-  const actoken = localStorage.accessToken;
-  const retoken = localStorage.refreshToken;
+
   const nickname = window.sessionStorage.getItem("nickname");
-  const [mypost, setMyPost] = useState();
-  const [myrent, setMyRent] = useState();
-  const [myborrow, setMyBorrow] = useState();
-  const [myreview,setMyReview]=useState();
-  const [mywriterw,setMyWriteRw] = useState();
-  const [loading, setLoading] = useState(null);
-  const [error, setError] = useState();
-
-  const fetchMyPosts = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get('/api/posts/my', {
-        headers: { 'Authorization' : `Bearer ${actoken}`,
-                   'Auth' : retoken }
-      })
-      //console.log(response);
-      setMyPost(response.data.postList);
-    }
-    catch (e) {
-      console.log(e);
-      if (e.response.data.code == '511') {
-        alert('로그인이 만료되어 로그인 페이지로 이동합니다');
-        window.location.replace('/loginpage');
-      }
-    }
-    setLoading(false);
-  }
-  const fetchMyRend = async () => {
-    try {
-      const response = await axios.get('/api/trades/rend-item?true,', {
-        headers: { 'Authorization' : `Bearer ${actoken}`,
-        'Auth' : retoken }
-      })
-      //console.log(response);
-      setMyRent(response.data.tradeList);
-    }
-    catch (e) {
-      console.log(e);
-    }
-    setLoading(false);
-  }
-  const fetchMYBorrow = async () => {
-    try {
-      const response = await axios.get('/api/trades/borrow-item?true', {
-        headers: { 'Authorization' : `Bearer ${actoken}`,
-        'Auth' : retoken }
-      })
-      //console.log(response);
-      setMyBorrow(response.data.tradeList);
-    }
-    catch (e) {
-      console.log(e);
-    }
-    setLoading(false);
-  }
-  const fetchMyReview = async() =>{
-    try{
-      const response = await axios.get('/api/reviews/my', {
-        headers: { 'Authorization' : `Bearer ${actoken}`,
-        'Auth' : retoken }
-      })
-      setMyReview(response.data.reviewList);
-    }catch(e){
-      console.log(e);
-    }
-    setLoading(false);
-  }
-  const fetchWriteReivew = async()=>{
-    try{
-      console.log("nickname:"+nickname);
-      const response = await axios.get('/api/reviews?nickname='+nickname,{
-        headers:{'Authorization':`Bearer ${actoken}`,
-      'Auth':retoken}
-      })
-      //console.log(response);
-      setMyWriteRw(response.data.reviewList);
-    }catch(e){
-      console.log(e);  
-  }
-  setLoading(false);
-}
-
-  useEffect(() => {
-    
-    //본인작성게시글
-    fetchMyPosts();
-    //본인이 대여해주는 상품
-    fetchMyRend();
-    //본인이 대여받는(빌리는 상품)
-    fetchMYBorrow();
-    //내가받은리뷰조회
-    fetchMyReview();
-    //내가작성한리뷰조회
-    fetchWriteReivew();
-  }, [])
-
-  if (loading) return <div>로딩중..</div>
-  if(!mypost || !myrent || !myborrow || !myreview|| !mywriterw) return null 
-
+  const mypost = useGet('/api/posts/my');
+  const myrent = useGet('/api/trades/rend-item?true');
+  const myborrow = useGet('/api/trades/borrow-item?true');
+  const myreview = useGet('/api/reviews/my');
+  const mywriterw = useGet('/api/reviews?nickname='+nickname);
+  
+  if(mypost.error||myrent.error||myborrow.error||myreview.error||mywriterw.error) return <div>에러발생</div>;
+  if(mypost.loading||myrent.loading||myborrow.loading||myreview.loading||mywriterw.loading) return <div>로딩중</div>;
+  if(!mypost.data||!myrent.data||!myborrow.data||!myreview.data||!mywriterw.data) return null;
+  
+  
   return (
     <div>
       {/* 마이페이지 상단 */}
-       <MyPageTop mypost={mypost.length}
-        myrent={myrent.length} myborrow={myborrow.length} myreview={myreview.length} mywriterw={mywriterw.length} />
+       <MyPageTop mypost={mypost.data.totalElements}   myrent={myrent.data.totalElements} 
+       myborrow={myborrow.data.totalElements} myreview={myreview.data.totalElements}  mywriterw={mywriterw.data.totalElements} />
       
       <div className="mypagebottom">
         {/* 마이페이지 왼쪽 nav */}
@@ -126,7 +35,6 @@ export default function MyPage() {
     </div>
   )
 }
-
 
 // sidebar 참고 :  https://www.daleseo.com/react-side-navigation/
 function isActive(path) {
@@ -173,7 +81,6 @@ function Sidebar() {
           받은 리뷰
           </Nav.Link>
         </Nav.Item>
-
 
       </Nav.List>
     </Nav>

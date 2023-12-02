@@ -8,7 +8,7 @@ export default function MyBorrow()
     const {myborrow, setMyBorrow}=useOutletContext();
     console.log(myborrow);
     const {mypost, setMyPost}=useOutletContext();
-    //console.log(mypost);
+    console.log(myborrow);
     
     const [rentmodalopen,setRentModalOpen]= useState(false);
     const [tradeid, setTradeId]= useState();
@@ -30,7 +30,7 @@ export default function MyBorrow()
                         </tr>
                     </thead>
                     <tbody>
-                        {myborrow.map(a => (
+                        {myborrow.data.tradeList.map(a => (
                             <tr key={a.tradeId} onClick={()=>{
                             setRentModalOpen(!rentmodalopen);
                             setTradeId(a.tradeId);

@@ -6,8 +6,7 @@ import Posts from './Posts';
 import WriteBtn from '../../components/WriteBtn';
 import Watched from './Watched';
 import Carousel from '../../components/Carousel';
-import dash1 from '../../assets/img/dash1.PNG';
-import dash2 from '../../assets/img/dash2.PNG';
+
 
 function ItemMain() {
   const [store, setStore] = useState(null);
@@ -16,9 +15,6 @@ function ItemMain() {
   const [error, setError] = useState(null);
   let filter;
   
-  const CAROUSEL_IMAGES=[{dash1},{dash2}];
-  
-
   const fetchPosts = async () => {
     try {
       //요청시작할때 error와 store 초기화
@@ -32,7 +28,7 @@ function ItemMain() {
       {
         localStorage.setItem('watched',JSON.stringify([]));
       }
-      console.log(response.data.postList);
+      //console.log(response.data.postList);
       setStore(response.data.postList);
     } catch (e) {
       setError(e);
@@ -78,7 +74,7 @@ function ItemMain() {
 
   return (
     <div className='page-container'>
-      <Dashboard carouselList={CAROUSEL_IMAGES}/>
+      <Dashboard/>
       <hr />
       <div className='Main-Content'>등록된 상품</div>
 
@@ -106,11 +102,10 @@ function ItemMain() {
   );
 };
 
-function Dashboard(props) {
+function Dashboard() {
   return (
     <div className='dashboard'>
-      {console.log(props.CAROUSEL_IMAGES)}
-      <Carousel carouselList={props.CAROUSEL_IMAGES}/>
+      <Carousel/>
     </div>
   )
 }

@@ -21,8 +21,8 @@ export default function AdminTop({trade, report, review, setData,setType}) {
                 <div>
                     <Title>카테고리관리</Title>
                     <div style={{display:"flex", justifyContent:"space-evenly"}}>
-                        <Link>생성</Link>
-                        <Link>삭제</Link>
+                        <Link onClick={()=>{setType("categorymake")}}>생성</Link>
+                        <Link onClick={()=>{setType("categorydelete")}}>삭제</Link>
                     </div>
                 </div>
             </TopDiv>
@@ -42,11 +42,12 @@ font-weight:bold;`
 const Cnt = styled.p`
 text-align:center;
 transition: all 2s;
-overflow:hidden;
 font-weight:bold;
 font-size:25px;
 color:blue;
-animation:fadein 0.5s ease-in-out;
+margin-top:20px;
+overflow:hidden;
+animation:fadein 0.8s ease-in-out;
  @keyframes fadein{
     0%{
         opacity:0;

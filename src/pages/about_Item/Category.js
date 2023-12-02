@@ -12,8 +12,7 @@ export default function Category() {
     const [watched, setWatched] = useState([]);
     const [filtername, setFilterName] = useState('최신순');
 
-    // state가 null이면 검색
-    // id가 숫자이면 카테고리
+    // state가 null이면 검색 , id가 숫자이면 카테고리
 
     //카테고리클릭했을때 useLocation()으로 카테고리명 데이터 불러옴
     const { state } = useLocation();
@@ -25,7 +24,6 @@ export default function Category() {
     const [searchtitle,setSearchTitle]=useState('');
     let title = '';
     const [searcherror,setSearchError] = useState('');
-    // const [query,setQuery]= useState('');
     let query = '';
     const SetQuery = () => {
         console.log(id.search.split(' '));
@@ -63,14 +61,11 @@ export default function Category() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // const response = await axios.get(`/api/posts?categoryName=가전제품&title=소니`);
     //검색했을경우. 
     const fetchItem = async () => {
         try {
-            //요청이 시작할때 error와 items를 초기화
             setError(null);
             setItems(null);
-            //loading 상태를 treu
             setLoading(true);
             const response = await axios.get(`/api/posts?${query}`);
             console.log(response);

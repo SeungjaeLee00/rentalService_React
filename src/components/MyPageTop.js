@@ -1,49 +1,14 @@
-import { useEffect } from 'react'
-import axios from 'axios'
-import { useState } from 'react';
-
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link,  useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import useGet from '../hooks/useGet';
 
 export default function MyPageTop(props) {
     const navigate = useNavigate();
-    const actoken = localStorage.accessToken;
-    const retoken = localStorage.refreshToken;
-    const [myinfo, setMyInfo] = useState();
+    const myinfo = useGet('/api/members/my-profile');
 
-    const [loading, setLoading] = useState();
-    const [error, setError] = useState();
-
-    const fetchMyInfo = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get('/api/members/my-profile', {
-                headers: {
-                    'Authorization': `Bearer ${actoken}`,
-                    'Auth': retoken
-                }
-            })
-            setMyInfo(response.data);
-            setLoading(false);
-        }
-        catch (e) {
-            if (e.response.data.code == '511') {
-                alert('로그인이 만료되어 로그인 페이지로 이동합니다');
-                window.location.replace('/loginpage');
-            }
-            console.log(e);
-            setError(e);
-        }
-    }
-
-    useEffect(() => {
-        //본인정보 조회 api
-        fetchMyInfo();
-    }, [])
-
-    if (loading) <div>로딩중..</div>
-    if (error) <div>에러가 발생했습니다</div>
-    if (!myinfo) return null;
+    if(myinfo.error==true) return <div>에러발생...</div>
+    if(myinfo.loading==true) return <div>로딩중...</div>
+    if (!myinfo.data) return null;
 
     return (
         <div style={{ borderBottom: "1px solid black", paddingBottom: "45px" }} className="content">
@@ -94,10 +59,22 @@ export default function MyPageTop(props) {
         </div>
     )
 }
-let QuantityDiv = styled.div`
-font-size:1vw;
-margin-top:15px;
+let QuantityDiv = styled.p`
+font-size:2vw;
+color:blue;
+font-weight:bold;
+margin-top:25px;
 margin-left:0.1vw;
+transition: all 1s;
+animation:fadein 0.7s ease-in-out;
+ @keyframes fadein{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+ }
 `
 
 let UserDiv = styled.div`

@@ -11,6 +11,7 @@ export default function Admin()
     const review = useGet('/api/reviews/all');
     const [data,setData] = useState([]);
     const [type,setType] = useState("");
+    
     // console.log(trade);
     // console.log(report);
     // console.log(review);    

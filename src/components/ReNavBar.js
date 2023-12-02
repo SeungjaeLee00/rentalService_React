@@ -12,13 +12,12 @@ export default function ReNavBar() {
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
     const [nickname,setNickname] = useState(sessionStorage.getItem('nickname'));
-    //console.log(typeof(sessionStorage.getItem('nickname')));
     const navigate = useNavigate();
     const { isAuthenticated, logout } = useAuth();
     const [isLogin, setIsLogin] = useState(false);
     const [view, setView] = useState(false);
     const [searchfilter, setSearchFilter] = useState('제목');
-
+    
     const fetchMyInfo = async () => {
         try {
           const response = await axios.get('/api/members/my-profile', {

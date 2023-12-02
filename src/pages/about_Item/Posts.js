@@ -4,7 +4,7 @@ import SetKST from "../../utils/SetKST";
 import { useState } from "react";
 
 const Posts = (props) => {
-  console.log(props.currentPosts);
+  //console.log(props.currentPosts);
   const navigate = useNavigate();
   const [posts,setPosts]= useState([]); 
   const [postlength,setPostLength] =useState(props.currentPosts.length);

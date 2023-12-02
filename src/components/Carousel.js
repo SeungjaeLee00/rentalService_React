@@ -6,7 +6,7 @@ import arrowright from '../assets/img/arrow-right.png';
 import arrowleft from '../assets/img/arrpw-left.png'
 
 
-export default function Carousel({ carouselList }) {
+export default function Carousel() {
     const slideRef = useRef(null);
     const [currentImgIdx, setCurrentImgIdx] = useState(0);
     const IMG_WIDTH = 800;

@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 export default function My_WriteReview()
 {
-    
     const { mywriterw } = useOutletContext();
     const actoken = localStorage.accessToken;
     const retoken = localStorage.refreshToken;
@@ -49,7 +48,7 @@ export default function My_WriteReview()
                 <h2>작성한 리뷰</h2>
             </div>
             <div className="review-btm">
-                {mywriterw.map((item, index) => {
+                {mywriterw.data.reviewList.map((item, index) => {
                     return (
                         <div className="onereview" key={index}>
                              {/* 삭제할 리뷰의 게시물 id전달 */}
