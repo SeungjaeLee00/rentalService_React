@@ -13,8 +13,11 @@ export default function Carousel({ carouselList }) {
     const slideRange = currentImgIdx * IMG_WIDTH;
 
     useEffect(() => {
-        slideRef.current.style.transition = "all 2s ease-in-out";
+        slideRef.current.style.transition = "all 1.7s ease-in-out";
         slideRef.current.style.transform = `translateX(-${slideRange}px)`;
+    }, [currentImgIdx]);
+
+    useEffect(()=>{
         let time = setTimeout(()=>{
             if (currentImgIdx == 1) setCurrentImgIdx(currentImgIdx -1);
             else if (currentImgIdx == 0) setCurrentImgIdx(currentImgIdx +1);
@@ -22,7 +25,7 @@ export default function Carousel({ carouselList }) {
         return()=>{
             clearInterval(time);
         }
-    }, [currentImgIdx]);
+    },[currentImgIdx])
 
     const moveToNextSlide = () => {
         if (currentImgIdx == 1)

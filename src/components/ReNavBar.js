@@ -4,17 +4,44 @@ import { useAuth } from './AuthContext';
 import { useState } from 'react';
 import Category from './Category';
 import styled from 'styled-components';
-
-
+import { useEffect } from 'react';
+import axios from 'axios';
 
 export default function ReNavBar() {
+    
+    const actoken = localStorage.accessToken;
+    const retoken = localStorage.refreshToken;
+    const [nickname,setNickname] = useState(sessionStorage.getItem('nickname'));
+    //console.log(typeof(sessionStorage.getItem('nickname')));
     const navigate = useNavigate();
     const { isAuthenticated, logout } = useAuth();
     const [isLogin, setIsLogin] = useState(false);
     const [view, setView] = useState(false);
     const [searchfilter, setSearchFilter] = useState('제목');
+
+    const fetchMyInfo = async () => {
+        try {
+          const response = await axios.get('/api/members/my-profile', {
+            headers: {
+              'Authorization': `Bearer ${actoken}`,
+              'Auth': retoken
+            }
+          })
+          //sessionstorage에 저장
+          window.sessionStorage.setItem("nickname", response.data.nickname);
+          setNickname(response.data.nickname);
+        } catch (e) {
+          if (e.response.data.code == '511') {
+            console.log(e);
+            alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+            window.location.replace('/loginpage');
+          }
+        }
+      }
+
     const handleLogout = () => {
         logout();
+        sessionStorage.setItem('nickname',null);
         window.location.replace("/");
         setIsLogin(prevState => !prevState)
     };
@@ -32,7 +59,12 @@ export default function ReNavBar() {
         else temp='categoryName' + ' '+temp;
         navigate("/category/"+temp);
     }
-    
+    useEffect(()=>{
+        fetchMyInfo();
+        
+    },[])
+
+
     return (
         <div className="header">
             <div className="header-top">
@@ -66,7 +98,8 @@ export default function ReNavBar() {
                         <button className='searchbarbtn'>🔍</button>
                     </form>
                 </div>
-                <div className='admin-link'><Link>관리자 페이지</Link></div>
+                {nickname=="admin"?<div className='admin-link'><Link to="/admin">관리자 페이지</Link></div> :null }
+                
             </div>
         </div>
     )

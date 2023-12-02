@@ -27,6 +27,7 @@ import Footer from './components/Footer';
 import Profile from './pages/my_page/Profile';
 import NotFound from './components/NotFound';
 import My_WriteReview from './pages/Review/My_WriteReview';
+import Admin from './pages/Admin/Admin'
 
 
 
@@ -68,6 +69,8 @@ function App() {
               <Route exact path='my-write-review' element={<My_WriteReview/>}/>
               <Route exact path='/my-page/edit-membership' element={<Edit_membership />} />
             </Route>
+
+            <Route exact path="/admin" element={<Admin/>}></Route>
           </Routes>
         </AuthProvider>
       </div>

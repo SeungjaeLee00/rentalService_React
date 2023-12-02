@@ -10,9 +10,6 @@ import dash1 from '../../assets/img/dash1.PNG';
 import dash2 from '../../assets/img/dash2.PNG';
 
 function ItemMain() {
-  const actoken = localStorage.accessToken;
-  const retoken = localStorage.refreshToken;
-
   const [store, setStore] = useState(null);
   const [watched, setWatched] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -44,29 +41,9 @@ function ItemMain() {
     setLoading(false);
   }
 
-  const fetchMyInfo = async () => {
-    try {
-      const response = await axios.get('/api/members/my-profile', {
-        headers: {
-          'Authorization': `Bearer ${actoken}`,
-          'Auth': retoken
-        }
-      })
-      //sessionstorage에 저장
-      window.sessionStorage.setItem("nickname", response.data.nickname);
-    } catch (e) {
-      if (e.response.data.code == '511') {
-        console.log(e);
-        alert('로그인이 만료되어 로그인 페이지로 이동합니다');
-        window.location.replace('/loginpage');
-      }
-    }
-  }
-
 
   useEffect(() => {
     fetchPosts();
-    fetchMyInfo();
     //최근본상품 localstorage할당 , 최근본상품이 없으면 생성
     let localarray = localStorage.getItem('watched');
     if (localarray == null) {
@@ -134,14 +111,6 @@ function Dashboard(props) {
     <div className='dashboard'>
       {console.log(props.CAROUSEL_IMAGES)}
       <Carousel carouselList={props.CAROUSEL_IMAGES}/>
-      {/* <div className='dashboard-right'>
-        <div className='dashboard-title'>
-          <h1 style={{ fontWeight: "bold", fontSize: "50px" }}>Billim</h1>
-        </div>
-        <div style={{ marginTop: "20px" }} className='dashboard-decoration'>
-          <h1 style={{marginBottom:"50px"}}>Billim이 처음이시라면?</h1>
-        </div>
-      </div> */}
     </div>
   )
 }

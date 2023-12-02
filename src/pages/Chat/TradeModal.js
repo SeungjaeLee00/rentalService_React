@@ -71,7 +71,8 @@ export default function TradeModal(props) {
         dataToSend.endDate=windowtransDate(dataToSend.endDate);
         // dataToSend.startDate = macTransDate(dataToSend.startDate);
         // dataToSend.endDate = macTransDate(dataToSend.endDate);
-
+        
+        console.log(dataToSend);
         axios.post('/api/trades/'+props.postId,dataToSend,{
             headers: { 'Authorization' : `Bearer ${actoken}`,
                 'Auth' : retoken }
