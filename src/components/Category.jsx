@@ -1,43 +1,18 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import useDetectClose from "../hooks/useDetectClose";
-import { useEffect } from "react";
-import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useGetNoHeader from "../hooks/useGetNoHeader";
 
 export default function Category() {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const navigate = useNavigate();
+  const category = useGetNoHeader('/api/category');
 
-  const [category, setCategory] = useState();
-  const [loading, setLoading] = useState();
-  const [error, setError] = useState();
-
-  const FetchCategory = async () => {
-    try {
-      setCategory(null);
-      setError(null);
-
-      setLoading(true);
-      const response = await axios.get('/api/category')
-      setCategory(response.data[1].children);
-      //console.log(response.data[1].children);
-    } catch (error) {
-      setError(error);
-      console.log(error);
-    }
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    FetchCategory();
-  }, [])
-
-  if (loading) return <div>로딩중..</div>
-  if (error) return <div>에러발생..</div>
-  if (!category) return null;
-
+  if (category.loading) return <div>로딩중..</div>
+  if (category.error) return <div>에러발생..</div>
+  if (!category.data) return null;
+  //console.log(category);
   return (
     <Wrapper>
       <DropdownContainer>
@@ -46,7 +21,7 @@ export default function Category() {
         </DropdownButton>
         <Menu $isDropped={myPageIsOpen}>
           <Ul >
-            {category.map(data => (
+            {category.data[1].children.map(data => (
               <Li key={data.id}>
                 <LinkWrapper key={"w" + data.id}>
                   <LinkWrapper1 key={"L"+data.id} onClick={() => { navigate("category/" + data.id, { state: data.name }) }}>

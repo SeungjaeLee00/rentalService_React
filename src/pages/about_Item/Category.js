@@ -7,7 +7,6 @@ import axios from "axios";
 import styled from "styled-components";
 import MessagePagination from "../../components/Pagination";
 
-
 export default function Category() {
     const [watched, setWatched] = useState([]);
     const [filtername, setFilterName] = useState('최신순');
@@ -22,7 +21,6 @@ export default function Category() {
     const id = useParams();
     console.log(id);
     const [searchtitle,setSearchTitle]=useState('');
-    let title = '';
     const [searcherror,setSearchError] = useState('');
     let query = '';
     const SetQuery = () => {

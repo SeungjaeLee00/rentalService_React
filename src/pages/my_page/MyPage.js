@@ -4,6 +4,7 @@ import Nav from "../SideNav/Index";
 import MyPageTop from '../../components/MyPageTop';
 import WriteBtn from '../../components/WriteBtn';
 import useGet from '../../hooks/useGet';
+import useReactQuery from '../../hooks/useReactQuery';
 
 export default function MyPage() {
 
@@ -17,7 +18,6 @@ export default function MyPage() {
   if(mypost.error||myrent.error||myborrow.error||myreview.error||mywriterw.error) return <div>에러발생</div>;
   if(mypost.loading||myrent.loading||myborrow.loading||myreview.loading||mywriterw.loading) return <div>로딩중</div>;
   if(!mypost.data||!myrent.data||!myborrow.data||!myreview.data||!mywriterw.data) return null;
-  
   
   return (
     <div>
