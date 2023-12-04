@@ -53,7 +53,6 @@ const Wrapper = styled.div`
   width: 120px;
   height: 40px;
   border-radius:7px;
-  margin:20px 0px;
   transition: all 0.5s;
   &:hover{
     background-color: rgb(66, 66, 253);

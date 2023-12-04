@@ -11,7 +11,7 @@ import useReactQuery from '../../hooks/useReactQuery';
 function ItemMain() {
   //모든상품들
   const store= useReactQuery('/api/posts');
-
+  
   //최근본상품들
   const [watched, setWatched] = useState([]);
   let filter;

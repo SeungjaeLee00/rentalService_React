@@ -4,7 +4,6 @@ import Nav from "../SideNav/Index";
 import MyPageTop from '../../components/MyPageTop';
 import WriteBtn from '../../components/WriteBtn';
 import useGet from '../../hooks/useGet';
-import useReactQuery from '../../hooks/useReactQuery';
 
 export default function MyPage() {
 

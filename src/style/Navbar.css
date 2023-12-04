@@ -27,31 +27,34 @@
 
 .top-right {
     display: flex;
-    font-size: min(2vw, 20px); /* 화면 너비의 2% 또는 최소 20px 중 작은 값 선택 */
+    font-size: 15px;
     color: black;
-    margin-right: 5vw; /* 화면 너비의 5% */
+    margin-right: 7vw; 
 }
 
 .top-right a{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-right:2vw;
     text-decoration: none;
     border:none;
     color:black;
     &:hover{
         font-weight: bold;
       }
-    margin-right: 20px;
+    
 }
 
 
 .header-bottom{
     display:flex;
     flex-direction: row;
-    
-    /* margin-top:15px; */
+    margin-top:3vh;
+    justify-content: space-between;
 }
 .admin-link{
     margin-left:30vw;
-    margin-top:3vh;
     text-decoration: none;
     font-size: min(1.5vw, 20px);
     color:black;
@@ -63,9 +66,6 @@
 .searchbar{
     display:flex;
     flex-direction: row;
-    margin-top:20px;
-    width:300px;
-    margin-left: 13vw; /* 좌측 여백을 화면 너비에 대한 비율로 설정 */
 }
 .searchform{
     display: flex;
@@ -92,4 +92,22 @@
     border-left: none;
     border-bottom-right-radius: 1vw;
     border-top-right-radius: 1vw;
+}
+
+.linkwrap{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: min(2vw, 20px);
+    margin-right:7vw;
+}
+
+.linkwrap a{
+    text-decoration: none;
+    border:none;
+    color:black;
+    &:hover{
+        font-weight: bold;
+      }
+      margin-right:1.5vw;
 }
