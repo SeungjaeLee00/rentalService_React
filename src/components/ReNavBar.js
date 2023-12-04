@@ -73,11 +73,7 @@ export default function ReNavBar() {
                 <div className="top-right">
                     {isAuthenticated ? <Link onClick={handleLogout}>로그아웃</Link> :
                         <Link onClick={handleLogin}>로그인</Link>}
-
                     <Link to="/signup">회원가입</Link>
-
-
-
                 </div>
             </div>
             <div className="header-bottom">
@@ -86,7 +82,7 @@ export default function ReNavBar() {
                     <form className='searchform' onSubmit={(e) => { handleSubmit(e) }}>
                         <UlDiv>
                             <Ul onClick={() => { setView(!view) }}>{searchfilter}</Ul>
-                            {view && <SearchDropdown setSearchFilter={setSearchFilter} view={view} setView={setView} />}
+                            {view && <SearchDropdown  setSearchFilter={setSearchFilter} view={view} setView={setView} />}
                         </UlDiv>
                         <input type="text"
                             value={search}

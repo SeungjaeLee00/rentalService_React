@@ -22,24 +22,23 @@ export default function Category() {
     console.log(id);
     const [searchtitle,setSearchTitle]=useState('');
     const [searcherror,setSearchError] = useState('');
+
+    //stroe에 서버 api에서 불러온 데이터 
+    const [store, setStore] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    
     let query = '';
     const SetQuery = () => {
         console.log(id.search.split(' '));
         const searcharray = id.search.split(' ');
-        if (Number(searcharray[0])>=0)
-        {
-            console.log('Number');
-            query = `categoryName=${searcharray[0]}`;
-            setSearchTitle(searcharray[0]);
-        }
-        //게시글제목으로 검색한경우.
-        else if (searcharray[0] == 'title') {
+        //제목 필터로 검색한경우
+        if (searcharray[0] == 'title') {
             query = 'title=' + searcharray[1];
             setSearchTitle(searcharray[1]);
         }
         //카테고리로 필터 클릭후 검색한경우.
         else if (searcharray[0] == 'categoryName') {
-            console.log('카테고리 클릭');
             //카테고리명 + 제품  검색할때 ex)'전자제품 소니' 
             if (searcharray[2] != null) {
                 query = 'categoryName=' + searcharray[1] + '&title=' + searcharray[2];
@@ -52,19 +51,13 @@ export default function Category() {
 
     }
 
-    //stroe에 서버 api에서 불러온 데이터 
-    const [store, setStore] = useState();
-
-    const [items, setItems] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-
     //검색했을경우. 
     const fetchItem = async () => {
         try {
             setError(null);
-            setItems(null);
+            setStore(null);
             setLoading(true);
+            console.log(query);
             const response = await axios.get(`/api/posts?${query}`);
             console.log(response);
             setStore(response.data.postList);
@@ -93,14 +86,25 @@ export default function Category() {
         }
         setLoading(false);
     };
+
     //필터 최신순 클릭 실행 함수 
     const sortLatestItem = () => {
         setFilterName('최신순');
         let temp = [...store];
         temp = temp.sort((a, b) => {
+            if (a.createdTime > b.createdTime) return -1;
+            if (a.createdTime < b.createdTime) return 1;
+            return 0;
+        })
+        setStore(temp);
+    }
+    //필터 오래된순 클릭 실행함수
+    const sortOldItem = ()=>{
+        setFilterName('오래된순');
+        let temp =[...store];
+        temp = temp.sort((a,b)=>{
             if (a.createdTime > b.createdTime) return 1;
             if (a.createdTime < b.createdTime) return -1;
-            return 0;
         })
         setStore(temp);
     }
@@ -123,21 +127,19 @@ export default function Category() {
     useEffect(() => {
         //검색했을때
         if (state == null) {
+            SetQuery();
             fetchItem();
         }
         //카테고리클릭했을때
-        else {
+        else{
             fetchCategory();
         }
         //최근본상품
         let localarray = localStorage.getItem('watched');
         setWatched(JSON.parse(localarray));
-        return()=>{
-            //검색했을때 get의 url주소 + 변수값(검색에 따라 유동적) 설정
-            SetQuery();
-        }
-
     }, [state]);
+
+
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 6;
     const ItemIndex = 6;
@@ -157,6 +159,7 @@ export default function Category() {
     if (loading) return <div>로딩중..</div>
     if (error) return <div>에러발생</div>
     if (!store) return null;
+    
 
     return (
 
@@ -177,6 +180,7 @@ export default function Category() {
 
                         <Dropdown.Menu >
                             <Dropdown.Item key={1} onClick={() => { sortLatestItem() }} >최신순</Dropdown.Item>
+                            <Dropdown.Item key={2} onClick={() => { sortOldItem() }} >오래된순</Dropdown.Item>
                             <Dropdown.Item key={3} onClick={() => { sortLowerItem() }} >가격낮은순</Dropdown.Item>
                             <Dropdown.Item key={4} onClick={() => { sortHigherItem() }}>가격높은순</Dropdown.Item>
                         </Dropdown.Menu>
