@@ -85,6 +85,7 @@ function Dashboard() {
   return (
     <div className='dashboard'>
       <Carousel />
+      {/* 모바일 화면일때 컴포넌트*/}
     </div>
   )
 }

@@ -28,6 +28,7 @@ import Profile from './pages/my_page/Profile';
 import NotFound from './components/NotFound';
 import My_WriteReview from './pages/Review/My_WriteReview';
 import Admin from './pages/Admin/Admin'
+import HowToUse from './pages/Etc/HowToUse';
 
 
 
@@ -41,7 +42,7 @@ function App() {
             <Route exact path="/" element={<ItemMain />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/*" element={<NotFound/>}/>
-
+             
             <Route exact path="/find-pw" element={<FindPw />} />
             <Route exact path='/reset-pw' element={<ResetPW />} />
             <Route exact path="/loginpage" element={<LoginPage />} />
@@ -52,6 +53,7 @@ function App() {
             <Route exact path='/itemmain/detail/chat' element={<Chat />} />
             <Route exact path='/category/:search' element={<Category />} />
 
+            <Route exact path='/howtouse' element={<HowToUse/>}/>
             
             <Route exact path='/my-page/chats' element={<MyChat />} />
             <Route exact path='/my-page/chats/message/:id' element={<OneMessage />} />

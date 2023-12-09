@@ -11,7 +11,7 @@ export default function MyPageTop(props) {
     if (!myinfo.data) return null;
 
     return (
-        <div style={{ borderBottom: "1px solid black", paddingBottom: "45px" }} className="content">
+        <div className="content">
             <div className="mypagetop">
                 <div className="toptitle">
                     <h1 onClick={()=>{navigate("/my-page")}}>My Page</h1>
@@ -60,7 +60,7 @@ export default function MyPageTop(props) {
     )
 }
 let QuantityDiv = styled.p`
-font-size:2vw;
+font-size:20px;
 color:blue;
 font-weight:bold;
 margin-top:25px;
@@ -78,7 +78,7 @@ animation:fadein 0.7s ease-in-out;
 `
 
 let UserDiv = styled.div`
-font-size:1.5vw;
+font-size:20px;
 font-weight:bold;
 margin-left:0.1vw;
   `

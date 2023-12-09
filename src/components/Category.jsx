@@ -50,24 +50,29 @@ const Wrapper = styled.div`
   color: white;
   font-size: 14px;
   background: black;
-  width: 120px;
+  width: 8vw;
   height: 40px;
   border-radius:7px;
   transition: all 0.5s;
   &:hover{
     background-color: rgb(66, 66, 253);
   }
+  @media all and (max-width:500px){
+    width:20vw;
+}
 `;
 
 const DropdownContainer = styled.div`
   position: relative;
   text-align: center;
-  
 `;
 
 const DropdownButton = styled.div`
   cursor: pointer;
   font-size:20px;
+  @media all and (max-width:500px){
+    font-size:15px;
+}
 `;
 
 const Menu = styled.div`
@@ -94,6 +99,8 @@ const Menu = styled.div`
       transform: translate(-50%, 0);
       left: 50%;
     `};
+   
+    
 `;
 
 const Ul = styled.ul`
@@ -117,12 +124,7 @@ const Ul = styled.ul`
 `;
 
 const Li = styled.li`
-  //width:200px;
-  //margin-top:13px;
-  //border:1px solid blue; 
   border-bottom:1px solid rgb(221, 218, 218);
-  
-  
 `;
 
 const LinkWrapper = styled.a`
@@ -132,8 +134,10 @@ const LinkWrapper = styled.a`
   color:gray;
   flex-direction:row;
   justify-content : left;
-  
-  
+  //border:1px solid red;
+  @media all and (max-width:500px){
+    height:30px;
+  }
 `;
 
 const LinkWrapper1 = styled.button`
@@ -150,6 +154,11 @@ border:none;
   cursor:pointer;
   font-weight:bold;
 }
+@media all and (max-width:500px){
+  font-size:10px;
+  width:50px;
+  margin:0px;
+}
 `
 
 const LinkWrapper2 = styled.button`
@@ -164,6 +173,13 @@ margin-top:15px;
   color:blue;
   cursor:pointer;
   font-weight:bold;
+}
+@media all and (max-width:500px){
+  font-size:10px;
+  width:60px;
+  padding-left:0px;
+  margin:0px;
+  
 }
 `
 

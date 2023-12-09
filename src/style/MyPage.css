@@ -1,6 +1,8 @@
 .content{
     display:flex;
     flex-direction: column;
+    border-bottom: 1px solid black;
+    padding-bottom: 45px;
 }
 
 .mypagetop{
@@ -42,7 +44,9 @@
     display:flex;
     flex-direction: row;
     margin-left:200px;
-
+}
+@media all and (max-width:950px){
+    .inforight{display:none;}
 }
 
 .userpost{
