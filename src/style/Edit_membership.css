@@ -20,31 +20,19 @@
 }
 
 .EditBtn {
-    position: absolute; /* 버튼 중앙에 정렬 */
-    left: 50%;
-    transform: translateX(-50%);
     background-color: black;
     color: white;
     width: 20vw; /* 유동 너비 */
     max-width: 150px;
     height: 6vh; /* 유동 높이 */
-    border-radius: 2vw; /* 유동 경계 반지름 */
-    margin-top: 3vh; /* 유동 마진 */
-    text-align: center;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.5s;
+    margin-right:10px;
 }
 
 
 .EditBtn:hover {
-    font-weight: bold;
-    background-color: rgb(66, 66, 253);
-    transition: 0.5s;
-
-    width: 150px;
-    height: 40px;
-    border-radius: 10px;
-    margin-left:5px;
     &:hover {
         font-weight: bold;
         background-color: rgb(66, 66, 253);

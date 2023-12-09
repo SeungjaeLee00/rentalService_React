@@ -141,3 +141,10 @@
   #modalCloseBtn:hover {
     cursor: pointer;
   }
+  .Modal button{
+    background-color: white;
+    border-radius: 5px;
+    &:hover{
+        background-color: rgb(66, 66, 253);
+    }
+  }

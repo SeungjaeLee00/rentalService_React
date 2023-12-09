@@ -66,7 +66,7 @@ const Do_Report = (props) => {
             ) : (
               <Form onSubmit={onSubmitHandler}>
                 <FormGroup>
-                  <h4>뭐든빌리개</h4>
+                  <h4>Billim</h4>
                   <p style={{ fontSize: "13px", color: "#4A4F5A" }}>신고 내용을 입력 해주세요.</p>
                   <InputLabel htmlFor="reportType">신고 종류</InputLabel>
                   <NativeSelect

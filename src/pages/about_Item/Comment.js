@@ -141,6 +141,7 @@ export default function Comment(props) {
 
     useEffect(() => {
         FetchComment();
+        console.log(usernickname);
     }, [])
 
     if (loading) <div>로딩중..</div>

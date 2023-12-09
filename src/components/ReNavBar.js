@@ -95,7 +95,7 @@ export default function ReNavBar() {
                     </form>
                 </div>
                 <div>
-                    <ul className='linkwrap'>
+                    {nickname!="admin"?<ul className='linkwrap'>
                         <li>
                         {isAuthenticated ? <Link to="my-page">마이빌림</Link> : <Link to="/loginpage">마이빌림</Link>}
                         </li>
@@ -105,9 +105,10 @@ export default function ReNavBar() {
                         <li>
                         {isAuthenticated ? <Link to="/my-page/chats">쪽지함</Link> : <Link to="/loginpage">쪽지함</Link>}
                         </li>
-                        </ul> 
+                        </ul> :  <div className='admin-link'><Link to="/admin">관리자 페이지</Link></div>}
+                    
                 </div>
-                {nickname == "admin" ? <div className='admin-link'><Link to="/admin">관리자 페이지</Link></div> : null}
+                
 
             </div>
         </div>

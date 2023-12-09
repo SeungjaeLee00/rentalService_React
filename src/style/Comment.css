@@ -74,6 +74,10 @@
     font-weight: bold;
     font-size: 1.2vw; /* 유동 폰트 사이즈 */
 }
+.comment-writername{
+    font-weight:bold;
+    color:rgb(66, 66, 253);
+}
 
 .comment-time {
     color: rgb(147, 147, 147);
