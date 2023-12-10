@@ -12,11 +12,11 @@ export default function MessageListBody({message, who})
                 <table>
                     <thead>
                         <tr >
-                            <th key={2}>보낸사람</th>
-                            <th key={3}>게시물제목</th>
+                            <th className="sender" key={2}>보낸이</th>
+                            <th key={3}>게시물</th>
                             <th key={4} className="th3">내용</th>
-                            <th key={5}>날짜</th>
-                            <th key={6}>읽음상태</th>
+                            <th className="date" key={5}>날짜</th>
+                            <th className="check" key={6}>읽음상태</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,10 +28,10 @@ export default function MessageListBody({message, who})
                                 navigate('/my-page/chats/message/' + a.id, { state: { copy } });
                             }}>
                                 <td >{a.senderNickname}</td>
-                                <td> {a.postTitle}</td>
+                                <td className="sender-body"> {a.postTitle}</td>
                                 <td >{a.content.length > 20 ? a.content.substr(0, 15) + "..." : a.content}</td>
-                                <td >{SetKST(a.createdDate)}</td>
-                                <td >{a.checked ? <div style={{ color: "gray" }}>읽음</div> : <div style={{ fontWeight: "bold" }}>읽지않음</div>}</td>
+                                <td className="date-body" >{SetKST(a.createdDate)}</td>
+                                <td className="check-body" >{a.checked ? <div style={{ color: "gray" }}>읽음</div> : <div style={{ fontWeight: "bold" }}>읽지않음</div>}</td>
                             </tr>
                         ))}
                     </tbody>

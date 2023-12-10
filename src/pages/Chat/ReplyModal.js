@@ -51,11 +51,11 @@ export default function ReplyModal(props) {
                     X
                 </button>
                 <div style={{ marginTop: "12px" }}>수신 : {props.senderNickname}</div>
-                <TextField
+                <textarea
                     label="내용"
-                    multiline rows={13}
+                    multiline rows={10}
                     onChange={(e) => { setReplyMsg(e.target.value) }}
-                    style={{ width: "430px", marginTop: "10px" }}></TextField>
+                    ></textarea>
                 <button onClick={reply} style={{ marginTop: "15px" }}>전송</button>
             </div>
         </div>

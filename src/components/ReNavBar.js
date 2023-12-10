@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import '../style/Navbar.css'
 import { useAuth } from './AuthContext';
 import { useState } from 'react';
@@ -17,6 +17,7 @@ export default function ReNavBar() {
     const [isLogin, setIsLogin] = useState(false);
     const [view, setView] = useState(false);
     const [searchfilter, setSearchFilter] = useState('제목');
+    const location = useLocation();
 
     const fetchMyInfo = async () => {
         try {
@@ -29,10 +30,15 @@ export default function ReNavBar() {
             //sessionstorage에 저장
             window.sessionStorage.setItem("nickname", response.data.nickname);
             setNickname(response.data.nickname);
+            
         } catch (e) {
+            console.log(location);
             if (e.response.data.code == '511') {
                 console.log(e);
-                alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+                if(location.pathname!="/loginpage")
+                {
+                    alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+                }
                 window.location.replace('/loginpage');
             }
         }
@@ -94,7 +100,7 @@ export default function ReNavBar() {
                         <button className='searchbarbtn'>🔍</button>
                     </form>
                 </div>
-                <div>
+                <div className='ul-wrap'>
                     {nickname!="admin"?<ul className='linkwrap'>
                         <li>
                         {isAuthenticated ? <Link to="my-page">마이빌림</Link> : <Link to="/loginpage">마이빌림</Link>}

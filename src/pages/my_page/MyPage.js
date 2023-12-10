@@ -4,6 +4,8 @@ import Nav from "../SideNav/Index";
 import MyPageTop from '../../components/MyPageTop';
 import WriteBtn from '../../components/WriteBtn';
 import useGet from '../../hooks/useGet';
+import { useEffect, useState } from 'react';
+import { debounce } from '@material-ui/core';
 
 export default function MyPage() {
 
@@ -13,22 +15,33 @@ export default function MyPage() {
   const myborrow = useGet('/api/trades/borrow-item?true');
   const myreview = useGet('/api/reviews/my');
   const mywriterw = useGet('/api/reviews?nickname='+nickname);
-  
+  const [screen,setScreen] = useState(window.outerWidth);
+    const handleResize=debounce(()=>{
+        setScreen(window.outerWidth);
+    })
+    useEffect(()=>{
+        window.addEventListener('resize',handleResize);
+        console.log(screen);
+        return()=>{
+            window.removeEventListener('resize', handleResize);
+        }
+
+    },[])
   if(mypost.error||myrent.error||myborrow.error||myreview.error||mywriterw.error) return <div>에러발생</div>;
   if(mypost.loading||myrent.loading||myborrow.loading||myreview.loading||mywriterw.loading) return <div>로딩중</div>;
   if(!mypost.data||!myrent.data||!myborrow.data||!myreview.data||!mywriterw.data) return null;
-  
+  console.log(screen);
   return (
     <div>
       {/* 마이페이지 상단 */}
-       <MyPageTop mypost={mypost.data.totalElements}   myrent={myrent.data.totalElements} 
+       <MyPageTop screen={screen} mypost={mypost.data.totalElements}   myrent={myrent.data.totalElements} 
        myborrow={myborrow.data.totalElements} myreview={myreview.data.totalElements}  mywriterw={mywriterw.data.totalElements} />
       
       <div className="mypagebottom">
         {/* 마이페이지 왼쪽 nav */}
-        <div className="bottom-leftnav"><Sidebar /></div>
+        {screen>=750? <div className="bottom-leftnav"><Sidebar /></div> : null}
         {/* https://leejams.github.io/useOutletContext/ , sidebar클릭했을때 보이는 컴포넌트들(mypost,mylike...*/}
-        <div className='bottom-right'><Outlet context={{ mypost,  myrent,  myborrow, myreview, mywriterw}} /></div>
+        <div className='bottom-right'><Outlet context={{ screen, mypost,  myrent,  myborrow, myreview, mywriterw}} /></div>
       </div>
       <WriteBtn />
     </div>

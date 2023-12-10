@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ViewProfile = (props) => {
   console.log(props.userData);
+
   const navigate = useNavigate();
   if(!props.userData||!props.userData.address) return null;
   return (
@@ -37,10 +38,11 @@ const ViewProfile = (props) => {
           </tr>
         </tbody>
       </table>
-      <div className='btn-wrap'>
+     <div className='btn-wrap'>
       <button className="EditBtn" onClick={()=>{props.startEditing()}}>회원정보수정</button>
       <button className="EditBtn" onClick={()=>{navigate('/find-pw')}}>비밀번호변경</button>
       </div>
+      
     </div>
   );
 }

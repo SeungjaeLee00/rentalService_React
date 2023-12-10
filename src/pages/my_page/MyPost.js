@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function MyPost() {
     const { mypost, setMyPost } = useOutletContext();
+    const {screen, setSize} =useOutletContext();
     const navigate = useNavigate();
     //console.log(mypost);
     
@@ -48,13 +49,11 @@ export default function MyPost() {
 
     return (
         <div className="MyPost-wrap">
-            
              <div className="post-top">
-                <p style={{ padding: "30px", fontSize: "25px", fontWeight: "bold" }}>게시물내역 조회</p>
+                <p>게시물내역 조회</p>
             </div>
-
             {/* 게시물 컴포넌트 */}
-            {mypost? <ItemTable mypost={currentPosts()}  navigate={navigate} DeleteItem={DeleteItem} /> : null}
+            {mypost? <ItemTable screen={screen} mypost={currentPosts()}  navigate={navigate} DeleteItem={DeleteItem} /> : null}
             
             
             <MessagePagination length={mypost.length} HandlePageNumbers={HandlePageNumbers}/>
@@ -62,33 +61,35 @@ export default function MyPost() {
     )
 }
 
-function ItemTable({ mypost, navigate, DeleteItem }) {
+function ItemTable({ screen, mypost, navigate, DeleteItem }) {
     console.log(mypost);
 
     return (
         <div className="post-bottom">
-            <table style={{ width:"100%",borderRight:"1px solid black"}}>
+            <table>
                 <thead>
                     <tr>
                         <th >게시물 제목</th>
                         <th >작성일자</th>
-                        <th> 수정,  삭제</th>
+                        {screen>=750? <th> 수정,  삭제</th>: null}
+                        
                     </tr>
                 </thead>
                 <tbody>
                     {mypost.map(a => (
                         <tr  key={a.id} onClick={() => navigate("/itemmain/detail/" + a.id, { state: a.createdTime })}>
                             <td className="first-td">
-                                <div>
-                                    <img style={{ width: "100px", height: "100px" }} src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + a.link}></img>
-                                </div>
-                                <div className="first-td-info">
-                                    <div style={{ fontSize: "20px", fontWeight: "bold", marginTop: "30px" }}>{a.title}</div>
-                                </div>
+                                <span>
+                                    {screen>=750?<img style={{ width: "100px", height: "100px" }} src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + a.link}></img>
+                                    :null}
+                                </span>
+                                <span className="first-td-info">
+                                    <p>{a.title}</p>
+                                </span>
 
                             </td>
-                            <td>{SetKST(a.createdTime)}</td>                            
-                            <td>
+                            <td className="second-td">{SetKST(a.createdTime)}</td>          
+                            {screen>=750?<td>
                                 <button onClick={(e) => {
                                     //이벤트버블링 예방 stopProgration()함수사용
                                     e.stopPropagation();
@@ -101,7 +102,8 @@ function ItemTable({ mypost, navigate, DeleteItem }) {
                                     DeleteItem(a.id);
                                     
                                 }}>삭제</button>
-                            </td>
+                            </td> :null}                  
+                            
                         </tr>
                     ))}
 

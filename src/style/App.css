@@ -4,12 +4,17 @@
   font-style: normal;
   src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff');
 }
+.root-wrap{
+  font-family: 'NanumBarunGothic', sans-serif;
+  font-weight:bold;
+}
 
 body {
   font-family: 'NanumBarunGothic', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
   
 }
 @media all and (max-width:500px)

@@ -1,18 +1,26 @@
 .message-wrap{
     display:flex;
-    flex-direction:column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    padding-top:30px;
 }
-
+.message-title{
+    margin:auto auto;
+}
+.list-wrap{
+    display:flex;
+    flex-direction: column;
+    margin:auto auto;
+}
 .message-nav{
     display:flex;
     flex-direction:row;
-    width:1000px;
+    margin-right:auto;
+    margin-top:40px;
 }
 .message-mid{
     display:flex;
     flex-direction: row;
+    justify-content: space-between;
     margin-bottom:10px;
 }
 .message-nav button{
@@ -38,7 +46,6 @@
 
 .message-content table{
     border-top: 1px solid black;
-    width:1000px;
 }
 
 .message-content thead{
@@ -58,7 +65,7 @@
     padding:20px 30px;
 }
 .th3{
-    width:350px;
+    width:auto;
 }
 
 .message-content th td{
@@ -83,12 +90,32 @@
 
 .message-mid button{
     margin-top: 10px;
-    height:35px;
+    height:auto;
+    width:auto;
     border-radius: 5px;
     background-color: black;
     color:white;
     transition: all 0.5s;
     &:hover{
         background-color: rgb(66, 66, 253);
+    }
+}
+
+@media all and (max-width:500px)
+{
+    .message-content{
+        font-size: 13px;
+    }
+    .message-content thead{
+        font-size:13px;
+    }
+    .message-content th{
+        padding: 10px;
+    }
+    .sender, .sender-body, .check, .check-body{
+        display:none;
+    }
+    .date, .date-body{
+        font-size:10px;
     }
 }

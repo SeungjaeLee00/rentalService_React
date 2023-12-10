@@ -1,8 +1,8 @@
 .editmy-top {
     border-bottom: 0.2vw solid black; /* 유동 선굵기 */
     font-weight: bold;
-    margin-top: 4vh; /* 유동 마진 */
-    padding-bottom: 1vh; /* 유동 패딩 */
+    margin-top: 2vh; /* 유동 마진 */
+    margin-left:3vw;
 }
 
 .my-data {
@@ -15,14 +15,14 @@
 }
 .btn-wrap{
     display:flex;
-    margin-left: 500px;
     margin-top: 30px;
+    justify-content: center;
 }
 
 .EditBtn {
     background-color: black;
     color: white;
-    width: 20vw; /* 유동 너비 */
+    width: auto;
     max-width: 150px;
     height: 6vh; /* 유동 높이 */
     border-radius: 10px;
@@ -110,3 +110,14 @@
     
 }
 
+@media all and (max-width:750px) {
+    .my-datatable{
+        font-size: 13px;        
+    }    
+}
+/* 모바일 환경에서 회원정보수정 불가 */
+@media all and (max-width:500px){
+    .btn-wrap{
+        display:none;
+    }
+}

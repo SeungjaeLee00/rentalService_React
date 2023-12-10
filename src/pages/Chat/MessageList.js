@@ -40,9 +40,9 @@ export default function MessageList(props) {
     const [messagelength, setMessageLength] = useState('');
 
     //pagenumbers state 변경함수. 아래 페이지네이션 번호 클릭할때 해당 번호의 값이 들어온다. 
-    const HandlePageNumbers = (x)=>{
+    const HandlePageNumbers = (x) => {
         console.log(x);
-        if(x==0||x==1) x=0;
+        if (x == 0 || x == 1) x = 0;
         setPageNumbers(x);
     }
     //페이지네이션에 해당하는 메시지들을 불러오는 함수 ex) 0~9, 10~19 
@@ -183,7 +183,7 @@ export default function MessageList(props) {
     if (!message) return null;
 
     return (
-        <div>
+        <div className="list-wrap">
             <div className="message-nav">
                 <button className={isActive1 ? "receivebtn" : "inactiveBtn"}
                     onClick={() => { receiveHandle() }}>받은쪽지 </button>
@@ -191,7 +191,7 @@ export default function MessageList(props) {
                     onClick={() => { sendHandle() }}>보낸쪽지</button>
             </div>
             <div className="message-mid">
-                <button onClick={readMsgDelete}>읽은쪽지 삭제</button>
+                <div><button onClick={readMsgDelete}>읽은쪽지 삭제</button></div>
                 <div className="message-dropbox">
                     <Wrapper>
                         <DropdownContainer>
@@ -201,11 +201,11 @@ export default function MessageList(props) {
                             <Menu isDropped={myPageIsOpen}>
                                 <Ul >
                                     <Li>
-                                        <LinkWrapper onClick={() => { setMessage(originmsg);}}>전체</LinkWrapper>
+                                        <LinkWrapper onClick={() => { setMessage(originmsg); }}>전체</LinkWrapper>
                                     </Li>
                                     <Li>
-                                        {sortcheck == true ? <LinkWrapper onClick={() => { SortTime(); setSortCheck(!sortcheck)}}>오래된순</LinkWrapper> :
-                                            <LinkWrapper onClick={() => {SortTime(); setSortCheck(!sortcheck);}}>최신순</LinkWrapper>}
+                                        {sortcheck == true ? <LinkWrapper onClick={() => { SortTime(); setSortCheck(!sortcheck) }}>오래된순</LinkWrapper> :
+                                            <LinkWrapper onClick={() => { SortTime(); setSortCheck(!sortcheck); }}>최신순</LinkWrapper>}
                                     </Li>
                                     <Li>
                                         <LinkWrapper onClick={() => { setReadCheck(true); NoRead(); }}>읽지않은쪽지</LinkWrapper>
@@ -216,10 +216,12 @@ export default function MessageList(props) {
                     </Wrapper>
                 </div>
             </div>
-            {/* 메시지 내용 */}
-            {message ? < MessageListBody message={message} who={who}/> : null}
-            {/* 하단 페이지네이션 */}
-            <MessagePagination  length={messagelength}  HandlePageNumbers={HandlePageNumbers}/>
+            <div className="message-btm">
+                {/* 메시지 내용 */}
+                {message ? < MessageListBody message={message} who={who} /> : null}
+                {/* 하단 페이지네이션 */}
+                <MessagePagination length={messagelength} HandlePageNumbers={HandlePageNumbers} />
+            </div>
         </div>
     )
 }
@@ -240,7 +242,7 @@ const Wrapper = styled.div`
   height: 28px;
   border-radius:7px;
   margin-top:20px;
-  margin-left:790px;
+  margin-left:auto;
   transition: all 0.5s;
 `;
 

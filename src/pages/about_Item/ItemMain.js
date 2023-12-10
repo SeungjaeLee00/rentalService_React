@@ -6,9 +6,16 @@ import WriteBtn from '../../components/WriteBtn';
 import Watched from './Watched';
 import Carousel from '../../components/Carousel';
 import useReactQuery from '../../hooks/useReactQuery';
+import { useLocation } from 'react-router-dom';
+import { debounce } from '@material-ui/core';
 
 
 function ItemMain() {
+  const [screen,setScreen] = useState(window.outerWidth);
+    const handleResize=debounce(()=>{
+        setScreen(window.outerWidth);
+    })
+
   //모든상품들
   const store= useReactQuery('/api/posts');
   
@@ -24,6 +31,11 @@ function ItemMain() {
     }
     else if (localarray.length > 0) {
       setWatched(JSON.parse(localarray));
+    }
+    window.addEventListener('resize',handleResize);
+    console.log(screen);
+    return()=>{
+        window.removeEventListener('resize', handleResize);
     }
   }, [])
 
@@ -53,7 +65,7 @@ function ItemMain() {
 
   return (
     <div className='page-container'>
-      <Dashboard />
+      <Dashboard screen={screen} />
       <hr />
       <div className='Main-Content'>등록된 상품</div>
 
@@ -81,10 +93,10 @@ function ItemMain() {
   );
 };
 
-function Dashboard() {
+function Dashboard({screen}) {
   return (
     <div className='dashboard'>
-      <Carousel />
+      <Carousel screen={screen}/>
       {/* 모바일 화면일때 컴포넌트*/}
     </div>
   )

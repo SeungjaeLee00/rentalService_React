@@ -1,8 +1,7 @@
 // 모달창 아닌 로그인 페이지
 import React, { useState } from 'react';
 import {  Button, Form, FormGroup } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { NavLink, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import KaKaoLogin from '../../socialLogin/KakaoLogin';
 import NaverLogin from '../../socialLogin/NaverLogin';
@@ -14,7 +13,8 @@ import '../../style/LoginPage.css';
 import { useRef } from 'react';
 
 function LoginPage() {
-    const dispatch = useDispatch();
+    const location = useLocation();
+    console.log(location);
     const { login } = useAuth();
 
     const [username, setUsername] = useState("");

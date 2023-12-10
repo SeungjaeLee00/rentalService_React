@@ -35,6 +35,11 @@
     flex-direction: column;
     margin-left:100px;
 }
+.infoleft a{
+    color: gray;
+    margin-top: 15px;
+    text-decoration: none;
+}
 
 .name{
     font-size:50px;
@@ -44,9 +49,7 @@
     display:flex;
     flex-direction: row;
     margin-left:200px;
-}
-@media all and (max-width:950px){
-    .inforight{display:none;}
+    font-size:20px;
 }
 
 .userpost{
@@ -70,6 +73,35 @@
     flex-direction: column;
     margin-left: 100px;
 }
+@media all and (max-width:1000px){
+    .toptitle{
+        margin:10px;
+       margin-left:20px;
+    }
+    .infoleft{
+        margin: 0px;
+        margin-left:20px;
+    }
+    .name{
+        font-size:25px;
+    }
+    .topinfo{
+        flex-direction: column;
+        margin:0px;
+    }
+    .inforight{
+        flex-direction: row;
+        margin:0 auto;
+        margin-left:20px;
+        font-size: 13px;
+    }
+    .userrent, .userborrow, .userreview{
+        margin:0px;
+        margin-left:30px;
+    }
+}
+
+
 
 .mypagebottom{
     display:flex;
@@ -83,9 +115,18 @@
 .bottom-right{
     width:100%;
 }
+.post-top p{
+    padding:30px;
+    font-size: 25px;
+    font-weight: bold;
+}
 .post-bottom{
     display:flex;
     flex-direction: column;
+}
+.post-bottom table{
+    width:100%;
+    border-right: 1px solid black;
 }
 .post-bottom thead{
     border-top: 1px solid black;
@@ -99,12 +140,11 @@
     
 }
 .post-bottom th{
-    padding-left:55px;
+    padding-left:auto;
 }
 .post-bottom td{
     height:150px;
-    padding-top: 30px;
-    padding-left: 55px;
+    padding:auto auto;
 }
 .post-bottom tbody tr:hover{
     cursor: pointer;
@@ -140,9 +180,52 @@ tbody button:hover
     flex-direction:row;
 }
 .first-td-info{
-    display:flex;
-    flex-direction: column;
-    margin-left: 20px;
+   margin-left:10px;
+}
+.first-td-info p{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+@media all and (max-width:750px){
+    .post-bottom table{
+        font-size:13px;
+        width:auto;
+    }
+    .post-top{
+        padding:30px;
+    }
+    .post-top p{
+        font-size: 25px;
+        padding:0px;
+    }
+    .post-bottom th, td{
+        padding:auto auto;
+        padding-top:0px;
+        padding-bottom:0px;
+    }
+    .post-bottom td{
+        height:auto;
+    }
+    .first-td{
+        padding:0px;
+        padding-bottom: 12px;
+        text-align: center;
+    }
+    .second-td{
+        padding:auto;
+    }
+    .post-bottom tr{
+        text-align: center;
+    }
+    .post-bottom th{
+        padding:15px;
+    }
+    .first-td-info p{
+        font-size: 13px;
+        margin:10px;
+    }
+
 }
 
 /* 찜페이지 css */

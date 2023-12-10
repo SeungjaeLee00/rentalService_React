@@ -22,6 +22,12 @@
   padding-top: 230px;
   padding-bottom:110px;
 }
+@media all and (max-width:800px){
+  .body{
+    padding-top:0px;
+    padding:auto 0px;
+  }
+}
 
 
 .foot{

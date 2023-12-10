@@ -7,10 +7,13 @@ import arrowleft from '../assets/img/arrpw-left.png'
 import { Link } from 'react-router-dom';
 
 
-export default function Carousel() {
+export default function Carousel({screen}) {
     const slideRef = useRef(null);
     const [currentImgIdx, setCurrentImgIdx] = useState(0);
-    let IMG_WIDTH = 800;
+    let IMG_WIDTH 
+    if(screen<=500) IMG_WIDTH = screen-50;
+    else if(screen>=800) IMG_WIDTH=800;
+    else if(screen>500) IMG_WIDTH=screen;
     const slideRange = currentImgIdx * IMG_WIDTH;
 
     useEffect(() => {
@@ -20,9 +23,10 @@ export default function Carousel() {
 
     useEffect(() => {
         let time = setTimeout(() => {
-            if (currentImgIdx == 1) setCurrentImgIdx(currentImgIdx - 1);
-            else if (currentImgIdx == 0) setCurrentImgIdx(currentImgIdx + 1);
-        }, 5000)
+                if (currentImgIdx == 1) setCurrentImgIdx(currentImgIdx - 1);
+                else if (currentImgIdx == 0) setCurrentImgIdx(currentImgIdx + 1);
+            }, 5000)
+        
         return () => {
             clearInterval(time);
         }
@@ -65,9 +69,9 @@ export default function Carousel() {
                             <div>
                                 <H1>Billim</H1>
                             </div>
-                            <div style={{ marginTop: "20px" }} className='dashboard-decoration'>
-                                <div style={{ marginBottom: "50px", fontSize: "30px" }}><p>Billim이 처음이시라면?</p><br /><Link to="/howtouse">서비스 이용방법 보러가기</Link></div>
-                            </div>
+                            <DashBody>
+                                <FirstDiv><P>Billim이 처음이시라면?</P><Link to="/howtouse">서비스 이용방법 보러가기</Link></FirstDiv>
+                            </DashBody>
                         </>
                     </Dash>
                 </SlideWrapper>
@@ -76,6 +80,19 @@ export default function Carousel() {
         </Container>
     )
 }
+const FirstDiv=styled.div`
+margin-bottom:50px;
+@media all and(max-width:500px){
+    font-size:15px;
+}`
+const P=styled.p`
+padding-bottom:30px;
+@media all and(max-width:500px){
+    font-size:10px;
+    color:red;
+    margin-bottom:0px;
+}`
+
 const H1 = styled.h1`
 font-weight:bold;
 font-size:50px;
@@ -135,6 +152,9 @@ const SlideWrapper = styled.div`
 display:flex;
 width:700px;
 height:150px;
+@media all and (max-width:500px){
+    margin-left:15px;
+}
 
 `;
 const Dash = styled.div`

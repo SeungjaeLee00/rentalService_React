@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   color: white;
   font-size: 14px;
   background: black;
-  width: 8vw;
+  width: 10vw;
   height: 40px;
   border-radius:7px;
   transition: all 0.5s;
@@ -70,6 +70,7 @@ const DropdownContainer = styled.div`
 const DropdownButton = styled.div`
   cursor: pointer;
   font-size:20px;
+  width:auto;
   @media all and (max-width:500px){
     font-size:15px;
 }

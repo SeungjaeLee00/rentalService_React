@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../style/modal.css'
@@ -9,6 +9,8 @@ import ViewProfile from './ViewProfile';
 import EditForm from './EditForm';
 
 const Edit_membership = (props) => {
+  const state= useLocation();
+  console.log(state);
   const navigate = useNavigate();
   const actoken = localStorage.accessToken;
   const retoken = localStorage.refreshToken;
@@ -90,7 +92,7 @@ const Edit_membership = (props) => {
         <p>기본 회원정보</p>
       </div>
       {isEditing? <EditForm userData={userData} userData2={userData2}/> : 
-      <ViewProfile userData={userData} userData2={userData2} startEditing={startEditing} />}
+      <ViewProfile  userData={userData} userData2={userData2} startEditing={startEditing} />}
   </div>
   );
 }
