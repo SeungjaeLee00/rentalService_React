@@ -28,6 +28,9 @@ export default function MyLike() {
             })
     }, [])
 
+
+    if(!likepost) return null;
+
     return (
         <div className="MyLike-wrap">
             <div style={{ padding: "10px", borderBottom: "3px solid black" }} className="Like-top">

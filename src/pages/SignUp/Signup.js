@@ -6,9 +6,11 @@ import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import Address from '../../components/Address';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 function Signup() {
+    const navigate = useNavigate();
     //email -> useRef로 설정. useState로 하면 불필요한 리렌더링 발생 , 
     //실사간 유효성 검사 x -> 인증하기 버튼을 클릭하기 때문.
     const email = useRef();
@@ -54,6 +56,10 @@ function Signup() {
                 axios.post('/api/auth/sign-up', data)
                     .then(response => {
                         console.log(response);
+                        alert('회원가입이 완료되었습니다');
+                        navigate('/loginpage');
+                        
+                        
                     }).catch(error => {
                         if (error.response.data.result.msg == "해당 이메일로 가입된 계정이 이미 존재합니다.") {
                             alert('해당 이메일로 가입된 계정이 이미 존재합니다.')
@@ -80,10 +86,11 @@ function Signup() {
         //사용자가 이메일을 입력했으면 
         if (email.current.value) {
             console.log(email.current.value);
-            axios.post('/email/sign-up?email=' + email.current.value)
+            axios.post('/api/email/sign-up?email=' + email.current.value)
                 .then(response => {
                     setEmailCheck(true);
                     console.log('이메일 전송 성공:', response.data);
+                    alert('이메일을 확인해주세요');
 
                 })
                 .catch(error => {
@@ -121,28 +128,31 @@ function Signup() {
 
     return (
         <div className='signupwrap'>
-            <h2 style={{ marginTop: "30px", marginBottom: "10px", fontWeight: "bold" }}>회원가입</h2>
-            <p style={{ marginTop: "10px", marginBottom: "20px", fontSize: "20px" }}>Billim을 시작해보세요!</p>
-
+            <div className='signupTop'>
+            <h2 >회원가입</h2>
+            <p>Billim을 시작해보세요!</p>
+            </div>
             <div className='signupform'>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='email-wrap'>
-                        <div>
+                        <div className='emailTop'>
                             <label>이메일</label>
                             <input className="inputField"
                                 ref={email}
                                 placeholder="abcdef@google.com" />
-                            <button className='emailbtn' onClick={(e) => {
+                        </div>
+                        <div className='emailbtm'>
+                        {emailcheck ? <h5 style={{ color: "blue" }}>이메일을 전송하였습니다</h5> : null}
+                        <button className='emailbtn' onClick={(e) => {
                                 //새로고침방지
                                 e.preventDefault();
                                 SendEmail();
                             }}> 인증 </button>
                         </div>
-                        {emailcheck ? <h5 style={{ color: "black" }}>이메일을 전송하였습니다</h5> : null}
                     </div>
 
                     <div className='key-wrap'>
-                        <div>
+                        <div className='keyTop'>
                             <label>이메일 인증키</label>
                             <input className="inputField"
                                 placeholder="인증번호를 입력하세요" {...register('authKey', {
@@ -209,16 +219,21 @@ function Signup() {
                     </div>
 
                     <div className='address-wrap'>
-                        <div>
+                        <div className='addressTop'>
                             <label >주소</label>
-                            {/* 우편번호 zipcode (ex. 50139) */}
-                            <input className='inputZipcode' value={zipcode} onClick={() => { addresstoggle() }}></input>
-                            <button onClick={(e) => {
-                                addresstoggle();
-                                e.preventDefault();
-                            }}>주소찾기</button>
+                            <div>
+                                {/* 우편번호 zipcode (ex. 50139) */}
+                                 <input className='inputZipcode' value={zipcode} onClick={() => { addresstoggle() }}></input>
+                                 <button onClick={(e) => {
+                                   addresstoggle();
+                                   e.preventDefault();
+                                 }}>주소찾기</button>
+                            </div>
                         </div>
-                        <input className='inputAddress' value={address} onClick={() => { addresstoggle() }} ></input>
+                        <div className='addressbtm'>
+                            <label>상세주소</label>
+                            <input className='inputAddress' value={address} onClick={() => { addresstoggle() }} ></input>
+                        </div>
                     </div>
 
 

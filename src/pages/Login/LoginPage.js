@@ -94,7 +94,7 @@ function LoginPage() {
                         <Button color="dark" type="submit">로그인</Button>
                     </div>
 
-                    <div className="small" style={{ marginLeft: "80px" }}>
+                    <div className="small" >
                         <NavLink  className="find-pw" to="/find-pw">비밀번호 찾기</NavLink>{' | '}
                         <NavLink  className="signup" to="/signup">회원 가입</NavLink>
                     </div>
@@ -104,7 +104,6 @@ function LoginPage() {
                         <NaverLogin />
                         <KaKaoLogin />
                         <GoogleLogin />
-
                     </div>
                 </FormGroup>
             </Form>

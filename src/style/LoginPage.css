@@ -4,6 +4,10 @@
     align-items: center;
     width:100%;
 }
+.small{
+    text-align: center;
+}
+
 .Login-wrap input{
     padding:13px;
 }
@@ -154,5 +158,18 @@
 {
     .Login-wrap{
         padding-top:30px;
+        font-size:13px;
+    }
+    .Login-wrap h1{
+        font-size:5vw;
+    }
+    .Login-wrap p{
+        font-size:15px;
+    }
+    .Login-wrap input{
+        width:250px;
+    }
+    .Login-wrap button{
+        width:250px;
     }
 }
