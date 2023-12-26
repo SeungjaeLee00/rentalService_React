@@ -1,14 +1,32 @@
+.upload-wrap{
+    margin-top: 10px;
+}
+.upload-top{
+    display:flex;
+    border-bottom: 1px solid black;
+    padding-left:200px;
+    padding-bottom:20px;
+}
+.upload-top p{
+    color:red;
+    font-size: 14px;
+}
 .upload-wrap h5{
     font-weight: bold;
 }
+.upload-btn{
+    text-align:center
+}
 .img-wrap{
     display: flex;
+    padding-left:200px;
 }
 .img-wrap input{
     margin-left:30px;
 }
 .title-wrap{
     display:flex;
+    padding-left:200px;
 }
 .title-wrap input{
     margin-left:80px;
@@ -19,11 +37,13 @@
 
 .category-wrap{
     display:flex;
+    padding-left:200px;
 }
 
 
 .name-wrap{
     display: flex;
+    padding-left:200px;
 }
 .name-wrap input{
     margin-left:45px;
@@ -35,6 +55,7 @@
 .price-wrap{
     display:flex;
     flex-direction: row;
+    padding-left:200px;
 }
 .price-wrap input{
     padding: 7px;
@@ -43,13 +64,65 @@
     width:150px;
 }
 
-
 .content-wrap{
     display:flex;
+    padding-left:200px;
 }
 .content-wrap textarea{
     padding:7px;
     margin-left:80px;
     border-radius: 5px;
     border:2px solid black;
+}
+
+@media all and (max-width:900px){
+    .body{
+        padding-top:170px;
+    }
+    .upload-wrap{
+        font-size:13px;
+    }
+    .upload-wrap h5{
+        font-size:13px;
+    }
+    .title-wrap input{
+        width:300px;
+    }
+    
+    .name-wrap input{
+        width:200px;
+    }
+    .upload-top{
+        padding-left:30px;
+    }
+    .title-wrap{
+        padding-left:30px;
+    }
+    .img-wrap{
+        padding-left:30px;
+    }
+    .category-wrap{
+        padding-left:30px;
+    }
+    .name-wrap{
+        padding-left:30px;
+    }
+    .price-wrap{
+        padding-left:30px;
+    }
+    .content-wrap{
+        padding-left:30px;
+    }
+}
+
+@media all and (max-width:800px){
+    .body{
+        padding-top:50px;
+    }
+}
+@media all and (max-width:450px){
+    .upload-wrap h5{
+        font-size:10px;
+    }
+
 }

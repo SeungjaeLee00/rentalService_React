@@ -33,23 +33,20 @@ export default function MyLike() {
 
     return (
         <div className="MyLike-wrap">
-            <div style={{ padding: "10px", borderBottom: "3px solid black" }} className="Like-top">
-                <p style={{ fontSize: "30px" , padding:"20px"}}>찜</p>
+            <div className="Like-top">
+                <p>찜</p>
             </div>
             <div className="Like-bottom">
                 {likepost ? likepost.postList.map(a => (
                     <div key={a.id} className="Like-item" onClick={()=>{navigate("/itemmain/detail/"+a.id)}}>
-                        <div className="item-img">
-                            <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + a.link} style={{ width: "200px", height: "200px" }}></img>
+                        <div className="Like-img">
+                            <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + a.link}></img>
                         </div>
                         <div className="item-info">
                             <div style={{ fontSize: "20px", fontWeight: "bold", }}>{a.title}</div>
                             <div style={{ marginTop: "10px" }}>{a.createdTime.replace("T", " ")}</div>
                         </div>
-
-
                     </div>
-
                 )) : null}
             </div>
         </div>

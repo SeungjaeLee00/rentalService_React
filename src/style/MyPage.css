@@ -236,6 +236,15 @@ tbody button:hover
     margin-left:20px;
 }
 
+.Like-top{
+    padding:10px;
+    border-bottom: 3px solid black;
+}
+
+.Like-top p{
+    font-size: 30px;
+    padding: 20px;
+}
 
 .Like-bottom{
     display:flex;
@@ -243,7 +252,10 @@ tbody button:hover
     flex-wrap:wrap;
     margin-top:30px;
 }
-
+.Like-img img{
+    width:200px;
+    height:200px;
+}
 .Like-item{
     display:flex;
     flex-direction:row;
@@ -264,6 +276,12 @@ tbody button:hover
     transform:scaleY(1.02);
     box-shadow: 5px 5px 10px -10px gray;
     cursor:pointer;    
+}
+@media all and (max-width:700px){
+    .Like-item img{
+        width:100px;
+        height:100px;        
+    }
 }
 
 /* 대여해주는 상품 css */

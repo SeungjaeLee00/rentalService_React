@@ -195,20 +195,19 @@ const Upload_Item = () => {
 
   return (
     <div className='upload-wrap'>
-      <div style={{ marginTop: "10px", marginLeft: "110px", marginRight: "110px", marginBottom: "80px" }}>
-        <div style={{ display: "flex" }}>
+        <div className='upload-top'>
           <h3 >상품 정보</h3>
-          <p style={{ color: 'red', fontSize: "14px" }}>{"\u00A0"}{"\u00A0"}{"\u00A0"}{"\u00A0"}{"\u00A0"}*필수항목</p>
+          <p>{"\u00A0"}{"\u00A0"}{"\u00A0"}{"\u00A0"}{"\u00A0"}*필수항목</p>
         </div>
-        <p style={{ border: "solid 1px #000000", marginTop: "10px" }}></p>
+       
         <br />
         <Input itemtitle={itemtitle} itemcontent={itemcontent} itemcategoryName={itemcategoryName} itemname={itemname} itemprice={itemprice}
           saveFile={saveFile} saveTitle={saveTitle} saveCategory={saveCategory} saveName={saveName} savePrice={savePrice}
           saveContent={saveContent} category={category} />
-
-        <Button
-          onClick={produce}>등록하기</Button>
-      </div>
+        <div className='upload-btn'>
+          <Button onClick={produce}>등록하기</Button>
+        </div>
+     
     </div>
   );
 };
@@ -237,7 +236,7 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,
       <div className='category-wrap'>
         <h5>카테고리</h5>
         <p style={{ color: 'red' }}>*</p>
-        <FormControl sx={{ minWidth: 300, marginLeft: " 55px" }}>
+        <FormControl sx={{ minWidth: 250, marginLeft: " 55px" }}>
           <NativeSelect
             onChange={saveCategory}
             //value={itemcategoryName}
@@ -305,9 +304,8 @@ function Input({ itemtitle, itemcontent, itemcategoryName, itemname, itemprice,
 export default Upload_Item;
 
 let Button = styled.button`
-  margin-left:830px;
   margin-top:25px;
-  width:130px;
+  width:200px;
   height:40px;
   border-radius: 5px;
     background-color: black;
