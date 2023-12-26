@@ -133,8 +133,8 @@ function OneItem(props) {
     <div className='Detail_Item_wrap'>
       {/* img */}
       <div className='Detail_Item_Img'>
-        <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + props.item.imageName}
-          style={{ width: "400px", height: "400px" }} />
+        <img className='oneImg' src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + props.item.imageName}
+           />
       </div>
 
       {/* 상품정보,설명 등 */}
@@ -145,8 +145,8 @@ function OneItem(props) {
           <span>{props.item.title}</span>
         </div>
         <div className="Detail_Item_Name_Price">
-          <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Name"> {props.item.item.name}</div>
-          <div style={{ marginTop: 20, fontSize: 30, fontWeight: "bold" }} className="Detail_Item_Price">
+          <div  className="Detail_Item_Name"> {props.item.item.name}</div>
+          <div  className="Detail_Item_Price">
             {props.item.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
         </div>
         <div style={{ marginTop: 20 }}>

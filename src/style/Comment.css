@@ -37,8 +37,8 @@
 /* 댓글 상단오른쪽 삭제, 답글 달기  */
 .onecomment-btn button {
     height: 3.5vh;
-    font-size: 1vw; /* 유동 폰트 사이즈 */
-    width: 6vw; /* 유동 너비 */
+    font-size: 13px;
+    width:80px;
     border: 0.5px solid gray;
     background-color: white;
     border-radius: 0.2vw;
@@ -56,9 +56,8 @@
 }
 /* 댓글입력칸 바로 아래 댓글작성 버튼 */
 .comment-top button {
-    width: 8vw; /* 유동 너비 */
+    width:100px;
     border-radius: 0.5vw;
-    max-width: 200px;
     margin-left: auto; /* 자동 왼쪽 정렬 */
     margin-top: 1vh; /* 유동 마진 */
     background-color: black;
@@ -72,7 +71,7 @@
 
 .comment-name, .comment-writername {
     font-weight: bold;
-    font-size: 1.2vw; /* 유동 폰트 사이즈 */
+    font-size: 15px;
 }
 .comment-writername{
     font-weight:bold;
@@ -81,7 +80,7 @@
 
 .comment-time {
     color: rgb(147, 147, 147);
-    font-size: 1vw; /* 유동 폰트 시ㅏㅇ즈 */
+    font-size: 10px;
 }
 
 .onecomment-content, .onecomment-bottom {
@@ -89,8 +88,7 @@
 }
 /* 댓글 아래의 답글 달기 , +..개의 답글 버튼 */
 .onecomment-bottom button {
-    width: 10vw; /* 유동 너비 */
-    max-width: 200px;
+    width: 100px;
     background-color: white;
     border: none;
     transition: all 0.5s;
