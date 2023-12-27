@@ -104,11 +104,20 @@ export default function ReNavBar() {
                         {isAuthenticated ? <Link to="/my-page/chats">쪽지함</Link> : <Link to="/loginpage">쪽지함</Link>}
                         </li>
                         </ul> :  <div className='admin-link'><Link to="/admin">관리자 페이지</Link></div>}
-                    
                 </div>
-                
-
             </div>
+            <div className='searchbar2'>
+            <form className='searchform' onSubmit={(e) => { handleSubmit(e) }}>
+                     <input type="text"
+                        className='mobile-search'
+                        value={search}
+                        placeholder='어떤 상품을 찾으시나요?'
+                        onChange={(e) => {
+                        setSearch(e.target.value);
+                    }}></input>
+                    <button className='mobile-searchbtn'>🔍</button>
+            </form>
+                </div>
         </div>
     )
 }
