@@ -196,7 +196,7 @@ export default function Category() {
 }
 
 let Div = styled.div`
-  font-size:2vw;
+  font-size:15px;
   font-weight: bold;
   margin-left:5vw;
   `

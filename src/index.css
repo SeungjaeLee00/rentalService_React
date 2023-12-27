@@ -86,8 +86,6 @@
   flex-direction: row;
   flex-wrap:wrap;
   justify-content: space-around;
-  align-items: center;
- 
 }
 
 /* 상품한개부분섹션 */
@@ -101,9 +99,21 @@
   transition: 0.2s;
   margin-top: 30px;
   font-size: 20px;
-  @media all and (max-width:500px){
-    width:250px;
-    font-size: 15px;
+}
+@media all and (max-width:500px){
+  .Item{
+    width:180px;
+  }
+  .Item-Wrap{
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+  }
+  .Item-Date{
+    font-size:15px;
+  }
+  .Item-Price{
+    margin:5px 0px;
   }
 }
 .Item:hover{
@@ -154,18 +164,6 @@
   margin-top: 7vh;
 }
 
-@media all and (max-width:500px){
-  .Item{
-    width:250px;
-    font-size: 15px;
-  }
-  .Item-Date{
-    font-size:15px;
-  }
-  .Item-Price{
-    margin:5px 0px;
-  }
-}
 
 
 /* 메인화면의 방금 등록된 상품 문구*/
@@ -234,4 +232,11 @@
     padding:30px 15px;
     height:200px;
   }
+}
+
+/* 글쓰기버튼 */
+.upload_item{
+  position: fixed;
+  right:45px;
+  bottom:30px;
 }
