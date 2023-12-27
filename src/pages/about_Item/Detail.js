@@ -96,8 +96,7 @@ function Detail() {
             <OneItem item={item} id={id} location={location} setItem={setItem} itemlike={itemlike} setItemLike={setItemLike}
               navigate={navigate} openReportModal={openReportModal} showReportPopup={showReportPopup} closeReportnModal={closeReportnModal}
               onProfileClick={onProfileClick} />
-            {/* 글쓰기 컴포넌트 */}
-            <WriteBtn />
+           
           </div>
         </div>
       </div>
@@ -132,7 +131,7 @@ function OneItem(props) {
   return (
     <div className='Detail_Item_wrap'>
       {/* img */}
-      <div className='Detail_Item_Img'>
+      <div>
         <img className='oneImg' src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + props.item.imageName}
            />
       </div>
@@ -149,9 +148,9 @@ function OneItem(props) {
           <div  className="Detail_Item_Price">
             {props.item.item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</div>
         </div>
-        <div style={{ marginTop: 20 }}>
-          <span>{SetKST(props.location.state)}</span>
-          <div style={{ marginTop: "20px" }}>{props.item.content}</div>
+        <div style={{ marginTop: "15px" }}>
+          <span className='Item_Time'>{SetKST(props.location.state)}</span>
+          <div className='Item_Content' >{props.item.content}</div>
           <div className='nickname-btn'>
             <div className='profile' onClick={props.onProfileClick}  >👤{props.item.writer.nickname}</div>
             <button onClick={props.openReportModal} variant="secondary">❗️</button>

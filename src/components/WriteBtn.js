@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 let Button = styled.button`
   border-Radius:30px;
-  font-Size:20px;
+  font-Size:15px;
   width:100px;
   height:50px;
   border:none;
