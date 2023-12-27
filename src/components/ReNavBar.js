@@ -5,12 +5,11 @@ import { useState } from 'react';
 import Category from './Category';
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import axios from 'axios';
+import useReactQueryHeader from '../hooks/useReactQueryHeader';
 
 export default function ReNavBar() {
 
-    const actoken = localStorage.accessToken;
-    const retoken = localStorage.refreshToken;
+   
     const [nickname, setNickname] = useState(sessionStorage.getItem('nickname'));
     const navigate = useNavigate();
     const { isAuthenticated, logout } = useAuth();
@@ -18,32 +17,12 @@ export default function ReNavBar() {
     const [view, setView] = useState(false);
     const [searchfilter, setSearchFilter] = useState('제목');
     const location = useLocation();
+    
 
-    const fetchMyInfo = async () => {
-        try {
-            const response = await axios.get('/api/members/my-profile', {
-                headers: {
-                    'Authorization': `Bearer ${actoken}`,
-                    'Auth': retoken
-                }
-            })
-            //sessionstorage에 저장
-            window.sessionStorage.setItem("nickname", response.data.nickname);
-            setNickname(response.data.nickname);
-            
-        } catch (e) {
-            console.log(location);
-            if (e.response.data.code == '511') {
-                console.log(e);
-                if(location.pathname!="/loginpage")
-                {
-                    alert('로그인이 만료되어 로그인 페이지로 이동합니다');
-                }
-                window.location.replace('/loginpage');
-            }
-        }
-    }
-
+    const myinfo2 = useReactQueryHeader('/api/members/my-profile');
+    console.log(myinfo2);
+    
+    
     const handleLogout = () => {
         logout();
         sessionStorage.setItem('nickname', null);
@@ -64,11 +43,24 @@ export default function ReNavBar() {
         else temp = 'categoryName' + ' ' + temp;
         navigate("/category/" + temp);
     }
+
     useEffect(() => {
-        fetchMyInfo();
-
-    }, [])
-
+        if(myinfo2.data){
+            setNickname(myinfo2.data.nickname);
+            window.sessionStorage.setItem("nickname", myinfo2.data.nickname);
+        }
+        if(myinfo2.error){
+            if(myinfo2.error.response.data.code==511)
+             {
+                 if(location.pathname!="/loginpage")
+                 {
+                     alert('로그인이 만료되어 로그인 페이지로 이동합니다');
+                  }
+                 window.location.replace('/loginpage');
+        }
+        }
+    }, [myinfo2])
+    
 
     return (
         <div className="header">

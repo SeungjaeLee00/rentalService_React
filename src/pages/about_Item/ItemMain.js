@@ -33,7 +33,7 @@ function ItemMain() {
       setWatched(JSON.parse(localarray));
     }
     window.addEventListener('resize',handleResize);
-    console.log(screen);
+    // console.log(screen);
     return()=>{
         window.removeEventListener('resize', handleResize);
     }

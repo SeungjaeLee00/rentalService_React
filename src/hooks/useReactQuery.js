@@ -8,7 +8,7 @@ export default function useReactQuery(url)
             return a.data;
         })
     })
-    console.log(result);
+    //console.log(result);
     return result;
     
 }
