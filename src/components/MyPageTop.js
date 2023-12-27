@@ -9,7 +9,7 @@ export default function MyPageTop(props) {
     if(myinfo.error==true) return <div>에러발생...</div>
     if(myinfo.loading==true) return <div>로딩중...</div>
     if (!myinfo.data) return null;
-    
+    console.log(myinfo);
     return (
         <div className="content">
             <div className="mypagetop">
@@ -37,7 +37,7 @@ function MobileTopInfo({screen,myinfo,mypost,myrent,myborrow,mywriterw,myreview}
     return(
         <div className="topinfo">
         <div className="infoleft">
-            <div className="name">{myinfo.nickname}</div>
+            <div className="name">{myinfo.data.nickname}</div>
             <Link to="/my-page/edit-membership" state={{screen:screen}}>내정보</Link>
         </div>
         <div className="inforight">
@@ -70,8 +70,9 @@ function PcTopInfo({myinfo,mypost,myrent,myborrow,mywriterw,myreview}){
     return(
         <div className="topinfo">
         <div className="infoleft">
-            <div className="name">{myinfo.nickname}</div>
+            <div className="name">{myinfo.data.nickname}</div>
             <Link to="/my-page/edit-membership">회원정보수정</Link>
+            <Link to="/find-pw">비밀번호변경</Link>
         </div>
         <div className="inforight">
             <div className="userpost">

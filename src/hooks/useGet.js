@@ -21,7 +21,7 @@ export default function useGet(url)
             });
             console.log(response.data);
             setData(response.data);
-        }catch(e){
+        }catch(eroor){
             // if (e.response.data.code == '511') {
             //     console.log(e);
             //     if(location.pathname!="/loginpage")
