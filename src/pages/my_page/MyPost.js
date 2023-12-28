@@ -63,7 +63,6 @@ export default function MyPost() {
 
 function ItemTable({ screen, mypost, navigate, DeleteItem }) {
     console.log(mypost);
-
     return (
         <div className="post-bottom">
             <table>

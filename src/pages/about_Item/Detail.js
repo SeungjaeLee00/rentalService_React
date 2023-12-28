@@ -23,8 +23,7 @@ function Detail() {
   const [item, setItem] = useState();
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
-  //itemlike -> 단일상품 좋아요 표시
-  const [itemlike, setItemLike] = useState();
+
 
   const [showReportPopup, setshowReportPopup] = useState(false);
 
@@ -35,8 +34,6 @@ function Detail() {
       setLoading(true);
       const response = await axios.get('/api/posts/' + id);
       setItem(response.data);
-      setItemLike(response.data.likes);
-      //console.log(response);
     }
     catch (e) {
       console.log(e);
@@ -84,7 +81,7 @@ function Detail() {
   if (loading) <div>로딩중입니다..</div>
   if (error) <div>에러가발생했습니다..</div>
   if (!item) return null;
-
+  console.log(item);
   return (
     <>
       <div className='Detail-container'>
@@ -93,7 +90,7 @@ function Detail() {
             <Do_Report open={showReportPopup} close={closeReportnModal} ></Do_Report>
 
             {/* 상품정보컴포넌트 */}
-            <OneItem item={item} id={id} location={location} setItem={setItem} itemlike={itemlike} setItemLike={setItemLike}
+            <OneItem item={item} id={id} fetchPostInfo={fetchPostInfo} location={location} setItem={setItem} 
               navigate={navigate} openReportModal={openReportModal} showReportPopup={showReportPopup} closeReportnModal={closeReportnModal}
               onProfileClick={onProfileClick} />
            
@@ -113,11 +110,7 @@ function OneItem(props) {
       headers: { Auth: localStorage.refreshToken },
     })
       .then(response => {
-        let copy = props.item;
-        copy.likes = 1;
-        props.setItem(copy);
-        { props.itemlike ? props.setItemLike(false) : props.setItemLike(true) }
-
+        props.fetchPostInfo();
       })
       .catch(error => {
         if(error.response.data.code==511)
@@ -128,6 +121,7 @@ function OneItem(props) {
         console.log(error.response);
       })
   }
+
   return (
     <div className='Detail_Item_wrap'>
       {/* img */}
@@ -157,7 +151,7 @@ function OneItem(props) {
           </div>
         </div>
         <div className='Item_Button'>
-          <button className='likebtn' onClick={LikeAdd}>{props.itemlike ? <span style={{ color: "red" }}>♥</span> : <span>♥</span>}</button>
+          <button className='likebtn' onClick={LikeAdd}><span style={{ color: "red" }}>♥</span>&nbsp;<span>{props.item.likes}</span></button>
           <button className='sendbtn' onClick={() => props.navigate('/itemmain/detail/chat', { state: props.item })}>쪽지보내기</button>
           <Do_Report open={props.showReportPopup} close={props.closeReportnModal} postId={props.id} />
         </div>

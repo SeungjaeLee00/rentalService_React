@@ -4,12 +4,13 @@ import SetKST from "../../utils/SetKST";
 import { useState } from "react";
 
 const Posts = (props) => {
-  //console.log(props.currentPosts);
+  console.log(props.currentPosts);
   const navigate = useNavigate();
   const [posts,setPosts]= useState([]); 
   const [postlength,setPostLength] =useState(props.currentPosts.length);
 
   useEffect(()=>{
+    
     setPosts(props.currentPosts);
     //페이지의 아이템의 개수가 6개미만이면 그에 맞는 길이(개수)만큼 길이설정
     if(props.currentPosts.length<6)
@@ -36,8 +37,10 @@ const Posts = (props) => {
         props.setWatched(copy);
         navigate('/itemmain/detail/' + item.id, { state: item.createdTime });
       }}>
+        
         <div className='Item-Img'>
-          <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/'+item.link } style={{ width: 200, height: 200 }} />
+          {item.link? <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/'+item.link } style={{ width: 200, height: 200 }} />
+          : <p>이미지가 없습니다.</p>}
         </div>
         <div className='Item-Information-Wrap'>
           <div className='Item-Name-Price-Date-Wrap'>
