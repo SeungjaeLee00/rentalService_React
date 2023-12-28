@@ -32,23 +32,12 @@ export default function Category() {
     const SetQuery = () => {
         console.log(id.search.split(' '));
         const searcharray = id.search.split(' ');
-        //제목 필터로 검색한경우
+        //검색한경우
         if (searcharray[0] == 'title') {
             query = 'title=' + searcharray[1];
             setSearchTitle(searcharray[1]);
         }
-        //카테고리로 필터 클릭후 검색한경우.
-        else if (searcharray[0] == 'categoryName') {
-            //카테고리명 + 제품  검색할때 ex)'전자제품 소니' 
-            if (searcharray[2] != null) {
-                query = 'categoryName=' + searcharray[1] + '&title=' + searcharray[2];
-                setSearchTitle(searcharray[2]);
-            }
-            //제품, 카테고리 한개만 입력하여 검색한경우 
-            else setSearchError('카테고리, 제품을 입력해주세요 ex)가전제품 아이폰');
-        }
         console.log(query);
-
     }
 
     //검색했을경우. 
@@ -159,7 +148,7 @@ export default function Category() {
     if (loading) return <div>로딩중..</div>
     if (error) return <div>에러발생</div>
     if (!store) return null;
-    
+    console.log(store);
 
     return (
 

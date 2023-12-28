@@ -49,7 +49,7 @@ function ItemMain() {
   if (store.isLoading) return <div>로딩중..</div>;
   if (store.error) return <div>에러가 발생했습니다</div>;
   if (!store.data) return null;
-  //console.log(store);
+  console.log(store);
   
   //상품이 하나도 없으면 로컬도 0으로초기화.
   if (store.data.postList.length == 0) localStorage.setItem('watched', JSON.stringify([]));

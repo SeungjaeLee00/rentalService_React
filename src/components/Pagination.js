@@ -27,10 +27,10 @@ export default function MessagePagination({ length, HandlePageNumbers }) {
     const Numbers = [];
  
 
-    for (let i = 0; i <= length / 10; i++) {
+    for (let i = 0; i <= length / 6; i++) {
         Numbers.push(i);
     }
-
+    console.log(length);
     return (
         <PagiWrapDiv>
             {Numbers.map((a, index) => {

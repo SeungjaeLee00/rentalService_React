@@ -78,10 +78,6 @@ export default function ReNavBar() {
                 <div className="category"><Category /></div>
                 <div className="searchbar">
                     <form className='searchform' onSubmit={(e) => { handleSubmit(e) }}>
-                        <UlDiv>
-                            <Ul onClick={() => { setView(!view) }}>{searchfilter}</Ul>
-                            {view && <SearchDropdown  setSearchFilter={setSearchFilter} view={view} setView={setView} />}
-                        </UlDiv>
                         <input type="text"
                             value={search}
                             className='search'
@@ -121,7 +117,7 @@ export default function ReNavBar() {
         </div>
     )
 }
-
+/*
 function SearchDropdown({ setSearchFilter, view, setView }) {
     return (
         <>
@@ -133,45 +129,4 @@ function SearchDropdown({ setSearchFilter, view, setView }) {
         </>
     )
 }
-
-
-
-
-const UlDiv = styled.div`
-display:flex;
-flex-direction:column;
-width:5vw;
-font-size:0.9vw;
-position:fixed;
-`
-
-
-const Ul = styled.ul`
-border: 2px solid black;
-border-right:none;
-height:6vh;
-padding-top:0.6vw;
-padding-left:0.8vw;
-margin-bottom:0px;
-background-color: rgb(250, 250, 250);
-cursor:pointer;
-border-top-left-radius:1vw;
-border-bottom-left-radius:1vw;
-`
-
-const Li = styled.li`
-list-style-type:none;
-margin-top:0.4vh;
-padding-left:0.8vw;
-cursor:pointer;
-
- &:hover{
-    color:blue;
- }
-
-`
-const LiWrapper = styled.div`
-border:1px solid black;
-background-color: rgb(250, 250, 250);
-
-`
+*/
