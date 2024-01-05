@@ -93,7 +93,6 @@ function Detail() {
             <OneItem item={item} id={id} fetchPostInfo={fetchPostInfo} location={location} setItem={setItem} 
               navigate={navigate} openReportModal={openReportModal} showReportPopup={showReportPopup} closeReportnModal={closeReportnModal}
               onProfileClick={onProfileClick} />
-           
           </div>
         </div>
       </div>
@@ -123,13 +122,14 @@ function OneItem(props) {
   }
 
   return (
+    <div>
     <div className='Detail_Item_wrap'>
       {/* img */}
       <div>
         <img className='oneImg' src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + props.item.imageName}
            />
       </div>
-
+      
       {/* 상품정보,설명 등 */}
       <div className='Item_About'>
         <div className='Detail_Item_Category'>
@@ -144,7 +144,7 @@ function OneItem(props) {
         </div>
         <div style={{ marginTop: "15px" }}>
           <span className='Item_Time'>{SetKST(props.location.state)}</span>
-          <div className='Item_Content' >{props.item.content}</div>
+         
           <div className='nickname-btn'>
             <div className='profile' onClick={props.onProfileClick}  >👤{props.item.writer.nickname}</div>
             <button onClick={props.openReportModal} variant="secondary">❗️</button>
@@ -157,6 +157,12 @@ function OneItem(props) {
         </div>
 
       </div>
+    </div>
+    <div className='Content-Wrap'>
+        <label>상품 내용</label>
+        <p className='Item_Content'>{props.item.content}</p>
+    </div>
+   
     </div>
   )
 }

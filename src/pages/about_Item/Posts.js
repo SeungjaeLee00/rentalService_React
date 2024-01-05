@@ -28,6 +28,7 @@ const Posts = (props) => {
   //초기에 posts에 undefined값이 들어오는 현상 발생 -> 예외처리
   if(posts[0]==undefined) return null;
   
+  console.log(posts);
   return (
     <>
     {posts&&posts.length>0? posts.slice(0, postlength).map(item => (

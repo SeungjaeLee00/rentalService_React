@@ -86,7 +86,7 @@ function ItemMain() {
       </div>
 
       <div className='Main-Content'>최근 본 상품</div>
-      <Watched store={store.data.postList} watched={watched} setWatched={setWatched} />
+      {/* <Watched store={store.data.postList} watched={watched} setWatched={setWatched} /> */}
       {/* 본문하단 글쓰기버튼 */}
       <WriteBtn />
     </div>

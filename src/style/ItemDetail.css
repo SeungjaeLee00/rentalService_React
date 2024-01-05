@@ -3,11 +3,14 @@
     border-bottom: 1px solid black;
     margin-top:7vh;
     padding-bottom: 10vh; /* 유동적인 패딩 */
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .Detail_Item_wrap {
-    display: flex;
-    justify-content: flex-end;
+    display: flex;  
+    /* justify-content: flex-end; */
 }
 .Detail_Item_Category{
     margin-bottom: 2vh;
@@ -35,8 +38,13 @@
     flex-direction: column;
     margin-left:80px;
 }
+.Content-Wrap{
+    margin-top:30px;
+    display: flex;
+    flex-direction: column;
+}
 .Item_Content{
-    margin-top: 20px;
+    margin-top: 30px;    
 }
 
 .Item_Button {
@@ -101,10 +109,14 @@
 }
 
 
-@media all and (max-width:700px){
+@media all and (max-width:900px){
     .oneImg{
         width:200px;
         height: 250px;
+    }
+    .Item_About{
+        margin-left:10px;
+        padding-left:30px;
     }
 }
 @media all and (max-width:500px){
