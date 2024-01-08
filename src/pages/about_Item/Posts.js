@@ -10,7 +10,6 @@ const Posts = (props) => {
   const [postlength,setPostLength] =useState(props.currentPosts.length);
 
   useEffect(()=>{
-    
     setPosts(props.currentPosts);
     //페이지의 아이템의 개수가 6개미만이면 그에 맞는 길이(개수)만큼 길이설정
     if(props.currentPosts.length<6)

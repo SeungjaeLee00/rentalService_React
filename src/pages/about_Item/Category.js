@@ -1,15 +1,16 @@
 import { useLocation, useParams } from "react-router-dom"
 import Posts from "./Posts";
-import Dropdown from 'react-bootstrap/Dropdown';
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import MessagePagination from "../../components/Pagination";
+import MessagePagination from "../../components/Pagination6";
 
 export default function Category() {
     const [watched, setWatched] = useState([]);
-    const [filtername, setFilterName] = useState('최신순');
+    
+    const [pageNum,setPageNum]=useState(0);
+
 
     // state가 null이면 검색 , id가 숫자이면 카테고리
 
@@ -21,13 +22,13 @@ export default function Category() {
     const id = useParams();
     console.log(id);
     const [searchtitle,setSearchTitle]=useState('');
-    const [searcherror,setSearchError] = useState('');
 
     //stroe에 서버 api에서 불러온 데이터 
     const [store, setStore] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    
+    const [length,setLength]=useState();
+
     let query = '';
     const SetQuery = () => {
         console.log(id.search.split(' '));
@@ -40,6 +41,7 @@ export default function Category() {
         console.log(query);
     }
 
+    
     //검색했을경우. 
     const fetchItem = async () => {
         try {
@@ -47,9 +49,10 @@ export default function Category() {
             setStore(null);
             setLoading(true);
             console.log(query);
-            const response = await axios.get(`/api/posts?${query}`);
+            const response = await axios.get(`/api/posts?${query}&page=${pageNum}`);
             console.log(response);
             setStore(response.data.postList);
+            setLength(response.data.totalElements);
         } catch (e) {
             if (e.response.data.code == '511') {
                 alert('로그인이 만료되어 로그인 페이지로 이동합니다');
@@ -66,51 +69,16 @@ export default function Category() {
             setError(null);
             setStore(null);
             setLoading(true);
-            const response = await axios.get(`/api/posts?categoryName=${state}`);
+            const response = await axios.get(`/api/posts?categoryName=${state}&page=${pageNum}`);
             console.log(response);
             setStore(response.data.postList);
+            setLength(response.data.totalElements);
         } catch (e) {
             console.log(e);
             setError(e);
         }
         setLoading(false);
     };
-
-    //필터 최신순 클릭 실행 함수 
-    const sortLatestItem = () => {
-        setFilterName('최신순');
-        let temp = [...store];
-        temp = temp.sort((a, b) => {
-            if (a.createdTime > b.createdTime) return -1;
-            if (a.createdTime < b.createdTime) return 1;
-            return 0;
-        })
-        setStore(temp);
-    }
-    //필터 오래된순 클릭 실행함수
-    const sortOldItem = ()=>{
-        setFilterName('오래된순');
-        let temp =[...store];
-        temp = temp.sort((a,b)=>{
-            if (a.createdTime > b.createdTime) return 1;
-            if (a.createdTime < b.createdTime) return -1;
-        })
-        setStore(temp);
-    }
-    //필터 가격낮은순 클릭 실행 함수
-    const sortLowerItem = () => {
-        setFilterName('가격낮은순');
-        let temp = [...store];
-        temp = temp.sort((a, b) => (a.itemPrice - b.itemPrice));
-        setStore(temp);
-    }
-    //필터 가격높은순 클릭 실행 함수
-    const sortHigherItem = () => {
-        setFilterName('가격높은순');
-        let temp = [...store];
-        temp = temp.sort((a, b) => (b.itemPrice - a.itemPrice));
-        setStore(temp);
-    }
 
 
     useEffect(() => {
@@ -126,60 +94,25 @@ export default function Category() {
         //최근본상품
         let localarray = localStorage.getItem('watched');
         setWatched(JSON.parse(localarray));
-    }, [state]);
+    }, [state,pageNum]);
 
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 6;
     const ItemIndex = 6;
-    const indexOfLast = currentPage * postsPerPage;
-    const indexOfFirst = indexOfLast - postsPerPage;
-
-    //pagenumbers state 변경함수. 아래 페이지네이션 번호 클릭할때 해당 번호의 값이 들어온다. 
-    const HandlePageNumbers = (x) => {
-        setCurrentPage(x);
-    }
-
-    const currentPosts = () => {
-        let currentPosts = store.slice(indexOfFirst, indexOfLast);
-        return currentPosts;
-    }
-
+  
     if (loading) return <div>로딩중..</div>
     if (error) return <div>에러발생</div>
     if (!store) return null;
     console.log(store);
 
     return (
-
         <div className="category-page">
-            {searcherror ? <P>{searcherror}</P> : null}
             <div className="category-top">
                 <div>{state ? <Div> {state} 검색결과</Div> : <Div> {searchtitle} 검색결과 </Div>} </div>
                 <div className="top-right">
-                    <div style={{ fontWeight: "bold" }} >{store.length}개의 상품</div>
-                    {/* react bootstrap으로 필터 드랍다운 구현 */}
-                    <Dropdown style={{ marginLeft: "15px" }}>
-                        <Dropdown.Toggle style={{
-                            background: "white", color: "black",
-                            borderColor: "black", fontWeight: "bold"
-                        }}
-                            variant="success" id="dropdown-basic">{filtername}
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu >
-                            <Dropdown.Item key={1} onClick={() => { sortLatestItem() }} >최신순</Dropdown.Item>
-                            <Dropdown.Item key={2} onClick={() => { sortOldItem() }} >오래된순</Dropdown.Item>
-                            <Dropdown.Item key={3} onClick={() => { sortLowerItem() }} >가격낮은순</Dropdown.Item>
-                            <Dropdown.Item key={4} onClick={() => { sortHigherItem() }}>가격높은순</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    <div style={{ fontWeight: "bold" }} >{length}개의 상품</div>
                 </div>
             </div>
-            <div className="Item-Wrap"><Posts currentPosts={currentPosts()} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} /></div>
-            <MessagePagination length={store.length} HandlePageNumbers={HandlePageNumbers} />
-
-
+            <div className="Item-Wrap"><Posts currentPosts={store} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} /></div>
+            <MessagePagination length={length} pageNum={pageNum} setPageNum={setPageNum}  />
         </div>
     )
 }

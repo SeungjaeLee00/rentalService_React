@@ -25,14 +25,28 @@ export default function MessagePagination({ length, HandlePageNumbers }) {
     //페이지 선택여부 효과주기위한 state
     const [selectedPage, setSelectedPage] = useState(0);
     const Numbers = [];
- 
-
-    for (let i = 0; i <= length / 6; i++) {
+    
+    //현재 페이지네이션의 첫번째 숫자 ex.1, 10, 20 ...
+    const [firstNum,setFirstNum] = useState(0);
+    //현재 페이지네이션의 마지막 숫자 
+    const [lastNum,setLastNum]=useState(firstNum+10);
+    let cnt = 0;
+    for (let i = firstNum; i <= length / 6; i++) {
         Numbers.push(i);
+        cnt++;
+        if(cnt==10)
+        {
+            cnt=0;
+            break;
+        }
     }
-    console.log(length);
+    console.log(length); //87 
+    
     return (
         <PagiWrapDiv>
+            <button onClick={()=>{
+                setFirstNum(lastNum-10);
+            }}>{"<"}</button>
             {Numbers.map((a, index) => {
                 return (
                     <PagiSpan key={index} $isSelected={selectedPage === a} onClick={() => {
@@ -41,6 +55,9 @@ export default function MessagePagination({ length, HandlePageNumbers }) {
                     }}>{a+1}</PagiSpan>
                 )
             })}
+            <button onClick={()=>{
+                setFirstNum(lastNum);
+            }}>{">"}</button>
         </PagiWrapDiv>
     )
 }

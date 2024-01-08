@@ -114,6 +114,9 @@
     margin-left:5vw;
     border-bottom: 2px solid black; 
 }
+input:focus{
+    outline: none;
+}
 .mobile-searchbtn{
     background-color: white;
     width: 40px; 

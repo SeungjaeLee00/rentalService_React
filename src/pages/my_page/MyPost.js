@@ -1,12 +1,13 @@
   import axios from "axios";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import SetKST from "../../utils/SetKST";
-import MessagePagination from "../../components/Pagination";
+import MessagePagination from "../../components/Pagination6";
 import { useState } from "react";
 
 export default function MyPost() {
     const { mypost, setMyPost } = useOutletContext();
     const {screen, setSize} =useOutletContext();
+    const {pageNum,setPageNum}=useOutletContext();
     const navigate = useNavigate();
     //console.log(mypost);
     
@@ -30,22 +31,7 @@ export default function MyPost() {
                 console.log(error);
             })
     }
-    const [currentPage,setCurrentPage] = useState(1);
-    const postsPerPage = 10;
-    const ItemIndex = 10;
-    const indexOfLast = currentPage * postsPerPage; 
-    const indexOfFirst = indexOfLast - postsPerPage;    
-
-    //pagenumbers state 변경함수. 아래 페이지네이션 번호 클릭할때 해당 번호의 값이 들어온다. 
-    const HandlePageNumbers = (x)=>{
-        setCurrentPage(x);
-    }
-
-    const currentPosts=()=>{
-        let currentPosts = 0;
-        currentPosts=mypost.data.postList.slice(indexOfFirst,indexOfLast);
-        return currentPosts;
-    }
+   
 
     return (
         <div className="MyPost-wrap">
@@ -53,10 +39,10 @@ export default function MyPost() {
                 <p>게시물내역 조회</p>
             </div>
             {/* 게시물 컴포넌트 */}
-            {mypost? <ItemTable screen={screen} mypost={currentPosts()}  navigate={navigate} DeleteItem={DeleteItem} /> : null}
+            {mypost? <ItemTable screen={screen} mypost={mypost.data.postList}  navigate={navigate} DeleteItem={DeleteItem} /> : null}
             
             
-            <MessagePagination length={mypost.length} HandlePageNumbers={HandlePageNumbers}/>
+            <MessagePagination length={mypost.data.totalElements} pageNum={pageNum} setPageNum={setPageNum}/>
         </div>
     )
 }
