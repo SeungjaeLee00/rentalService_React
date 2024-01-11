@@ -20,7 +20,7 @@ export default function ReNavBar() {
     
 
     const myinfo2 = useReactQueryHeader('/api/members/my-profile');
-    console.log(myinfo2);
+    //console.log(myinfo2);
     
     
     const handleLogout = () => {

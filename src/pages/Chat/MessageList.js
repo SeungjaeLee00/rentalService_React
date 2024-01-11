@@ -50,6 +50,7 @@ export default function MessageList(props) {
         try {
             setLoading(true);
             //쪽지는 페이지네이션이 0부터시작. 따라서 -1. 
+            console.log(pagenumbers);
             const response = await axios.get(`/api/messages/${who}?page=${pagenumbers}`, {
                 headers: {
                     'Authorization': `Bearer ${actoken}`,
@@ -69,6 +70,7 @@ export default function MessageList(props) {
     }
 
     useEffect(() => {
+        
         //처음 메시지 받아올때(받은메시지)
         FetchMessage();
     }, [pagenumbers])
@@ -181,7 +183,7 @@ export default function MessageList(props) {
     if (loading) <div>메시지로딩중...</div>
     if (error) <div>메시지에러...</div>
     if (!message) return null;
-
+    console.log(message);
     return (
         <div className="list-wrap">
             <div className="message-nav">

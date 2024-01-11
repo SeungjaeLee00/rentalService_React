@@ -8,10 +8,10 @@ import { useEffect, useState } from 'react';
 import { debounce } from '@material-ui/core';
 
 export default function MyPage() {
-  
+  const [apiPageNum,setApiPageNum]=useState(0);
   const [pageNum,setPageNum] = useState(0);
   const nickname = window.sessionStorage.getItem("nickname");
-  const mypost = useGet(`/api/posts/my?page=${pageNum}`);
+  const mypost = useGet(`/api/posts/my?page=${apiPageNum}`);
   const myrent = useGet('/api/trades/rend-item?true');
   const myborrow = useGet('/api/trades/borrow-item?true');
   const myreview = useGet('/api/reviews/my');
@@ -42,7 +42,8 @@ export default function MyPage() {
         {/* 마이페이지 왼쪽 nav */}
         {screen>=750? <div className="bottom-leftnav"><Sidebar /></div> : null}
         {/* https://leejams.github.io/useOutletContext/ , sidebar클릭했을때 보이는 컴포넌트들(mypost,mylike...*/}
-        <div className='bottom-right'><Outlet context={{ screen,pageNum,setPageNum, mypost,  myrent,  myborrow, myreview, mywriterw}} /></div>
+        <div className='bottom-right'><Outlet context={{ screen,pageNum,setPageNum, apiPageNum,setApiPageNum,
+           mypost,  myrent,  myborrow, myreview, mywriterw}} /></div>
       </div>
       <WriteBtn />
     </div>

@@ -12,7 +12,7 @@ export default function useGetNoHeader(url)
         setLoading(true); //로딩시작
         try{
             const response = await axios.get(url)
-            console.log(response.data);
+            //console.log(response.data);
             setData(response.data);
         }catch(error){
             // if(error.response.data.code==511) 

@@ -1,13 +1,14 @@
-  import axios from "axios";
-import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
+import axios from "axios";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import SetKST from "../../utils/SetKST";
 import MessagePagination from "../../components/Pagination6";
-import { useState } from "react";
+
 
 export default function MyPost() {
     const { mypost, setMyPost } = useOutletContext();
     const {screen, setSize} =useOutletContext();
     const {pageNum,setPageNum}=useOutletContext();
+    const{apiPageNum,setApiPageNum}=useOutletContext();
     const navigate = useNavigate();
     //console.log(mypost);
     
@@ -39,16 +40,22 @@ export default function MyPost() {
                 <p>게시물내역 조회</p>
             </div>
             {/* 게시물 컴포넌트 */}
-            {mypost? <ItemTable screen={screen} mypost={mypost.data.postList}  navigate={navigate} DeleteItem={DeleteItem} /> : null}
+            {mypost? <ItemTable screen={screen} mypost={mypost.data.postList}
+            pageNum={pageNum}  navigate={navigate} DeleteItem={DeleteItem} /> : null}
             
             
-            <MessagePagination length={mypost.data.totalElements} pageNum={pageNum} setPageNum={setPageNum}/>
+            <MessagePagination length={mypost.data.totalElements} apiPageNum={apiPageNum}
+            setApiPageNum={setApiPageNum} pageNum={pageNum} setPageNum={setPageNum}/>
         </div>
     )
 }
 
-function ItemTable({ screen, mypost, navigate, DeleteItem }) {
+function ItemTable({ pageNum, screen, mypost, navigate, DeleteItem }) {
     console.log(mypost);
+    const postsPerPage = 6;
+    let indexOfLast = ((pageNum%10) + 1) * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
+    let indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
+    mypost=mypost.slice(indexOfFirst,indexOfLast);
     return (
         <div className="post-bottom">
             <table>

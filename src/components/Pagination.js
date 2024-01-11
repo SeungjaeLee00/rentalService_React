@@ -51,7 +51,7 @@ export default function MessagePagination({ length, HandlePageNumbers }) {
                 return (
                     <PagiSpan key={index} $isSelected={selectedPage === a} onClick={() => {
                         setSelectedPage(a);
-                        HandlePageNumbers(a+1);
+                        HandlePageNumbers(a);
                     }}>{a+1}</PagiSpan>
                 )
             })}
