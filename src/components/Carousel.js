@@ -2,9 +2,9 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useRef } from 'react';
-import arrowright from '../assets/img/arrow-right.png';
-import arrowleft from '../assets/img/arrpw-left.png'
 import { Link } from 'react-router-dom';
+import { AiOutlineRight } from "react-icons/ai";
+import { AiOutlineLeft } from "react-icons/ai";
 
 
 export default function Carousel({screen}) {
@@ -47,7 +47,7 @@ export default function Carousel({screen}) {
 
     return (
         <Container>
-            <LeftBtn onClick={moveToPrevSlide}></LeftBtn>
+            <LeftBtn onClick={moveToPrevSlide}><AiOutlineLeft /></LeftBtn>
             <Wrapper>
                 <SlideWrapper ref={slideRef}>
                     <Dash >
@@ -76,7 +76,7 @@ export default function Carousel({screen}) {
                     </Dash>
                 </SlideWrapper>
             </Wrapper>
-            <RightBtn onClick={moveToNextSlide}></RightBtn>
+            <RightBtn onClick={moveToNextSlide}><AiOutlineRight /></RightBtn>
         </Container>
     )
 }
@@ -122,7 +122,7 @@ font-weight:bold;
 const Container = styled.div`
 display:flex;
 flex-direction:row;
-margin-left:15vw;
+margin-left:10vw;
 @media all and (max-width:500px)
 {
     margin-left:0px;
@@ -170,11 +170,10 @@ flex: none;	  				  // 이 속성을 넣어야 화면에 1개씩 보여진다.
 `;
 
 let LeftBtn = styled.button`
-margin-top:70px;
-background-image:url(${arrowleft});
-background-size: 100%;  
+margin-top:70px; 
 width:40px;
 height:40px;
+font-size:70px;
 display:inline-block;
 border:none;
 opacity:.2;
@@ -186,10 +185,9 @@ opacity:.2;
 `
 let RightBtn = styled.button`
 margin-top:70px;
-background-image:url(${arrowright});
-background-size: 100%;  
 width:65px;
 height:65px;
+font-size:70px;
 display:inline-block;
 border:none;
 opacity:.2;

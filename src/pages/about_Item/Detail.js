@@ -5,9 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../style/modal.css';
 import axios from 'axios';
 import SetKST from '../../utils/SetKST';
-import WriteBtn from '../../components/WriteBtn';
 import Comment from './Comment';
 import '../../style/ItemDetail.css'
+import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineAlert } from "react-icons/ai";
+import { AiTwotoneHeart } from "react-icons/ai";
 
 function Detail() {
   const navigate = useNavigate();
@@ -146,12 +148,12 @@ function OneItem(props) {
           <span className='Item_Time'>{SetKST(props.location.state)}</span>
          
           <div className='nickname-btn'>
-            <div className='profile' onClick={props.onProfileClick}  >👤{props.item.writer.nickname}</div>
-            <button onClick={props.openReportModal} variant="secondary">❗️</button>
+            <div className='profile' onClick={props.onProfileClick}  ><AiOutlineUser />{props.item.writer.nickname}</div>
+            <button onClick={props.openReportModal} variant="secondary"><AiOutlineAlert style={{color:"red"}} /></button>
           </div>
         </div>
         <div className='Item_Button'>
-          <button className='likebtn' onClick={LikeAdd}><span style={{ color: "red" }}>♥</span>&nbsp;<span>{props.item.likes}</span></button>
+          <button className='likebtn' onClick={LikeAdd}><span><AiTwotoneHeart /></span>&nbsp;<span>{props.item.likes}</span></button>
           <button className='sendbtn' onClick={() => props.navigate('/itemmain/detail/chat', { state: props.item })}>쪽지보내기</button>
           <Do_Report open={props.showReportPopup} close={props.closeReportnModal} postId={props.id} />
         </div>
@@ -159,7 +161,7 @@ function OneItem(props) {
       </div>
     </div>
     <div className='Content-Wrap'>
-        <label>상품 내용</label>
+        <h3>상품 내용</h3>
         <p className='Item_Content'>{props.item.content}</p>
     </div>
    

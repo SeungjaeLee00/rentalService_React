@@ -71,7 +71,7 @@
     display:flex;
     flex-direction: row;
 }
-.searchbar2{
+.mobile-searchbar{
     display:none;
 }
 @media all and (max-width:950px)
@@ -79,7 +79,7 @@
     .searchbar{
         display:none;
     }
-    .searchbar2{
+    .mobile-searchbar{
         display:flex;
         justify-content: center;
         margin-top:20px;
@@ -102,9 +102,9 @@
 }
 
 .search {
-    width: 25vw; /* 화면 너비의 45%로 설정 */
+    width: 30vw; /* 화면 너비의 45%로 설정 */
     max-width: 500px; /* 최대 너비를 400px로 제한 */
-    height: 6vh; /* 고정된 높이로 설정 */
+    height: 7vh; /* 고정된 높이로 설정 */
     font-size: 0.9vw; /* 화면 너비의 1.2%로 폰트 크기 설정 */
     font-weight: 400;
     border-top: none;
@@ -128,8 +128,8 @@ input:focus{
 
 .searchbarbtn {
     background-color: white;
-    width: 40px; 
-    height: 6vh; 
+    width: 45px; 
+    height: 7vh; 
     border-left: none;
     border-right:none;
     border-top:none;

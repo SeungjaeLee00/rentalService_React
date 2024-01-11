@@ -6,6 +6,7 @@ import Category from './Category';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import useReactQueryHeader from '../hooks/useReactQueryHeader';
+import {  AiOutlineSearch } from "react-icons/ai";
 
 export default function ReNavBar() {
 
@@ -85,7 +86,7 @@ export default function ReNavBar() {
                             onChange={(e) => {
                                 setSearch(e.target.value);
                             }}></input>
-                        <button className='searchbarbtn'>🔍</button>
+                        <button className='searchbarbtn'>< AiOutlineSearch/></button>
                     </form>
                 </div>
                 <div className='ul-wrap'>
@@ -102,7 +103,7 @@ export default function ReNavBar() {
                         </ul> :  <div className='admin-link'><Link to="/admin">관리자 페이지</Link></div>}
                 </div>
             </div>
-            <div className='searchbar2'>
+            <div className='mobile-searchbar'>
             <form className='searchform' onSubmit={(e) => { handleSubmit(e) }}>
                      <input type="text"
                         className='mobile-search'
@@ -111,7 +112,7 @@ export default function ReNavBar() {
                         onChange={(e) => {
                         setSearch(e.target.value);
                     }}></input>
-                    <button className='mobile-searchbtn'>🔍</button>
+                    <button className='mobile-searchbtn'>< AiOutlineSearch/></button>
             </form>
                 </div>
         </div>

@@ -6,7 +6,6 @@ import WriteBtn from '../../components/WriteBtn';
 import Watched from './Watched';
 import Carousel from '../../components/Carousel';
 import useReactQuery from '../../hooks/useReactQuery';
-import { useLocation } from 'react-router-dom';
 import { debounce } from '@material-ui/core';
 
 
