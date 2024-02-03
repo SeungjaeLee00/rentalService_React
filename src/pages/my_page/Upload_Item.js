@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NativeSelect from "@mui/material/NativeSelect";
 import FormControl from "@mui/material/FormControl";
-import HorizonLine from "../../components/HorizonLine";
 import { useAuth } from "../../components/AuthContext";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";

@@ -1,54 +1,38 @@
-import axios from "axios";
-import { useState } from "react";
-import { useEffect } from "react"
 import { useNavigate } from "react-router-dom";
+import useGet from "../../hooks/useGet";
 
 export default function MyLike() {
-    const actoken = localStorage.accessToken;
-    const retoken = localStorage.refreshToken;
-    
-    const [likepost, setLikePost] = useState();
-    const navigate = useNavigate();
-    useEffect(() => {
-        axios.get('/api/posts/likes', {
-            headers: { 'Authorization' : `Bearer ${actoken}`,
-                'Auth' : retoken }
-        })
-            .then(response => {
-                console.log("본인찜조회성공");
-                console.log(response.data);
-                setLikePost(response.data);
-            })
-            .catch(error => {
-                if (error.response.data.code == '511') {
-                    alert('로그인이 만료되어 로그인 페이지로 이동합니다');
-                    window.location.replace('/loginpage');
-                  }
-                console.log(error);
-            })
-    }, [])
+	const likePosts = useGet("/api/posts/likes");
+	const navigate = useNavigate();
 
+	if (likePosts.loading) return <div>로딩중...</div>;
+	if (likePosts.error) return <div>에러...</div>;
+	if (!likePosts.data) return null;
 
-    if(!likepost) return null;
-
-    return (
-        <div className="MyLike-wrap">
-            <div className="Like-top">
-                <p>찜</p>
-            </div>
-            <div className="Like-bottom">
-                {likepost ? likepost.postList.map(a => (
-                    <div key={a.id} className="Like-item" onClick={()=>{navigate("/itemmain/detail/"+a.id)}}>
-                        <div className="Like-img">
-                            <img src={'https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/' + a.link}></img>
-                        </div>
-                        <div className="item-info">
-                            <div style={{ fontSize: "20px", fontWeight: "bold", }}>{a.title}</div>
-                            <div style={{ marginTop: "10px" }}>{a.createdTime.replace("T", " ")}</div>
-                        </div>
-                    </div>
-                )) : null}
-            </div>
-        </div>
-    )
+	return (
+		<div className="MyLike-wrap">
+			<div className="Like-top">
+				<p>찜</p>
+			</div>
+			<div className="Like-bottom">
+				{likePosts.data.postList.map((a) => (
+					<div
+						key={a.id}
+						className="Like-item"
+						onClick={() => {
+							navigate("/itemmain/detail/" + a.id);
+						}}
+					>
+						<div className="Like-img">
+							<img src={"https://sharingplatformbucket.s3.ap-northeast-2.amazonaws.com/post/" + a.link}></img>
+						</div>
+						<div className="item-info">
+							<div style={{ fontSize: "20px", fontWeight: "bold" }}>{a.title}</div>
+							<div style={{ marginTop: "10px" }}>{a.createdTime.replace("T", " ")}</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	);
 }
