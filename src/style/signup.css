@@ -5,10 +5,19 @@
     justify-content: center;
     align-items: center;
 }
+.signupTop{
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+.signupTop p{
+    margin-top: 20px;
+}
 .signupform form{
     display:flex;
     flex-direction: column;
-    width:545px;
+    align-items: center;
+    width:100%;
 }
 
 .signupform button{
@@ -23,7 +32,6 @@
 }
 .emailbtn{
     width:60px;
-    margin-left:20px;
     background-color: black;
     color:white;
     transition: all 0.3s;
@@ -54,76 +62,98 @@
 .email-wrap{
     display: flex;
     flex-direction: column;
+   
 }
 .email-wrap h5{
     font-size: 15px;
-    margin-top:5px;
-    margin-left:115px;
+}
+.emailTop input{
+    margin-left:70px;
+    margin-bottom: 0px;
 }
 
-.email-wrap input{
-    margin-left:70px;
+.emailbtm{
+    display: flex;
+    flex-direction: row;
+    margin-left:auto;
     
+}
+.emailbtm h5{
+    margin-top:15px;
+    margin-left:10px;
+
 }
 .key-wrap{
     display:flex;
     flex-direction: column;
 }
-.key-wrap input{
-    margin-left:23px;
 
+.key-wrap input{
+    margin-left:30px;
 }
+
 .nickname-wrap{
     display: flex;
     flex-direction: column;
 }
 .nickname-wrap input{
-    margin-left:70px;
+    margin-left:75px;
 }
 .password-wrap{
     display: flex;
     flex-direction: column;
 }
 .password-wrap input{
-    margin-left:55px;
+    margin-left:60px;
 }
 .repassword-wrap input{
-    margin-left:23px;
+    margin-left:30px;
 }
 .phone-wrap{
     display: flex;
     flex-direction: column;
 }
 .phone-wrap input{
-    margin-left:38px;
+    margin-left:45px;
 }
 
 .inputZipcode{
-    margin-left:85px;
+    margin-left:90px;
     width:150px;
     height: 40px;
     border:2px solid rgba(0,0,0,0.23);
     border-radius: 7px;
 }
 .inputAddress{
-    margin-left:112px;
+    margin-left:auto;
     width:300px;
     height: 40px;
     border:2px solid rgba(0,0,0,0.23);
     border-radius: 7px;
-
 }
 
 .address-wrap{
     display:flex;
     flex-direction: column;
+    width:100%;
+}
+.addressTop{
+    display:flex;
+    flex-direction: row;
+}
+.addressbtm{
+    display:flex;
+    margin-bottom:20px;
+}
+.addressInput{
+    margin-left:auto;
 }
 .address-wrap button{
     margin-left:10px;
 }
 .submitbtn{
-    margin-left:65px;
-    width:400px;
+    text-align: center;
+    width:100%;
     height:40px;
 }
 
@@ -176,3 +206,46 @@
     align-items: center;
 }
 
+@media all and (max-width:800px){
+    .signupform label{
+        font-size: 13px;
+    }
+    .emailTop input{
+        width:200px;
+        font-size:13px;
+    }
+    .key-wrap input{
+        width:200px;
+        font-size:13px;
+    }
+    .keyTop{
+        text-align: center;
+    }
+    .nickname-wrap input{
+        width:200px;
+        font-size:13px;
+    }
+    .password-wrap input{
+        width:200px;
+        font-size:13px;
+    }
+    .repassword-wrap input{
+        width:200px;
+        font-size:13px;
+    }
+    .phone-wrap input{
+        width: 200px;
+        font-size:13px;
+    }
+    .address-wrap{
+        text-align: center;
+    }
+    .address-wrap .inputZipcode{
+       width:100px;   
+    }
+    .address-wrap .inputAddress{
+       width:250px;
+       font-size:13px;
+    }
+
+}

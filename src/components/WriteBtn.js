@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 let Button = styled.button`
   border-Radius:30px;
-  font-Size:20px;
+  font-Size:15px;
   width:100px;
   height:50px;
   border:none;
@@ -19,7 +19,7 @@ export default function WriteBtn()
 {
     const navigate = useNavigate();
     return(
-        <div className='upload_item' style={{ position: "fixed", right: '45px', bottom: '30px' }}>
+        <div className='upload_item'>
             <Button onClick={() => navigate('/itemmain/upload-item')}>글쓰기 </Button>
           </div>
       )

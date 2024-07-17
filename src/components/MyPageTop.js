@@ -1,53 +1,17 @@
-import { useEffect, useHistory } from 'react'
-import axios from 'axios'
-import { useState } from 'react';
-
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import Edit_membership from '../pages/my_page/Edit_Pages/Edit_membership';
+import { Link,  useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import useGet from '../hooks/useGet';
+
 
 export default function MyPageTop(props) {
     const navigate = useNavigate();
-    const actoken = localStorage.accessToken;
-    const retoken = localStorage.refreshToken;
-    const [myinfo, setMyInfo] = useState();
-
-    const [loading, setLoading] = useState();
-    const [error, setError] = useState();
-
-    const fetchMyInfo = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get('/api/members/my-profile', {
-                headers: {
-                    'Authorization': `Bearer ${actoken}`,
-                    'Auth': retoken
-                }
-            })
-            setMyInfo(response.data);
-            setLoading(false);
-        }
-        catch (e) {
-            if (e.response.data.code == '511') {
-                alert('로그인이 만료되어 로그인 페이지로 이동합니다');
-                window.location.replace('/loginpage');
-            }
-            console.log(e);
-            setError(e);
-        }
-    }
-
-    useEffect(() => {
-        //본인정보 조회 api
-        fetchMyInfo();
-    }, [])
-
-    if (loading) <div>로딩중..</div>
-    if (error) <div>에러가 발생했습니다</div>
-    if (!myinfo) return null;
-
+    const myinfo = useGet('/api/members/my-profile');
+    if(myinfo.error==true) return <div>에러발생...</div>
+    if(myinfo.loading==true) return <div>로딩중...</div>
+    if (!myinfo.data) return null;
+    console.log(myinfo);
     return (
-        <div style={{ borderBottom: "1px solid black", paddingBottom: "45px" }} className="content">
+        <div className="content">
             <div className="mypagetop">
                 <div className="toptitle">
                     <h1 onClick={()=>{navigate("/my-page")}}>My Page</h1>
@@ -60,34 +24,107 @@ export default function MyPageTop(props) {
                             style={{ borderLeft: "1px solid black", paddingLeft: "5px" }}>⚒︎</Link>
                     </div>
                 </div>
-                <div className="topinfo">
-                    <div className="infoleft">
-                        <div className="name">{myinfo.nickname}</div>
-
-                        <Link to="/my-page/edit-membership" style={{ textDecoration: "none", color: "gray", marginTop: "15px" }}>회원정보수정</Link>
-
-                    </div>
-                    <div className="inforight">
-                        <div className="userpost">
-                            <div className='UserDiv'>게시물</div>
-                            <div className='QuantityDiv'>{props.mypost}개</div>
-                        </div>
-                        <div className="userrent">
-                            <div className='UserDiv'>대여해주는 상품</div>
-                            <div className='QuantityDiv'>{props.myrent}개</div>
-                        </div>
-                        <div className="userborrow">
-                            <div className='UserDiv'>대여받는 상품</div>
-                            <div className='QuantityDiv'>{props.myborrow}개</div>
-                        </div>
-                        <div className="userreview">
-                            <div className='UserDiv'>리뷰</div>
-                            <div className='QuantityDiv'>{props.myreview}개</div>
-                        </div>
-
-                    </div>
-                </div>
+                {props.screen>=1000? <PcTopInfo myinfo={myinfo} mypost={props.mypost} myrent={props.myrent}
+                myborrow={props.myborrow}  mywriterw={props.mywriterw}  myreview={props.myreview} />
+            :<MobileTopInfo screen={props.screen} myinfo={myinfo} mypost={props.mypost} myrent={props.myrent}
+            myborrow={props.myborrow}  mywriterw={props.mywriterw}  myreview={props.myreview}/>}
             </div>
         </div>
     )
 }
+function MobileTopInfo({screen,myinfo,mypost,myrent,myborrow,mywriterw,myreview})
+{
+    return(
+        <div className="topinfo">
+        <div className="infoleft">
+            <div className="name">{myinfo.data.nickname}</div>
+            <Link to="/my-page/edit-membership" state={{screen:screen}}>내정보</Link>
+        </div>
+        <div className="inforight">
+            <div className="userpost">
+                <MUserDiv to="/my-page/post">게시물</MUserDiv>
+                <QuantityDiv >{mypost}개</QuantityDiv>
+            </div>
+            <div className="userrent">
+                <MUserDiv to="/my-page/rent" >대여상품</MUserDiv>
+                <QuantityDiv >{myrent}개</QuantityDiv>
+            </div>
+            <div className="userborrow">
+                <MUserDiv to="/my-page/borrow" >빌린상품</MUserDiv>
+                <QuantityDiv >{myborrow}개</QuantityDiv>
+            </div>
+            <div className="userreview">
+                <MUserDiv to="/my-page/my-write-review">작성리뷰</MUserDiv>
+                <QuantityDiv>{mywriterw}개</QuantityDiv>
+            </div>
+            <div className="userreview">
+                <MUserDiv to="/my-page/my-review">받은리뷰</MUserDiv>
+                <QuantityDiv>{myreview}개</QuantityDiv>
+            </div>
+        </div> 
+    </div>
+    )
+}
+
+function PcTopInfo({myinfo,mypost,myrent,myborrow,mywriterw,myreview}){
+    return(
+        <div className="topinfo">
+        <div className="infoleft">
+            <div className="name">{myinfo.data.nickname}</div>
+            <Link to="/my-page/edit-membership">회원정보수정</Link>
+            <Link to="/find-pw">비밀번호변경</Link>
+        </div>
+        <div className="inforight">
+            <div className="userpost">
+                <UserDiv>게시물</UserDiv>
+                <QuantityDiv >{mypost}개</QuantityDiv>
+            </div>
+            <div className="userrent">
+                <UserDiv >대여상품</UserDiv>
+                <QuantityDiv >{myrent}개</QuantityDiv>
+            </div>
+            <div className="userborrow">
+                <UserDiv >대여받는상품</UserDiv>
+                <QuantityDiv >{myborrow}개</QuantityDiv>
+            </div>
+            <div className="userreview">
+                <UserDiv>작성리뷰</UserDiv>
+                <QuantityDiv>{mywriterw}개</QuantityDiv>
+            </div>
+            <div className="userreview">
+                <UserDiv>받은리뷰</UserDiv>
+                <QuantityDiv>{myreview}개</QuantityDiv>
+            </div>
+        </div> 
+    </div>
+
+    )
+}
+let QuantityDiv = styled.p`
+color:blue;
+font-weight:bold;
+margin-top:25px;
+margin-left:0.1vw;
+transition: all 1s;
+animation:fadein 0.7s ease-in-out;
+ @keyframes fadein{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+ }
+ @media all and (max-width:1000px){
+    margin:0px;
+ }
+`
+
+let UserDiv = styled.div`
+font-weight:bold;
+margin-left:0.1vw;
+  `
+
+let MUserDiv=styled(Link)`
+font-size:12px;
+font-weight:bold;`

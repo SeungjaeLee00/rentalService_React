@@ -1,154 +1,101 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Pagination from './Pagination';
-import Posts from './Posts';
-import WriteBtn from '../../components/WriteBtn';
-import Watched from './Watched';
+import { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Pagination from "./Pagination";
+import Posts from "./Posts";
+import WriteBtn from "../../components/WriteBtn";
+import Watched from "./Watched";
+import Carousel from "../../components/Carousel";
+import useReactQuery from "../../hooks/useReactQuery";
+import { debounce } from "@material-ui/core";
 
 function ItemMain() {
-  const navigate = useNavigate();
-  const actoken = localStorage.accessToken;
-  const retoken = localStorage.refreshToken;
+	const [screen, setScreen] = useState(window.outerWidth);
+	const handleResize = debounce(() => {
+		setScreen(window.outerWidth);
+	});
 
-  const [store, setStore] = useState(null);
-  const [watched, setWatched] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+	//모든 상품들
+	const posts = useReactQuery("/api/posts");
+	//거래가 안된 상품들
+	let filterPosts;
 
-  
+	//최근본상품
+	const [watched, setWatched] = useState([]);
 
-  const fetchPosts = async () => {
-    try {
-      //요청시작할때 error와 store 초기화
-      setError(null);
-      setStore(null);
-      //loading 상태를 true
-      setLoading(true);
-      const response = await axios.get('/api/posts');
-      //게시물이 모두 삭제되었을때 로컬도 초기화 해줘야함. 
-      if(response.data.postList.length==0)
-      {
-        localStorage.setItem('watched',JSON.stringify([]));
-      }
-      console.log(response.data.postList);
-      setStore(response.data.postList);
-    } catch (e) {
-      setError(e);
-      console.log(e);
-    }
-    setLoading(false);
-  }
-
-  const fetchMyInfo = async () => {
-    try {
-      const response = await axios.get('/api/members/my-profile', {
-        headers: {
-          'Authorization': `Bearer ${actoken}`,
-          'Auth': retoken
-        }
-      })
-      //console.log(response.data);
-      //sessionstorage에 저장
-      window.sessionStorage.setItem("nickname", response.data.nickname);
-    } catch (e) {
-      if (e.response.data.code == '511') {
-        console.log(e);
-        alert('로그인이 만료되어 로그인 페이지로 이동합니다');
-        window.location.replace('/loginpage');
-      }
-      console.log(e);
-    }
-  }
-
-
-  useEffect(() => {
-    fetchPosts();
-    fetchMyInfo();
-    //최근본상품 localstorage할당
-    //최근본상품이 없으면 생성
+	useEffect(() => {
+		//최근본상품 localstorage할당 , 최근본상품이 없으면 생성
+		/*
     let localarray = localStorage.getItem('watched');
     if (localarray == null) {
       localStorage.setItem('watched', JSON.stringify([]));
     }
-    else if(localarray.length>0){
-        setWatched(JSON.parse(localarray));
-    }
-  }, [])
+    else if (localarray.length > 0) {
+      setWatched(JSON.parse(localarray));
+    }*/
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 6;
-  const ItemIndex = 6;
-  const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
-  const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
+		window.addEventListener("resize", handleResize);
+		// console.log(screen);
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 
+	const [currentPage, setCurrentPage] = useState(1);
+	const postsPerPage = 6;
+	const ItemIndex = 6;
+	const indexOfLast = currentPage * postsPerPage; //해당페이지의 마지막 인덱스(첫번째페이지가정 인덱스6)
+	const indexOfFirst = indexOfLast - postsPerPage; //해당페이지의 첫번째 인덱스(첫번째페이지가정 인덱스1)
 
-  if (loading) return <div>로딩중..</div>;
-  if (error) return <div>에러가 발생했습니다</div>;
-  if(!store) return null;
-  
+	if (posts.isLoading) return <div>로딩중..</div>;
+	if (posts.error) return <div>에러가 발생했습니다</div>;
+	if (!posts.data) return null;
 
+	//상품데이터가 없으면 로컬0으로 초기화
+	if (posts.data.postList.length == 0) localStorage.setItem("watched", JSON.stringify([]));
 
-  //여기서는 1~100 번까지 아이템이 존재하면 1~6번 이렇게 잘라서 currentPosts에 담아줍니다.
-  const currentPosts = () => {
-    let currentPosts = 0;
-    currentPosts = store.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
-    
-  };
+	//1~100 번까지 데이터가 존재하면 1~6번 6개씩 잘라서 currentPosts에 담아줍니다.
+	const currentPosts = () => {
+		let currentPosts = 0;
+		filterPosts = posts.data.postList.filter((item) => item.complete === false);
+		//console.log(filterPosts);
+		currentPosts = filterPosts.slice(indexOfFirst, indexOfLast);
+		return currentPosts;
+	};
 
-  return (
-    <div className='page-container'>
-      <Dashboard />
-      <hr />
-      <div className='Main-Content'> 등록된 상품</div>
+	return (
+		<div className="page-container">
+			<Dashboard screen={screen} />
+			<hr />
+			<div className="Main-Content">등록된 상품</div>
 
-      {/* 본문가운데상품진열 */}
-      <div className="Item-Wrap">
-        {store!=null ? (<Posts currentPosts={currentPosts()} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} />) : (<div>로딩중입니다</div>)}
-      </div>
+			{/* 가운데 상품  */}
+			<div className="Item-Wrap">
+				<Posts currentPosts={currentPosts()} ItemIndex={ItemIndex} watched={watched} setWatched={setWatched} />
+			</div>
 
-      {/* 본문하단Pagination */}
-      <div className="Item-Pagination">
-        {store? <Pagination
-          // 총데이터를 postsPerPage만큼 등분해서 보여준다. 6개씩보여주자.
-          postsPerPage={postsPerPage} //각각 페이지당 포스트개수
-          totalPosts={store.length} //전체 데이터 개수 
-          paginate={setCurrentPage} //CurrentPage변경하는함수.(첫번째페이지가정 6)
-        ></Pagination>: null}
-        
-      </div>
-
-      <div className='Main-Content'>최근 본 상품</div>
-      {store?<Watched store={store} watched={watched} setWatched={setWatched}/> : null }
-      {/* 본문하단 글쓰기버튼 */}
-      <WriteBtn />
-    </div>
-  );
-};
-
-function Dashboard() {
-  return (
-<div className='dashboard'>
-  <div className='dashboard-right'>
-    <div className='dashboard-title'>
-      <h1>Billim</h1>
-    </div>
-    <div className='dashboard-decoration'>
-    <h1>
-    언제 어디서든지 상품을{'\n'}
-    대여해주고 받을 수 있는 서비스입니다.
-    </h1>
-
-    </div>
-  </div>
-</div>
-
-  )
+			{/* Pagination */}
+			<div className="Item-Pagination">
+				<Pagination
+					postsPerPage={postsPerPage} //각각 페이지당 포스트개수
+					totalPosts={filterPosts.length} //전체 데이터 개수
+					paginate={setCurrentPage} //CurrentPage변경하는함수.(첫번째페이지가정 6)
+				></Pagination>
+			</div>
+			<div className="Main-Content">최근 본 상품</div>
+			{/* <Watched store={posts.data.postList} watched={watched} setWatched={setWatched} /> */}
+			{/* 본문하단 글쓰기버튼 */}
+			<WriteBtn />
+		</div>
+	);
 }
 
-
-
+function Dashboard({ screen }) {
+	return (
+		<div className="dashboard">
+			<Carousel screen={screen} />
+			{/* 모바일 화면일때 컴포넌트*/}
+		</div>
+	);
+}
 
 export default ItemMain;

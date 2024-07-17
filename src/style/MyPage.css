@@ -1,6 +1,8 @@
 .content{
     display:flex;
     flex-direction: column;
+    border-bottom: 1px solid black;
+    padding-bottom: 45px;
 }
 
 .mypagetop{
@@ -28,11 +30,78 @@
     margin-top:45px;
 }
 
-.infoleft {
+.infoleft{
+    display:flex;
+    flex-direction: column;
+    margin-left:100px;
+}
+.infoleft a{
+    color: gray;
+    margin-top: 15px;
+    text-decoration: none;
+}
+
+.name{
+    font-size:50px;
+}
+
+.inforight{
+    display:flex;
+    flex-direction: row;
+    margin-left:200px;
+    font-size:20px;
+}
+
+.userpost{
+    display:flex;
+    flex-direction: column;
+}
+
+.userrent{
+    display:flex;
+    flex-direction: column;
+    margin-left:100px;
+}
+
+.userborrow{
+    display:flex;
+    flex-direction: column;
+    margin-left:150px;
+}
+.userreview{
     display: flex;
     flex-direction: column;
     margin-left: 10vw;
 }
+@media all and (max-width:1000px){
+    .toptitle{
+        margin:10px;
+       margin-left:20px;
+    }
+    .infoleft{
+        margin: 0px;
+        margin-left:20px;
+    }
+    .name{
+        font-size:25px;
+    }
+    .topinfo{
+        flex-direction: column;
+        margin:0px;
+    }
+    .inforight{
+        flex-direction: row;
+        margin:0 auto;
+        margin-left:20px;
+        font-size: 13px;
+    }
+    .userrent, .userborrow, .userreview{
+        margin:0px;
+        margin-left:30px;
+    }
+}
+
+
 
 .name {
     font-size: 3vw; /* vw 단위 사용 */
@@ -76,9 +145,18 @@
 .bottom-right{
     width:100%;
 }
+.post-top p{
+    padding:30px;
+    font-size: 25px;
+    font-weight: bold;
+}
 .post-bottom{
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+.post-bottom table{
+    width:100%;
+    border-right: 1px solid black;
 }
 .post-bottom thead{
     border-top: 1px solid black;
@@ -92,12 +170,11 @@
     
 }
 .post-bottom th{
-    padding-left:55px;
+    padding-left:auto;
 }
 .post-bottom td{
     height:150px;
-    padding-top: 30px;
-    padding-left: 55px;
+    padding:auto auto;
 }
 .post-bottom tbody tr:hover{
     cursor: pointer;
@@ -133,9 +210,52 @@ tbody button:hover
     flex-direction:row;
 }
 .first-td-info{
-    display:flex;
-    flex-direction: column;
-    margin-left: 20px;
+   margin-left:10px;
+}
+.first-td-info p{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+@media all and (max-width:750px){
+    .post-bottom table{
+        font-size:13px;
+        width:auto;
+    }
+    .post-top{
+        padding:30px;
+    }
+    .post-top p{
+        font-size: 25px;
+        padding:0px;
+    }
+    .post-bottom th, td{
+        padding:auto auto;
+        padding-top:0px;
+        padding-bottom:0px;
+    }
+    .post-bottom td{
+        height:auto;
+    }
+    .first-td{
+        padding:0px;
+        padding-bottom: 12px;
+        text-align: center;
+    }
+    .second-td{
+        padding:auto;
+    }
+    .post-bottom tr{
+        text-align: center;
+    }
+    .post-bottom th{
+        padding:15px;
+    }
+    .first-td-info p{
+        font-size: 13px;
+        margin:10px;
+    }
+
 }
 
 /* 찜페이지 css */
@@ -146,6 +266,15 @@ tbody button:hover
     margin-left:20px;
 }
 
+.Like-top{
+    padding:10px;
+    border-bottom: 3px solid black;
+}
+
+.Like-top p{
+    font-size: 30px;
+    padding: 20px;
+}
 
 .Like-bottom{
     display:flex;
@@ -153,7 +282,10 @@ tbody button:hover
     flex-wrap:wrap;
     margin-top:30px;
 }
-
+.Like-img img{
+    width:200px;
+    height:200px;
+}
 .Like-item{
     display:flex;
     flex-direction:row;
@@ -174,6 +306,12 @@ tbody button:hover
     transform:scaleY(1.02);
     box-shadow: 5px 5px 10px -10px gray;
     cursor:pointer;    
+}
+@media all and (max-width:700px){
+    .Like-item img{
+        width:100px;
+        height:100px;        
+    }
 }
 
 /* 대여해주는 상품 css */

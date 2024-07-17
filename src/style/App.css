@@ -1,119 +1,128 @@
 @font-face {
-  font-family: 'NanumBarunGothic';
-  font-weight: normal;
-  font-style: normal;
-  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff');
+	font-family: "NanumBarunGothic";
+	font-weight: normal;
+	font-style: normal;
+	src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff") format("woff");
+}
+.root-wrap {
+	font-family: "NanumBarunGothic", sans-serif;
+	font-weight: bold;
 }
 
 body {
-  font-family: 'NanumBarunGothic', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	font-family: "NanumBarunGothic", sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+@media all and (max-width: 500px) {
+	.body {
+		padding-top: 0px;
+	}
 }
 
 .main-bg {
-  height: 50vh;
-  background-image: url('../assets/img/logo.png');
-  background-size: cover;
-  background-position: center;
-  
+	height: 50vh;
+	background-size: cover;
+	background-position: center;
 }
 
 .App {
-  text-align: center;
-  white-space: pre-line;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+	text-align: center;
+	white-space: pre-line;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
-.sub, .item_list, .d-flex {
-  font-family: 'NanumBarunGothic', sans-serif;
+.sub,
+.item_list,
+.d-flex {
+	font-family: "NanumBarunGothic", sans-serif;
 }
 
 .App-logo {
-  height: 20vmin;
-  pointer-events: none;
+	height: 20vmin;
+	pointer-events: none;
 }
 
 .social_login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .more_info {
-  padding: 5vh 0;
+	padding: 5vh 0;
 }
 
 .login {
-  padding-bottom: 10vh;
+	padding-bottom: 10vh;
 }
 
 .Makers {
-  padding-top: 5vh;
+	padding-top: 5vh;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 2vw; /* 유동적인 폰트 크기 */
-  color: white;
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 2vw; /* 유동적인 폰트 크기 */
+	color: white;
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .inputField {
-  background-color: transparent;
-  height: 3vh;
-  width: 20vw;
-  width: 300px;
-  border: 2px solid rgba(0, 0, 0, 0.23);
-  border-radius: 7px;
-  margin-bottom: 1vh;
-  padding: 1vh;
-  box-sizing: border-box;
+	background-color: transparent;
+	height: 3vh;
+	width: 20vw;
+	width: 300px;
+	border: 2px solid rgba(0, 0, 0, 0.23);
+	border-radius: 7px;
+	margin-bottom: 1vh;
+	padding: 1vh;
+	box-sizing: border-box;
 }
 
 .inputField:hover {
-  border: 2px solid black;
+	border: 2px solid black;
 }
 
 .inputField:focus-visible {
-  outline: none!important;
-  border: 2px solid #1976d2;
+	outline: none !important;
+	border: 2px solid #1976d2;
 }
 
 .signUp {
-  color: aqua;
+	color: aqua;
 }
 
 .buttonstyle {
-  background-color: #4A4F5A;
-  color: white;
-  border-radius: 30px;
-  border: 0;
-  position: fixed;
-  right: 5vw;
-  bottom: 3vh;
-  padding: 1vw 2vw; /* 유동적인 패딩 */
-  /* font-size: 1.5vw; 유동적인 폰트 크기 */
+	background-color: #4a4f5a;
+	color: white;
+	border-radius: 30px;
+	border: 0;
+	position: fixed;
+	right: 5vw;
+	bottom: 3vh;
+	padding: 1vw 2vw; /* 유동적인 패딩 */
+	/* font-size: 1.5vw; 유동적인 폰트 크기 */
 }

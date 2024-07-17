@@ -4,7 +4,6 @@ export default function Address(props) {
     const temp = (data)=>{
         console.log(data);
         props.zipcodehandle(data.zonecode);
-        //props.addresshandle(data.address);
         let address=data.roadAddress;
         address=address.split(" ");
         props.addresshandle(address);
